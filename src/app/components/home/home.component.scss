@@ -1,5 +1,87 @@
-.center-img {
+#center-img {
   justify-content: center;
   align-items: center;
   vertical-align: middle;
+  transition: 0.5s all ease-in-out;
+
+}
+
+#card-free-mints{
+  background-color: aliceblue;
+  border-radius: 5%;
+  max-width: 60%;
+
+}
+
+#card-free-mints:hover{
+  background-color: bisque;
+  border-radius: 5%;
+  max-width: 70%;
+  text-decoration: underline;
+
+}
+
+#card-free-mints:hover img{
+  transform: scale(1.25);
+
+
+}
+
+#center-img:hover{
+  transform: scale(1.25);
+}
+
+#gremlins-img {
+  // max-width: 100%;
+  // max-height: 100%;
+  // object-fit: contain;
+  // padding: 3px;
+  transition: 0.5s all ease-in-out;
+
+}
+
+
+#gremlins-img:hover{
+  transform: scale(1.25);
+}
+
+#card-gremlins {
+background-color: #666;
+
+}
+#card-cloudz {
+  background-color: #666;
+  
+  }
+
+#cloudz-img {
+  // max-width: 100%;
+  // max-height: 100%;
+  // object-fit: contain;
+  // padding: 3px;
+  transition: 0.5s all ease-in-out;
+
+}
+
+
+#cloudz-img:hover{
+  transform: scale(1.25);
+}
+
+
+
+.grid-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  // grid-gap: 20px;
+  padding: 20px;
+}
+
+
+.grid-item {
+  // background-color: white;
+  // border: 1px solid #666;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
