@@ -1,279 +1,137 @@
 <div class="center-div">
-  <!-- <div class="card main">
-    <div class="center-img">
-    </div>
-    <img
-    src="https://toonverse.s3.amazonaws.com/greenCat.png"
-    alt="BuddhaInu"
-    height="200vh"
-    width="200vw"
-    style="border-radius: 50%"
-    />
-      <h3 class="card-text" style="font-size: 2em">
-        <br> 
+  <div class="card main">
 
-        <u> Mint $SIMON. </u>
-        <br><br>
-      </h3>
-     
-<br> <br>
-
-      <div *ngIf="this.isLoading">
-        <br />
-        <div
-          class="spinner-grow"
-          style="width: 10em; height: 10em; color: pink"
-          role="status"
-        >
-          <span class="visually-hidden">Loading...</span>
-        </div>
-        <br />
-        <br />
-        <br />
-
-        <p style="font-size: 1.25em; color: pink">Loading...</p>
-        <br />
-      </div>
+    <div class="card-header" style="border-radius: 5%; position: relative; top: -90px;">
 
 
-        <div *ngIf="!this.isLoading">
+      <img id="center-img" src="../../../assets/toonverse/greenCat.png" alt="logo" height="400vh" width="400vw"
+        style="border-radius: 5%" />
+      <br>
 
 
-          <div *ngIf="this.userAddress == ''">
-            <p>              MetaMask Not Connected. Please connect to ETH MAIN net.
 
-                           <br> 
 
-              This is where you will be able to see more details about the token and be able to mint.
-              <br>
-            </p>
-            
-          </div>
 
-        <div *ngIf="this.userAddress != ''">
-          <p style="font-size: 1.25em">
-<br>
-            Symbol : {{ contractSymbol }}
-            <br />
-            Minted: {{ contractMinted }}
-            <br />
-            Total Supply : {{ contractTotalSupply }}
-            <br />
-            Current Price : {{ contractPrice }} ETH
-            <br />
-  
-          </p>
-          <hr
-            style="
-              color: pink;
-              width: 85%;
-              margin-left: auto;
-              margin-right: auto;
-            "
-          />
-          <div class="card-body" id="manageCard">
-
-          <p>
-            &nbsp;Your address: {{ userAddress }}
-            <br />
-            Your {{ contractSymbol }} : {{ tokensOwned }}
-            <br />
-          </p>
+      <div class="card-body">
+        <h3 class="card-text">
           <br>
-          <div
-            class="form-outline"
-            id="mintInput"
-            style="max-width: 60%; margin-left: auto; margin-right: auto"
-          >
-            <input
-              [ngModel]="numToBuy"
-              type="number"
-              (ngModelChange)="updatePrice($event)"
-              min="0"
-              max="100000000000"
-              step="1"
-              onfocus="this.previousValue = this.value"
-              onkeydown="if(event.key==='.'){event.preventDefault();} this.previousValue =this.value"
-              class="form-control"
-              placeholder="Amount To Buy"
-            />
-          </div>
-          <br />
-          <p>
-            Total price without gas fees for {{ numToBuy }}
-            {{ contractSymbol }} is {{ totalPrice }} ETH
-          </p>
+          <u>Mint a DevilCatz</u>
+        </h3>
+        <div class="card-text">
 
-          <br />
-          <div class="center-div">
-            <button
-              *ngIf="this.numToBuy == '0' || this.numToBuy == 'null'"
-              class="favorite styledDisabled"
-              disabled
-            >
-              Disabled
+
+
+
+          <h4>
+            <br>
+            Contract
+            <a
+              href="https://etherscan.io/token/0x1c4a28690482b03f6991c8c24295016cba197c12">0x1c4a28690482b03f6991c8c24295016cba197c12</a>
+            <br>
+            <a href="https://opensea.io/collection/toonversestudios">Opensea</a>
+            <br>
+            <a href="https://rarible.com/toonverseStudios">Rarible</a>
+          </h4>
+
+
+
+
+          <p class="paragraph">The ToonVerse is a multi-collection mega project based on cartoon character development
+            with the goal of branding, storytelling, and syndication. Each of the primary NFT collections, starting with
+            the Devil Catz are a main character in our world building and animated series.<br>
+            <br>
+            Price = {{contractPrice}} Eth
+            <br>
+            Max Mint = 50
+            <br>
+            Buy 1 get 1 free starting at 3.
+            <br>
+            Buy 1 only get 1
+            <br>
+            Buy 2 only get 2
+            <br>
+            ***Then 2x Multiplier Bonus Kicks in...***
+            <br>
+            Buy 3 get a total of 6
+
+            <br>
+            Buy 4 get a total of 8
+            <br>
+            ...
+            <br>
+            Buy 50 get a total of 100
+            <br>
+            ^ Max mint amount. ^
+            <br>
+            <br>
+            This is a gas optimized ERC721A contract
+            <br>
+            Pixelated version of cats included.
+            :)
+            <br>
+
+            <div class="container" style="width:75%;">
+          <div class="div-quantity-selector">
+
+            <button class="mint-button w-button" (click)="minus()">
+              - </button>
+
+
+            <!-- <a id="mint-minusone" href="#"
+                  class="btn-quantity w-node-_0d2f99db-be57-70d7-001f-b14912b81a95-05774dfd 
+                  w-button">-</a> -->
+
+
+            <div id="w-node-f852b6d0-e5e3-30d3-5f48-21de007db10c-05774dfd" class="w-embed">
+              <input type="number" class="text-field w-input" max="50" maxlength="256" name="email" data-name="Email"
+                placeholder="" id="mint-quantity" required="" [ngModel]="numToBuy" type="number"
+                (ngModelChange)="updatePrice($event)" min="1" max="50" step="1"
+                onfocus="this.previousValue = this.value"
+                onkeydown="if(event.key==='.'){event.preventDefault();} this.previousValue =this.value"
+                placeholder="Amount To Buy">
+
+              <br>
+
+              <!-- <input [ngModel]="numToBuy" type="number" (ngModelChange)="updatePrice($event)" min="0" max="100000000000"
+                    step="1" onfocus="this.previousValue = this.value"
+                    onkeydown="if(event.key==='.'){event.preventDefault();} this.previousValue =this.value"
+                    class="form-control" placeholder="Amount To Buy" /> -->
+            </div>
+            <button class="mint-button w-button" (click)="plus()">
+              + </button>
+          </div>
+          
+          <p class="">{{numToBuy}} = {{totalPrice}} ETH<br> Total Recieved With Multiplier = {{multiplier}} </p>
+
+
+
+
+
+          <br><br>
+          <div *ngIf="this.userAddress == ''">
+            <button class="mint-button w-button" (click)="connect()">
+              Connect Wallet
             </button>
-            <button
-              *ngIf="this.numToBuy != '0' && this.numToBuy != 'null'"
-              class="favorite styled"
-              type="submit"
-              (click)="buy()"
-            >
+          </div>
+          <div *ngIf="this.userAddress != '' && this.totalPrice!='0'">
+            <button class="mint-button w-button" type="submit" (click)="buy()">
               Mint
             </button>
           </div>
-          <div *ngIf="this.purchaseString">
-            <br />
-            <p>{{ purchaseString }}</p>
+          <div *ngIf="this.userAddress != '' && this.totalPrice=='0'">
+            <button class="mint-button w-button" type="submit" (click)="buy()">
+              Disabled
+            </button>
           </div>
-        </div>
-
-
-        <div *ngIf="this.userAddress == ''">
-          <p style="color: red">
-            MetaMask Not Connected. Please connect to BSC test net
-          </p>
-        </div>
-        <div *ngIf="this.error">
-          <p style="color: red">Found Error : {{ error }}</p>
-        </div>
-      </div>
-
-    </div>
-  </div> -->
-  <div class="card main">
-    <div data-w-id="a32ce18b-fc02-99b1-7346-14bc7892615e"
-      style="opacity: 1; transform: translate3d(0px, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg); transform-style: preserve-3d;"
-      class="hero-paragraph-and-btn-copy">
-      <div class="hero-paragraph"><img
-          src="https://uploads-ssl.webflow.com/62bd730fe8ee772181df0220/62f6c1baea0370806865af63_devilcats-img.png"
-          loading="lazy" data-w-id="0ab28d0f-8c2c-6a2a-9185-79f6860f8846"
-          sizes="(max-width: 479px) 53vw, (max-width: 991px) 253.1953125px, (max-width: 1279px) 240px, (max-width: 1439px) 400px, (max-width: 1919px) 260px, 290px"
-          id="mint-testmode"
-          srcset="https://uploads-ssl.webflow.com/62bd730fe8ee772181df0220/62f6c1baea0370806865af63_devilcats-img-p-500.png 500w, https://uploads-ssl.webflow.com/62bd730fe8ee772181df0220/62f6c1baea0370806865af63_devilcats-img.png 800w"
-          alt="" class="image hero-character-img-sm"
-          style="opacity: 1; transform: translate3d(0px, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg); transform-style: preserve-3d;">
-        <h1 class="h1-minting">Mint Devil Catz</h1>
-        <h4>
-          <br>
-          Contract
-          <a
-            href="https://etherscan.io/token/0x1c4a28690482b03f6991c8c24295016cba197c12">0x1c4a28690482b03f6991c8c24295016cba197c12</a>
-          <br>
-          <a href="https://opensea.io/collection/toonversestudios">Opensea</a>
-          <br>
-          <a href="https://rarible.com/toonverseStudios">Rarible</a>
-
-
-
-        </h4>
-        <p class="paragraph">The ToonVerse is a multi-collection mega project based on cartoon character development
-          with the goal of branding, storytelling, and syndication. Each of the primary NFT collections, starting with
-          the Devil Catz are a main character in our world building and animated series.<br>
-          <br>
-          Price = {{contractPrice}} Eth
-          <br>
-          Max Mint = 50
-          <br>
-          Buy 1 get 1 free starting at 3.
-          <br>
-          Buy 1 only get 1
-          <br>
-          Buy 2 only get 2
-          <br>
-          ***Then 2x Multiplier Bonus Kicks in...***
-          <br>
-          Buy 3 get a total of 6
-
-          <br>
-          Buy 4 get a total of 8
-          <br>
-          ...
-          <br>
-          Buy 50 get a total of 100
-          <br>
-           ^ Max mint amount. ^
-           <br>
-           <br>
-           This is a gas optimized ERC721A contract
-           <br>
-           Pixelated version of cats included.
-           :)
-          <br>
-
-
-
-
-        </p>
-
-
-
-
-
-        <div class="div-quantity-selector">
-
-          <button class="mint-button w-button" (click)="minus()">
-            - </button>
-
-
-          <!-- <a id="mint-minusone" href="#"
-            class="btn-quantity w-node-_0d2f99db-be57-70d7-001f-b14912b81a95-05774dfd 
-            w-button">-</a> -->
-
-
-          <div id="w-node-f852b6d0-e5e3-30d3-5f48-21de007db10c-05774dfd" class="w-embed">
-            <input type="number" class="text-field w-input" max="50" maxlength="256" name="email" data-name="Email"
-              placeholder="" id="mint-quantity" required="" [ngModel]="numToBuy" type="number"
-              (ngModelChange)="updatePrice($event)" min="1" max="50" step="1" onfocus="this.previousValue = this.value"
-              onkeydown="if(event.key==='.'){event.preventDefault();} this.previousValue =this.value"
-              placeholder="Amount To Buy">
-
+          <p>
             <br>
 
-            <!-- <input [ngModel]="numToBuy" type="number" (ngModelChange)="updatePrice($event)" min="0" max="100000000000"
-              step="1" onfocus="this.previousValue = this.value"
-              onkeydown="if(event.key==='.'){event.preventDefault();} this.previousValue =this.value"
-              class="form-control" placeholder="Amount To Buy" /> -->
+          </p>
+          <div *ngIf="this.error">
+            <p style="color: red">Found Error : {{ error }}</p>
           </div>
-          <button class="mint-button w-button" (click)="plus()">
-            + </button>
+
         </div>
-        <p class="">{{numToBuy}} = {{totalPrice}} ETH<br> Total Recieved With Multiplier = {{multiplier}} </p>
-
       </div>
-
-
-
-
-      <br><br>
-      <div *ngIf="this.userAddress == ''">
-        <button class="mint-button w-button" (click)="connect()">
-          Connect Wallet
-        </button>
       </div>
-      <div *ngIf="this.userAddress != '' && this.totalPrice!='0'">
-        <button class="mint-button w-button" type="submit" (click)="buy()">
-          Mint
-        </button>
-      </div>
-      <div *ngIf="this.userAddress != '' && this.totalPrice=='0'">
-        <button class="mint-button w-button" type="submit" (click)="buy()">
-          Disabled
-        </button>
-      </div>
-      <p>
-        <br>
-
-      </p>
-      <div *ngIf="this.error">
-        <p style="color: red">Found Error : {{ error }}</p>
-      </div>
-      <!-- <p id="mint-wallet" class="p-connected-wallet">Connected wallet:&nbsp;<br><span
-            class="span-connected-wallet"><strong> </strong></span></p> -->
-
     </div>
-    <br>
-
-    <br>
-  </div>
-</div>
