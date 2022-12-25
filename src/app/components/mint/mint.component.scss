@@ -282,7 +282,7 @@ html.w-mod-touch * {
     display: inline-block;
     padding: 9px 15px;
     background-color: #3898ec;
-    color: #fff;
+    color:pink;
     border: 0;
     line-height: inherit;
     text-decoration: none;
@@ -536,7 +536,7 @@ label {
     line-height: 1.42857143;
     color: #333;
     vertical-align: middle;
-    background-color: #fff;
+    background-color:pink;
     border: 1px solid #ccc
 }
 
@@ -1169,7 +1169,7 @@ textarea.w-select {
 
 .w-widget-twitter-count-shim:not(.w--vertical):after {
     border-color: rgba(255, 255, 255, 0);
-    border-right-color: #fff;
+    border-right-color:pink;
     border-width: 4px;
     margin-left: -8px;
     margin-top: -4px
@@ -1208,7 +1208,7 @@ textarea.w-select {
 
 .w-widget-twitter-count-shim.w--vertical:after {
     border-color: rgba(255, 255, 255, 0);
-    border-top-color: #fff;
+    border-top-color:pink;
     border-width: 4px;
     margin-left: -4px
 }
@@ -1370,7 +1370,7 @@ textarea.w-select {
     margin: auto;
     cursor: pointer;
     overflow: hidden;
-    color: #fff;
+    color:pink;
     font-size: 40px;
     -webkit-tap-highlight-color: transparent;
     tap-highlight-color: rgba(0, 0, 0, 0);
@@ -1525,7 +1525,7 @@ textarea.w-select {
     right: 0;
     bottom: 0;
     left: 0;
-    color: #fff;
+    color:pink;
     font-family: "Helvetica Neue", Helvetica, Ubuntu, "Segoe UI", Verdana, sans-serif;
     font-size: 17px;
     line-height: 1.2;
@@ -1738,7 +1738,7 @@ textarea.w-select {
     bottom: -4px;
     left: -4px;
     border: 3px solid transparent;
-    border-bottom-color: #fff;
+    border-bottom-color:pink;
     border-radius: 50%
 }
 
@@ -2210,7 +2210,7 @@ textarea.w-select {
 body {
     margin: 0;
     min-height: 100%;
-    background-color: #fff;
+    background-color:pink;
     font-family: 'Open Sans', sans-serif;
     color: #404756;
     font-size: 18px;
@@ -2454,7 +2454,7 @@ h2 {
 }
 
 .paragraph.pink {
-    color: #f7859c;
+    color: pink;
     text-align: center
 }
 
@@ -2474,8 +2474,8 @@ h2 {
 .primary-button {
     padding: 10px 28px;
     border-radius: 12px;
-    background-color: #f7859c;
-    color: #fff;
+    background-color: pink;
+    color:pink;
     font-weight: 700
 }
 
@@ -3100,7 +3100,7 @@ h2 {
 }
 
 .big-text.pink {
-    color: #f7859c
+    color: pink
 }
 
 .tier-container {
@@ -3197,7 +3197,7 @@ h2 {
     z-index: -1;
     width: 100%;
     height: 100%;
-    background-color: #fff;
+    background-color:pink;
     opacity: 0
 }
 
@@ -3360,7 +3360,7 @@ h2 {
 
 .roadmap-percentage-text {
     font-family: Montserrat, sans-serif;
-    color: #f7859c;
+    color: pink;
     line-height: 90%;
     font-weight: 700
 }
@@ -3390,7 +3390,7 @@ h2 {
 .dotted-line {
     width: 1px;
     height: 560px;
-    border-right: 2px #f7859c
+    border-right: 2px pink
 }
 
 .dotted-line.for-style-guide {
@@ -3918,7 +3918,7 @@ h2 {
 }
 
 .huge-text.pink {
-    color: #f7859c
+    color: pink
 }
 
 .huge-text.purple {
@@ -3927,7 +3927,7 @@ h2 {
 
 .inner-dotted-line {
     height: 100%;
-    border-right: 2px dashed #f7859c
+    border-right: 2px dashed pink
 }
 
 .link-blob {
@@ -4026,7 +4026,7 @@ h2 {
     padding: 10px 28px;
     border-radius: 12px;
     background-color: #ff8961;
-    color: #fff;
+    color:pink;
     font-weight: 700
 }
 
@@ -4076,7 +4076,7 @@ h2 {
     -webkit-align-items: center;
     -ms-flex-align: center;
     align-items: center;
-    border: 4px solid #f7859c;
+    border: 4px solid pink;
     border-radius: 20px;
     background-color: #fbf1e6
 }
@@ -4108,7 +4108,7 @@ h2 {
     max-width: none;
     padding-bottom: 13px;
     border-radius: 10px;
-    background-color: #f7859c;
+    background-color: pink;
     box-shadow: 3px 3px 0 0 #ba5569;
     font-size: 48px;
     line-height: 50px;
@@ -4128,7 +4128,7 @@ h2 {
     border-style: none;
     background-color: #c0ecf1;
     font-family: 'Open Sans', sans-serif;
-    color: #fff;
+    color:black;
     font-size: 35px;
     line-height: 0;
     font-weight: 700;
@@ -4136,22 +4136,22 @@ h2 {
 }
 
 .text-field::-webkit-input-placeholder {
-    color: #fff;
+    color:pink;
     line-height: 35px
 }
 
 .text-field:-ms-input-placeholder {
-    color: #fff;
+    color:pink;
     line-height: 35px
 }
 
 .text-field::-ms-input-placeholder {
-    color: #fff;
+    color:pink;
     line-height: 35px
 }
 
 .text-field::placeholder {
-    color: #fff;
+    color:pink;
     line-height: 35px
 }
 
@@ -4178,7 +4178,7 @@ h2 {
 }
 
 .p-total.pink {
-    color: #f7859c;
+    color: pink;
     text-align: center
 }
 
@@ -4197,19 +4197,27 @@ h2 {
 
 .span-total,
 .text-span {
-    color: #f7859c
+    color: pink
 }
 
 .mint-button {
-    width: 100%;
+    width: 75%;
     padding: 15px 28px;
     border-radius: 12px;
-    background-color: #f7859c;
-    box-shadow: 3px 3px 0 2px #b9596d;
-    color: #fff;
+    background-color: pink;
+
+    color:black;
     font-weight: 700;
     text-align: center
 }
+
+.mint-button:hover{
+box-shadow: inset 2px 2px 3px pink, inset -2px -2px 3px rgba(0, 0, 0, 0.6);
+
+
+}
+
+
 
 .mint-button.utility {
     margin-top: 32px
@@ -4234,7 +4242,7 @@ h2 {
 }
 
 .p-connected-wallet.pink {
-    color: #f7859c;
+    color: pink;
     text-align: center
 }
 
@@ -6441,3 +6449,4 @@ h2 {
     -ms-grid-row-span: 1;
     grid-row-end: span 1
 }
+

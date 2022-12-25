@@ -66,7 +66,7 @@ body {
   color: black;
   text-shadow: 1px 1px 1px #000;
   border-radius: 10px;
-  background-color: white;
+  background-color: pink;
   background-image: linear-gradient(to top left,
       rgba(0, 0, 0, 0.2),
       rgba(0, 0, 0, 0.2) 30%,
@@ -97,6 +97,8 @@ body {
 
 .styled:hover {
   background-color: pink;
+  box-shadow: inset 2px 2px 3px rgb(108, 34, 46), inset -2px -2px 3px rgba(0, 0, 0, 0.6);
+  font-size: 1.05rem;
 }
 
 .styled:active {
@@ -113,14 +115,14 @@ body {
 //   font-family: RapidFinger101;
 //   src: url("./assets/cooper-hewitt-font/CooperhewittBold-K4BW.ttf");
 // }
-
+h1,
 h2,
 h3,
 h4,
 h5,
 h6 {
   color: black;
-  font-family: RapidFinger101;
+  font-family: EncodeSansCondensedBold;
   font-size: 1em;
   font-size: min(6vw, 35px);
 
@@ -129,7 +131,7 @@ h6 {
 }
 
 button {
-  font-family: RapidFinger101;
+  font-family: EncodeSansCondensedBold;
 }
 
 
@@ -224,4 +226,122 @@ p {
 
 #mintInput {
   background-color: rgba(54, 45, 3, 0.753);
+}
+
+
+#center-img {
+  justify-content: center;
+  align-items: center;
+  vertical-align: middle;
+  transition: 0.5s all ease-in-out;
+
+}
+
+#center-img:hover{
+  transform: scale(1.25);
+}
+
+#center-img-gif {
+  justify-content: center;
+  align-items: center;
+  vertical-align: middle;
+  transition: 0.5s all ease-in-out;
+
+}
+
+#center-img-gif:hover{
+  transform: scale(1.05);
+}
+
+
+
+#card-free-mints{
+  background-color: aliceblue;
+  border-radius: 5%;
+  max-width: 60%;
+
+}
+
+#card-free-mints:hover{
+  background-color: bisque;
+  border-radius: 5%;
+  max-width: 70%;
+  text-decoration: underline;
+
+}
+
+#card-devilcat{
+  background-color: aliceblue;
+  border-radius: 5%;
+  max-width: 60%;
+}
+
+
+#card-devilcat:hover{
+  background-color: bisque;
+  border-radius: 5%;
+  transform: scale(1.05);
+  text-decoration: underline;
+
+}
+
+#card-free-mints:hover img{
+  transform: scale(1.25);
+
+
+}
+
+#gremlins-img {
+  // max-width: 100%;
+  // max-height: 100%;
+  // object-fit: contain;
+  // padding: 3px;
+  transition: 0.5s all ease-in-out;
+
+}
+
+
+#gremlins-img:hover{
+  transform: scale(1.25);
+}
+
+#card-gremlins {
+background-color: #666;
+
+}
+#card-cloudz {
+  background-color: #666;
+  
+  }
+
+#cloudz-img {
+  // max-width: 100%;
+  // max-height: 100%;
+  // object-fit: contain;
+  // padding: 3px;
+  transition: 0.5s all ease-in-out;
+
+}
+
+
+#cloudz-img:hover{
+  transform: scale(1.25);
+}
+
+
+
+.grid-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  // grid-gap: 20px;
+  padding: 20px;
+}
+
+
+.grid-item {
+  // background-color: white;
+  // border: 1px solid #666;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
