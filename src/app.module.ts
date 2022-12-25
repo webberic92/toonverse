@@ -18,7 +18,7 @@ import { MintComponent } from './app/components/mint/mint.component';
 import { ManageComponent } from './app/components/manage/manage.component';
 import { NFTComponent } from './app/components/nft/nft.component';
 import { HttpClientModule } from '@angular/common/http';
-
+import { MdbCarouselModule } from 'mdb-angular-ui-kit/carousel';
 @NgModule({
   declarations: [
     AppComponent,
@@ -38,7 +38,8 @@ import { HttpClientModule } from '@angular/common/http';
     AppRoutingModule,
     MdbCollapseModule,
     MdbFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    MdbCarouselModule
 
   ],
   providers: [],

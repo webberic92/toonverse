@@ -6,6 +6,24 @@
 
 }
 
+#center-img:hover{
+  transform: scale(1.25);
+}
+
+#center-img-gif {
+  justify-content: center;
+  align-items: center;
+  vertical-align: middle;
+  transition: 0.5s all ease-in-out;
+
+}
+
+#center-img-gif:hover{
+  transform: scale(1.05);
+}
+
+
+
 #card-free-mints{
   background-color: aliceblue;
   border-radius: 5%;
@@ -21,14 +39,25 @@
 
 }
 
+#card-devilcat{
+  background-color: aliceblue;
+  border-radius: 5%;
+  max-width: 60%;
+}
+
+
+#card-devilcat:hover{
+  background-color: bisque;
+  border-radius: 5%;
+  transform: scale(1.05);
+  text-decoration: underline;
+
+}
+
 #card-free-mints:hover img{
   transform: scale(1.25);
 
 
-}
-
-#center-img:hover{
-  transform: scale(1.25);
 }
 
 #gremlins-img {
