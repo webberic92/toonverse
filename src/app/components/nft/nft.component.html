@@ -1,0 +1,604 @@
+<div class="center-div">
+  <div class="card main">
+    <h3 class="card-text" style="font-size: 2em">
+      <u>
+        <br />
+        The Buddha Inu NFT's
+      </u>
+    </h3>
+    <div class="row justify-content-md-center">
+      <div class="col">
+        <br />
+
+        <img
+          src="https://thebuddhainu.s3.amazonaws.com/MONK4.png"
+          alt="BuddhaInu"
+          height="150vh"
+          width="150vw"
+        />
+        <img
+          src="https://thebuddhainu.s3.amazonaws.com/handsUp.png"
+          alt="BuddhaInu"
+          height="150vh"
+          width="150vw"
+        />
+        <img
+          src="https://thebuddhainu.s3.amazonaws.com/MONK5.png"
+          alt="BuddhaInu"
+          height="150vh"
+          width="150vw"
+        />
+      </div>
+    </div>
+
+    <div *ngIf="this.isLoading">
+      <div
+        class="spinner-grow"
+        style="width: 10em; height: 10em; color: #f0b90b"
+        role="status"
+      >
+        <span class="visually-hidden">Loading...</span>
+      </div>
+
+      <p style="font-size: 1.25em; color: #f0b90b">Loading...</p>
+    </div>
+    <div *ngIf="!this.isLoading">
+      <p style="font-size: 1.25em">
+        NFT Collection Address: <p style="color: coral;">{{ contractAddress }}</p>
+        <p>
+        NFT Minting / Staking will take place here. Mint will be
+        cheaper with SIMON while traditional ETH is also accepted. You will be
+        able to stake an NFT for 1 Simon an hour for up to 10 years.
+      </p>
+      <!-- <div *ngIf="this.userAddress == ''">
+        <p style="color: red">
+          MetaMask Not Connected. Please connect to BSC test net
+        </p>
+      </div> -->
+      <div *ngIf="this.error">
+        <p style="color: red">Found Error : {{ error }}</p>
+      </div>
+      <hr
+        style="
+          color: #f0b90b;
+          width: 85%;
+          margin-left: auto;
+          margin-right: auto;
+        "
+      />
+      <!-- <p style="color: coral;">MOCK EXAMPLES. -->
+        <!-- <br>Waiting for artwork.</p> -->
+      <!-- <div *ngIf="this.userAddress != ''"> -->
+      <p style="font-size: 1.25em">
+       Your {{ contractSymbol }} tokens: {{ tokensOwned }}
+      </p>
+      <!-- <img
+          src="assets/example.gif"
+          alt="logo"
+          width="10%"
+          style="border-radius: 50%"
+        /><br /><br /> -->
+      <div *ngIf="this.isPaused == true">
+        <p>Contract Currently Paused</p>
+      </div>
+
+      <!-- <div *ngIf="this.contractOwner == this.userAddress">
+          <hr
+            style="
+              color: #f0b90b;
+              width: 100%;
+              margin-left: auto;
+              margin-right: auto;
+            "
+          />
+          <p>Owner Dashboard</p>
+          <div class="row" style="margin-left: auto; margin-right: auto">
+            <div class="col-xl-6">
+              <div class="card-body" id="manageCard">
+                <p class="card-text" style="font-size: 1em"></p>
+                <p>
+                  Contract Paused :<br /><br />
+                  {{ this.isPaused }}
+                </p>
+                <br /><br /><br />
+                <div class="center-div">
+                  <button
+                    *ngIf="this.isPaused == true"
+                    class="favorite styled"
+                    type="button"
+                    (click)="setPaused(false)"
+                  >
+                    Unpause
+                  </button>
+                  <button
+                    *ngIf="this.isPaused == false"
+                    class="favorite styled"
+                    type="button"
+                    (click)="setPaused(true)"
+                  >
+                    Pause
+                  </button>
+                </div>
+              </div>
+            </div>
+            <div class="col-xl-6">
+              <div class="card-body" id="manageCard">
+                <p class="card-text" style="font-size: 1em"></p>
+                <p>
+                  NFT's Revealed :<br /><br />
+                  {{ this.isRevealed }}
+                </p>
+                <br /><br /><br />
+                <div class="center-div">
+                  <button
+                    *ngIf="this.isRevealed == false"
+                    class="favorite styled"
+                    type="button"
+                    (click)="setRevealed(true)"
+                  >
+                    Reveal
+                  </button>
+                  <button
+                    *ngIf="this.isRevealed == true"
+                    class="favorite styled"
+                    type="button"
+                    (click)="setRevealed(false)"
+                  >
+                    UnReveal
+                  </button>
+                </div>
+              </div>
+            </div>
+            <div class="col-xl-6">
+              <div class="card-body" id="manageCard">
+                <p class="card-text" style="font-size: 1em">
+                  <u> SET UTIL TOKEN ADDRESS </u>
+                  <br />
+
+                  Current address : <br />
+                  {{ erc20ContractAddress }}
+                  <br />
+                </p>
+                <div
+                  class="form-outline"
+                  id="mintInput"
+                  style="max-width: 75%; margin-left: auto; margin-right: auto"
+                >
+                  <input
+                    [ngModel]="setERC20Token"
+                    (ngModelChange)="erc20Token($event)"
+                    type="text"
+                    onfocus="this.previousValue = this.value"
+                    onkeydown="if(event.key==='.'){event.preventDefault();} this.previousValue =this.value"
+                    class="form-control"
+                    placeholder="Address"
+                  />
+                </div>
+                <br />
+                <button
+                  *ngIf="this.setERC20Token != ''"
+                  class="favorite styled"
+                  type="button"
+                  (click)="setErc20address()"
+                >
+                  Update
+                </button>
+                <button
+                  *ngIf="this.setERC20Token == ''"
+                  class="favorite styledDisabled"
+                  type="button"
+                  (click)="setErc20address()"
+                >
+                  Update
+                </button>
+              </div>
+            </div>
+            <div class="col-xl-6">
+              <div class="card-body" id="manageCard">
+                <p class="card-text" style="font-size: 1em">
+                  <u> Update Price ETH </u>
+                  <br />
+
+                  New Price : {{ updateBnbPrice }} ETH
+                  <br />
+                </p>
+                <div
+                  class="form-outline"
+                  id="mintInput"
+                  style="max-width: 75%; margin-left: auto; margin-right: auto"
+                >
+                  <input
+                    [ngModel]="updateBnbPrice"
+                    (ngModelChange)="setupdateBnbPrice($event)"
+                    type="number"
+                    min="0"
+                    max="100000000000"
+                    step=".000001"
+                    onfocus="this.previousValue = this.value"
+                    onkeydown="if(event.key==='.'){event.preventDefault();} this.previousValue =this.value"
+                    class="form-control"
+                    placeholder="Amount"
+                  />
+                </div>
+                <br />
+                <button
+                  *ngIf="this.updateBnbPrice != '0'"
+                  class="favorite styled"
+                  type="button"
+                  (click)="setUpdateBnbPrice()"
+                >
+                  Update
+                </button>
+                <button
+                  *ngIf="this.updateBnbPrice == '0'"
+                  class="favorite styledDisabled"
+                  type="button"
+                >
+                  Update
+                </button>
+              </div>
+            </div>
+            <div class="col-xl-6">
+              <div class="card-body" id="manageCard">
+                <p class="card-text" style="font-size: 1em">
+                  <u> Update Price in Utility Token </u>
+                  <br />
+
+                  New Price : {{ updateUtilityPrice }} {{ erc20ContractSymbol }}
+                  <br />
+                </p>
+                <div
+                  class="form-outline"
+                  id="mintInput"
+                  style="max-width: 75%; margin-left: auto; margin-right: auto"
+                >
+                  <input
+                    [ngModel]="updateUtilityPrice"
+                    (ngModelChange)="setupdateUtilityPrice($event)"
+                    type="number"
+                    min="0"
+                    max="100000000000"
+                    step="1"
+                    onfocus="this.previousValue = this.value"
+                    onkeydown="if(event.key==='.'){event.preventDefault();} this.previousValue =this.value"
+                    class="form-control"
+                    placeholder="Amount"
+                  />
+                </div>
+                <br />
+                <button
+                  *ngIf="this.updateUtilityPrice != '0'"
+                  class="favorite styled"
+                  type="button"
+                  (click)="setUpdateUtilPrice()"
+                >
+                  Update
+                </button>
+                <button
+                  *ngIf="this.updateUtilityPrice == '0'"
+                  class="favorite styledDisabled"
+                  type="button"
+                >
+                  Update
+                </button>
+              </div>
+            </div>
+            <div class="col-xl-6">
+              <div class="card-body" id="manageCard">
+                <p class="card-text" style="font-size: 1em">
+                  <u> Withdrawal ETH </u>
+                  <br />
+
+                  Balance : {{ contractBnbBalance }} ETH
+                  <br />
+                </p>
+                <div
+                  class="form-outline"
+                  id="mintInput"
+                  style="max-width: 75%; margin-left: auto; margin-right: auto"
+                >
+                  <input
+                    [ngModel]="withdrawalBNB"
+                    (ngModelChange)="setWithdrawalBNB($event)"
+                    type="number"
+                    min="0"
+                    max="100000000000"
+                    step="0.000001"
+                    onfocus="this.previousValue = this.value"
+                    onkeydown="if(event.key==='.'){event.preventDefault();} this.previousValue =this.value"
+                    class="form-control"
+                    placeholder="Amount"
+                  />
+                </div>
+                <br />
+                <button
+                  *ngIf="this.withdrawalBNB != '0'"
+                  class="favorite styled"
+                  type="button"
+                  (click)="getWithdrawalBNB()"
+                >
+                  Withdrawal
+                </button>
+                <button
+                  *ngIf="this.withdrawalBNB == '0'"
+                  class="favorite styledDisabled"
+                  type="button"
+                >
+                  Withdrawal
+                </button>
+              </div>
+            </div>
+            <div class="col-xl-6">
+              <div class="card-body" id="manageCard">
+                <p class="card-text" style="font-size: 1em">
+                  <u> Withdrawal Utility Token </u>
+                  <br />
+
+                  Balance : {{ contractUtilityBalance }}
+                  {{ erc20ContractSymbol }}
+                  <br />
+                </p>
+                <div
+                  class="form-outline"
+                  id="mintInput"
+                  style="max-width: 75%; margin-left: auto; margin-right: auto"
+                >
+                  <input
+                    [ngModel]="withdrawalUtilityToken"
+                    (ngModelChange)="setWithdrawalUtilityToken($event)"
+                    type="number"
+                    min="0"
+                    max="100000000000"
+                    step="1"
+                    onfocus="this.previousValue = this.value"
+                    onkeydown="if(event.key==='.'){event.preventDefault();} this.previousValue =this.value"
+                    class="form-control"
+                    placeholder="Amount"
+                  />
+                </div>
+                <br />
+                <button
+                  *ngIf="this.withdrawalUtilityToken != '0'"
+                  class="favorite styled"
+                  type="button"
+                  (click)="getWithdrawalUtilityToken()"
+                >
+                  Withdrawal
+                </button>
+                <button
+                  *ngIf="this.withdrawalUtilityToken == '0'"
+                  class="favorite styledDisabled"
+                  type="button"
+                >
+                  Withdrawal
+                </button>
+              </div>
+            </div>
+          </div>
+          <hr
+            style="
+              color: #f0b90b;
+              width: 100%;
+              margin-left: auto;
+              margin-right: auto;
+            "
+          />
+        </div> -->
+
+      <!-- <div *ngIf="this.isPaused == false"> -->
+      <div class="row" style="margin-left: auto; margin-right: auto">
+        <!-- <div class="center-div"> -->
+        <div class="col-xl-6">
+          <div class="card-body" id="manageCard">
+            <p class="card-text" style="font-size: 1em">
+              MINT with ETH <br /><br />
+              Price : {{ contractPrice }} ETH
+            </p>
+            <div
+              class="form-outline"
+              id="mintInput"
+              style="max-width: 75%; margin-left: auto; margin-right: auto"
+            >
+              <input
+                [ngModel]="numToBuy"
+                (ngModelChange)="setMintAmount($event)"
+                type="number"
+                min="0"
+                max="100000000000"
+                step="1"
+                onfocus="this.previousValue = this.value"
+                onkeydown="if(event.key==='.'){event.preventDefault();} this.previousValue =this.value"
+                class="form-control"
+                placeholder="Amount"
+              />
+            </div>
+            <br />
+            <p>Buy {{ numToBuy }} for {{ totalPrice }}</p>
+            <button
+              class="favorite styledDisabled"
+              disabled
+              type="button"
+              (click)="mint()"
+            >
+              Disabled!
+            </button>
+          </div>
+        </div>
+        <div class="col-xl-6">
+          <div class="card-body" id="manageCard">
+            <p class="card-text" style="font-size: 1em">
+              MINT with {{ contractSymbol }}<br /><br />
+              Cost : {{ contractPriceInUtilityToken }}
+              {{ erc20ContractSymbol }}
+            </p>
+            <div
+              class="form-outline"
+              id="mintInput"
+              style="max-width: 75%; margin-left: auto; margin-right: auto"
+            >
+              <input
+                [ngModel]="numToBuyWithToken"
+                (ngModelChange)="setMintAmountWithToken($event)"
+                type="number"
+                min="0"
+                max="100000000000"
+                step="1"
+                onfocus="this.previousValue = this.value"
+                onkeydown="if(event.key==='.'){event.preventDefault();} this.previousValue =this.value"
+                class="form-control"
+                placeholder="Amount"
+              />
+            </div>
+            <br />
+            <p>
+              Buy {{ numToBuyWithToken }} for
+              {{ totalPriceWithToken }}
+              {{ erc20ContractSymbol }}out
+            </p>
+            <button
+              class="favorite styledDisabled"
+              disabled
+              type="button"
+              (click)="mintWithUtilityToken()"
+            >
+              Disabled!
+            </button>
+          </div>
+        </div>
+        <!-- </div> -->
+      </div>
+      <hr
+        style="
+          color: #f0b90b;
+          width: 85%;
+          margin-left: auto;
+          margin-right: auto;
+        "
+      />
+        <!-- <p style="color: coral;">TEST RENDER COLLECTION BELOW.
+        <br>This is not the BuddhaInu artwork.</p> -->
+      <div class="row" style="margin-left: auto; margin-right: auto">
+        <p>
+          <u> UNSTAKED NFT's:</u> (1)
+
+          <!-- <u> UNSTAKED NFT's ({{ userNFTs.length }}) </u> -->
+        </p>
+
+        <div class="row" style="margin-left: auto; margin-right: auto">
+          <div class="col-xl-6" *ngFor="let obj of unstakedNfts | keyvalue">
+            <div class="card-body" id="manageCard">
+              <p class="card-text" style="font-size: 1em">
+                {{ obj.value.name }}<br />
+                <img
+                  src="{{ obj.value.image }}"
+                  alt="logo"
+                  width="90%"
+                  style="border-radius: 5%"
+                />
+                <br />
+              </p>
+
+              <div *ngFor="let t of obj.value.attributes">
+                <p>{{ t.trait_type }} &nbsp;{{ t.value }}</p>
+              </div>
+              <div class="center-div">
+                <button
+                  class="favorite styledDisabled"
+                  disabled
+                  type="button"
+                  (click)="stake(obj.value.id)"
+                >
+                  Stake
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row" style="margin-left: auto; margin-right: auto">
+        <p>
+          <!-- <u> STAKED NFT'S ({{ userStakedNFTs.length }})</u> -->
+          <u> STAKED NFT's:</u> (1)
+
+          <!-- <br />
+          <br /> -->
+        </p>
+        <div>
+          <!-- <button
+            class="favorite styledDisabled"
+            disabled
+            style="margin-left: auto; margin-right: auto"
+            type="button"
+            (click)="collectAllStakedNftReward()"
+          >
+            Collect all Staking!
+          </button> -->
+          <br><br>
+          <div class="row" style="margin-left: auto; margin-right: auto">
+            <div class="col-xl-6" *ngFor="let obj of stakedNfts | keyvalue">
+              <div class="card-body" id="manageCard">
+                <p class="card-text" style="font-size: 1em">
+                  {{ obj.value.name }}<br />
+                  <img
+                  src="{{ obj.value.image }}"
+                  alt="logo"
+                  width="90%"
+                  style="border-radius: 5%"
+                />
+                </p>
+
+                <div *ngFor="let t of obj.value.attributes">
+                  <p>{{ t.trait_type }} &nbsp;{{ t.value }}</p>
+                </div>
+
+                <div class="center-div">
+                                    <button
+                    class="favorite styled"
+                    type="button"
+                  >
+                    Unstake
+                  </button>
+                  <!-- <button
+                    class="favorite styled"
+                    type="button"
+                    (click)="unstake(obj.value.id)"
+                  >
+                    Unstake
+                  </button> -->
+                </div>
+                <div class="center-div">
+                  <!-- <button
+                    class="favorite styled"
+                    type="button"
+                    (click)="collectStakedNftReward(obj.value.id)"
+                  >
+                    Claim {{ obj.value.potentialReward }}
+                    {{ contractSymbol }}
+                  </button> -->
+                
+                  <button
+                  class="favorite styled"
+                  type="button"
+                >
+                  Claim {{ obj.value.potentialReward }}
+                  {{ contractSymbol }}
+                </button>
+                
+                
+                
+                
+                </div>
+              </div>
+            </div>
+          </div>
+          <br />
+          <br />
+        </div>
+      </div>
+      <!-- </div> -->
+      <!-- </div> -->
+    </div>
+  </div>
+</div>
+

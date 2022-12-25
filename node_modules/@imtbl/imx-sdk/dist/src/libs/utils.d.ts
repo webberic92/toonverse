@@ -1,0 +1,12 @@
+import { AxiosError } from 'axios';
+import { ETHToken, PositiveBigNumber, PositiveNumberString, Token } from '../types';
+export declare function payloadId(): number;
+export declare function formatError(err: AxiosError): Error;
+export declare function sleep(time: number): Promise<unknown>;
+export declare const ethToken: ETHToken;
+export declare const eth8ToWei: (amount: PositiveBigNumber) => PositiveBigNumber;
+export declare const eth8ToEth: (amount: PositiveBigNumber) => PositiveNumberString;
+export declare const weiToEth8: (amount: PositiveBigNumber) => PositiveBigNumber;
+export declare const ethToEth8: (amount: PositiveNumberString) => PositiveBigNumber;
+export declare const amountToQuantizedAmount: (amount: PositiveBigNumber, quantum: string) => PositiveBigNumber;
+export declare const tokenQuantizedAmount: (token: Token, amount: PositiveBigNumber, quantum?: string) => PositiveBigNumber;
