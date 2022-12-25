@@ -2,6 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import Web3 from "web3";
 import NFTContract from "../services/Solidity/nft.service";
 import axios from "axios";
+import { clear } from "console";
 @Component({
   selector: "app-viewcatz",
   templateUrl: "./viewcatz.component.html",
@@ -35,8 +36,15 @@ export class ViewcatzComponent implements OnInit {
     }
   }
 
+  clearCatObj(){
+    this.catObj = null;
+    this.searchedId = 0;
+    this.searchedAddress = '';
+  }
+
   async searchById() {
-    console.log("Searching for " + this.searchedId);
+    this.catObj = null;
+    this.searchedAddress = "";
     if (this.searchedId != 0) {
       this.tokenUri = await NFTContract.methods
         .tokenURI(this.searchedId)

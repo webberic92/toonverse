@@ -14,3 +14,14 @@
 #card-devilcat{
     max-width: 100%;
 }
+
+#table-cat-attributes{
+    font-family: EncodeSansCondensedBold;
+    color: black;
+    word-break: break-word;
+    font-size: min(4vw, 20px);
+    justify-content: center;
+    justify-items: center;
+    margin-left: auto;
+    display: grid;
+  }
