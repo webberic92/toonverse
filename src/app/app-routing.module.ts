@@ -6,6 +6,8 @@ import { MintComponent } from './components/mint/mint.component';
 import { RoadMapComponent } from './components/road-map/road-map.component';
 import { TeamComponent } from './components/team/team.component';
 import { NFTComponent } from './components/nft/nft.component';
+import { AboutComponent } from './components/about/about.component';
+import { ViewcatzComponent } from './viewcatz/viewcatz.component';
 
 const routes: Routes = [
 
@@ -15,6 +17,8 @@ const routes: Routes = [
   { path: 'roadmap', pathMatch: 'full', component: RoadMapComponent },
   { path: 'team', pathMatch: 'full', component: TeamComponent },
   { path: 'mint', pathMatch: 'full', component: MintComponent },
+  { path: 'about', pathMatch: 'full', component: AboutComponent },
+  { path: 'viewcatz', pathMatch: 'full', component: ViewcatzComponent },
   
 
 
