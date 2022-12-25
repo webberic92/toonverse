@@ -27,7 +27,7 @@
                         <p>Eth Address Lookup</p>
                         <mdb-form-control >
                             <input mdbInput (ngModelChange)="updateSearchedAddress($event)" [ngModel]="searchedAddress"  type="text" id="typeText" class="styled" placeholder="Eth Address" />
-                            <label mdbLabel class="styled" for="typeText">Search</label>
+                            <button mdbLabel (click)="searchByEthAddress()" class="styled" for="typeText">Search</button>
                             <!-- <button style="float: right; justify-content: center; justify-items: center;">Go</button> -->
                         </mdb-form-control>
 
@@ -41,9 +41,8 @@
                         <p>DevilCat ID# Lookup</p>
 
                         <mdb-form-control>
-                            <input mdbInput type="text" id="typeText" placeholder="DevilCatID#" class="styled" />
-                            <p> Lookup : {{searchedAddress}} ?</p>
-                            <label mdbLabel class="styled" for="typeText">Search</label>
+                            <input mdbInput (ngModelChange)="updateSearchedID($event)" [ngModel]="searchedId" type="number" min="0" max="2222" id="typeText" placeholder="DevilCatID#" class="styled" />
+                            <button (click)="searchById()" class="styled" for="typeText">Search</button>
                         </mdb-form-control>
                     </div>
                 </div>
@@ -51,6 +50,21 @@
 
         </div>
 
-        Results for {{searchedAddress}}...
+<div class="LoggedInView">
+    LoggedInView
+
+</div>
+
+<div class="ByAddressView">
+    Results for {{searchedAddress}}...
+
+    
+</div>
+
+<div class="ByCatIDView">
+    Results for {{searchedId}}...
+    
+</div>
+
     </div>
 </div>

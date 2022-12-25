@@ -32,7 +32,6 @@ import { ViewcatzComponent } from './app/viewcatz/viewcatz.component';
     MintComponent,
     ManageComponent,
     NFTComponent,
-    AboutComponent,
     ViewcatzComponent,
   ],
   imports: [
