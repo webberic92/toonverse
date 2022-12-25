@@ -25,9 +25,11 @@
                 <div class="col-4">
                     <div id="card-devilcat" style="min-height:100%">
                         <p>Eth Address Lookup</p>
-                        <mdb-form-control >
-                            <input mdbInput (ngModelChange)="updateSearchedAddress($event)" [ngModel]="searchedAddress"  type="text" id="typeText" class="styled" placeholder="Eth Address" />
-                            <button mdbLabel (click)="searchByEthAddress()" class="styled" for="typeText">Search</button>
+                        <mdb-form-control>
+                            <input mdbInput (ngModelChange)="updateSearchedAddress($event)" [ngModel]="searchedAddress"
+                                type="text" id="typeText" class="styled" placeholder="Eth Address" />
+                            <button mdbLabel (click)="searchByEthAddress()" class="styled"
+                                for="typeText">Search</button>
                             <!-- <button style="float: right; justify-content: center; justify-items: center;">Go</button> -->
                         </mdb-form-control>
 
@@ -41,7 +43,9 @@
                         <p>DevilCat ID# Lookup</p>
 
                         <mdb-form-control>
-                            <input mdbInput (ngModelChange)="updateSearchedID($event)" [ngModel]="searchedId" type="number" min="0" max="2222" id="typeText" placeholder="DevilCatID#" class="styled" />
+                            <input mdbInput (ngModelChange)="updateSearchedID($event)" [ngModel]="searchedId"
+                                type="number" min="0" max="2222" id="typeText" placeholder="DevilCatID#"
+                                class="styled" />
                             <button (click)="searchById()" class="styled" for="typeText">Search</button>
                         </mdb-form-control>
                     </div>
@@ -50,21 +54,63 @@
 
         </div>
 
-<div class="LoggedInView">
-    LoggedInView
+        <div class="LoggedInView" *ngIf="searchedAddress">
+            LoggedInView
 
-</div>
+        </div>
 
-<div class="ByAddressView">
-    Results for {{searchedAddress}}...
+        <div class="ByAddressView" *ngIf="searchedAddress">
 
-    
-</div>
 
-<div class="ByCatIDView">
-    Results for {{searchedId}}...
-    
-</div>
+            Results for searchedAddress {{searchedAddress}}...
+
+        </div>
+
+        <div class="ByCatIDView" *ngIf="searchedId!=0" style="max-width: 100%; width: 65%;">
+
+            Results for searchedId {{searchedId}}...
+
+
+            <div id="card-devilcat" style="min-width: 75%;" *ngIf="catObj!=null">
+                <p>
+                    {{catObj.data.name}}
+                    <br>
+                    <img id="center-img" src={{catObj.data.image}} alt="logo" height="200vh" width="200vw"
+                        style="border-radius: 5%" />
+
+                    <!-- <tr *ngFor="let attribute of catObj.data.attributes; let i = index"> -->
+
+
+                <table id="styled" class="table" style="border-style:none">
+                    <tbody style="border-style:none">
+                        <p>
+                        <tr style="border-style:none" *ngFor="let attribute of catObj.data.attributes; let i = index">
+                            {{attribute.trait_type}} : {{attribute.value}} 
+
+
+                        </tr></p>
+                        <!-- <tr>
+                                    <th scope="row">2</th>
+                                    <td>Jacob</td>
+
+                                  </tr> -->
+
+                    </tbody>
+                </table>
+
+
+
+
+
+                <!-- <td>{{attribute.value}}</td> -->
+
+                <!-- </tr> -->
+                <!-- </p> -->
+
+
+            </div>
+
+        </div>
 
     </div>
 </div>

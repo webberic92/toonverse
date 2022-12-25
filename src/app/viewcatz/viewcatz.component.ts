@@ -1,7 +1,7 @@
 import { Component, OnInit } from "@angular/core";
-import Web3 from 'web3';
+import Web3 from "web3";
 import NFTContract from "../services/Solidity/nft.service";
-import axios from 'axios';
+import axios from "axios";
 @Component({
   selector: "app-viewcatz",
   templateUrl: "./viewcatz.component.html",
@@ -13,8 +13,7 @@ export class ViewcatzComponent implements OnInit {
   tokenUri: string = "";
   searchedAddress: string = "";
   searchedId: number = 0;
-
-
+  catObj: any = null;
 
   ngOnInit(): void {}
 
@@ -38,17 +37,21 @@ export class ViewcatzComponent implements OnInit {
 
   async searchById() {
     console.log("Searching for " + this.searchedId);
-    if(this.searchedId != 0){
-          this.tokenUri = await NFTContract.methods.tokenURI(this.searchedId).call();
-          axios.get(this.tokenUri)
-          .then((response) => {
-            console.log(response)
-          })
-          .catch((err) => console.log(err))
+    if (this.searchedId != 0) {
+      this.tokenUri = await NFTContract.methods
+        .tokenURI(this.searchedId)
+        .call();
+      axios
+        .get(this.tokenUri)
+        .then((response) => {
+          this.catObj = JSON.parse(JSON.stringify(response));
+
+          console.log(response);
+        })
+        .catch((err) => console.log(err));
     }
 
-
-    console.log(" this.tokenUri for " +  this.tokenUri);
+    console.log(" this.tokenUri for " + this.tokenUri);
 
     //Need to query Contract for MetData.
 
@@ -56,7 +59,4 @@ export class ViewcatzComponent implements OnInit {
 
     //Display data.
   }
-
-
-
 }
