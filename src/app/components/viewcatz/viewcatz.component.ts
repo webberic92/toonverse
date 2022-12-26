@@ -1,6 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import Web3 from "web3";
-import NFTContract from "../services/Solidity/nft.service";
+import NFTContract from "../../services/Solidity/nft.service";
 import axios from "axios";
 import { clear } from "console";
 @Component({
@@ -15,12 +15,8 @@ export class ViewcatzComponent implements OnInit {
   searchedAddress: string = "";
   searchedId: number = 0;
   catObj: any = null;
-
+  tokenJsonArray: any[] = new Array();
   ngOnInit(): void {}
-
-  searchByEthAddress() {
-    console.log("Searching for " + this.searchedAddress);
-  }
 
   updateSearchedAddress(e: Event) {
     this.searchedAddress = String(e);
@@ -36,15 +32,14 @@ export class ViewcatzComponent implements OnInit {
     }
   }
 
-  clearCatObj(){
+  clearCatObj() {
     this.catObj = null;
-    this.searchedId = 0;
-    this.searchedAddress = '';
+    this.tokenJsonArray = new Array();
   }
 
   async searchById() {
+    this.tokenJsonArray = new Array;
     this.catObj = null;
-    this.searchedAddress = "";
     if (this.searchedId != 0) {
       this.tokenUri = await NFTContract.methods
         .tokenURI(this.searchedId)
@@ -54,17 +49,49 @@ export class ViewcatzComponent implements OnInit {
         .then((response) => {
           this.catObj = JSON.parse(JSON.stringify(response));
 
-          console.log(response);
+          // console.log(response);
+          console.log(this.catObj);
         })
         .catch((err) => console.log(err));
     }
 
-    console.log(" this.tokenUri for " + this.tokenUri);
+    // console.log(" this.tokenUri for " + this.tokenUri);
 
     //Need to query Contract for MetData.
 
     //API call metadatalink.
 
     //Display data.
+  }
+
+  async searchByEthAddress() {
+    this.tokenJsonArray = new Array;
+    this.catObj = null;
+    if (this.searchedAddress != "") {
+      //First get balance of.
+      let usersBalanceOfNftTokens = await NFTContract.methods
+        .balanceOf(this.searchedAddress)
+        .call();
+
+      for (let i = 0; i <= usersBalanceOfNftTokens - 1; i++) {
+        //Then tokenOfOwnerByIndex
+        let tokenOfOwnerByIndex = await NFTContract.methods
+          .tokenOfOwnerByIndex(this.searchedAddress, i)
+          .call();
+
+        //Then tokenURI
+        let tokenURI = await NFTContract.methods
+          .tokenURI(tokenOfOwnerByIndex)
+          .call();
+
+        //get json
+        axios
+          .get(tokenURI)
+          .then((response) => {
+            this.tokenJsonArray.push(JSON.parse(JSON.stringify(response)));
+          })
+          .catch((err) => console.log(err));
+      }
+    }
   }
 }

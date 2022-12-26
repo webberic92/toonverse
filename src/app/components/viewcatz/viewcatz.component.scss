@@ -25,3 +25,23 @@
     margin-left: auto;
     display: grid;
   }
+
+  #card-devilcat-multi{
+    background-color: aliceblue;
+    border-radius: 5%;
+    max-width: 60%;
+    width: auto;
+    margin: auto;
+    margin-bottom: 5%;
+  }
+  
+  
+  #card-devilcat-multi:hover{
+    background-color: bisque;
+    border-radius: 5%;
+    transform: scale(1.05);
+    text-decoration: underline;
+  
+  }
+
+  

@@ -22,6 +22,9 @@
 
                     </div>
                 </div>
+
+
+
                 <div class="col-4">
                     <div id="card-devilcat" style="min-height:100%">
                         <p>Eth Address Lookup</p>
@@ -30,12 +33,14 @@
                                 type="text" id="typeText" class="styled" placeholder="Eth Address" />
                             <button mdbLabel (click)="searchByEthAddress()" class="styled"
                                 for="typeText">Search</button>
-                            <!-- <button style="float: right; justify-content: center; justify-items: center;">Go</button> -->
                         </mdb-form-control>
 
 
                     </div>
                 </div>
+
+
+
 
                 <div class="col-4">
                     <div id="card-devilcat" style="min-height:100%">
@@ -54,27 +59,48 @@
 
         </div>
 
-        <div class="LoggedInView" *ngIf="searchedAddress">
+        <!-- <div class="LoggedInView" *ngIf="searchedAddress">
             LoggedInView
 
-        </div>
+        </div> -->
 
-        <div class="ByAddressView" *ngIf="searchedAddress">
-
-
-            Results for searchedAddress {{searchedAddress}}...
-
-        </div>
-
-        <div class="ByCatIDView" *ngIf="searchedId!=0"
+        <!-- ETH ADDRESS LOOK UP RESULTS-->
+        <div class="ByAddressView" *ngIf="tokenJsonArray.length >0"
             style="max-width: 100%; width: 65%;top: -90px;position: relative;">
             <br>
-            <button class="styled" *ngIf="catObj!=null" (click)="clearCatObj()">Clear</button>
-            <br>            <br>
+
+            <button class="styled" (click)="clearCatObj()">Clear</button>
+            <br>
+
+            <p>Unstaked DevilCatz belonging to {{searchedAddress}}...</p>
+
+            <div id="container">
+                <div class="row">
+                    <div class="col-md-3" id="card-devilcat-multi" *ngFor="let token of tokenJsonArray">
+                        <p>{{token.data.name}}</p>
+                        <img id="center-img" src={{token.data.image}} alt="logo" height="100vh" width="100"
+                            style="border-radius: 5%" />
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+
+        <!-- GET BY CAT ID DIV -->
+        <div class="ByCatIDView" *ngIf="catObj!=null"
+            style="max-width: 100%; width: 65%;top: -90px;position: relative;">
+            <br>
+            <button class="styled" (click)="clearCatObj()">Clear</button>
+            <br> <br>
             <br>
             <br>
 
-            <div id="card-devilcat" style="min-width: 75%;" *ngIf="catObj!=null">
+            <div id="card-devilcat" style="min-width: 75%;">
 
 
 
@@ -87,7 +113,7 @@
                 <table id="styled" class="table" style="border-style:none">
                     <tbody style="border-style:none" id="table-cat-attributes">
 
-                        <tr style="border-style:none" *ngFor="let attribute of catObj.data.attributes; let i = index">
+                        <tr style="border-style:none" *ngFor="let attribute of catObj.data.attributes">
                             {{attribute.trait_type}} : {{attribute.value}}
                         </tr>
 

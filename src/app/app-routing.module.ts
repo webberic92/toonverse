@@ -7,7 +7,7 @@ import { RoadMapComponent } from './components/road-map/road-map.component';
 import { TeamComponent } from './components/team/team.component';
 import { NFTComponent } from './components/nft/nft.component';
 import { AboutComponent } from './components/about/about.component';
-import { ViewcatzComponent } from './viewcatz/viewcatz.component';
+import { ViewcatzComponent } from './components/viewcatz/viewcatz.component';
 
 const routes: Routes = [
 

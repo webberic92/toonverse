@@ -20,7 +20,7 @@ import { NFTComponent } from './app/components/nft/nft.component';
 import { HttpClientModule } from '@angular/common/http';
 import { MdbCarouselModule } from 'mdb-angular-ui-kit/carousel';
 import { AboutComponent } from './app/components/about/about.component';
-import { ViewcatzComponent } from './app/viewcatz/viewcatz.component';
+import { ViewcatzComponent } from './app/components/viewcatz/viewcatz.component';
 @NgModule({
   declarations: [
     AppComponent,
