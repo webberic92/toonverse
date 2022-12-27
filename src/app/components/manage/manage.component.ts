@@ -2,7 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import bscContract from "src/app/services/Solidity/contract.service"
 import Web3 from 'web3';
 import { Web3Service } from 'src/app/services/Web3/web3.service';
+import NFTContract from 'src/app/services/Solidity/nft.service';
 const web3 = new Web3('https://data-seed-prebsc-1-s1.binance.org:8545');
+import axios from "axios";
 
 @Component({
   selector: 'app-manage',
@@ -14,7 +16,7 @@ export class ManageComponent implements OnInit {
   tokensStaked: string = ''
 
   isLoading: boolean = false;
-  userAddress: string = ''
+  userAddress: string = '0x4538C3d93FfdE7677EF66aB548a4Dd7f39eca785'
   contractAddress: string = ''
   contractOwner: string = ''
   contractName: string = ''
@@ -62,7 +64,8 @@ export class ManageComponent implements OnInit {
   }
 
   async ngOnInit() {
-    this.getContent()
+    // this.getContent()
+    this.searchByEthAddress();
   }
 
 
@@ -543,6 +546,54 @@ export class ManageComponent implements OnInit {
       this.isLoading = false;
     }
   }
+
+
+
+
+  tokenUri: string = "";
+  searchedAddress: string = "0x4538C3d93FfdE7677EF66aB548a4Dd7f39eca785";
+  searchedId: number = 0;
+  catObj: any = null;
+  tokenJsonArray: any[] = new Array();
+
+
+
+
+  async searchByEthAddress() {
+    this.tokenJsonArray = new Array;
+    this.catObj = null;
+    if (this.searchedAddress != "") {
+      //First get balance of.
+      let usersBalanceOfNftTokens = await NFTContract.methods
+        .balanceOf(this.searchedAddress)
+        .call();
+
+      for (let i = 0; i <= usersBalanceOfNftTokens - 1; i++) {
+        //Then tokenOfOwnerByIndex
+        let tokenOfOwnerByIndex = await NFTContract.methods
+          .tokenOfOwnerByIndex(this.searchedAddress, i)
+          .call();
+
+        //Then tokenURI
+        let tokenURI = await NFTContract.methods
+          .tokenURI(tokenOfOwnerByIndex)
+          .call();
+
+        //get json
+        axios
+          .get(tokenURI)
+          .then((response) => {
+            this.tokenJsonArray.push(JSON.parse(JSON.stringify(response)));
+          })
+          .catch((err) => console.log(err));
+      }
+    }
+  }
+
+
+
+
+
 
 
 }

@@ -1,534 +1,298 @@
 <div class="center-div">
   <div class="card main">
-    
-    <h3 class="card-text" style="font-size: 2em">
-      <br> 
+    <div class="card-header" style="border-radius: 5%; position: relative; top: -90px;">
 
-      <u> Manage $SIMON. </u>
-      <br><br>
-    </h3>
-   
-    <img
-      src="https://thebuddhainu.s3.amazonaws.com/coin.png"
-      alt="BuddhaInu"
-      height="200vh"
-      width="200vw"
-      style="border-radius: 50%"
-    /><br> <br>
+      <img id="center-img" src="../../../assets/toonverse/greenCat.png" alt="logo" height="400vh" width="400vw"
+        style="border-radius: 5%" />
 
+      <h3 class="card-text" style="font-size: 2em">
+        <br>
+
+        <h3 style="text-decoration: underline;">Your Account</h3>
+        <br><br>
+      </h3>
 
       <div *ngIf="this.isLoading">
-        <div
-          class="spinner-grow"
-          style="width: 10em; height: 10em; color: #f0b90b"
-          role="status"
-        >
+        <div class="spinner-grow" style="width: 10em; height: 10em; color: #f0b90b" role="status">
           <span class="visually-hidden">Loading...</span>
         </div>
         <br />
         <br />
         <br />
-  
+
         <p style="font-size: 1.25em; color: #f0b90b">Loading...</p>
         <br />
       </div>
 
-    <div *ngIf="!this.isLoading">
-      <br>     
-   
+      <div *ngIf="!this.isLoading">
+        <br>
 
-      <div *ngIf="this.userAddress == ''">
-        <p >
-          MetaMask Not Connected. Please connect to ETH MAIN net.
-          <br>
-          This is where you will be able to burn, stake, unstake, and collect SIMON.
-<br>
+        <!-- IF USER IS LOGGGGGGEDDD IN-->
+        <div *ngIf="this.userAddress != ''" style="position: relative; top: -90px;">
 
-        </p>
-      </div>
-      <div *ngIf="this.error && this.userAddress != ''">
-        <p style="color: red">Found Error : {{ error }}</p>
-      </div>
-
-      <div *ngIf="this.userAddress != ''">
-      
-        <p style="font-size: 1.25em">
-          Token Address: {{ contractAddress }}
-          <br />
-          Minted: {{ contractMinted }}
-          <br />
-          Total Supply : {{ contractTotalSupply }}
-          <br />
-        </p>
-        <div *ngIf="this.contractOwner == this.userAddress">
-          <br />
-          <hr
-            style="
+          <!-- <p style="font-size: 1.25em">
+            Token Address: {{ contractAddress }}
+            <br />
+            Minted: {{ contractMinted }}
+            <br />
+            Total Supply : {{ contractTotalSupply }}
+            <br />
+          </p> -->
+          <div *ngIf="this.contractOwner == this.userAddress">
+            <br />
+            <hr style="
               color: #f0b90b;
               width: 85%;
               margin-left: auto;
               margin-right: auto;
-            "
-          />
-          <p><u>OWNER ONLY DASHBOARD</u></p>
+            " />
+            <p><u>OWNER ONLY DASHBOARD</u></p>
 
-          <div class="row" style="margin-left: auto; margin-right: auto">
-            <div
-              class="col-xl-4"
-              style="grid-template-columns: repeat(auto-fit, minmax(275, auto))"
-            >
-              <div class="card-body" id="manageCard">
-                <p class="card-text" style="font-size: 1em">
-                  <u> SET NFT ADDRESS </u>
+            <div class="row" style="margin-left: auto; margin-right: auto">
+              <div class="col-xl-4" style="grid-template-columns: repeat(auto-fit, minmax(275, auto))">
+                <div class="card-body" id="styled">
+                  <p class="card-text" style="font-size: 1em">
+                    <u> SET NFT ADDRESS </u>
+                    <br />
+
+                    Current address : <br />
+                    {{ contractERC721Token }}<br />
+                  </p>
+                  <div class="form-outline" id="mintInput"
+                    style="max-width: 75%; margin-left: auto; margin-right: auto">
+                    <input [ngModel]="setERC721Token" (ngModelChange)="erc721Token($event)" type="text"
+                      onfocus="this.previousValue = this.value"
+                      onkeydown="if(event.key==='.'){event.preventDefault();} this.previousValue =this.value"
+                      class="form-control" placeholder="Address" />
+                  </div>
                   <br />
-
-                  Current address : <br />
-                  {{ contractERC721Token }}<br />
-                </p>
-                <div
-                  class="form-outline"
-                  id="mintInput"
-                  style="max-width: 75%; margin-left: auto; margin-right: auto"
-                >
-                  <input
-                    [ngModel]="setERC721Token"
-                    (ngModelChange)="erc721Token($event)"
-                    type="text"
-                    onfocus="this.previousValue = this.value"
-                    onkeydown="if(event.key==='.'){event.preventDefault();} this.previousValue =this.value"
-                    class="form-control"
-                    placeholder="Address"
-                  />
+                  <button *ngIf="this.setERC721Token != ''" class="favorite styled" type="button"
+                    (click)="setErc721address()">
+                    Update
+                  </button>
+                  <button *ngIf="this.setERC721Token == ''" class="favorite styledDisabled" type="button"
+                    (click)="setErc721address()">
+                    Update
+                  </button>
                 </div>
-                <br />
-                <button
-                  *ngIf="this.setERC721Token != ''"
-                  class="favorite styled"
-                  type="button"
-                  (click)="setErc721address()"
-                >
-                  Update
-                </button>
-                <button
-                  *ngIf="this.setERC721Token == ''"
-                  class="favorite styledDisabled"
-                  type="button"
-                  (click)="setErc721address()"
-                >
-                  Update
-                </button>
               </div>
-            </div>
-            <div
-              class="col-xl-4"
-              style="grid-template-columns: repeat(auto-fit, minmax(275, auto))"
-            >
-              <div class="card-body" id="manageCard">
-                <p class="card-text" style="font-size: 1em">
-                  <u> WITHDRAW. </u><br /><br />
-                  <br />{{ contractBnbBalance }} BNB
-                </p>
+              <div class="col-xl-4" style="grid-template-columns: repeat(auto-fit, minmax(275, auto))">
+                <div class="card-body" id="styled">
+                  <p class="card-text" style="font-size: 1em">
+                    <u> WITHDRAW. </u><br /><br />
+                    <br />{{ contractBnbBalance }} BNB
+                  </p>
 
-                <div
-                  class="form-outline"
-                  id="mintInput"
-                  style="max-width: 75%; margin-left: auto; margin-right: auto"
-                >
-                  <input
-                    [ngModel]="this.setAmountToWithdrawal"
-                    type="number"
-                    (ngModelChange)="updateAmountToWithDrawal($event)"
-                    min=".000001"
-                    max="10000000"
-                    step=".000001"
-                    onfocus="this.previousValue = this.value"
-                    onkeydown="this.previousValue =this.value"
-                    class="form-control"
-                    placeholder="Withdrawal"
-                  />
-                </div>
-                <br />
-                <div class="center-div">
-                  <div *ngIf="setAmountToWithdrawal == ''">
-                    <button
-                      class="favorite styledDisabled"
-                      disabled
-                      type="button"
-                      (click)="withdrawBNB()"
-                    >
-                      Withdrawal
-                    </button>
+                  <div class="form-outline" id="mintInput"
+                    style="max-width: 75%; margin-left: auto; margin-right: auto">
+                    <input [ngModel]="this.setAmountToWithdrawal" type="number"
+                      (ngModelChange)="updateAmountToWithDrawal($event)" min=".000001" max="10000000" step=".000001"
+                      onfocus="this.previousValue = this.value" onkeydown="this.previousValue =this.value"
+                      class="form-control" placeholder="Withdrawal" />
                   </div>
-                  <div *ngIf="setAmountToWithdrawal != ''">
-                    <button
-                      class="favorite styled"
-                      type="button"
-                      (click)="withdrawBNB()"
-                    >
-                      Withdrawal
-                    </button>
+                  <br />
+                  <div class="center-div">
+                    <div *ngIf="setAmountToWithdrawal == ''">
+                      <button class="favorite styledDisabled" disabled type="button" (click)="withdrawBNB()">
+                        Withdrawal
+                      </button>
+                    </div>
+                    <div *ngIf="setAmountToWithdrawal != ''">
+                      <button class="favorite styled" type="button" (click)="withdrawBNB()">
+                        Withdrawal
+                      </button>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-            <div
-              class="col-xl-4"
-              style="grid-template-columns: repeat(auto-fit, minmax(275, auto))"
-            >
-              <div class="card-body" id="manageCard">
-                <p class="card-text" style="font-size: 1em">
-                  <u> WITHDRAW Utility Token </u><br /><br />
-                  <br />{{ contractUtilityBalance }} {{ contractSymbol }}
-                </p>
+              <div class="col-xl-4" style="grid-template-columns: repeat(auto-fit, minmax(275, auto))">
+                <div class="card-body" id="styled">
+                  <p class="card-text" style="font-size: 1em">
+                    <u> WITHDRAW Utility Token </u><br /><br />
+                    <br />{{ contractUtilityBalance }} {{ contractSymbol }}
+                  </p>
 
-                <div
-                  class="form-outline"
-                  id="mintInput"
-                  style="max-width: 75%; margin-left: auto; margin-right: auto"
-                >
-                  <input
-                    [ngModel]="setUtilityAmountToWithdrawal"
-                    type="number"
-                    (ngModelChange)="utilityAmountToWithdrawal($event)"
-                    min="1"
-                    max="1000000000000"
-                    step="1"
-                    onfocus="this.previousValue = this.value"
-                    onkeydown="this.previousValue =this.value"
-                    class="form-control"
-                    placeholder="Withdrawal"
-                  />
-                </div>
-                <br />
-                <div class="center-div">
-                  <div *ngIf="setUtilityAmountToWithdrawal == '0'">
-                    <button
-                      class="favorite styledDisabled"
-                      disabled
-                      type="button"
-                    >
-                      Withdrawal
-                    </button>
+                  <div class="form-outline" id="mintInput"
+                    style="max-width: 75%; margin-left: auto; margin-right: auto">
+                    <input [ngModel]="setUtilityAmountToWithdrawal" type="number"
+                      (ngModelChange)="utilityAmountToWithdrawal($event)" min="1" max="1000000000000" step="1"
+                      onfocus="this.previousValue = this.value" onkeydown="this.previousValue =this.value"
+                      class="form-control" placeholder="Withdrawal" />
                   </div>
-                  <div *ngIf="setUtilityAmountToWithdrawal != '0'">
-                    <button
-                      class="favorite styled"
-                      type="button"
-                      (click)="withdrawUtility()"
-                    >
-                      Withdrawal
-                    </button>
+                  <br />
+                  <div class="center-div">
+                    <div *ngIf="setUtilityAmountToWithdrawal == '0'">
+                      <button class="favorite styledDisabled" disabled type="button">
+                        Withdrawal
+                      </button>
+                    </div>
+                    <div *ngIf="setUtilityAmountToWithdrawal != '0'">
+                      <button class="favorite styled" type="button" (click)="withdrawUtility()">
+                        Withdrawal
+                      </button>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-            <div class="col-xl-4">
-              <div class="card-body" id="manageCard">
-                <p class="card-text" style="font-size: 1em">
-                  <u> SET COST </u><br /><br />
+              <div class="col-xl-4">
+                <div class="card-body" id="styled">
+                  <p class="card-text" style="font-size: 1em">
+                    <u> SET COST </u><br /><br />
 
-                  Current Price : {{ contractPrice }} BNB
-                </p>
+                    Current Price : {{ contractPrice }} BNB
+                  </p>
 
-                <div
-                  class="form-outline"
-                  id="mintInput"
-                  style="max-width: 75%; margin-left: auto; margin-right: auto"
-                >
-                  <input
-                    [ngModel]="this.setCostvalue"
-                    type="number"
-                    (ngModelChange)="updatePrice($event)"
-                    min=".000001"
-                    max="100"
-                    step=".000001"
-                    onfocus="this.previousValue = this.value"
-                    onkeydown="this.previousValue =this.value"
-                    class="form-control"
-                    placeholder="Cost"
-                  />
-                </div>
-
-                <br />
-                <div class="center-div">
-                  <div *ngIf="setCostvalue == ''">
-                    <button
-                      class="favorite styledDisabled"
-                      disabled
-                      type="button"
-                      (click)="setCost()"
-                    >
-                      Set Cost
-                    </button>
+                  <div class="form-outline" id="mintInput"
+                    style="max-width: 75%; margin-left: auto; margin-right: auto">
+                    <input [ngModel]="this.setCostvalue" type="number" (ngModelChange)="updatePrice($event)"
+                      min=".000001" max="100" step=".000001" onfocus="this.previousValue = this.value"
+                      onkeydown="this.previousValue =this.value" class="form-control" placeholder="Cost" />
                   </div>
-                  <div *ngIf="setCostvalue != ''">
-                    <button
-                      class="favorite styled"
-                      type="button"
-                      (click)="setCost()"
-                    >
-                      Set Cost
-                    </button>
+
+                  <br />
+                  <div class="center-div">
+                    <div *ngIf="setCostvalue == ''">
+                      <button class="favorite styledDisabled" disabled type="button" (click)="setCost()">
+                        Set Cost
+                      </button>
+                    </div>
+                    <div *ngIf="setCostvalue != ''">
+                      <button class="favorite styled" type="button" (click)="setCost()">
+                        Set Cost
+                      </button>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
 
-            <div class="col-xl-4">
-              <div class="card-body" id="manageCard">
-                <p class="card-text" style="font-size: 1em">
-                  <u> TRANSFER OWNERSHIP </u>
-                  <br /><br />
-                  This will transfer ownership of contract.
-                </p>
-                <div
-                  class="form-outline"
-                  id="mintInput"
-                  style="max-width: 75%; margin-left: auto; margin-right: auto"
-                >
-                  <input
-                    [ngModel]="setNewOwnerAddress"
-                    (ngModelChange)="setNewOwner($event)"
-                    type="text"
-                    onfocus="this.previousValue = this.value"
-                    onkeydown=" this.previousValue =this.value"
-                    class="form-control"
-                    placeholder="Address"
-                  />
+              <div class="col-xl-4">
+                <div class="card-body" id="styled">
+                  <p class="card-text" style="font-size: 1em">
+                    <u> TRANSFER OWNERSHIP </u>
+                    <br /><br />
+                    This will transfer ownership of contract.
+                  </p>
+                  <div class="form-outline" id="mintInput"
+                    style="max-width: 75%; margin-left: auto; margin-right: auto">
+                    <input [ngModel]="setNewOwnerAddress" (ngModelChange)="setNewOwner($event)" type="text"
+                      onfocus="this.previousValue = this.value" onkeydown=" this.previousValue =this.value"
+                      class="form-control" placeholder="Address" />
+                  </div>
+                  <br />
+                  <button *ngIf="setNewOwnerAddress != ''" class="favorite styled" type="button" (click)="newOwner()">
+                    Transfer Ownership
+                  </button>
+                  <button *ngIf="setNewOwnerAddress == ''" class="favorite styledDisabled" type="button">
+                    Transfer Ownership
+                  </button>
                 </div>
-                <br />
-                <button
-                  *ngIf="setNewOwnerAddress != ''"
-                  class="favorite styled"
-                  type="button"
-                  (click)="newOwner()"
-                >
-                  Transfer Ownership
-                </button>
-                <button
-                  *ngIf="setNewOwnerAddress == ''"
-                  class="favorite styledDisabled"
-                  type="button"
-                >
-                  Transfer Ownership
-                </button>
               </div>
             </div>
           </div>
-        </div>
 
-        <hr
-          style="
+          <!-- <hr style="
             color: #f0b90b;
             width: 85%;
             margin-left: auto;
             margin-right: auto;
-          "
-        />
-        <p>
-          <u>USER DASHBOARD</u> <br />{{ userAddress }}<br />
-          Your {{ contractSymbol }} : {{ tokensOwned }}
-          <br />
-          Staked {{ contractSymbol }} : {{ tokensStaked }}
-
-        <div class="row">
-          <div class="col-xl-4">
-            <div class="card-body" id="manageCard">
-              <p class="card-text" style="font-size: 1em">
-                <u> BURN </u><br /><br />
-                Burn Tokens.
-              </p>
-              <br />
-              <div
-                class="form-outline"
-                id="mintInput"
-                style="max-width: 75%; margin-left: auto; margin-right: auto"
-              >
-                <input
-                  [ngModel]="setBurnAmount"
-                  type="number"
-                  (ngModelChange)="setBurn($event)"
-                  min="0"
-                  max="100000000000"
-                  step="1"
-                  onfocus="this.previousValue = this.value"
-                  onkeydown="if(event.key==='.'){event.preventDefault();} this.previousValue =this.value"
-                  class="form-control"
-                  placeholder="Burn"
-                />
-              </div>
-              <br />
-              <button
-                *ngIf="setBurnAmount != ''"
-                class="favorite styled"
-                type="button"
-                (click)="burn()"
-              >
-                Burn
-              </button>
-              <button
-                *ngIf="setBurnAmount == ''"
-                class="favorite styledDisabled"
-                type="button"
-              >
-                Burn
-              </button>
-            </div>
-          </div>
-          <div class="col-xl-4">
-            <div class="card-body" id="manageCard">
-              <p class="card-text" style="font-size: 1em">
-                <u> STAKE </u>
-                <br />
-
-                <br />
-                Has to be more than 100.
-              </p>
-              <br />
-              <div
-                class="form-outline"
-                id="mintInput"
-                style="max-width: 75%; margin-left: auto; margin-right: auto"
-              >
-                <input
-                  [ngModel]="setStakeAmount"
-                  type="number"
-                  (ngModelChange)="setStake($event)"
-                  min="100"
-                  max="100000000000"
-                  step="1"
-                  onfocus="this.previousValue = this.value"
-                  onkeydown="if(event.key==='.'){event.preventDefault();} this.previousValue =this.value"
-                  class="form-control"
-                  placeholder="Stake"
-                />
-              </div>
-              <br />
-
-              <div class="center-div">
-                <button
-                  *ngIf="setStakeAmount != ''"
-                  class="favorite styled"
-                  type="button"
-                  (click)="stake()"
-                >
-                  Stake
-                </button>
-                <button
-                  *ngIf="setStakeAmount == ''"
-                  class="favorite styledDisabled"
-                  type="button"
-                >
-                  Stake
-                </button>
-              </div>
-            </div>
-          </div>
-          <div class="col-xl-4">
-            <div class="card-body" id="manageCard">
-              <p class="card-text" style="font-size: 1em">
-                <u> UNSTAKE </u><br />
-                <br />Has to be exactly 0 or greater than 100.
-              </p>
-              <div
-                class="form-outline"
-                id="mintInput"
-                style="max-width: 75%; margin-left: auto; margin-right: auto"
-              >
-                <input
-                  [ngModel]="setUnstakeAmount"
-                  (ngModelChange)="setUnstake($event)"
-                  type="number"
-                  min="0"
-                  max="100000000000"
-                  step="1"
-                  onfocus="this.previousValue = this.value"
-                  onkeydown="if(event.key==='.'){event.preventDefault();} this.previousValue =this.value"
-                  class="form-control"
-                  placeholder="Unstake"
-                />
-              </div>
-
-              <br />
-              <div class="center-div">
-                <button
-                  *ngIf="setUnstakeAmount != ''"
-                  class="favorite styled"
-                  type="button"
-                  (click)="unstake()"
-                >
-                  Unstake
-                </button>
-                <button
-                  *ngIf="setUnstakeAmount == ''"
-                  class="favorite styledDisabled"
-                  type="button"
-                >
-                  Unstake
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="row">
-          <div class="col-xl-4">
-            <div class="card-body" id="manageCard">
-              <p class="card-text" style="font-size: 1em">
-                <u> CLAIM STAKING REWARD</u> <br />
-
-                <br />Potential Reward: <br />
-                {{ contractUsersRewardFromStaking }}
-
-                <br />
-                Has to be greater than 1 to claim.
-              </p>
-              <br />
-           
-              <button
-                *ngIf="contractUsersRewardFromStaking >= 1"
-                class="favorite styled"
-                type="button"
-                (click)="collectStakingReward()"
-              >
-                Claim
-              </button>
-              <button
-                *ngIf="contractUsersRewardFromStaking <= 1"
-                class="favorite styledDisabled"
-                type="button"
-              >
-                Claim
-              </button>
-            </div>
-          </div>
-          <hr
-          style="
-            color: #f0b90b;
-            width: 85%;
-            margin-left: auto;
-            margin-right: auto;
-          "
-        />          <br />
+          " /> -->
           <p>
-          Current Staking based off of 5% a year (31,536,000 seconds)
+            <u>USER DASHBOARD</u> <br />
+          <p>Welcome "{{ userAddress }}"!
+            <br>
+            Total Staked Cats : 10
+          </p>
+
+          <!-- Your {{ contractSymbol }} : {{ tokensOwned }}
           <br />
-          Excluding leap years compounded quarterly.
-          <br />
-          APY = %5.09
-        </p>
+          Staked {{ contractSymbol }} : {{ tokensStaked }} -->
+
+          <div class="row">
+            <div class="col-sm" *ngFor="let token of tokenJsonArray">
+              <div class="card-body" id="styled">
+                <p class="card-text" style="font-size: 1em">
+                  {{token.data.name}}
+                </p>
+
+                <img id="center-img" src={{token.data.image}} alt="logo" height="100vh" width="100"
+                  style="border-radius: 5%" />
+                <br>
+                <br>
+
+                <button class="styled">Stake</button>
+              </div>
+            </div>
+          </div>
+
         </div>
+
+        <!-- <div class="form-outline" id="mintInput"
+                    style="max-width: 75%; margin-left: auto; margin-right: auto">
+                    <input [ngModel]="setBurnAmount" type="number" (ngModelChange)="setBurn($event)" min="0"
+                      max="100000000000" step="1" onfocus="this.previousValue = this.value"
+                      onkeydown="if(event.key==='.'){event.preventDefault();} this.previousValue =this.value"
+                      class="form-control" placeholder="Burn" />
+                  </div> -->
+        <br />
+        <!-- <button *ngIf="setBurnAmount != ''" class="favorite styled" type="button" (click)="burn()">
+                    Burn
+                  </button>
+                  <button *ngIf="setBurnAmount == ''" class="favorite styledDisabled" type="button">
+                    Burn
+                  </button> -->
+
+        <!-- <div class="row">
+            <div class="col-xl-4">
+              <div class="card-body" id="styled">
+                <p class="card-text" style="font-size: 1em">
+                  <u> CLAIM STAKING REWARD</u> <br />
+
+                  <br />Potential Reward: <br />
+                  {{ contractUsersRewardFromStaking }}
+
+                  <br />
+                  Has to be greater than 1 to claim.
+                </p>
+                <br />
+
+                <button *ngIf="contractUsersRewardFromStaking >= 1" class="favorite styled" type="button"
+                  (click)="collectStakingReward()">
+                  Claim
+                </button>
+                <button *ngIf="contractUsersRewardFromStaking <= 1" class="favorite styledDisabled" type="button">
+                  Claim
+                </button>
+              </div>
+            </div>
+            <hr style="
+            color: #f0b90b;
+            width: 85%;
+            margin-left: auto;
+            margin-right: auto;
+            " /> <br /> -->
+
+
+        <!-- <p>
+              Current Staking based off of 5% a year (31,536,000 seconds)
+              <br />
+              Excluding leap years compounded quarterly.
+              <br />
+              APY = %5.09
+            </p> -->
+
+
+      </div>
     </div>
   </div>
 </div>
 
 
 
-        <!-- <p><u> ALLOWANCE DASHBOARD </u></p>
+<!-- <p><u> ALLOWANCE DASHBOARD </u></p>
 
         <div class="row">
           <div class="col-xl-4">
-            <div class="card-body" id="manageCard">
+            <div class="card-body" id="styled">
               <p class="card-text" style="font-size: 1em">
                 <u> Allowance </u><br />
                 Allow others to spend your {{ contractSymbol }}
@@ -590,7 +354,7 @@
             </div>
           </div>
           <div class="col-xl-4">
-            <div class="card-body" id="manageCard">
+            <div class="card-body" id="styled">
               <p class="card-text" style="font-size: 1em">
                 <u> Check Allowance </u><br />
                 See how much can be spent.
@@ -654,7 +418,7 @@
           </div>
 
           <div class="col-xl-4">
-            <div class="card-body" id="manageCard">
+            <div class="card-body" id="styled">
               <p class="card-text" style="font-size: 1em">
                 <u> Increase Allowance </u><br />
                 Add more to allowance.
@@ -708,7 +472,7 @@
                 </button>
                 <button
                   *ngIf="
-                    setAllowanceIncrease == '' || setAllowanceIncreaseNum == ''
+                    setAllowanceIncrease == '' || setAllowanceIn creaseNum == ''
                   "
                   class="favorite styledDisabled"
                   type="button"
@@ -724,7 +488,7 @@
             </div>
           </div>
           <div class="col-xl-4">
-            <div class="card-body" id="manageCard">
+            <div class="card-body" id="styled">
               <p class="card-text" style="font-size: 1em">
                 <u> Decrease Allowance </u><br />
                 Subtract amount of allowance.
@@ -794,7 +558,7 @@
             </div>
           </div>
           <div class="col-xl-4">
-            <div class="card-body" id="manageCard">
+            <div class="card-body" id="styled">
               <p class="card-text" style="font-size: 1em">
                 <u> Spend Allowance </u><br />
                 Use allowance.
@@ -885,3 +649,21 @@
           </div>
         </div>
       </div> -->
+
+
+
+
+<!-- <div *ngIf="this.userAddress == ''">
+          <p>
+            MetaMask Not Connected. Please connect to ETH MAIN net.
+            <br>
+            This is where you will be able to burn, stake, unstake, and collect SIMON.
+            <br>
+
+          </p>
+        </div> -->
+
+<!-- ERROR HERE-->
+<!-- <div *ngIf="this.error && this.userAddress != ''">
+          <p style="color: red">Found Error : {{ error }}</p>
+        </div> -->

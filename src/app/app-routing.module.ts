@@ -8,10 +8,10 @@ import { TeamComponent } from './components/team/team.component';
 import { NFTComponent } from './components/nft/nft.component';
 import { AboutComponent } from './components/about/about.component';
 import { ViewcatzComponent } from './components/viewcatz/viewcatz.component';
-
+import { AccountComponent } from './components/account/account.component';
 const routes: Routes = [
 
-  { path: '', pathMatch: 'full', component: HomeComponent },
+  { path: '', pathMatch: 'full', component: ManageComponent },
   { path: 'home', pathMatch: 'full', component: HomeComponent },
   { path: 'manage', pathMatch: 'full', component: ManageComponent },
   { path: 'roadmap', pathMatch: 'full', component: RoadMapComponent },
@@ -19,8 +19,8 @@ const routes: Routes = [
   { path: 'mint', pathMatch: 'full', component: MintComponent },
   { path: 'about', pathMatch: 'full', component: AboutComponent },
   { path: 'viewcatz', pathMatch: 'full', component: ViewcatzComponent },
-  
-
+  { path: 'nft', pathMatch: 'full', component: NFTComponent },
+  { path: 'account', pathMatch: 'full', component: AccountComponent }
 
 
 

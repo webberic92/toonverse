@@ -21,6 +21,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { MdbCarouselModule } from 'mdb-angular-ui-kit/carousel';
 import { AboutComponent } from './app/components/about/about.component';
 import { ViewcatzComponent } from './app/components/viewcatz/viewcatz.component';
+import { AccountComponent } from './app//components/account/account.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -33,6 +34,8 @@ import { ViewcatzComponent } from './app/components/viewcatz/viewcatz.component'
     ManageComponent,
     NFTComponent,
     ViewcatzComponent,
+    AccountComponent,
+    AboutComponent,
   ],
   imports: [
     StoreModule.forRoot({ address: addressReducer }),
