@@ -27,14 +27,14 @@
 #card-free-mints{
   background-color: aliceblue;
   border-radius: 5%;
-  max-width: 60%;
+  // max-width: 60%;
 
 }
 
 #card-free-mints:hover{
   background-color: bisque;
   border-radius: 5%;
-  max-width: 70%;
+  // max-width: 70%;
   text-decoration: underline;
 
 }
@@ -89,7 +89,7 @@
 
 
 #gremlins-img:hover{
-  transform: scale(1.25);
+  transform: scale(1.05);
 }
 
 #card-gremlins {
@@ -112,9 +112,15 @@ background-color: #666;
 
 
 #cloudz-img:hover{
-  transform: scale(1.25);
+  transform: scale(1.05);
 }
 
+#text:hover{
+  text-decoration: underline;
+  transform: scale(1.05);
+
+
+}
 
 
 .grid-container {
