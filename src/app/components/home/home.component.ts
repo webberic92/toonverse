@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import bscContract from "src/app/services/Solidity/contract.service"
-import Chart from 'chart.js/auto';
+import ethContract from 'src/app/services/Solidity/contract.service';
+import Web3 from 'web3';
 
 @Component({
   selector: 'app-home',
@@ -10,36 +10,23 @@ import Chart from 'chart.js/auto';
 })
 export class HomeComponent implements OnInit {
   contractName: string = '';
-
-  constructor(private router: Router) {
+  totalSupply: number = 0;
+  isLoading: boolean =false;
+  userAddress: any;
+  error: any;
+  totalPrice: string = '';
+  
+  constructor() {
+ 
 
 
   }
   async ngOnInit(): Promise<void> {
-    // try {
-    //   this.contractName = await bscContract.methods.name().call()
-    // } catch (e) {
-    //   console.log(e)
-
-    // }
+   this.totalSupply= (await ethContract.methods.totalSupply().call() - 1)
+console.log(this.totalSupply)
   }
 
-  // mint = () => {
-  //   this.router.navigateByUrl('/mint');
-  // };
-  // manage = () => {
-  //   this.router.navigateByUrl('/manage');
-  // };
-  // nft = () => {
-  //   this.router.navigateByUrl('/nft');
-  // };
-  // team = () => {
-  //   this.router.navigateByUrl('/team');
-  // };
 
-  // roadmap = () => {
-  //   this.router.navigateByUrl('/roadmap');
-  // };
 
 }
 
