@@ -112,9 +112,15 @@
             <!-- <button class="mint-button w-button" (click)="connect()">
                     Connect Wallet
                   </button> -->
-            <button id="styled-mint-button" style="margin-top: 25%;margin-bottom: 15%;" (click)="mint()">Mint
-              DevilCat</button>
-          </div>
+                  <div *ngIf="isMetaMaskConnected==false"> <button id="styled-mint-button" style="margin-top: 25%;margin-bottom: 15%;"
+                    (click)="connectMetaMask()">Connect MetaMask</button>
+                </div>
+
+            <div *ngIf="isMetaMaskConnected!=false"> <button id="styled-mint-button" style="margin-top: 25%;margin-bottom: 15%;"
+                (click)="mint()">Mint
+                DevilCat</button>
+            </div>
+            </div>
 
           <div *ngIf="this.isLoading">
             <br><br>
@@ -126,7 +132,7 @@
 
           <div *ngIf="this.error">
 <br>
-            <p (click)="clearError()" style="background-color: Yellow;">{{error}} </p>
+            <p (click)="clearError()" style="background-color: pink;">{{error}} </p>
             
             <br><br><br><br>
           </div>

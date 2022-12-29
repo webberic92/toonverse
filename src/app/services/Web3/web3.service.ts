@@ -2,13 +2,12 @@ import { Injectable } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
 // import  { detectEthereumProvider } from "@metamask/detect-provider";
 
-var Eth = require('web3-eth');
-var Web3 = require('web3');
-
+var Eth = require("web3-eth");
+var Web3 = require("web3");
 
 declare global {
   interface Window {
-    ethereum: any
+    ethereum: any;
   }
 }
 
@@ -30,25 +29,37 @@ export class Web3Service {
     // }
   }
 
-
+  public isConnected = async () => {
+    if (window.ethereum.isConnected()) {
+      return true;
+    } else {
+      // start web3 filters, calls, etc
+      return false;
+    }
+  };
 
   
-  public getAccounts = async () => {
-    
-  try {
-    new Web3(window.ethereum);
-    window.ethereum.enable().catch((error: any) => {
-      return null;
-    });
-    const test =  await window.ethereum.request({ method: 'eth_accounts' });
-    console.log(test)
-    return test;
-  } catch (e) {
-    console.log('error' + e);
-    return [];
-  }
-}
 
+  public getAccounts = async () => {
+    try {
+      new Web3(window.ethereum);
+
+
+
+
+      const accounts = await window.ethereum.request({
+        method: "eth_requestAccounts",
+    });
+      if (accounts.length == 0) {
+        throw Error("Check MetaMask");
+      }
+      return accounts;
+    } catch (e) {
+      console.log("error" + e);
+
+      throw Error(e.message);
+    }
+  };
 
   // try {
   //   new Web3(window.ethereum);
@@ -80,4 +91,3 @@ export class Web3Service {
 function detectEthereumProvider() {
   throw new Error("Function not implemented.");
 }
-
