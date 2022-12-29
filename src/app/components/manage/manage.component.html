@@ -1,128 +1,73 @@
 <div class="center-div">
-  <div class="card main">
-    <div class="card-header" style="border-radius: 5%; position: relative; top: -90px; ">
+  <div class="card-header" style="border-radius: 5%;">
+    <br>
+    <h6 style="font-weight: bold; "><u>**Coming Soon Devil Cat Staking**</u> </h6>
+    <br>
+
+    <p>Below is a rough basic GUI we will be implementing. <br>
       <br>
-      <h6 style="font-weight: bold; "><u>**Coming Soon Devil Cat Staking**</u> </h6>
+      We will be releasing the tokenzation of DevilCatz and staking.
+      Future airdrops will be paid in DevilCatz homegrown token to mint future collections.
       <br>
-      <p style=""> We will be releasing the tokenzation of DevilCatz and staking.
-        Future airdrops will be paid in DevilCatz homegrown token to mint future collections.
-        <br>
 
-      </p>
-      <img id="center-img" src="../../../assets/toonverse/greenCat.png" alt="logo" height="400vh" width="400vw"
-        style="border-radius: 5%" />
+    </p>
+    <h3 class="card-text" style="font-size: 2em">
+      <br>
 
-      <h3 class="card-text" style="font-size: 2em">
-        <br>
+      <h3 style="text-decoration: underline;">A **ROUGH DRAFT** ACCOUNT EXAMPLE</h3>
+      <br><br>
+    </h3>
 
-        <h3 style="text-decoration: underline;">Your Account EXAMPLE</h3>
-        <br><br>
-      </h3>
-
-      <div *ngIf="this.isLoading">
-        <div class="spinner-grow" style="width: 10em; height: 10em; color: #f0b90b" role="status">
-          <span class="visually-hidden">Loading...</span>
-        </div>
-        <br />
-        <br />
-        <br />
-
-        <p style="font-size: 1.25em; color: #f0b90b">Loading...</p>
-        <br />
+    <div *ngIf="this.isLoading">
+      <div class="spinner-grow" style="width: 10em; height: 10em; color: #f0b90b" role="status">
+        <span class="visually-hidden">Loading...</span>
       </div>
+      <br />
+      <br />
+      <br />
 
-      <div *ngIf="!this.isLoading">
-        <br>
+      <p style="font-size: 1.25em; color: #f0b90b">Loading...</p>
+      <br />
+    </div>
 
-        <!-- IF USER IS LOGGGGGGEDDD IN-->
-        <div *ngIf="this.userAddress != ''" style="position: relative; top: -90px;">
+    <div *ngIf="!this.isLoading">
+      <br>
 
-          <p>Welcome "{{ userAddress }}"!
-            <br>
-            TOATAL UNSTAKED DEVILCATZ :10
-            <br>
-            TOATAL STAKED DEVILCATZ :10
-          <p>Claimed TOONCOIN : 2500 <img id="center-img" src="../../../assets/toonverse/catCoin.gif" alt="logo"
-              height="25vh" width="25" style="border-radius: 5%" />
-            <br>
-            Unclaimed TOONCOIN : 250
-            <img id="center-img" src="../../../assets/toonverse/catCoin.gif" alt="logo" height="25vh" width="25"
-              style="border-radius: 5%" />
+      <!-- IF USER IS LOGGGGGGEDDD IN-->
+      <div *ngIf="this.userAddress != ''" style="position: relative; top: -90px;">
 
-          </p>
+        <p>Welcome "{{ userAddress }}"!
+          <br>
+          TOATAL UNSTAKED DEVILCATZ :10
+          <br>
+          TOATAL STAKED DEVILCATZ :10
+        <p>Claimed TOONCOIN : 2500 <img id="center-img" src="../../../assets/toonverse/catCoin.gif" alt="logo"
+            height="25vh" width="25" style="border-radius: 5%" />
+          <br>
+          Unclaimed TOONCOIN : 250
+          <img id="center-img" src="../../../assets/toonverse/catCoin.gif" alt="logo" height="25vh" width="25"
+            style="border-radius: 5%" />
 
-          <!-- Your {{ contractSymbol }} : {{ tokensOwned }}
+        </p>
+
+        <!-- Your {{ contractSymbol }} : {{ tokensOwned }}
           <br />
           Staked {{ contractSymbol }} : {{ tokensStaked }} -->
-          <div class="container" id="unstaked" style="background-color: rgb(236, 230, 230)">
-            <h3>UNSTAKED DEVILCATZ : 10</h3>
-            <div class="row" style="margin-bottom: 20px;">
-              <div class="col-sm">
-                <button class="styled">
-                  STAKE ALL
-                </button>
-              </div>
-              <div class="col-sm">
-                <button class="styled">
-                  STAKE 15
-                </button>
-              </div>
-
-            </div>
-            <div class="row">
-              <div class="col-sm" *ngFor="let token of tokenJsonArray">
-                <div class="card-body" id="styled">
-                  <p class="card-text" style="font-size: 1em">
-                    {{token.data.name}}
-                  </p>
-
-                  <img id="center-img" src={{token.data.image}} alt="logo" height="100vh" width="100"
-                    style="border-radius: 5%" />
-                  <br>
-                  <br>
-
-                  <button class="styled">Stake</button>
-                  <br>
-                  <br>
-                  <input mdbCheckbox style="border-color: pink; text-decoration: black;" class="form-check-input"
-                    type="checkbox" id="checkboxNoLabel" value="" aria-label="..." />
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <br>
-
-        <div class="container" id="staked" style="position: relative;top: -90px; background-color: rgb(198, 195, 195);">
-          <h3>STAKED DEVILCATZ : 10</h3>
-
+        <div class="container" id="unstaked" style="background-color: rgb(236, 230, 230)">
+          <h3>UNSTAKED DEVILCATZ : 10</h3>
           <div class="row" style="margin-bottom: 20px;">
-            <div class="col-md">
+            <div class="col-sm">
               <button class="styled">
-                Unstake All
+                STAKE ALL
               </button>
             </div>
-            <div class="col-md">
+            <div class="col-sm">
               <button class="styled">
-                Unstake 15
+                STAKE 15
               </button>
             </div>
-            <div class="col-md">
-              <button class="styled">
-                Collect All
-                <img id="center-img" src="../../../assets/toonverse/catCoin.gif" alt="logo" height="25vh" width="25"
-                  style="border-radius: 5%" />
-              </button>
-            </div>
-            <div class="col-md">
-              <button class="styled">
-                Collect 250
-                <img id="center-img" src="../../../assets/toonverse/catCoin.gif" alt="logo" height="25vh" width="25"
-                  style="border-radius: 5%" />
-              </button>
-            </div>
-          </div>
 
+          </div>
           <div class="row">
             <div class="col-sm" *ngFor="let token of tokenJsonArray">
               <div class="card-body" id="styled">
@@ -135,26 +80,79 @@
                 <br>
                 <br>
 
-                <p>13<img id="center-img" src="../../../assets/toonverse/catCoin.gif" alt="logo" height="25vh"
-                    width="25" style="border-radius: 5%" /></p>
-                <button class="styled">
-                  Collect
-                </button>
-                <br> <button class="styled">Unstake</button>
+                <button class="styled">Stake</button>
                 <br>
-                <div>
-                  <br>
-                  <input mdbCheckbox style="border-color: pink; text-decoration: black;" class="form-check-input"
-                    type="checkbox" id="checkboxNoLabel" value="" aria-label="..." />
-                </div>
-
-
+                <br>
+                <input mdbCheckbox style="border-color: pink; text-decoration: black;" class="form-check-input"
+                  type="checkbox" id="checkboxNoLabel" value="" aria-label="..." />
               </div>
             </div>
           </div>
         </div>
-
       </div>
+      <br>
+
+      <div class="container" id="staked" style="position: relative;top: -90px; background-color: rgb(198, 195, 195);">
+        <h3>STAKED DEVILCATZ : 10</h3>
+
+        <div class="row" style="margin-bottom: 20px;">
+          <div class="col-md">
+            <button class="styled">
+              Unstake All
+            </button>
+          </div>
+          <div class="col-md">
+            <button class="styled">
+              Unstake 15
+            </button>
+          </div>
+          <div class="col-md">
+            <button class="styled">
+              Collect All
+              <img id="center-img" src="../../../assets/toonverse/catCoin.gif" alt="logo" height="25vh" width="25"
+                style="border-radius: 5%" />
+            </button>
+          </div>
+          <div class="col-md">
+            <button class="styled">
+              Collect 250
+              <img id="center-img" src="../../../assets/toonverse/catCoin.gif" alt="logo" height="25vh" width="25"
+                style="border-radius: 5%" />
+            </button>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-sm" *ngFor="let token of tokenJsonArray">
+            <div class="card-body" id="styled">
+              <p class="card-text" style="font-size: 1em">
+                {{token.data.name}}
+              </p>
+
+              <img id="center-img" src={{token.data.image}} alt="logo" height="100vh" width="100"
+                style="border-radius: 5%" />
+              <br>
+              <br>
+
+              <p>13<img id="center-img" src="../../../assets/toonverse/catCoin.gif" alt="logo" height="25vh" width="25"
+                  style="border-radius: 5%" /></p>
+              <button class="styled">
+                Collect
+              </button>
+              <br> <button class="styled">Unstake</button>
+              <br>
+              <div>
+                <br>
+                <input mdbCheckbox style="border-color: pink; text-decoration: black;" class="form-check-input"
+                  type="checkbox" id="checkboxNoLabel" value="" aria-label="..." />
+              </div>
+
+
+            </div>
+          </div>
+        </div>
+      </div>
+
     </div>
   </div>
 </div>
