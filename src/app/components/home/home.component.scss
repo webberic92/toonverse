@@ -2,7 +2,10 @@
 
   text-shadow: 1px 1px 1px #000;
   border-radius: 10px;
+  padding: 1%;
+  display: grid;
 }
+
 
 .yellowHighlight{
   
@@ -59,13 +62,13 @@
 #card-mintDevilCat{
   background-color: aliceblue;
   border-radius: 5%;
-  max-width: 50%;
+  max-width: 555px;
 }
 
 #card-mintDevilCat:hover{
   background-color: bisque;
   border-radius: 5%;
-  max-width: 60%;
+  max-width: 650px;
   text-decoration: underline;
 
 }

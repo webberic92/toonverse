@@ -1,3 +1,48 @@
+.card-lightblue {
+    background-color: aliceblue;
+    border-radius: 5%;
+    // max-width: 60%;
+}
+
+
+#styled-mint-button {
+    margin-bottom: 4px;
+    border: 0;
+    line-height: 2.5;
+    padding: 0 20px;
+    font-size: 1rem;
+    text-align: center;
+    color: black;
+    text-shadow: 1px 1px 1px #000;
+    border-radius: 10px;
+    background-color: pink;
+    min-height: 15vh;
+    
+}
+
+.styled-mint-button {
+    margin-bottom: 4px;
+    border: 0;
+    line-height: 2.5;
+    padding: 0 20px;
+    font-size: 1rem;
+    text-align: center;
+    color: black;
+    text-shadow: 1px 1px 1px #000;
+    border-radius: 10px;
+    background-color: pink;
+    min-height: 15vh;
+    
+}
+
+#styled-mint-button:hover {
+    box-shadow: inset 2px 2px 3px pink, inset -2px -2px 3px rgba(0, 0, 0, 0.6);
+}
+
+
+
+
+
 html {
     font-family: sans-serif;
     -ms-text-size-adjust: 100%;
@@ -282,7 +327,7 @@ html.w-mod-touch * {
     display: inline-block;
     padding: 9px 15px;
     background-color: #3898ec;
-    color:pink;
+    color: pink;
     border: 0;
     line-height: inherit;
     text-decoration: none;
@@ -536,7 +581,7 @@ label {
     line-height: 1.42857143;
     color: #333;
     vertical-align: middle;
-    background-color:pink;
+    background-color: pink;
     border: 1px solid #ccc
 }
 
@@ -1169,7 +1214,7 @@ textarea.w-select {
 
 .w-widget-twitter-count-shim:not(.w--vertical):after {
     border-color: rgba(255, 255, 255, 0);
-    border-right-color:pink;
+    border-right-color: pink;
     border-width: 4px;
     margin-left: -8px;
     margin-top: -4px
@@ -1208,7 +1253,7 @@ textarea.w-select {
 
 .w-widget-twitter-count-shim.w--vertical:after {
     border-color: rgba(255, 255, 255, 0);
-    border-top-color:pink;
+    border-top-color: pink;
     border-width: 4px;
     margin-left: -4px
 }
@@ -1370,7 +1415,7 @@ textarea.w-select {
     margin: auto;
     cursor: pointer;
     overflow: hidden;
-    color:pink;
+    color: pink;
     font-size: 40px;
     -webkit-tap-highlight-color: transparent;
     tap-highlight-color: rgba(0, 0, 0, 0);
@@ -1525,7 +1570,7 @@ textarea.w-select {
     right: 0;
     bottom: 0;
     left: 0;
-    color:pink;
+    color: pink;
     font-family: "Helvetica Neue", Helvetica, Ubuntu, "Segoe UI", Verdana, sans-serif;
     font-size: 17px;
     line-height: 1.2;
@@ -1738,7 +1783,7 @@ textarea.w-select {
     bottom: -4px;
     left: -4px;
     border: 3px solid transparent;
-    border-bottom-color:pink;
+    border-bottom-color: pink;
     border-radius: 50%
 }
 
@@ -2210,7 +2255,7 @@ textarea.w-select {
 body {
     margin: 0;
     min-height: 100%;
-    background-color:pink;
+    background-color: pink;
     font-family: 'Open Sans', sans-serif;
     color: #404756;
     font-size: 18px;
@@ -2475,7 +2520,7 @@ h2 {
     padding: 10px 28px;
     border-radius: 12px;
     background-color: pink;
-    color:pink;
+    color: pink;
     font-weight: 700
 }
 
@@ -3197,7 +3242,7 @@ h2 {
     z-index: -1;
     width: 100%;
     height: 100%;
-    background-color:pink;
+    background-color: pink;
     opacity: 0
 }
 
@@ -4026,7 +4071,7 @@ h2 {
     padding: 10px 28px;
     border-radius: 12px;
     background-color: #ff8961;
-    color:pink;
+    color: pink;
     font-weight: 700
 }
 
@@ -4128,7 +4173,7 @@ h2 {
     border-style: none;
     background-color: #c0ecf1;
     font-family: 'Open Sans', sans-serif;
-    color:black;
+    color: black;
     font-size: 35px;
     line-height: 0;
     font-weight: 700;
@@ -4136,22 +4181,22 @@ h2 {
 }
 
 .text-field::-webkit-input-placeholder {
-    color:pink;
+    color: pink;
     line-height: 35px
 }
 
 .text-field:-ms-input-placeholder {
-    color:pink;
+    color: pink;
     line-height: 35px
 }
 
 .text-field::-ms-input-placeholder {
-    color:pink;
+    color: pink;
     line-height: 35px
 }
 
 .text-field::placeholder {
-    color:pink;
+    color: pink;
     line-height: 35px
 }
 
@@ -4206,13 +4251,13 @@ h2 {
     border-radius: 12px;
     background-color: pink;
 
-    color:black;
+    color: black;
     font-weight: 700;
     text-align: center
 }
 
-.mint-button:hover{
-box-shadow: inset 2px 2px 3px pink, inset -2px -2px 3px rgba(0, 0, 0, 0.6);
+.mint-button:hover {
+    box-shadow: inset 2px 2px 3px pink, inset -2px -2px 3px rgba(0, 0, 0, 0.6);
 
 
 }
@@ -6449,4 +6494,3 @@ box-shadow: inset 2px 2px 3px pink, inset -2px -2px 3px rgba(0, 0, 0, 0.6);
     -ms-grid-row-span: 1;
     grid-row-end: span 1
 }
-

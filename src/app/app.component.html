@@ -1,16 +1,28 @@
+
 <div id="page-container">
+  
+
   <div id="content-wrap">
+
     <div class="container">
-      <app-navbar></app-navbar>
+      
+      <div><app-navbar></app-navbar></div>
+
+      <div class="card main" class="main" id="styledText" style="position: relative;top: 110px;justify-items: center;
+      display: grid;">
+        
+
+        <img id="center-img" src="../../../assets/toonverse/greenCat.png" alt="logo" height="10%" width="10%"
+          style="position: relative;top: -20px; border-radius: 5%; object-fit: contain; height: auto;" />
+
+        <router-outlet></router-outlet>
+
+      </div>
+
+      <br /><br />
+      test3
     </div>
-    <div class="container">
-
-    <br /><br />
-    <br /><br />
-    <router-outlet></router-outlet>
-    <br /><br />
-  </div>
-
+    test4
   </div>
   <app-footer id="footer"></app-footer>
 </div>

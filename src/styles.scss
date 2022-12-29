@@ -277,6 +277,24 @@ p {
 }
 
 
+#styledText {
+
+  text-shadow: 1px 1px 1px #000;
+  border-radius: 10px;
+}
+
+.yellowHighlight{
+  
+    background-color: Yellow;
+    display: grid;
+    justify-content: center;
+    justify-items: center;
+    max-width: fit-content;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+
 #card-lightblue:hover{
   background-color: bisque;
   border-radius: 5%;
