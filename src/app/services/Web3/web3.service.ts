@@ -1,20 +1,22 @@
 import { Injectable } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
-import Web3 from "web3";
+// import  { detectEthereumProvider } from "@metamask/detect-provider";
 
-import detectEthereumProvider from "@metamask/detect-provider";
+var Eth = require('web3-eth');
+var Web3 = require('web3');
 
-// declare global {
-//   interface Window {
-//     ethereum: MetaMaskInpageProvider;
-//   }
-// }
+
+declare global {
+  interface Window {
+    ethereum: any
+  }
+}
 
 @Injectable({
   providedIn: "root",
 })
 export class Web3Service {
-  window: any;
+  window = Window;
   currentRoute: any;
 
   constructor(private route: ActivatedRoute, private router: Router) {
@@ -28,19 +30,24 @@ export class Web3Service {
     // }
   }
 
+
+
+  
   public getAccounts = async () => {
     
-      const provider = await detectEthereumProvider();
-      if (provider) {
-        // From now on, this should always be true:
-        // provider === window.ethereum
-        console.log(provider); // initialize your app
-        return provider
-      } else {
-        throw new Error('Could not detect MetaMask.'); 
-           }
-    return null;
-  };
+  try {
+    new Web3(window.ethereum);
+    window.ethereum.enable().catch((error: any) => {
+      return null;
+    });
+    const test =  await window.ethereum.request({ method: 'eth_accounts' });
+    console.log(test)
+    return test;
+  } catch (e) {
+    console.log('error' + e);
+    return [];
+  }
+}
 
 
   // try {
@@ -70,3 +77,7 @@ export class Web3Service {
   //   return addresses.length ? addresses[0] : null;
   // };
 }
+function detectEthereumProvider() {
+  throw new Error("Function not implemented.");
+}
+

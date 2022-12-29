@@ -178,11 +178,11 @@ export class MintComponent implements OnInit {
     try {
       this.userAddress = ''
       await this.web3.getAccounts();
-
-        await NFTContract.methods.mint(this.numToBuy).send({
-          from: this.userAddress[0],
-          value: Web3.utils.toWei(this.totalPrice, 'ether'),
-        });
+      // console.log(test)
+        // await NFTContract.methods.mint(this.numToBuy).send({
+        //   from: this.userAddress[0],
+        //   value: Web3.utils.toWei(this.totalPrice, 'ether'),
+        // });
         // this.getContent();
       
 
