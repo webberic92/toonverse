@@ -29,6 +29,7 @@
     "@angular/router": "~13.2.0",
     "@fortawesome/fontawesome-free": "^6.0.0",
     "@imtbl/imx-sdk": "^1.5.0",
+    "@metamask/detect-provider": "^2.0.0",
     "@ngrx/store": "^13.0.2",
     "angular-bootstrap-md": "^12.2.0",
     "assert": "^2.0.0",

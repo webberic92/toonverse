@@ -12,12 +12,12 @@ export class FooterComponent implements OnInit {
   constructor() { }
 
   async ngOnInit(): Promise<void> {
-    try {
-      this.contractName = await bscContract.methods.name().call()
-    } catch (e) {
-      console.log(e)
+    // try {
+    //   this.contractName = await bscContract.methods.name().call()
+    // } catch (e) {
+    //   console.log(e)
 
-    }
+    // }
 
   }
 }

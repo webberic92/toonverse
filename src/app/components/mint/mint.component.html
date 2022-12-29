@@ -25,8 +25,12 @@
     <br>
     Pixelated version of cats and designated factions of future drops included.
 
-    <br><br>
+    <br>
+    Staking tokenomics coming soon!
+    <br>
+    <br>
 
+  </p>
 
 
   <div class="container" style="width: 100%; max-width: 850px;display: grid;
@@ -103,12 +107,28 @@
           </div>
 
           <p class="">{{numToBuy}} = {{totalPrice}} ETH<br> Total Recieved With Multiplier = {{multiplier}} </p>
-          <div *ngIf="this.userAddress == ''">
+          <div *ngIf="!this.isLoading">
+
             <!-- <button class="mint-button w-button" (click)="connect()">
                     Connect Wallet
                   </button> -->
-            <button id="styled-mint-button" style="margin-top: 25%;margin-bottom: 15%;" [routerLink]="['/mint']">Mint
+            <button id="styled-mint-button" style="margin-top: 25%;margin-bottom: 15%;" (click)="mint()">Mint
               DevilCat</button>
+          </div>
+
+          <div *ngIf="this.isLoading">
+            <br><br>
+            <p>Waiting...</p>
+            <img id="center-img-gif" src="../../../assets/toonverse/catCoin.gif" alt="logo" height="100vh" width="65%"
+              style="border-radius: 5%" />
+            <br><br>
+          </div>
+
+          <div *ngIf="this.error">
+<br>
+            <p (click)="clearError()" style="background-color: Yellow;">{{error}} </p>
+            
+            <br><br><br><br>
           </div>
           <!-- <div *ngIf="this.userAddress != '' && this.totalPrice!='0'">
                   <button  id="styled-mint-button" (click)="buy()">
@@ -131,7 +151,8 @@
 
   <div class="paragraph" style="margin-bottom: 10%;">
     <br> <br>
-    <p style="margin-left: -2%;  max-width: 1200px;">Your Support is greatly appreciated from the Artist Keith (GIP) Miller, the Developer Eric (SudoAkula) Webb, and
+    <p style="margin-left: -2%;  max-width: 1200px;">Your Support is greatly appreciated from the Artist Keith (GIP)
+      Miller, the Developer Eric (SudoAkula) Webb, and
       the rest of the Team who is all making this possible.<br> We are excited to bring you more content and
       collections.<br>
       Thank you!<br>

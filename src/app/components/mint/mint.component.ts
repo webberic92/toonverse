@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import ethContract from 'src/app/services/Solidity/contract.service';
 import Web3 from 'web3';
 import { Web3Service } from 'src/app/services/Web3/web3.service';
-import NFTContract from 'src/app/services/Solidity/nft.service';
+import NFTContract, { NftService } from 'src/app/services/Solidity/nft.service';
 
 import { Store } from '@ngrx/store';
 import { Router } from '@angular/router';
@@ -43,7 +43,11 @@ export class MintComponent implements OnInit {
 
   async ngOnInit(): Promise<void> {
     this.totalSupply= (await NFTContract.methods.totalSupply().call() - 1)
- console.log(this.totalSupply)
+    this.contractPrice = Web3.utils.fromWei(
+      await NFTContract.methods.COST().call(),
+      'ether'
+    );
+ console.log(this.contractPrice)
    }
   async getContent() {
     try {
@@ -93,21 +97,21 @@ export class MintComponent implements OnInit {
       this.isLoading = false;
     }
   }
-  async connect() {
-    try {
+  // async connect() {
+  //   try {
 
-        //this.isLoading = false;
-        this.userAddress = await this.web3.getAccounts();
-      this.totalPrice = (
-        Number(this.numToBuy) * Number(this.contractPrice)
-      ).toFixed(6);      this.isLoading = false;
-      this.error = '';
+  //       //this.isLoading = false;
+  //       this.userAddress = await this.web3.getAccounts();
+  //     this.totalPrice = (
+  //       Number(this.numToBuy) * Number(this.contractPrice)
+  //     ).toFixed(6);      this.isLoading = false;
+  //     this.error = '';
 
-    } catch (e) {
-      this.error = e.message;
-      this.isLoading = false;
-    }
-  }
+  //   } catch (e) {
+  //     this.error = e.message;
+  //     this.isLoading = false;
+  //   }
+  // }
 
   plus() {
     if (Number(this.numToBuy) != 50) {
@@ -161,26 +165,26 @@ export class MintComponent implements OnInit {
     }
   }
 
-  async buy() {
+  clearError(){
+    this.isLoading = false;
+    this.error = ''
+  }
+
+  async mint() {
+    this.error='';
     this.isLoading = true;
+    
+
     try {
-      const response = await fetch(
-        `https://1mwe9uiok1.execute-api.us-east-1.amazonaws.com/proof/${this.userAddress[0]}`,
-        {
-          mode: 'cors',
-        }
-      );
-      const body = await response.json();
-      if(body.length==0){
-        //You are not on whitelist.
-        throw Error("Not on whitelist Bud.")
-      }else{
-        await ethContract.methods.mint(this.numToBuy).send({
+      this.userAddress = ''
+      await this.web3.getAccounts();
+
+        await NFTContract.methods.mint(this.numToBuy).send({
           from: this.userAddress[0],
           value: Web3.utils.toWei(this.totalPrice, 'ether'),
         });
-        this.getContent();
-      }
+        // this.getContent();
+      
 
 
       this.isLoading = false;
@@ -190,3 +194,25 @@ export class MintComponent implements OnInit {
     }
   }
 }
+
+
+// async mintWhitelist() {
+//   this.isLoading = true;
+  // try {
+  //   const response = await fetch(
+  //     `https://1mwe9uiok1.execute-api.us-east-1.amazonaws.com/proof/${this.userAddress[0]}`,
+  //     {
+  //       mode: 'cors',
+  //     }
+  //   );
+  //   const body = await response.json();
+  //   if(body.length==0){
+  //     //You are not on whitelist.
+  //     throw Error("Not on whitelist Bud.")
+  //   }else{
+  //     await ethContract.methods.mint(this.numToBuy).send({
+  //       from: this.userAddress[0],
+  //       value: Web3.utils.toWei(this.totalPrice, 'ether'),
+  //     });
+  //     this.getContent();
+  //   }
