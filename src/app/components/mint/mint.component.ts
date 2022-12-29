@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import ethContract from 'src/app/services/Solidity/contract.service';
 import Web3 from 'web3';
 import { Web3Service } from 'src/app/services/Web3/web3.service';
+import NFTContract from 'src/app/services/Solidity/nft.service';
 
 import { Store } from '@ngrx/store';
 import { Router } from '@angular/router';
@@ -13,6 +14,15 @@ import { Router } from '@angular/router';
 })
 export class MintComponent implements OnInit {
   constructor(private web3: Web3Service, private router: Router) {}
+  totalSupply: number = 0;
+
+  
+  
+  
+  
+  
+  
+  
   tokensOwned: string = '';
   tokensStaked: string = '';
 
@@ -31,9 +41,10 @@ export class MintComponent implements OnInit {
   error: string = '';
   multiplier: number = 1;
 
-  async ngOnInit(): Promise<any> {
-    this.getContent();
-  }
+  async ngOnInit(): Promise<void> {
+    this.totalSupply= (await NFTContract.methods.totalSupply().call() - 1)
+ console.log(this.totalSupply)
+   }
   async getContent() {
     try {
       this.error = '';

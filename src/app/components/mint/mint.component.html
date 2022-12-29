@@ -1,23 +1,45 @@
-
-
 <div class="container" style="word-wrap: break-word;text-align: center;width: 90vw">
-<h3 id="styledText">Welcome to the DevilCatz Mint Page!</h3>
-<br>
+  <h3 id="styledText">Welcome to the DevilCatz Minting Page!</h3>
+  <h4>
+    <button id="styled-mint-button" style="margin: 1%;"> <a style="margin: 10%;" href="https://etherscan.io/token/0x1c4a28690482b03f6991c8c24295016cba197c12#code"
+        style="margin: 10px;">View Contract</a></button>
+    <button id="styled-mint-button" style="margin: 1%;"> <a href="https://opensea.io/collection/toonversestudios" style="margin: 10px">View
+        Opensea</a></button>
+    <button  id="styled-mint-button" style="margin: 1%;"> <a href="https://rarible.com/toonverseStudios">View Rarible</a></button>
+
+  </h4>
+
+  <p> The DevilCats Minting is taking place now.
+    <br> Currently
+  </p>
+  <p class="yellowHighlight">{{totalSupply}} Minted!</p>
+  <p>out of</p>
+  <p class="yellowHighlight">2222</p>
+  <br> <p>Owning a DevilCatz token entitles you to future collection drops.</p> 
+  
+  <p>This is a gas optimized ERC721A.
+    <br>
+    Pixelated version of cats and designated factions of future drops included.
+
+<br><br>
+
+
+
   <div class="container" style="width: 100%; max-width: 850px;display: grid;
         justify-items: center; ">
 
 
-    <div class="card" class="card-lightblue" style="width: 80%; max-width: 750px; ">
+    <div class="card" class="card-lightblue" style="width: 80%; max-width: 750px;margin-bottom: 10%; ">
       <div class="card-body" style="justify-content: center;
       display: grid;
       justify-items: center;">
-        <img id="center-img-gif" src="../../../assets/toonverse/slow.gif" alt="logo" height="300vh" width="75%"
+        <img id="center-img-gif" src="../../../assets/toonverse/slow.gif" alt="logo" height="300vh" width="65%"
           style="border-radius: 5%" />
         <div class="card-text" id="styledText" style="justify-content: center;
         display: grid;
         justify-items: center; text-align: center;">
-        <br>
-          <p>       
+          <br>
+          <p>
             <br>
 
             Price = {{contractPrice}} Eth
@@ -77,12 +99,12 @@
           </div>
 
           <p class="">{{numToBuy}} = {{totalPrice}} ETH<br> Total Recieved With Multiplier = {{multiplier}} </p>
-          <br><br>
           <div *ngIf="this.userAddress == ''">
             <!-- <button class="mint-button w-button" (click)="connect()">
                     Connect Wallet
                   </button> -->
-            <button id="styled-mint-button" [routerLink]="['/mint']">Mint DevilCat</button>
+            <button id="styled-mint-button" style="margin-top: 25%;margin-bottom: 15%;" [routerLink]="['/mint']">Mint
+              DevilCat</button>
           </div>
           <!-- <div *ngIf="this.userAddress != '' && this.totalPrice!='0'">
                   <button  id="styled-mint-button" (click)="buy()">
@@ -94,16 +116,6 @@
                     Disabled
                   </button>
                 </div> -->
-          <p>
-            <br>
-
-          </p>
-          <div *ngIf="this.error">
-            <p style="color: red">Found Error : {{ error }}</p>
-          </div>
-
-
-
 
         </div>
       </div>
@@ -112,36 +124,13 @@
   </div>
 
 
-  <h4>
-    <br>
-    Contract
-    <a
-      href="https://etherscan.io/token/0x1c4a28690482b03f6991c8c24295016cba197c12">0x1c4a28690482b03f6991c8c24295016cba197c12</a>
-    <br>
-    <a href="https://opensea.io/collection/toonversestudios">Opensea</a>
-    <br>
-    <a href="https://rarible.com/toonverseStudios">Rarible</a>
-  </h4>
-  <p class="paragraph">The ToonVerse is a multi-collection mega project based on cartoon character
-    development
-    with the goal of branding, storytelling, and syndication. Each of the primary NFT collections,
-    starting
-    with
-    the Devil Catz are a main character in our world building and animated series.<br>
-    <br>
 
-  </p>
+  <div class="paragraph" style="margin-bottom: 10%;">
+      <br> <br><p>Your Support is greatly appreciated from the Artist Keith Miller, he Developer Eric Webb, and the rest of the Team who is all making this possible.<br> We are excited to bring you more content and collections.<br>
+       Thank you!<br>
+      :)
+      <br>
+    </p>
 
-  <p> The Devil Cats Minting is taking place now.
-    <br> Currently 1602 out of 2222.
-    <br> Owning a DevilCatz token entitles you to future collection drops.
-  </p>
-  <br>
-  This is a gas optimized ERC721A contract
-  <br>
-  Pixelated version of cats included.
-  :)
-  <br>
-  <!-- <div class="container" style="width:50%;"> -->
-  </div>
-
+  </div> <!-- <div class="container" style="width:50%;"> -->
+</div>
