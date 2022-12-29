@@ -3,8 +3,13 @@
   text-shadow: 1px 1px 1px #000;
   border-radius: 10px;
   padding: 1%;
-  display: grid;
 }
+#styledText:hover {
+  transform: scale(1.05);
+
+text-decoration: underline;
+}
+
 
 
 .yellowHighlight{
