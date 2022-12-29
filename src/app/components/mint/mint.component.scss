@@ -4,7 +4,26 @@
     // max-width: 60%;
 }
 
+.card-lightblue:hover {
+    background-color: bisque;
+    border-radius: 5%;
+    transform: scale(1.05);
+    // max-width: 60%;
+}
 
+
+
+#styledText{
+  
+    justify-content: center;
+    justify-items: center;
+    display: flex;
+    }
+
+#styledText:hover{
+    text-decoration: underline;
+    transform: scale(1.1)
+    }
 #styled-mint-button {
     margin-bottom: 4px;
     border: 0;
