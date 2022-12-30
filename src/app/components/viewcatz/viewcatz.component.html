@@ -1,118 +1,127 @@
 <div class="center-div" style="display: grid;justify-items: center;">
 
-        <div class="card" style="border-radius: 5%; box-shadow: none;background: none;margin-bottom: 100px; ">
+    <div class="card" style="border-radius: 5%; box-shadow: none;background: none; ">
 
 
 
+        <br>
+        <h3 class="card-text">
             <br>
-            <h3 class="card-text">
-                <br>
-                <u> View Your Catz or Others!</u>
-            </h3>
-            <div class="row" style="justify-content: center;margin-top: 5%;">
+            <u> View Your Catz or Others!</u>
+        </h3>
+        <div class="row" style="justify-content: center;margin-top: 5%;margin-bottom: 5%;">
 
 
-    
-                <div class="col-md" >
-                    <div id="card-lightblue" style="min-height: 100%;
+
+            <div class="col-md">
+                <div id="card-lightblue" style="min-height: 100%;
                     max-width: 350px;
                     margin-left: auto;
                     margin-right: auto;">
-                        <p>Eth Address <br>Lookup</p>
-                        
-                        <mdb-form-control>
-                            <input mdbInput (ngModelChange)="updateSearchedAddress($event)" [ngModel]="searchedAddress"
-                                type="text" id="typeText" class="styled" placeholder="Eth Address" /><br>
-                            <button mdbLabel (click)="searchByEthAddress()" class="styled"
-                                for="typeText">Search</button>
-                        </mdb-form-control>
+                    <p>Eth Address <br>Lookup</p>
+
+                    <mdb-form-control>
+                        <input mdbInput (ngModelChange)="updateSearchedAddress($event)" [ngModel]="searchedAddress"
+                            type="text" id="typeText" class="styled" placeholder="Eth Address" /><br>
+                        <button mdbLabel (click)="searchByEthAddress()" class="styled" for="typeText">Search</button>
+                    </mdb-form-control>
 
 
-                    </div>
-                </div>
-&nbsp;
-
-                <div class="col-md">
-                    <div id="card-lightblue" style="min-height: 100%;
-                    max-width: 350px;
-                    margin-left: auto;
-                    margin-right: auto;">
-                        <p>DevilCat ID# Lookup</p>
-
-                        <mdb-form-control>
-                            <input mdbInput (ngModelChange)="updateSearchedID($event)" [ngModel]="searchedId"
-                                type="number" min="0" max="2222" id="typeText" placeholder="DevilCatID#"
-                                class="styled" /><br>
-                            <button (click)="searchById()" class="styled" for="typeText">Search</button>
-                        </mdb-form-control>
-                    </div>
                 </div>
             </div>
+            &nbsp;
 
+            <div class="col-md">
+                <div id="card-lightblue" style="min-height: 100%;
+                    max-width: 350px;
+                    margin-left: auto;
+                    margin-right: auto;">
+                    <p>DevilCat ID# Lookup</p>
+
+                    <mdb-form-control>
+                        <input mdbInput (ngModelChange)="updateSearchedID($event)" [ngModel]="searchedId" type="number"
+                            min="0" max="2222" id="typeText" placeholder="DevilCatID#" class="styled" /><br>
+                        <button (click)="searchById()" class="styled" for="typeText">Search</button>
+                    </mdb-form-control>
+                </div>
+            </div>
         </div>
 
-        <!-- <div class="LoggedInView" *ngIf="searchedAddress">
+    </div>
+
+    <!-- <div class="LoggedInView" *ngIf="searchedAddress">
             LoggedInView
 
         </div> -->
 
-        <!-- ETH ADDRESS LOOK UP RESULTS-->
-        <div class="ByAddressView" *ngIf="tokenJsonArray.length >0"
-            style="max-width: 100%; width: 65%;">
-            <br>
+    <!-- ETH ADDRESS LOOK UP RESULTS-->
+    <div class="ByAddressView" *ngIf="tokenJsonArray.length >0" style="max-width: 100%; width: 65%; margin-bottom: 10%;">
+        
+        <br>
 
-            <button class="styled" (click)="clearCatObj()">Clear</button>
-            <br>
+        <button class="styled" (click)="clearCatObj()">Clear</button>
+        <br> <br>
 
-            <p>Unstaked DevilCatz belonging to {{searchedAddress}}...</p>
+        <p>Unstaked DevilCatz belonging to {{searchedAddress}}...</p>
 
-            <div id="container">
-                <div class="row">
-                    <div class="col-md-3" id="card-lightblue-multi" *ngFor="let token of tokenJsonArray">
-                        <p>{{token.data.name}}</p>
-                        <img id="center-img" src={{token.data.image}} alt="logo" height="100vh" width="100"
+        <div id="container" style="padding-bottom: 20%;">
+            <div class="row">
+                <div class="col-md-3" id="card-lightblue-multi" *ngFor="let token of tokenJsonArray">
+                    <p>{{token.data.name}}</p>
+                    <img id="center-img" src={{token.data.image}} alt="logo" height="100vh" width="100"
+                        style="border-radius: 5%" />
+                        <br>
+                        <br>
+                        <a
+                        href="https://opensea.io/assets/ethereum/0x1c4a28690482b03f6991c8c24295016cba197c12/{{token.data.edition}}">
+                        <img id="center-img" src="../../../assets/openSea.png" alt="openseaLogo" height="25vh" width="25vw"
                             style="border-radius: 5%" />
-                    </div>
-
+                    </a>
+                    <br>
+                    <br>
                 </div>
 
             </div>
 
         </div>
 
-
-
-
-        <!-- GET BY CAT ID DIV -->
-        <div class="ByCatIDView" *ngIf="catObj!=null"
-            style="max-width: 100%; width: 65%;margin-bottom: 100px;">
-            <br>
-            <button class="styled" (click)="clearCatObj()">Clear</button>
-            <br> <br>
-            <br>
-            <br>
-
-            <div id="card-lightblue" style="min-width: 75%;">
+    </div>
 
 
 
 
-                <p> {{catObj.data.name}}
+    <!-- GET BY CAT ID DIV -->
+    <div class="ByCatIDView" *ngIf="catObj!=null" style="max-width: 100%; width: 65%;margin-bottom: 10%;">
+        <br>
+        <button class="styled" (click)="clearCatObj()">Clear</button>
+        <br> <br>
+      
+
+        <div id="card-lightblue" style="min-width: 75%;margin-bottom: 20%;">
+            <p> {{catObj.data.name}}
+                <br>
+                <br>
+                <img id="center-img" src={{catObj.data.image}} alt="logo" height="150vh" width="150vw"
+                    style="border-radius: 5%" />
                     <br>
-                    <img id="center-img" src={{catObj.data.image}} alt="logo" height="200vh" width="200vw"
+                    <br>
+                    <a
+                    href="https://opensea.io/assets/ethereum/0x1c4a28690482b03f6991c8c24295016cba197c12/{{catObj.data.edition}}">
+                    <img id="center-img" src="../../../assets/openSea.png" alt="openseaLogo" height="25vh" width="25vw"
                         style="border-radius: 5%" />
+                </a>
 
-                <table id="styled" class="table" style="border-style:none">
-                    <tbody style="border-style:none" id="table-cat-attributes">
+            <table id="styled" class="table" style="border-style:none">
+                <tbody style="border-style:none" id="table-cat-attributes">
 
-                        <tr style="border-style:none" *ngFor="let attribute of catObj.data.attributes">
-                            {{attribute.trait_type}} : {{attribute.value}}
-                        </tr>
+                    <tr style="border-style:none" *ngFor="let attribute of catObj.data.attributes">
+                        {{attribute.trait_type}} : {{attribute.value}}
+                    </tr>
 
-                    </tbody>
-                </table>
-            </div>
+                </tbody>
+            </table>
         </div>
+    </div>
 
-        
+
 </div>
