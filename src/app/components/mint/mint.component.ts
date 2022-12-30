@@ -2,9 +2,8 @@ import { Component, OnInit } from "@angular/core";
 import Web3 from "web3";
 import { Web3Service } from "src/app/services/Web3/web3.service";
 import NFTContract from "src/app/services/Solidity/nft.service";
-
 import { Router } from "@angular/router";
-
+const BigNumber = require("bignumber.js");
 @Component({
   selector: "app-mint",
   templateUrl: "./mint.component.html",
@@ -40,7 +39,7 @@ export class MintComponent implements OnInit {
       "ether"
     );
     this.totalPrice = this.contractPrice;
-    console.log(this.contractPrice);
+    // console.log(this.contractPrice);
   }
   // async getContent() {
   //   try {
@@ -171,16 +170,17 @@ export class MintComponent implements OnInit {
   async connectMetaMask() {
     this.error = "";
     this.isLoading = true;
+    this.error = "Login To MetaMask To Continue...";
 
     try {
       await this.web3.getAccounts();
       this.isLoading = false;
       this.isMetaMaskConnected = true;
+      this.error = "";
+
     } catch (e) {
-
-    this.error = e.message;
-    this.isLoading = false;
-
+      this.error = e.message;
+      this.isLoading = false;
     }
   }
 
@@ -188,24 +188,21 @@ export class MintComponent implements OnInit {
     this.error = "";
     this.isLoading = true;
 
-
     try {
-      var accountsArray = await this.web3.getAccounts();
-      console.log( accountsArray[0])
-      console.log(Web3.utils.toWei(this.totalPrice, 'ether'))
-      console.log(this.numToBuy)
-      console.log(this.totalPrice)
+      // var accountsArray = await this.web3.getAccounts();
+      // console.log(Web3.utils.toChecksumAddress(accountsArray[0]));
+      const accounts = await this.web3.getAccounts();
+  
+        await NFTContract.methods.mint(this.numToBuy).send({
+          from: Web3.utils.toChecksumAddress(accounts[0]),
+          value: Web3.utils.toWei(this.totalPrice, "ether"),
+        });
 
-      console.log(NFTContract.methods)
-      var booleanTest = await NFTContract.methods.mint(this.numToBuy).send({
-        from: accountsArray[0],
-        value: Web3.utils.toWei(this.totalPrice, 'ether'),
-      });
-      console.log(booleanTest)
+
     } catch (e) {
       console.log("errrrOrrr");
       console.log(e);
-      this.error = e;
+      this.error = e.message;
       this.isLoading = false;
     }
   }

@@ -3,11 +3,11 @@ import { ActivatedRoute, Router } from "@angular/router";
 // import  { detectEthereumProvider } from "@metamask/detect-provider";
 
 var Eth = require("web3-eth");
-var Web3 = require("web3");
-
+const Web3 = require("web3");
 declare global {
   interface Window {
     ethereum: any;
+    web3:any;
   }
 }
 
@@ -42,14 +42,10 @@ export class Web3Service {
 
   public getAccounts = async () => {
     try {
-      new Web3(window.ethereum);
-
-
-
-
       const accounts = await window.ethereum.request({
         method: "eth_requestAccounts",
     });
+    window.web3 = new Web3(window.ethereum);
       if (accounts.length == 0) {
         throw Error("Check MetaMask");
       }

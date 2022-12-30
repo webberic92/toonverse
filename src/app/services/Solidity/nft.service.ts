@@ -13,7 +13,7 @@ export class NftService {
    }
 }
 
-// provider.eth.setProvider(Web3.givenProvider);
+provider.eth.setProvider(Web3.givenProvider);
 
 
 const NFTContract = new provider.eth.Contract(

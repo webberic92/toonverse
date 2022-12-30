@@ -131,9 +131,11 @@
           </div>
 
           <div *ngIf="this.error">
-<br>
-            <p (click)="clearError()" style="background-color: pink;">{{error}} </p>
+            <br>
+          
+            <button id="styled-mint-button" (click)="clearError()" >{{error}}</button>
             
+          
             <br><br><br><br>
           </div>
           <!-- <div *ngIf="this.userAddress != '' && this.totalPrice!='0'">
