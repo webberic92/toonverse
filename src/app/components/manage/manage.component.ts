@@ -1,9 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import bscContract from "src/app/services/Solidity/contract.service"
-import Web3 from 'web3';
-import { Web3Service } from 'src/app/services/Web3/web3.service';
-import NFTContract from 'src/app/services/Solidity/nft.service';
-const web3 = new Web3('https://data-seed-prebsc-1-s1.binance.org:8545');
+import { Component, OnInit } from "@angular/core";
+import Web3 from "web3";
+import { Web3Service } from "src/app/services/Web3/web3.service";
+import NFTContract from "src/app/services/Solidity/nft.service";
+const web3 = new Web3("https://data-seed-prebsc-1-s1.binance.org:8545");
 import axios from "axios";
 
 @Component({
@@ -14,8 +13,22 @@ import axios from "axios";
 export class ManageComponent implements OnInit {
   // tokensOwned: string = ''
   // tokensStaked: string = ''
+  erc721Owned: number = 0;
+  erc721OwnedSelectedToStake = new Set();
+  erc721Staked: number = 0;
+  erc721StakedSelectToUnStake = new Set();
+  erc20Owned: number = 0;
+  erc20Unclaimed: number = 0;
+  isLoading: boolean = false;
+  intervalId!: number;
 
-   isLoading: boolean = false;
+  userAddress: string = "0x4538C3d93FfdE7677EF66aB548a4Dd7f39eca785";
+  tokenUri: string = "";
+  searchedAddress: string = "0x4538C3d93FfdE7677EF66aB548a4Dd7f39eca785";
+  searchedId: number = 0;
+  catObj: any = null;
+  unstakedJsonArray: any[] = new Array();
+  stakedJsonArray: any[] = new Array();
   // userAddress: string = '0x4538C3d93FfdE7677EF66aB548a4Dd7f39eca785'
   // contractAddress: string = ''
   // contractOwner: string = ''
@@ -50,7 +63,6 @@ export class ManageComponent implements OnInit {
   // allowanceCheckFinal: string = ''
   // allowanceIncreaseFinal: string = ''
   // allowanceDecreaseFinal: string = ''
-  intervalId!: number;
   // setAmountToWithdrawal: string = ''
   // setAllowanceFrom: string = ''
   // setAllowanceTo: string = ''
@@ -64,11 +76,81 @@ export class ManageComponent implements OnInit {
 
   async ngOnInit() {
     // this.getContent()
-    this.searchByEthAddress();
+    this.getUnstakedNfts();
   }
 
   ngOnDestroy() {
     clearInterval(this.intervalId);
+  }
+
+  updateCatsToStakeMap(id: number) {
+    if (!this.erc721OwnedSelectedToStake.has(id)) {
+      console.log("Not in map yet ready to update with #" + id);
+      this.erc721OwnedSelectedToStake.add(id);
+    } else {
+      console.log("Already in map Removing #" + id);
+      this.erc721OwnedSelectedToStake.delete(id);
+    }
+  }
+
+  updateCatsToUnstakeMap(id: number) {
+    if (!this.erc721StakedSelectToUnStake.has(id)) {
+      console.log("Not in map yet ready to update with #" + id);
+      this.erc721StakedSelectToUnStake.add(id);
+    } else {
+      console.log("Already in map Removing #" + id);
+      this.erc721StakedSelectToUnStake.delete(id);
+    }
+  }
+  
+   getStakedNftReward(){
+    var nftReward = Math.floor(Math.random() * 10);
+    //update totals
+    return nftReward
+  }
+
+  // async updateErc20Unclaimed(nftReward: number){
+  //   this.erc20Unclaimed =+ nftReward;
+  //   return this.erc20Unclaimed;
+  // }
+
+  async getUnstakedNfts() {
+    this.unstakedJsonArray = new Array();
+    this.catObj = null;
+    if (this.searchedAddress != "") {
+      //First get balance of.
+      let usersBalanceOfNftTokens = await NFTContract.methods
+        .balanceOf(this.searchedAddress)
+        .call();
+
+      for (let i = 0; i <= (usersBalanceOfNftTokens - 1); i++) {
+        //Then tokenOfOwnerByIndex
+        let tokenOfOwnerByIndex = await NFTContract.methods
+          .tokenOfOwnerByIndex(this.searchedAddress, i)
+          .call();
+
+        //Then tokenURI
+        let tokenURI = await NFTContract.methods
+          .tokenURI(tokenOfOwnerByIndex)
+          .call();
+
+        //get json
+        axios
+          .get(tokenURI)
+          .then((response) => {
+            if (i <5) {
+
+              this.unstakedJsonArray.push(JSON.parse(JSON.stringify(response)));
+            }else{
+          response.data.erc20Tokens = this.getStakedNftReward();
+          this.erc20Unclaimed += response.data.erc20Tokens;
+          this.stakedJsonArray.push(JSON.parse(JSON.stringify(response)));
+ 
+            }
+          })
+          .catch((err) => console.log(err));
+      }
+    }
   }
 
   // async updateRewards() {
@@ -514,46 +596,4 @@ export class ManageComponent implements OnInit {
   //     this.isLoading = false;
   //   }
   // }
-
-  userAddress: string = "0x4538C3d93FfdE7677EF66aB548a4Dd7f39eca785";
-  tokenUri: string = "";
-  searchedAddress: string = "0x4538C3d93FfdE7677EF66aB548a4Dd7f39eca785";
-  searchedId: number = 0;
-  catObj: any = null;
-  tokenJsonArray: any[] = new Array();
-  stakedJsonArray: any[] = new Array();
-
-  async searchByEthAddress() {
-    this.tokenJsonArray = new Array();
-    this.catObj = null;
-    if (this.searchedAddress != "") {
-      //First get balance of.
-      let usersBalanceOfNftTokens = await NFTContract.methods
-        .balanceOf(this.searchedAddress)
-        .call();
-
-      for (let i = 0; i <= usersBalanceOfNftTokens - 1; i++) {
-        //Then tokenOfOwnerByIndex
-        let tokenOfOwnerByIndex = await NFTContract.methods
-          .tokenOfOwnerByIndex(this.searchedAddress, i)
-          .call();
-
-        //Then tokenURI
-        let tokenURI = await NFTContract.methods
-          .tokenURI(tokenOfOwnerByIndex)
-          .call();
-
-        //get json
-        axios
-          .get(tokenURI)
-          .then((response) => {
-            this.tokenJsonArray.push(JSON.parse(JSON.stringify(response)));
-            this.stakedJsonArray.push(JSON.parse(JSON.stringify(response)));
-          })
-          .catch((err) => console.log(err));
-      }
-    }
-  }
 }
-
-
