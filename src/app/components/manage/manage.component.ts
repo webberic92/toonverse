@@ -15,12 +15,20 @@ export class ManageComponent implements OnInit {
   // tokensStaked: string = ''
   erc721Owned: number = 0;
   erc721OwnedSelectedToStake = new Set();
+
+
   erc721Staked: number = 0;
-  erc721StakedSelectToUnStake = new Set();
+  erc721StakedSelectToUnStake = new Map();
+  erc721CurrentlyStaked = new Map();
+
+
   erc20Owned: number = 0;
   erc20Unclaimed: number = 0;
+  erc20UnclaimedSelected:number =0;
+  
   isLoading: boolean = false;
   intervalId!: number;
+  tempNftReward:  number = 0;
 
   userAddress: string = "0x4538C3d93FfdE7677EF66aB548a4Dd7f39eca785";
   tokenUri: string = "";
@@ -28,7 +36,7 @@ export class ManageComponent implements OnInit {
   searchedId: number = 0;
   catObj: any = null;
   unstakedJsonArray: any[] = new Array();
-  stakedJsonArray: any[] = new Array();
+  stakedJsonMap= new Map();
   // userAddress: string = '0x4538C3d93FfdE7677EF66aB548a4Dd7f39eca785'
   // contractAddress: string = ''
   // contractOwner: string = ''
@@ -85,29 +93,46 @@ export class ManageComponent implements OnInit {
 
   updateCatsToStakeMap(id: number) {
     if (!this.erc721OwnedSelectedToStake.has(id)) {
-      console.log("Not in map yet ready to update with #" + id);
+
       this.erc721OwnedSelectedToStake.add(id);
     } else {
-      console.log("Already in map Removing #" + id);
+
       this.erc721OwnedSelectedToStake.delete(id);
     }
   }
 
   updateCatsToUnstakeMap(id: number) {
+
+
     if (!this.erc721StakedSelectToUnStake.has(id)) {
-      console.log("Not in map yet ready to update with #" + id);
-      this.erc721StakedSelectToUnStake.add(id);
+      this.erc721StakedSelectToUnStake.set(id, this.stakedJsonMap.get(id).data.rewards);
     } else {
-      console.log("Already in map Removing #" + id);
-      this.erc721StakedSelectToUnStake.delete(id);
+
+      this.erc721StakedSelectToUnStake.delete(id)
+    }
+
+    var amount =0;
+    this.erc721StakedSelectToUnStake.forEach((value: number, key: string) => {
+      amount += value
+    });
+    this.erc20UnclaimedSelected = amount
+
+  }
+
+  updateStakedMap(id: number) {
+
+    if (!this.erc721CurrentlyStaked.has(id)) {
+      this.erc721CurrentlyStaked.set(id, Math.floor(Math.random() * 10))
+    } else {
+      this.erc721CurrentlyStaked.delete(id)
     }
   }
   
-   getStakedNftReward(){
-    var nftReward = Math.floor(Math.random() * 10);
-    //update totals
-    return nftReward
-  }
+  //  getStakedNftReward(){
+  //   this.tempNftReward = Math.floor(Math.random() * 10);
+  //   //update totals
+  //   this.tempNftReward 
+  // }
 
   // async updateErc20Unclaimed(nftReward: number){
   //   this.erc20Unclaimed =+ nftReward;
@@ -138,13 +163,18 @@ export class ManageComponent implements OnInit {
         axios
           .get(tokenURI)
           .then((response) => {
+
+
             if (i <5) {
 
-              this.unstakedJsonArray.push(JSON.parse(JSON.stringify(response)));
+          this.unstakedJsonArray.push(JSON.parse(JSON.stringify(response)));
             }else{
-          response.data.erc20Tokens = this.getStakedNftReward();
-          this.erc20Unclaimed += response.data.erc20Tokens;
-          this.stakedJsonArray.push(JSON.parse(JSON.stringify(response)));
+          response.data.rewards = Math.floor(Math.random() * 10);
+          this.erc20Unclaimed += response.data.rewards;
+          this.stakedJsonMap.set(response.data.edition,JSON.parse(JSON.stringify(response)))
+          // this.stakedJsonArray.push(JSON.parse(JSON.stringify(response)));
+          // this.updateStakedMap(tokenOfOwnerByIndex)
+
  
             }
           })
