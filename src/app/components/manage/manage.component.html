@@ -42,7 +42,7 @@
           <br>
           TOATAL STAKED DEVILCATZ :{{stakedJsonMap.size}}
 
-      
+
         <!-- <p>Claimed TOONCOIN : 2500 <img id="center-img" src="../../../assets/toonverse/catCoin.gif" alt="logo"
             height="25vh" width="25" style="border-radius: 5%" />
           <br>
@@ -62,14 +62,14 @@
                 
             <div *ngIf="erc721OwnedSelectedToStake.size !=0" class="col-sm">
               <button class="styled">
-                STAKE {{erc721OwnedSelectedToStake.size}}
+                Stake Selected {{erc721OwnedSelectedToStake.size}}
               </button>
             </div>
 
             <div class="col-sm">
               <button class="styled">
                 <!-- STAKE ALL {{erc721Owned}} -->
-                STAKE ALL {{unstakedJsonArray.length}}
+                Stake All {{unstakedJsonArray.length}}
 
               </button>
             </div>
@@ -78,7 +78,6 @@
 
           <div class="row">
             <div class="col-sm" *ngFor="let token of unstakedJsonArray;">
-              <div *ngIf="token.data.edition >= 5">
                 <div class="card-body" id="styled">
                   <p class="card-text" style="font-size: 1em">
                     {{token.data.name}}
@@ -95,7 +94,6 @@
                   <input mdbCheckbox  (click)="updateCatsToStakeMap(token.data.edition)" style="border-color: pink; text-decoration: black;" class="form-check-input"
                     type="checkbox" id="checkboxNoLabel" value="" aria-label="..." />
                 </div>
-              </div>
             </div>
           </div>
         </div>
@@ -115,10 +113,10 @@
             </button>
           </div>
           <div  *ngIf="erc20UnclaimedSelected!=0"  class="col-md">
-            <button class="styled">
-              Collect {{erc20UnclaimedSelected}}
+            <button class="styled" style="min-width: fit-content;">
+              Collect Selected {{erc20UnclaimedSelected}}
               <img id="center-img" src="../../../assets/toonverse/catCoin.gif" alt="logo" height="25vh" width="25"
-                style="border-radius: 5%" />
+                 />
             </button>
           </div>
 
@@ -129,7 +127,7 @@
           </div>
           <div *ngIf="erc721StakedSelectToUnStake.size!=0" class="col-md">
             <button class="styled">
-              Unstake {{erc721StakedSelectToUnStake.size}}
+              Unstake Selected {{erc721StakedSelectToUnStake.size}}
             </button>
           </div>
         </div>

@@ -16,19 +16,17 @@ export class ManageComponent implements OnInit {
   erc721Owned: number = 0;
   erc721OwnedSelectedToStake = new Set();
 
-
   erc721Staked: number = 0;
   erc721StakedSelectToUnStake = new Map();
   erc721CurrentlyStaked = new Map();
 
-
   erc20Owned: number = 0;
   erc20Unclaimed: number = 0;
-  erc20UnclaimedSelected:number =0;
-  
+  erc20UnclaimedSelected: number = 0;
+
   isLoading: boolean = false;
   intervalId!: number;
-  tempNftReward:  number = 0;
+  tempNftReward: number = 0;
 
   userAddress: string = "0x4538C3d93FfdE7677EF66aB548a4Dd7f39eca785";
   tokenUri: string = "";
@@ -36,7 +34,7 @@ export class ManageComponent implements OnInit {
   searchedId: number = 0;
   catObj: any = null;
   unstakedJsonArray: any[] = new Array();
-  stakedJsonMap= new Map();
+  stakedJsonMap = new Map();
   // userAddress: string = '0x4538C3d93FfdE7677EF66aB548a4Dd7f39eca785'
   // contractAddress: string = ''
   // contractOwner: string = ''
@@ -93,45 +91,41 @@ export class ManageComponent implements OnInit {
 
   updateCatsToStakeMap(id: number) {
     if (!this.erc721OwnedSelectedToStake.has(id)) {
-
       this.erc721OwnedSelectedToStake.add(id);
     } else {
-
       this.erc721OwnedSelectedToStake.delete(id);
     }
   }
 
   updateCatsToUnstakeMap(id: number) {
-
-
     if (!this.erc721StakedSelectToUnStake.has(id)) {
-      this.erc721StakedSelectToUnStake.set(id, this.stakedJsonMap.get(id).data.rewards);
+      this.erc721StakedSelectToUnStake.set(
+        id,
+        this.stakedJsonMap.get(id).data.rewards
+      );
     } else {
-
-      this.erc721StakedSelectToUnStake.delete(id)
+      this.erc721StakedSelectToUnStake.delete(id);
     }
 
-    var amount =0;
+    var amount = 0;
     this.erc721StakedSelectToUnStake.forEach((value: number, key: string) => {
-      amount += value
+      amount += value;
     });
-    this.erc20UnclaimedSelected = amount
-
+    this.erc20UnclaimedSelected = amount;
   }
 
   updateStakedMap(id: number) {
-
     if (!this.erc721CurrentlyStaked.has(id)) {
-      this.erc721CurrentlyStaked.set(id, Math.floor(Math.random() * 10))
+      this.erc721CurrentlyStaked.set(id, Math.floor(Math.random() * 10));
     } else {
-      this.erc721CurrentlyStaked.delete(id)
+      this.erc721CurrentlyStaked.delete(id);
     }
   }
-  
+
   //  getStakedNftReward(){
   //   this.tempNftReward = Math.floor(Math.random() * 10);
   //   //update totals
-  //   this.tempNftReward 
+  //   this.tempNftReward
   // }
 
   // async updateErc20Unclaimed(nftReward: number){
@@ -140,47 +134,52 @@ export class ManageComponent implements OnInit {
   // }
 
   async getUnstakedNfts() {
-    this.unstakedJsonArray = new Array();
     this.catObj = null;
-    if (this.searchedAddress != "") {
-      //First get balance of.
-      let usersBalanceOfNftTokens = await NFTContract.methods
-        .balanceOf(this.searchedAddress)
-        .call();
+    // if (this.searchedAddress != "") {
+      // //First get balance of.
 
-      for (let i = 0; i <= (usersBalanceOfNftTokens - 1); i++) {
-        //Then tokenOfOwnerByIndex
-        let tokenOfOwnerByIndex = await NFTContract.methods
-          .tokenOfOwnerByIndex(this.searchedAddress, i)
-          .call();
+      // //10
+      // let usersBalanceOfNftTokens = await NFTContract.methods
+      //   .balanceOf(this.searchedAddress)
+      //   .call();
 
-        //Then tokenURI
-        let tokenURI = await NFTContract.methods
-          .tokenURI(tokenOfOwnerByIndex)
-          .call();
+      // for (let i = 0; i <= (usersBalanceOfNftTokens - 1); i++) {
+      //   //Then tokenOfOwnerByIndex
+      //   //Token IDs 100-110
+      //   let tokenOfOwnerByIndex = await NFTContract.methods
+      //     .tokenOfOwnerByIndex(this.searchedAddress, i)
+      //     .call();
 
+      //   //Then tokenURIs
+      //   let tokenURI = await NFTContract.methods
+      //     .tokenURI(tokenOfOwnerByIndex)
+      //     .call();
+      for (let i = 1; i <= 10; i++) {
         //get json
-        axios
-          .get(tokenURI)
+        await axios
+          .get(
+            "https://devilcatz.s3.us-east-2.amazonaws.com/json/" + i + ".json"
+          )
           .then((response) => {
+            if (response.data.edition <6 ) {
+              // if (response.data.name == "Toonverse #1000") {
+              //   console.log("#1000 found");
+              //   console.log(response);
+              // }
+              this.unstakedJsonArray.push(JSON.parse(JSON.stringify(response)));
+            } else {
+              response.data.rewards = Math.floor(Math.random() * 10);
+              this.erc20Unclaimed += response.data.rewards;
 
-
-            if (i <5) {
-
-          this.unstakedJsonArray.push(JSON.parse(JSON.stringify(response)));
-            }else{
-          response.data.rewards = Math.floor(Math.random() * 10);
-          this.erc20Unclaimed += response.data.rewards;
-          this.stakedJsonMap.set(response.data.edition,JSON.parse(JSON.stringify(response)))
-          // this.stakedJsonArray.push(JSON.parse(JSON.stringify(response)));
-          // this.updateStakedMap(tokenOfOwnerByIndex)
-
- 
+              this.stakedJsonMap.set(
+                response.data.edition,
+                JSON.parse(JSON.stringify(response))
+              );
             }
           })
           .catch((err) => console.log(err));
       }
-    }
+    // }
   }
 
   // async updateRewards() {
