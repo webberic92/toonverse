@@ -22,6 +22,7 @@ import { MdbCarouselModule } from 'mdb-angular-ui-kit/carousel';
 import { AboutComponent } from './app/components/about/about.component';
 import { ViewcatzComponent } from './app/components/viewcatz/viewcatz.component';
 import { AccountComponent } from './app//components/account/account.component';
+import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 @NgModule({
   declarations: [
     AppComponent,
@@ -48,7 +49,7 @@ import { AccountComponent } from './app//components/account/account.component';
     MdbCarouselModule
 
   ],
-  providers: [],
+  providers: [{provide: LocationStrategy, useClass: HashLocationStrategy}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

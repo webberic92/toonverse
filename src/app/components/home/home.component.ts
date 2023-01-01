@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import ethContract from 'src/app/services/Solidity/contract.service';
-import NFTContract from 'src/app/services/Solidity/nft.service';
+import  {ProviderLessNftContract} from "../../services/Solidity/nft.service";
 import Web3 from 'web3';
 
 @Component({
@@ -23,8 +23,7 @@ export class HomeComponent implements OnInit {
 
   }
   async ngOnInit(): Promise<void> {
-   this.totalSupply= (await NFTContract.methods.totalSupply().call() - 1)
-console.log(this.totalSupply)
+   this.totalSupply= (await ProviderLessNftContract.methods.totalSupply().call() - 1)
   }
 
 

@@ -1,9 +1,9 @@
 import { Component, OnInit } from "@angular/core";
-import Web3 from "web3";
 import { Web3Service } from "src/app/services/Web3/web3.service";
-import NFTContract from "src/app/services/Solidity/nft.service";
+import NFTContract , {ProviderLessNftContract} from "src/app/services/Solidity/nft.service";
 import { Router } from "@angular/router";
-const BigNumber = require("bignumber.js");
+const Web3 = require('web3');
+
 @Component({
   selector: "app-mint",
   templateUrl: "./mint.component.html",
@@ -33,9 +33,9 @@ export class MintComponent implements OnInit {
   multiplier: number = 1;
 
   async ngOnInit(): Promise<void> {
-    this.totalSupply = (await NFTContract.methods.totalSupply().call()) - 1;
+    this.totalSupply = (await ProviderLessNftContract.methods.totalSupply().call()) - 1;
     this.contractPrice = Web3.utils.fromWei(
-      await NFTContract.methods.COST().call(),
+      await ProviderLessNftContract.methods.COST().call(),
       "ether"
     );
     this.totalPrice = this.contractPrice;
@@ -163,7 +163,6 @@ export class MintComponent implements OnInit {
   }
 
   async isConnected() {
-    console.log();
     return false;
   }
 
@@ -190,9 +189,11 @@ export class MintComponent implements OnInit {
 
     try {
       // var accountsArray = await this.web3.getAccounts();
-      // console.log(Web3.utils.toChecksumAddress(accountsArray[0]));
       const accounts = await this.web3.getAccounts();
-  
+      const provider = new Web3('https://mainnet.infura.io/v3/acec92755ab44329bf4ffd95280afa27');
+
+      provider.eth.setProvider(Web3.givenProvider);
+         
         await NFTContract.methods.mint(this.numToBuy).send({
           from: Web3.utils.toChecksumAddress(accounts[0]),
           value: Web3.utils.toWei(this.totalPrice, "ether"),
@@ -200,7 +201,6 @@ export class MintComponent implements OnInit {
 
 
     } catch (e) {
-      console.log("errrrOrrr");
       console.log(e);
       this.error = e.message;
       this.isLoading = false;

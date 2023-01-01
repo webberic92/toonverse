@@ -1,8 +1,6 @@
 import { Component, OnInit } from "@angular/core";
-import Web3 from "web3";
-import NFTContract from "../../services/Solidity/nft.service";
+import {ProviderLessNftContract} from "../../services/Solidity/nft.service";
 import axios from "axios";
-import { clear } from "console";
 @Component({
   selector: "app-viewcatz",
   templateUrl: "./viewcatz.component.html",
@@ -20,13 +18,11 @@ export class ViewcatzComponent implements OnInit {
 
   updateSearchedAddress(e: Event) {
     this.searchedAddress = String(e);
-    console.log(e);
   }
 
   updateSearchedID(e: Event) {
     if (Number(e)! >= 0 || Number(e) > 2222) {
       this.searchedId = Number(e);
-      console.log("Good Number");
     } else {
       this.searchedId = 0;
     }
@@ -41,7 +37,7 @@ export class ViewcatzComponent implements OnInit {
     this.tokenJsonArray = new Array;
     this.catObj = null;
     if (this.searchedId != 0) {
-      this.tokenUri = await NFTContract.methods
+      this.tokenUri = await ProviderLessNftContract.methods
         .tokenURI(this.searchedId)
         .call();
       axios
@@ -50,7 +46,7 @@ export class ViewcatzComponent implements OnInit {
           this.catObj = JSON.parse(JSON.stringify(response));
 
           // console.log(response);
-          console.log(this.catObj);
+
         })
         .catch((err) => console.log(err));
     }
@@ -69,18 +65,18 @@ export class ViewcatzComponent implements OnInit {
     this.catObj = null;
     if (this.searchedAddress != "") {
       //First get balance of.
-      let usersBalanceOfNftTokens = await NFTContract.methods
+      let usersBalanceOfNftTokens = await ProviderLessNftContract.methods
         .balanceOf(this.searchedAddress)
         .call();
 
       for (let i = 0; i <= usersBalanceOfNftTokens - 1; i++) {
         //Then tokenOfOwnerByIndex
-        let tokenOfOwnerByIndex = await NFTContract.methods
+        let tokenOfOwnerByIndex = await ProviderLessNftContract.methods
           .tokenOfOwnerByIndex(this.searchedAddress, i)
           .call();
 
         //Then tokenURI
-        let tokenURI = await NFTContract.methods
+        let tokenURI = await ProviderLessNftContract.methods
           .tokenURI(tokenOfOwnerByIndex)
           .call();
 
