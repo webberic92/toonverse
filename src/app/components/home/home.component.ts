@@ -23,7 +23,7 @@ export class HomeComponent implements OnInit {
 
   }
   async ngOnInit(): Promise<void> {
-   this.totalSupply= (await ProviderLessNftContract.methods.totalSupply().call() - 1)
+   this.totalSupply= (await ProviderLessNftContract.methods.totalSupply().call())
   }
 
 

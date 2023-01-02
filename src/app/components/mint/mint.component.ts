@@ -33,7 +33,7 @@ export class MintComponent implements OnInit {
   multiplier: number = 1;
 
   async ngOnInit(): Promise<void> {
-    this.totalSupply = (await ProviderLessNftContract.methods.totalSupply().call()) - 1;
+    this.totalSupply = (await ProviderLessNftContract.methods.totalSupply().call());
     this.contractPrice = Web3.utils.fromWei(
       await ProviderLessNftContract.methods.COST().call(),
       "ether"
