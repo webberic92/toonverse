@@ -32,7 +32,7 @@
 }
 
 #card-free-mints:hover{
-  background-color: bisque;
+  background-color: rgb(150, 154, 227);
   border-radius: 5%;
   max-width: 70%;
   text-decoration: underline;
@@ -47,7 +47,7 @@
 
 
 #card-lightblue:hover{
-  background-color: bisque;
+  background-color: rgb(150, 154, 227);
   border-radius: 5%;
   transform: scale(1.05);
   text-decoration: underline;
@@ -101,15 +101,12 @@ background-color: #666;
 
 .grid-container {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  // grid-gap: 20px;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  grid-gap: 20px;
   padding: 20px;
 }
 
-
 .grid-item {
-  // background-color: white;
-  // border: 1px solid #666;
   display: flex;
   align-items: center;
   justify-content: center;
