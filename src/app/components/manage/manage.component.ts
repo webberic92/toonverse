@@ -1,8 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import Web3 from "web3";
 import { Web3Service } from "src/app/services/Web3/web3.service";
-import NFTContract from "src/app/services/Solidity/nft.service";
-const web3 = new Web3("https://data-seed-prebsc-1-s1.binance.org:8545");
+import NFTContract from "src/app/services/Solidity/devilCatz.service";
 import axios from "axios";
 
 @Component({

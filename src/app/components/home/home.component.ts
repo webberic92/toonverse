@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import ethContract from 'src/app/services/Solidity/$toon.service';
 import  {ProviderLessNftContract} from "../../services/Solidity/devilCatz.service";
 import Web3 from 'web3';
 

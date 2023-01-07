@@ -15,14 +15,14 @@ export class NftService {
 }
 
 
-const contractAddress = "0x1c4a28690482b03F6991C8c24295016cba197C12";
+const contractAddress = "0x2C8817b299c2ec21bCfCe17099d119e96db123BD";
 export const ProviderLessNftContract = new provider2.eth.Contract(contract, contractAddress);
 
 
 provider.eth.setProvider(Web3.givenProvider);
 const NFTContract = new provider.eth.Contract(
   (contract),
-  '0x1c4a28690482b03F6991C8c24295016cba197C12'
+  '0x2C8817b299c2ec21bCfCe17099d119e96db123BD'
 );
 
 
