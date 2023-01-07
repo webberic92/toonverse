@@ -44,6 +44,9 @@ export class ManageComponent implements OnInit {
     // this.getContent()
     this.getUnstakedNfts();
     this.getStakedNfts();
+    this.erc20Unclaimed = await $toonCoinContract.methods
+      .potentialAllStakedNftReward(this.userAddress)
+      .call();
   }
 
   ngOnDestroy() {
@@ -89,10 +92,10 @@ export class ManageComponent implements OnInit {
   //   this.tempNftReward
   // }
 
-  // async updateErc20Unclaimed(nftReward: number){
-  //   this.erc20Unclaimed =+ nftReward;
-  //   return this.erc20Unclaimed;
-  // }
+  async updateErc20Unclaimed(nftReward: number) {
+    this.erc20Unclaimed = +nftReward;
+    return this.erc20Unclaimed;
+  }
 
   async getUnstakedNfts() {
     this.catObj = null;
@@ -127,10 +130,6 @@ export class ManageComponent implements OnInit {
       .call();
 
     for (let i = 0; i <= userStakedNftIDsArray.length - 1; i++) {
-      // let tokenOfOwnerByIndex = await devilcatNFTContract.methods
-      //   .tokenOfOwnerByIndex(this.searchedAddress, i)
-      //   .call();
-
       let tokenURI = await devilcatNFTContract.methods
         .tokenURI(userStakedNftIDsArray[i])
         .call();
@@ -138,7 +137,7 @@ export class ManageComponent implements OnInit {
       await axios
         .get(tokenURI)
         .then(async (response) => {
-          console.log(response);
+          //get Reward for individual cat
           let rewards = await $toonCoinContract.methods
             .potentialStakedNftReward(
               this.userAddress,
@@ -146,6 +145,7 @@ export class ManageComponent implements OnInit {
             )
             .call();
           response.data.rewards = Number(rewards);
+          // this.erc20Unclaimed += response.data.rewards;
           this.stakedJsonMap.set(
             response.data.edition,
             JSON.parse(JSON.stringify(response))
@@ -153,6 +153,14 @@ export class ManageComponent implements OnInit {
         })
         .catch((err) => console.log(err));
     }
+
+    // let totalRewards = 0;
+
+    //   for (let value of this.stakedJsonMap.values()) {
+    //     totalRewards += value.data.rewards;
+
+    // }
+    // console.log("final" +totalRewards)
   }
 
   async stakeSelectedNfts() {
@@ -163,10 +171,15 @@ export class ManageComponent implements OnInit {
       });
   }
 
+  async stakeSingleNft(id: number) {
+    await $toonCoinContract.methods.stakeNft(id).send({
+      from: this.userAddress,
+    });
+  }
+
   async stakeAllNfts() {
     let tempArray = new Array();
     for (let nft of this.unstakedJsonArray) {
-      
       tempArray.push(nft.data.edition);
     }
     await $toonCoinContract.methods
@@ -175,4 +188,73 @@ export class ManageComponent implements OnInit {
         from: this.userAddress,
       });
   }
+
+  async collectAllRewards() {
+    let nftIdArray = await $toonCoinContract.methods
+      .getUsersStakedNfts(this.userAddress)
+      .call();
+    console.log(nftIdArray);
+    await $toonCoinContract.methods
+      .collectMultipleStakedNftReward(nftIdArray)
+      .send({
+        from: this.userAddress,
+      });
+  }
+
+  async collectNftReward(id : Number) {
+
+    await $toonCoinContract.methods
+      .collectStakedNftReward(this.userAddress,id)
+      .send({
+        from: this.userAddress,
+      });
+  }
+
+  async collectSelectedRewards(){
+
+
+    let ids = [];
+
+for (let key of this.erc721StakedSelectToUnStake.keys()) {
+  
+  ids.push(key);
+
+};
+
+
+    
+
+    console.log( ids)
+    await $toonCoinContract.methods
+    .collectMultipleStakedNftReward(ids)
+    .send({
+      from: this.userAddress,
+    });
+
+
+  }
+
+
+
+  async unstakeAllNfts() {
+    let nftIdArray = await $toonCoinContract.methods
+      .getUsersStakedNfts(this.userAddress)
+      .call();
+    console.log(nftIdArray);
+    await $toonCoinContract.methods
+      .removeMultipleStakedNft(nftIdArray)
+      .send({
+        from: this.userAddress,
+      });
+  }
+
+ async unstakeNft(id:Number) {
+  await $toonCoinContract.methods
+  .removeStakedNft(id)
+  .send({
+    from: this.userAddress,
+  });
+   
+ }
+
 }

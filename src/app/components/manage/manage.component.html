@@ -88,7 +88,7 @@
                   <br>
                   <br>
 
-                  <button class="styled">Stake</button>
+                  <button (click)="stakeSingleNft(token.data.edition)" class="styled">Stake</button>
                   <br>
                   <br>
                   <input mdbCheckbox  (click)="updateCatsToStakeMap(token.data.edition)" style="border-color: pink; text-decoration: black;" class="form-check-input"
@@ -106,14 +106,14 @@
         <div class="row" style="margin-bottom: 20px;">
 
           <div class="col-md">
-            <button class="styled">
+            <button class="styled" (click)="collectAllRewards()">
               Collect All {{erc20Unclaimed}}
               <img id="center-img" src="../../../assets/toonverse/catCoin.gif" alt="logo" height="25vh" width="25"
                 style="border-radius: 5%" />
             </button>
           </div>
           <div  *ngIf="erc20UnclaimedSelected!=0"  class="col-md">
-            <button class="styled" style="min-width: fit-content;">
+            <button (click)="collectSelectedRewards()" class="styled" style="min-width: fit-content;">
               Collect Selected {{erc20UnclaimedSelected}}
               <img id="center-img" src="../../../assets/toonverse/catCoin.gif" alt="logo" height="25vh" width="25"
                  />
@@ -121,7 +121,7 @@
           </div>
 
           <div class="col-md">
-            <button class="styled">
+            <button (click)="unstakeAllNfts()" class="styled">
               Unstake All {{stakedJsonMap.size}}
             </button>
           </div>
@@ -146,10 +146,10 @@
                 <br>
                 <p>{{token.value.data.rewards}}<img id="center-img" src="../../../assets/toonverse/catCoin.gif" alt="logo" height="25vh"
                     width="25" style="border-radius: 5%" /></p>
-                <button class="styled">
+                <button (click)="collectNftReward(token.value.data.edition)" class="styled">
                   Collect
                 </button>
-                <br> <button class="styled">Unstake</button>
+                <br> <button (click)="unstakeNft(token.value.data.edition)" class="styled">Unstake</button>
                 <br>
                 <div>
                   <br>
