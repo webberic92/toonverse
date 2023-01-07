@@ -61,13 +61,13 @@
           <div class="row" style="margin-bottom: 20px;">
                 
             <div *ngIf="erc721OwnedSelectedToStake.size !=0" class="col-sm">
-              <button class="styled">
+              <button class="styled" (click)="stakeSelectedNfts()">
                 Stake Selected {{erc721OwnedSelectedToStake.size}}
               </button>
             </div>
 
             <div class="col-sm">
-              <button class="styled">
+              <button class="styled" (click)="stakeAllNfts()">
                 <!-- STAKE ALL {{erc721Owned}} -->
                 Stake All {{unstakedJsonArray.length}}
 
