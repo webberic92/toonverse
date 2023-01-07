@@ -46,26 +46,15 @@ import "@openzeppelin/contracts/token/ERC20/extensions/ERC20Burnable.sol";
 import "@openzeppelin/contracts/security/Pausable.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 import "@openzeppelin/contracts/utils/math/SafeMath.sol";
-import "./reentrancyGuard.sol";
+import "github.com/chiru-labs/ERC721A/blob/main/contracts/ERC721A.sol";
 
-//TODO
-// create stakeMultipleNFTs([1,2,3]) //DONE but test with duplicates test with duplicates and ones you dont own
-
-// create unstakeMultipleNFts // DONE but test with duplicates and ones you dont own
-
-// create collectMultipleRewards() // DONE but test
-
-// create circulatingSupply //DONE but TEST
-
-contract DEVILCAT_STAKING is ERC20Burnable, Ownable, ReentrancyGuard {
+contract $TOON is ERC20Burnable, Ownable {
     using SafeMath for uint256;
 
-    ERC721Enumerable public devilCatzNft;
+    ERC721A public devilCatzNft;
     // address constant public devilCatzNftAddress = 0x1c4a28690482b03F6991C8c24295016cba197C12; PRODUCTION DEVIL CAT NFT
-    //Make sure to change time to 1 day and not 1 minute.
-
-    // 0x2181eF3E8Fe13216FADf664334a8368eeba9A8D9 <----- goerli test NFT
-    // 0x7e3ADD77f73698C8666b76390197652120f0c909 <------ goerli test COIN
+    // 0x2C8817b299c2ec21bCfCe17099d119e96db123BD <----- goerli test NFT
+    // 0x128e72Ab8F91F6cdf7535BbCF0C4cD0A5c6495c7 <------ goerli test COIN
 
     uint256 public cost = 0.0005 ether;
     event Bought(uint256 amount);
@@ -83,9 +72,15 @@ contract DEVILCAT_STAKING is ERC20Burnable, Ownable, ReentrancyGuard {
         _mint(address(this), 935813);
         _mint(0x1aBC6efe814F2766003d0c4AA5496B9b0EBC6eA3, 150000);
         _mint(0x4538C3d93FfdE7677EF66aB548a4Dd7f39eca785, 150000);
-        devilCatzNft = ERC721Enumerable(
-            0x2181eF3E8Fe13216FADf664334a8368eeba9A8D9
-        );
+        devilCatzNft = ERC721A(0x2C8817b299c2ec21bCfCe17099d119e96db123BD);
+    }
+
+    function getUsersStakedNfts(address _staker)
+        public
+        view
+        returns (uint256[] memory)
+    {
+        return nftStakersWithArray[_staker];
     }
 
     function decimals() public view virtual override returns (uint8) {
@@ -166,35 +161,18 @@ contract DEVILCAT_STAKING is ERC20Burnable, Ownable, ReentrancyGuard {
         nftStakersWithArray[msg.sender].push(_tokenID);
     }
 
-    function getUsersStakedNfts(address _staker)
-        public
-        view
-        returns (uint256[] memory)
-    {
-        return nftStakersWithArray[_staker];
-    }
-
     function stakeMultipleNfts(uint256[] calldata _nftIds) public {
         require(!nftStakingPaused, "Staking NFTs is currently paused.");
-        //Verify user owns all those in wallet.
-
-        for (uint256 i = 0; i <= _nftIds.length; i++) {
+        for (uint256 i = 0; i <= _nftIds.length - 1; i++) {
             require(
                 devilCatzNft.ownerOf(_nftIds[i]) == msg.sender,
                 "Not all of those NFTs are in your current wallet."
             );
-        }
-        for (uint256 i = 0; i <= _nftIds.length; i++) {
-            if (devilCatzNft.ownerOf(_nftIds[i]) == msg.sender) {
-                devilCatzNft.transferFrom(
-                    msg.sender,
-                    address(this),
-                    _nftIds[i]
-                );
-                nftStakersWithTime[msg.sender][_nftIds[i]] = block.timestamp;
-                stakedNfts += 1;
-                nftStakersWithArray[msg.sender].push(_nftIds[i]);
-            }
+
+            devilCatzNft.transferFrom(msg.sender, address(this), _nftIds[i]);
+            nftStakersWithTime[msg.sender][_nftIds[i]] = block.timestamp;
+            stakedNfts += 1;
+            nftStakersWithArray[msg.sender].push(_nftIds[i]);
         }
     }
 
@@ -212,7 +190,7 @@ contract DEVILCAT_STAKING is ERC20Burnable, Ownable, ReentrancyGuard {
             if (nftStakersWithTime[_addy][nfts[i]] != 0) {
                 intDate = nftStakersWithTime[_addy][nfts[i]];
                 subtracted = block.timestamp - intDate;
-                utilToken += subtracted / rewardsTime; //Was 3600 for one hour NEED to make 3600*24
+                utilToken += subtracted / rewardsTime;
             }
         }
         return utilToken * 1;
@@ -229,25 +207,11 @@ contract DEVILCAT_STAKING is ERC20Burnable, Ownable, ReentrancyGuard {
         );
         uint256 intDate = nftStakersWithTime[_addy][_tokenID];
         uint256 subtracted = block.timestamp - intDate;
-        uint256 tokens = subtracted / 3600;
+        uint256 tokens = subtracted / rewardsTime;
         return tokens * 1;
     }
 
-    function collectAllStakedNftReward(address _addy) public {
-        require(!nftStakingPaused, "Staking NFTs is currently paused.");
-        uint256 sumOfNFTRewards = potentialAllStakedNftReward(_addy);
-        _transfer(address(this), _addy, sumOfNFTRewards);
-
-        uint256[] memory nfts = getUsersStakedNfts(_addy);
-        for (uint256 i = 0; i < nfts.length; i++) {
-            nftStakersWithTime[_addy][nfts[i]] = block.timestamp;
-        }
-    }
-
-    function collectStakedNftReward(address _addy, uint256 _tokenID)
-        public
-        nonReentrant
-    {
+    function collectStakedNftReward(address _addy, uint256 _tokenID) public {
         require(!nftStakingPaused, "Staking NFTs is currently paused.");
         require(
             nftStakersWithTime[_addy][_tokenID] != 0,
@@ -263,31 +227,21 @@ contract DEVILCAT_STAKING is ERC20Burnable, Ownable, ReentrancyGuard {
         nftStakersWithTime[_addy][_tokenID] = block.timestamp;
     }
 
-    function collectMultipleStakedNftReward(uint256[] calldata _nftIds)
-        public
-        nonReentrant
-    {
+    function collectMultipleStakedNftReward(uint256[] calldata _nftIds) public {
         require(
             !rewardsCollectionPaused,
             "Collecting Rewards is currently paused."
         );
 
-        for (uint256 k = 0; k <= _nftIds.length; k++) {
+        for (uint256 i = 0; i <= _nftIds.length-1; i++) {
             require(
-                nftStakersWithTime[msg.sender][_nftIds[k]] != 0,
+                nftStakersWithTime[msg.sender][_nftIds[i]] != 0,
                 "Not all those tokens are staked."
             );
+        collectStakedNftReward(msg.sender, _nftIds[i]);
+
         }
-        for (uint256 k = 0; k <= _nftIds.length; k++) {
-            if (potentialStakedNftReward(msg.sender, _nftIds[k]) != 0) {
-                uint256 tokens = potentialStakedNftReward(
-                    msg.sender,
-                    _nftIds[k]
-                );
-                _transfer(address(this), msg.sender, tokens);
-                nftStakersWithTime[msg.sender][_nftIds[k]] = block.timestamp;
-            }
-        }
+
     }
 
     function removeStakedNft(uint256 _stakedNFT) public {
@@ -314,36 +268,14 @@ contract DEVILCAT_STAKING is ERC20Burnable, Ownable, ReentrancyGuard {
     }
 
     function removeMultipleStakedNft(uint256[] calldata _nftIds) public {
-        for (uint256 k = 0; k <= _nftIds.length; k++) {
+        for (uint256 k = 0; k <= _nftIds.length - 1; k++) {
             require(
                 nftStakersWithTime[msg.sender][_nftIds[k]] != 0,
                 "Cant Unstake something your not staking."
             );
+            removeStakedNft(_nftIds[k]);
+
         }
 
-        for (uint256 k = 0; k <= _nftIds.length; k++) {
-            if (nftStakersWithTime[msg.sender][_nftIds[k]] != 0) {
-                devilCatzNft.transferFrom(
-                    address(this),
-                    msg.sender,
-                    _nftIds[k]
-                );
-                nftStakersWithTime[msg.sender][_nftIds[k]] = 0;
-                stakedNfts -= 1;
-
-                uint256[] storage tempArray = nftStakersWithArray[msg.sender];
-                for (uint256 i = 0; i < tempArray.length; i++) {
-                    if (tempArray[i] == _nftIds[i]) {
-                        if (i >= tempArray.length) return;
-
-                        for (uint256 j = i; j < tempArray.length - 1; j++) {
-                            tempArray[j] = tempArray[j + 1];
-                        }
-                        tempArray.pop();
-                        nftStakersWithArray[msg.sender] = tempArray;
-                    }
-                }
-            }
-        }
     }
 }
