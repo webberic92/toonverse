@@ -19,7 +19,7 @@ provider.eth.setProvider(Web3.givenProvider);
 
 const erc721aContract = new provider.eth.Contract(
   (contract),
-  '0x128e72Ab8F91F6cdf7535BbCF0C4cD0A5c6495c7'
+  '0xC3897F145597DA3e2c352cFcF54606523e5EE231'
 );
 
 

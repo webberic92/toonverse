@@ -1,21 +1,19 @@
 <div class="center-div">
   <div class="card-header" style="border-radius: 5%;">
     <br>
-    <h6 style="font-weight: bold; "><u>**Coming Soon Devil Cat Staking**</u> </h6>
+    <h6 style="font-weight: bold; "><u>**Devil Cat Staking**</u> </h6>
     <br>
 
-    <p>Below is a rough basic GUI we will be implementing. <br>
+    <!-- <p>Below is a rough basic GUI we will be implementing. <br>
       <br>
       We will be releasing the tokenzation of DevilCatz and staking.
       Future airdrops will be paid in DevilCatz homegrown token to mint future collections.
-      <br>
+      <br> -->
 
-    </p>
+    <!-- </p> -->
     <h3 class="card-text" style="font-size: 2em">
       <br>
 
-      <h3 style="text-decoration: underline;">A **ROUGH DRAFT** ACCOUNT EXAMPLE</h3>
-      <br><br>
     </h3>
 
     <div *ngIf="this.isLoading">
@@ -41,6 +39,11 @@
           TOATAL UNSTAKED DEVILCATZ :{{unstakedJsonArray.length}}
           <br>
           TOATAL STAKED DEVILCATZ :{{stakedJsonMap.size}}
+          <br>
+          <br>
+          $TOON IN WALLET :{{erc20Owned}}
+          <br>
+          UNCLAIMED $TOON :{{erc20Unclaimed}}
 
 
         <!-- <p>Claimed TOONCOIN : 2500 <img id="center-img" src="../../../assets/toonverse/catCoin.gif" alt="logo"
@@ -126,7 +129,7 @@
             </button>
           </div>
           <div *ngIf="erc721StakedSelectToUnStake.size!=0" class="col-md">
-            <button class="styled">
+            <button (click)="unstakeMultipleNfts()" class="styled">
               Unstake Selected {{erc721StakedSelectToUnStake.size}}
             </button>
           </div>

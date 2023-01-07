@@ -54,7 +54,7 @@ contract $TOON is ERC20Burnable, Ownable {
     ERC721A public devilCatzNft;
     // address constant public devilCatzNftAddress = 0x1c4a28690482b03F6991C8c24295016cba197C12; PRODUCTION DEVIL CAT NFT
     // 0x2C8817b299c2ec21bCfCe17099d119e96db123BD <----- goerli test NFT
-    // 0x128e72Ab8F91F6cdf7535BbCF0C4cD0A5c6495c7 <------ goerli test COIN
+    // 0xC3897F145597DA3e2c352cFcF54606523e5EE231 <------ goerli test COIN
 
     uint256 public cost = 0.0005 ether;
     event Bought(uint256 amount);
@@ -84,7 +84,7 @@ contract $TOON is ERC20Burnable, Ownable {
     }
 
     function decimals() public view virtual override returns (uint8) {
-        return 2;
+        return 0;
     }
 
     function circulatingSupply() public view returns (uint256) {

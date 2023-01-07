@@ -47,6 +47,7 @@ export class ManageComponent implements OnInit {
     this.erc20Unclaimed = await $toonCoinContract.methods
       .potentialAllStakedNftReward(this.userAddress)
       .call();
+      this.erc20Owned= await $toonCoinContract.methods.balanceOf(this.userAddress).call();
   }
 
   ngOnDestroy() {
@@ -201,60 +202,52 @@ export class ManageComponent implements OnInit {
       });
   }
 
-  async collectNftReward(id : Number) {
-
+  async collectNftReward(id: Number) {
     await $toonCoinContract.methods
-      .collectStakedNftReward(this.userAddress,id)
+      .collectStakedNftReward(this.userAddress, id)
       .send({
         from: this.userAddress,
       });
   }
 
-  async collectSelectedRewards(){
-
-
+  async collectSelectedRewards() {
     let ids = [];
 
-for (let key of this.erc721StakedSelectToUnStake.keys()) {
-  
-  ids.push(key);
+    for (let key of this.erc721StakedSelectToUnStake.keys()) {
+      ids.push(key);
+    }
 
-};
-
-
-    
-
-    console.log( ids)
-    await $toonCoinContract.methods
-    .collectMultipleStakedNftReward(ids)
-    .send({
+    console.log(ids);
+    await $toonCoinContract.methods.collectMultipleStakedNftReward(ids).send({
       from: this.userAddress,
     });
-
-
   }
-
-
 
   async unstakeAllNfts() {
     let nftIdArray = await $toonCoinContract.methods
       .getUsersStakedNfts(this.userAddress)
       .call();
     console.log(nftIdArray);
-    await $toonCoinContract.methods
-      .removeMultipleStakedNft(nftIdArray)
-      .send({
-        from: this.userAddress,
-      });
+    await $toonCoinContract.methods.removeMultipleStakedNft(nftIdArray).send({
+      from: this.userAddress,
+    });
   }
 
- async unstakeNft(id:Number) {
-  await $toonCoinContract.methods
-  .removeStakedNft(id)
-  .send({
-    from: this.userAddress,
-  });
-   
- }
+  async unstakeNft(id: Number) {
+    await $toonCoinContract.methods.removeStakedNft(id).send({
+      from: this.userAddress,
+    });
+  }
 
+  async unstakeMultipleNfts() {
+    let ids = [];
+
+    for (let key of this.erc721StakedSelectToUnStake.keys()) {
+      ids.push(key);
+    }
+
+    await $toonCoinContract.methods.removeMultipleStakedNft(ids).send({
+      from: this.userAddress,
+    });
+  }
 }
