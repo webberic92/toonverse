@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import nftContract from "src/app/services/Solidity/nft.service"
+import nftContract from "src/app/services/Solidity/devilCatz.service"
 import Web3 from 'web3';
 import { Web3Service } from 'src/app/services/Web3/web3.service';
 const provider = new Web3('https://mainnet.infura.io/v3/acec92755ab44329bf4ffd95280afa27');
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Observable } from 'rxjs/internal/Observable';
-import bscContract from "src/app/services/Solidity/contract.service"
+import bscContract from "src/app/services/Solidity/$toon.service"
 @Component({
   selector: 'app-nft',
   templateUrl: './nft.component.html',

@@ -1,5 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import {ProviderLessNftContract} from "../../services/Solidity/nft.service";
+import {ProviderLessNftContract} from "../../services/Solidity/devilCatz.service";
 import axios from "axios";
 @Component({
   selector: "app-viewcatz",

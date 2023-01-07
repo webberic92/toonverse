@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
-const contract = require("../Solidity/NFT_ABI.json");
+const contract = require("../../../../solidity/nft/devilcatz.json");
 const Web3 = require('web3');
 //testNet
-const provider = new Web3('https://mainnet.infura.io/v3/acec92755ab44329bf4ffd95280afa27');
-const provider2 = new Web3('https://mainnet.infura.io/v3/acec92755ab44329bf4ffd95280afa27');
+const provider = new Web3('https://goerli.infura.io/v3/589e31a14b0c42b78400756b023d7894');
+const provider2 = new Web3('https://goerli.infura.io/v3/589e31a14b0c42b78400756b023d7894');
 @Injectable({
   providedIn: 'root'
 })
