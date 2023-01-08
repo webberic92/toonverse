@@ -7,7 +7,7 @@ const Web3 = require("web3");
 declare global {
   interface Window {
     ethereum: any;
-    web3:any;
+    web3: any;
   }
 }
 
@@ -20,13 +20,11 @@ export class Web3Service {
 
   constructor(private route: ActivatedRoute, private router: Router) {
     // try {
-    //   window.ethereum.on('accountsChanged', (accounts: string | any[]) => {
+    //   window.ethereum.on("accountsChanged", (accounts: string | any[]) => {
     //     // If user has locked/logout from MetaMask, this resets the accounts array to empty
-    //     this.router.navigate(['/']); // navigate to other page
-    //   });
+    //     window.location.reload();      });
     // } catch {
-    //   this.router.navigate(['/']); // navigate to other page
-    // }
+    //   window.location.reload();    }
   }
 
   public isConnected = async () => {
@@ -38,14 +36,12 @@ export class Web3Service {
     }
   };
 
-  
-
   public getAccounts = async () => {
     try {
       const accounts = await window.ethereum.request({
         method: "eth_requestAccounts",
-    });
-    window.web3 = new Web3(window.ethereum);
+      });
+      window.web3 = new Web3(window.ethereum);
       if (accounts.length == 0) {
         throw Error("Check MetaMask");
       }
@@ -83,7 +79,4 @@ export class Web3Service {
   //   }
   //   return addresses.length ? addresses[0] : null;
   // };
-}
-function detectEthereumProvider() {
-  throw new Error("Function not implemented.");
 }

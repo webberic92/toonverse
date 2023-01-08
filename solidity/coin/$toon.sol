@@ -52,15 +52,12 @@ contract $TOON is ERC20Burnable, Ownable {
     using SafeMath for uint256;
 
     ERC721A public devilCatzNft;
-    // address constant public devilCatzNftAddress = 0x1c4a28690482b03F6991C8c24295016cba197C12; PRODUCTION DEVIL CAT NFT
-    // 0x2C8817b299c2ec21bCfCe17099d119e96db123BD <----- goerli test NFT
-    // 0xC3897F145597DA3e2c352cFcF54606523e5EE231 <------ goerli test COIN
 
     uint256 public cost = 0.0005 ether;
     event Bought(uint256 amount);
     uint256 public maxSupply = 1235813;
     uint256 public stakedNfts = 0;
-    uint256 public rewardsTime = 60; ////Was 3600 for one hour NEED to make 3600*24 for a day
+    uint256 public rewardsTime = 86400;
 
     bool public nftStakingPaused = false;
     bool public rewardsCollectionPaused = false;
@@ -72,7 +69,7 @@ contract $TOON is ERC20Burnable, Ownable {
         _mint(address(this), 935813);
         _mint(0x1aBC6efe814F2766003d0c4AA5496B9b0EBC6eA3, 150000);
         _mint(0x4538C3d93FfdE7677EF66aB548a4Dd7f39eca785, 150000);
-        devilCatzNft = ERC721A(0x2C8817b299c2ec21bCfCe17099d119e96db123BD);
+        devilCatzNft = ERC721A(0x1c4a28690482b03F6991C8c24295016cba197C12);
     }
 
     function getUsersStakedNfts(address _staker)

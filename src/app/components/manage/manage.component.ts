@@ -11,8 +11,6 @@ import axios from "axios";
   styleUrls: ["./manage.component.scss"],
 })
 export class ManageComponent implements OnInit {
-  // tokensOwned: string = ''
-  // tokensStaked: string = ''
   erc721Owned: number = 0;
   erc721OwnedSelectedToStake = new Set();
 
@@ -28,31 +26,63 @@ export class ManageComponent implements OnInit {
   intervalId!: number;
   tempNftReward: number = 0;
 
-  userAddress: string = "0x75939FA0D2F41542F5e8634ce88E2aE9bFD48767";
+  userAddress: string = "";
   tokenUri: string = "";
-  searchedAddress: string = "0x75939FA0D2F41542F5e8634ce88E2aE9bFD48767";
+  searchedAddress: string = "";
   searchedId: number = 0;
   catObj: any = null;
   unstakedJsonArray: any[] = new Array();
   stakedJsonMap = new Map();
+  isConnected: boolean = false;
 
   constructor(private web3: Web3Service) {
     // setInterval(() => { this.updateRewards() }, 30000);
   }
 
-  async ngOnInit() {
-    // this.getContent()
+  async ngOnInit() { 
+         this.isConnected = await this.web3.isConnected()
+    if (this.isConnected) {
+
+      this.getContent();
+    }
+  }
+
+  async getContent() {
+    this.unstakedJsonArray = [];
+    this.stakedJsonMap.clear;
+    this.erc20Unclaimed = 0;
+    this.erc20Owned = 0;
+    let addressArray = await this.web3.getAccounts();
+
+    this.userAddress = addressArray[0];
+    this.searchedAddress = this.userAddress;
+
     this.getUnstakedNfts();
     this.getStakedNfts();
     this.erc20Unclaimed = await $toonCoinContract.methods
       .potentialAllStakedNftReward(this.userAddress)
       .call();
-      this.erc20Owned= await $toonCoinContract.methods.balanceOf(this.userAddress).call();
+    this.erc20Owned = await $toonCoinContract.methods
+      .balanceOf(this.userAddress)
+      .call();
   }
 
   ngOnDestroy() {
     clearInterval(this.intervalId);
   }
+
+  // async connectMetaMask() {
+  //   this.isLoading = true;
+
+  //   try {
+  //     await this.web3.getAccounts();
+  //     this.isLoading = false;
+  //     this.isConnected = true;
+
+  //   } catch (e) {
+  //     this.isLoading = false;
+  //   }
+  // }
 
   updateCatsToStakeMap(id: number) {
     if (!this.erc721OwnedSelectedToStake.has(id)) {
@@ -86,12 +116,6 @@ export class ManageComponent implements OnInit {
       this.erc721CurrentlyStaked.delete(id);
     }
   }
-
-  //  getStakedNftReward(){
-  //   this.tempNftReward = Math.floor(Math.random() * 10);
-  //   //update totals
-  //   this.tempNftReward
-  // }
 
   async updateErc20Unclaimed(nftReward: number) {
     this.erc20Unclaimed = +nftReward;
@@ -165,89 +189,158 @@ export class ManageComponent implements OnInit {
   }
 
   async stakeSelectedNfts() {
-    await $toonCoinContract.methods
-      .stakeMultipleNfts(Array.from(this.erc721OwnedSelectedToStake))
-      .send({
-        from: this.userAddress,
-      });
+    this.isLoading = true;
+
+    try {
+      await $toonCoinContract.methods
+        .stakeMultipleNfts(Array.from(this.erc721OwnedSelectedToStake))
+        .send({
+          from: this.userAddress,
+        });
+    } catch (e) {
+      this.isLoading = false;
+    }
+    this.isLoading = false;
+    this.getContent();
   }
 
   async stakeSingleNft(id: number) {
-    await $toonCoinContract.methods.stakeNft(id).send({
-      from: this.userAddress,
-    });
+    this.isLoading = true;
+
+    try {
+      await $toonCoinContract.methods.stakeNft(id).send({
+        from: this.userAddress,
+      });
+    } catch (e) {
+      this.isLoading = false;
+    }
+    this.isLoading = false;
+    this.getContent();
   }
 
   async stakeAllNfts() {
-    let tempArray = new Array();
-    for (let nft of this.unstakedJsonArray) {
-      tempArray.push(nft.data.edition);
+    this.isLoading = true;
+
+    try {
+      let tempArray = new Array();
+      for (let nft of this.unstakedJsonArray) {
+        tempArray.push(nft.data.edition);
+      }
+      await $toonCoinContract.methods
+        .stakeMultipleNfts(Array.from(tempArray))
+        .send({
+          from: this.userAddress,
+        });
+    } catch (e) {
+      this.isLoading = false;
     }
-    await $toonCoinContract.methods
-      .stakeMultipleNfts(Array.from(tempArray))
-      .send({
-        from: this.userAddress,
-      });
+    this.isLoading = false;
+    this.getContent();
   }
 
   async collectAllRewards() {
+    this.isLoading = true;
     let nftIdArray = await $toonCoinContract.methods
       .getUsersStakedNfts(this.userAddress)
       .call();
     console.log(nftIdArray);
-    await $toonCoinContract.methods
-      .collectMultipleStakedNftReward(nftIdArray)
-      .send({
-        from: this.userAddress,
-      });
+    try {
+      await $toonCoinContract.methods
+        .collectMultipleStakedNftReward(nftIdArray)
+        .send({
+          from: this.userAddress,
+        });
+    } catch (e) {
+      this.isLoading = false;
+    }
+
+    this.isLoading = false;
+    this.getContent();
   }
 
   async collectNftReward(id: Number) {
-    await $toonCoinContract.methods
-      .collectStakedNftReward(this.userAddress, id)
-      .send({
-        from: this.userAddress,
-      });
+    this.isLoading = true;
+    try {
+      await $toonCoinContract.methods
+        .collectStakedNftReward(this.userAddress, id)
+        .send({
+          from: this.userAddress,
+        });
+    } catch (e) {
+      this.isLoading = false;
+    }
+    this.isLoading = false;
+    this.getContent();
   }
 
   async collectSelectedRewards() {
-    let ids = [];
+    this.isLoading = true;
 
-    for (let key of this.erc721StakedSelectToUnStake.keys()) {
-      ids.push(key);
+    try {
+      let ids = [];
+
+      for (let key of this.erc721StakedSelectToUnStake.keys()) {
+        ids.push(key);
+      }
+
+      console.log(ids);
+      await $toonCoinContract.methods.collectMultipleStakedNftReward(ids).send({
+        from: this.userAddress,
+      });
+    } catch (e) {
+      this.isLoading = false;
     }
-
-    console.log(ids);
-    await $toonCoinContract.methods.collectMultipleStakedNftReward(ids).send({
-      from: this.userAddress,
-    });
+    this.isLoading = false;
+    this.getContent();
   }
 
   async unstakeAllNfts() {
-    let nftIdArray = await $toonCoinContract.methods
-      .getUsersStakedNfts(this.userAddress)
-      .call();
-    console.log(nftIdArray);
-    await $toonCoinContract.methods.removeMultipleStakedNft(nftIdArray).send({
-      from: this.userAddress,
-    });
+    this.isLoading = true;
+
+    try {
+      let nftIdArray = await $toonCoinContract.methods
+        .getUsersStakedNfts(this.userAddress)
+        .call();
+      await $toonCoinContract.methods.removeMultipleStakedNft(nftIdArray).send({
+        from: this.userAddress,
+      });
+    } catch (e) {
+      this.isLoading = false;
+    }
+    this.isLoading = false;
   }
 
   async unstakeNft(id: Number) {
-    await $toonCoinContract.methods.removeStakedNft(id).send({
-      from: this.userAddress,
-    });
+    this.isLoading = true;
+
+    try {
+      await $toonCoinContract.methods.removeStakedNft(id).send({
+        from: this.userAddress,
+      });
+    } catch (e) {
+      this.isLoading = false;
+    }
+    this.isLoading = false;
+    this.getContent();
   }
 
   async unstakeMultipleNfts() {
-    let ids = [];
+    this.isLoading = true;
 
-    for (let key of this.erc721StakedSelectToUnStake.keys()) {
-      ids.push(key);
+    try {
+      let ids = [];
+
+      for (let key of this.erc721StakedSelectToUnStake.keys()) {
+        ids.push(key);
+      }
+
+      await $toonCoinContract.methods.removeMultipleStakedNft(ids).send({
+        from: this.userAddress,
+      });
+    } catch (e) {
+      this.isLoading = false;
     }
-
-    await $toonCoinContract.methods.removeMultipleStakedNft(ids).send({
-      from: this.userAddress,
-    });
+    this.isLoading = false;
+    this.getContent();
   }
 }
