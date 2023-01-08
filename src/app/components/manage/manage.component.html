@@ -14,7 +14,7 @@
         <span class="visually-hidden">...</span>
       </div>
       <br />
-      <p style="font-size: 1.25em; color: #f0b90b">Please finish transaction <br> or <br>wait for blokchain to confirm...
+      <p style="font-size: 1.25em;">Please finish transaction <br> or <br>wait for blokchain to confirm...
       <br>
     The page will referesh on its own.</p>
       <br />
@@ -22,11 +22,11 @@
 
     <div *ngIf="!this.isLoading">
       <br>
-      <div *ngIf="this.userAddress == ''" style="position: relative; top: -90px;">      <br>
-        <p>Please login to access these features.</p>
-        <button (click)="this.getContent()" class="styled" style="max-width: none;">
-          Connect MetaMask
+      <div *ngIf="this.userAddress == ''" style="position: relative; top: -45px;">    
+        <button (click)="connectAndGetStats()" class="styled" style="max-width: none;">
+          Login
         </button>
+        <p>Please login to access these features.</p>
         <br>
         <button class="styled" style="margin: 1%;"> <a style="margin: 10%;"
           href="https://etherscan.io/token/0x61DED8A72cDc7762D159ab46bE880BE7127A2DeF#code" style="margin: 10px;">View
@@ -38,7 +38,7 @@
       </div>
 
       <!-- IF USER IS LOGGGGGGEDDD IN-->
-      <div *ngIf="this.userAddress != ''" style="position: relative; top: -90px;">
+      <div *ngIf="this.userAddress != ''" style="position: relative; top: -45px;">
 
         <p>Welcome "{{ userAddress }}"!
 

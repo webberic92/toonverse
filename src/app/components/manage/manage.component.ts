@@ -28,7 +28,6 @@ export class ManageComponent implements OnInit {
 
   userAddress: string = "";
   tokenUri: string = "";
-  searchedAddress: string = "";
   searchedId: number = 0;
   catObj: any = null;
   unstakedJsonArray: any[] = new Array();
@@ -39,31 +38,26 @@ export class ManageComponent implements OnInit {
     // setInterval(() => { this.updateRewards() }, 30000);
   }
 
-  async ngOnInit() { 
-         this.isConnected = await this.web3.isConnected()
-    if (this.isConnected) {
-
-      this.getContent();
-    }
+  async ngOnInit() {
+    // this.getContent();
   }
 
   async getContent() {
+    this.isLoading = true;
     this.unstakedJsonArray = [];
     this.stakedJsonMap.clear;
     this.erc20Unclaimed = 0;
     this.erc20Owned = 0;
     let addressArray = await this.web3.getAccounts();
-
-    this.userAddress = addressArray[0];
-    this.searchedAddress = this.userAddress;
-
+    console.log(addressArray);
+    this.userAddress=addressArray[0]
     this.getUnstakedNfts();
     this.getStakedNfts();
     this.erc20Unclaimed = await $toonCoinContract.methods
-      .potentialAllStakedNftReward(this.userAddress)
+      .potentialAllStakedNftReward(addressArray[0])
       .call();
     this.erc20Owned = await $toonCoinContract.methods
-      .balanceOf(this.userAddress)
+      .balanceOf(addressArray[0])
       .call();
   }
 
@@ -71,18 +65,18 @@ export class ManageComponent implements OnInit {
     clearInterval(this.intervalId);
   }
 
-  // async connectMetaMask() {
-  //   this.isLoading = true;
+  async connectAndGetStats() {
+    this.isLoading = true;
+    try {
+      let addressArray = await this.web3.getAccounts();
+      console.log(addressArray);
+      this.getContent()
 
-  //   try {
-  //     await this.web3.getAccounts();
-  //     this.isLoading = false;
-  //     this.isConnected = true;
-
-  //   } catch (e) {
-  //     this.isLoading = false;
-  //   }
-  // }
+      this.isLoading = false;
+    } catch (e) {
+      this.isLoading = false;
+    }
+  }
 
   updateCatsToStakeMap(id: number) {
     if (!this.erc721OwnedSelectedToStake.has(id)) {
@@ -126,12 +120,12 @@ export class ManageComponent implements OnInit {
     this.catObj = null;
 
     let usersBalanceOfNftTokens = await devilcatNFTContract.methods
-      .balanceOf(this.searchedAddress)
+      .balanceOf(this.userAddress)
       .call();
 
     for (let i = 0; i <= usersBalanceOfNftTokens - 1; i++) {
       let tokenOfOwnerByIndex = await devilcatNFTContract.methods
-        .tokenOfOwnerByIndex(this.searchedAddress, i)
+        .tokenOfOwnerByIndex(this.userAddress, i)
         .call();
 
       let tokenURI = await devilcatNFTContract.methods
@@ -151,7 +145,7 @@ export class ManageComponent implements OnInit {
     this.catObj = null;
 
     let userStakedNftIDsArray = await $toonCoinContract.methods
-      .getUsersStakedNfts(this.searchedAddress)
+      .getUsersStakedNfts(this.userAddress)
       .call();
 
     for (let i = 0; i <= userStakedNftIDsArray.length - 1; i++) {
