@@ -50,7 +50,7 @@ export class ManageComponent implements OnInit {
     this.erc20Owned = 0;
     let addressArray = await this.web3.getAccounts();
     this.userAddress=addressArray[0]
-    this.getUnstakedNfts();
+     this.getUnstakedNfts();
     this.getStakedNfts();
     this.erc20Unclaimed = await $toonCoinContract.methods
       .potentialAllStakedNftReward(addressArray[0])
