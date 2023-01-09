@@ -50,8 +50,8 @@ export class ManageComponent implements OnInit {
     this.erc20Unclaimed = 0;
     this.erc20Owned = 0;
     let addressArray = await this.web3.getAccounts();
-    this.userAddress=addressArray[0]
-     this.getUnstakedNfts();
+    this.userAddress = addressArray[0];
+    this.getUnstakedNfts();
     this.getStakedNfts();
     this.erc20Unclaimed = await $toonCoinContract.methods
       .potentialAllStakedNftReward(addressArray[0])
@@ -59,8 +59,8 @@ export class ManageComponent implements OnInit {
     this.erc20Owned = await $toonCoinContract.methods
       .balanceOf(addressArray[0])
       .call();
-      this.isLoading = false;
-    this.approvedForAll = await this.isApprovedForAll()
+    this.isLoading = false;
+    this.approvedForAll = await this.isApprovedForAll();
   }
 
   ngOnDestroy() {
@@ -72,7 +72,7 @@ export class ManageComponent implements OnInit {
     try {
       let addressArray = await this.web3.getAccounts();
       console.log(addressArray);
-      this.getContent()
+      this.getContent();
 
       this.isLoading = false;
     } catch (e) {
@@ -174,31 +174,31 @@ export class ManageComponent implements OnInit {
         })
         .catch((err) => console.log(err));
     }
-
-    // let totalRewards = 0;
-
-    //   for (let value of this.stakedJsonMap.values()) {
-    //     totalRewards += value.data.rewards;
-
-    // }
-    // console.log("final" +totalRewards)
   }
- async isApprovedForAll() {
 
-  this.approvedForAll = await devilcatNFTContract.methods.isApprovedForAll(this.userAddress,"0x61DED8A72cDc7762D159ab46bE880BE7127A2DeF" ).call()
-  return this.approvedForAll
-   
- }
+  async isApprovedForAll() {
+    let b = await devilcatNFTContract.methods
+      .isApprovedForAll(
+        this.userAddress,
+        "0x61DED8A72cDc7762D159ab46bE880BE7127A2DeF"
+      )
+      .call();
+    return b;
+  }
 
+  // async setapprovedForAll(){
+  //   this.approvedForAll = await devilcatNFTContract.methods.isApprovedForAll("")
+
+  // }
 
   async stakeSelectedNfts() {
     this.isLoading = true;
-    if(!this.isApprovedForAll()){
 
-      this.setApprovedForAll(true)
-
-    }
     try {
+      if (!(await this.isApprovedForAll())) {
+        this.setApprovedForAll(true);
+      }
+
       await $toonCoinContract.methods
         .stakeMultipleNfts(Array.from(this.erc721OwnedSelectedToStake))
         .send({
@@ -210,24 +210,31 @@ export class ManageComponent implements OnInit {
     this.isLoading = false;
     this.getContent();
   }
-  async setApprovedForAll( b : boolean) {
+
+  async setApprovedForAll(b: boolean) {
     this.isLoading = true;
 
     try {
-      await $toonCoinContract.methods.setApprovedForAll("0x61DED8A72cDc7762D159ab46bE880BE7127A2DeF", b).send({
-        from: this.userAddress,
-      });
+      await devilcatNFTContract.methods
+        .setApprovalForAll("0x61DED8A72cDc7762D159ab46bE880BE7127A2DeF", b)
+        .send({
+          from: this.userAddress,
+        });
     } catch (e) {
+      console.log(e);
       this.isLoading = false;
     }
     this.isLoading = false;
-  } 
-
+    this.getContent();
+  }
 
   async stakeSingleNft(id: number) {
     this.isLoading = true;
 
     try {
+      if (!(await this.isApprovedForAll())) {
+        this.setApprovedForAll(true);
+      }
       await $toonCoinContract.methods.stakeNft(id).send({
         from: this.userAddress,
       });
@@ -246,6 +253,11 @@ export class ManageComponent implements OnInit {
       for (let nft of this.unstakedJsonArray) {
         tempArray.push(nft.data.edition);
       }
+
+      if (!(await this.isApprovedForAll())) {
+        this.setApprovedForAll(true);
+      }
+
       await $toonCoinContract.methods
         .stakeMultipleNfts(Array.from(tempArray))
         .send({

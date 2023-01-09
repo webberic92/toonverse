@@ -2,17 +2,17 @@
   <div class="card-header" style="border-radius: 5%;">
     <h6 style="font-weight: bold; "><u>**Devil Catz Staking**</u> </h6>
     <button class="styled" style="margin: 1%;"> <a style="margin: 10%;"
-      href="https://etherscan.io/token/0x61DED8A72cDc7762D159ab46bE880BE7127A2DeF#code" style="margin: 10px;">View
-      Contract</a></button>
+        href="https://etherscan.io/token/0x61DED8A72cDc7762D159ab46bE880BE7127A2DeF#code" style="margin: 10px;">View
+        Contract</a></button>
     <h3 class="card-text" style="font-size: 2em">
       <br>
 
     </h3>
 
 
-      <br>
-      <div *ngIf="this.userAddress == ''" style="position: relative; top: -45px;">
-        <div class="card-body" id="styled" style="min-height: 0px;">
+    <br>
+    <div *ngIf="this.userAddress == ''" style="position: relative; top: -45px;">
+      <div class="card-body" id="styled" style="min-height: 0px;">
 
         <button (click)="connectAndGetStats()" class="styled" style="max-width: none;">
           Login
@@ -21,13 +21,13 @@
         <br>
         <img id="center-img-gif" src="../../../assets/toonverse/devilCatCode.png" alt="logo" height="40%" width="63%"
           style="border-radius: 5%" />
-        </div>
       </div>
+    </div>
 
     <!-- IF USER IS LOGGGGGGEDDD IN-->
     <div *ngIf="this.userAddress != ''" style="position: relative; top: -45px;">
       <div class="container" id="stats" style="width: fit-content;">
-        <div class="card-body" id="styled" style="min-height: 0px;">
+        <div class="card-body" id="styled" style="min-height: 0px; width: fit-content;">
           <p>Welcome "{{ userAddress }}"!
 
           <div class="row" style="justify-content: center;">
@@ -48,219 +48,221 @@
               TOATAL STAKED DEVILCATZ :{{stakedJsonMap.size}}
             </div>
           </div>
-          <div *ngIf="approvedForAll">
-
-
-
-
-
-         $Toon-contract is connected to DevilCats-contract for staking : {{approvedForAll}}
-        </div>
-      </div>
-
-      <Br>
-
-      <div *ngIf="this.isLoading">
-        <div>
-          <img id="center-img" src="../../../assets/toonverse/catCoin.gif" alt="logo" height="200vh" width="150" />
-          <span class="visually-hidden">...</span>
-        </div>
-        <br />
-        <p style="font-size: 1.25em;">Please finish transaction <br> or <br>wait for blokchain to confirm...
           <br>
-          The page will referesh on its own.
-        </p>
-        <br />
-      </div>
+          <div>
+          </div>
+        </div>
 
-      <hr>
+        <Br>
 
-      <div class="container" id="staked" style="margin-bottom: 15px;">
-
-
-
-      <div *ngIf="stakedJsonMap.size == 0 && !isLoading">
-
-          <h3> No staked DevilCatz Found.</h3>
-          <p><img id="center-img" src="../../../assets/toonverse/catCoin.gif" alt="logo"
-            height="25vh" width="25" />Please stake to earn $TOON!<img id="center-img" src="../../../assets/toonverse/catCoin.gif" alt="logo"
-              height="25vh" width="25" />
+        <div *ngIf="this.isLoading">
+          <div>
+            <img id="center-img" src="../../../assets/toonverse/catCoin.gif" alt="logo" height="200vh" width="150" />
+            <span class="visually-hidden">...</span>
+          </div>
+          <br />
+          <p style="font-size: 1.25em;">Please finish transaction <br> or <br>wait for blokchain to confirm...
+            <br>
+            The page will referesh on its own.
           </p>
-
-          <img id="center-img" src="../../../assets/toonverse/multiBanner.png" alt="logo" height="50%" width="50%"
-            style=" margin-bottom: 20px;" />
-          <br>
-          <br>
+          <br />
         </div>
 
+        <hr>
 
-      </div>
-
-      <div *ngIf="!this.isLoading">
+        <div class="container" id="staked" style="margin-bottom: 15px;">
 
 
-        <div *ngIf="stakedJsonMap.size > 0">
-          <h3>STAKED DEVILCATZ : {{stakedJsonMap.size}}</h3>
 
-          <div class="row " style="margin-bottom: 20px;justify-content: center;">
+          <div *ngIf="stakedJsonMap.size == 0 && !isLoading">
 
-            <div *ngIf="this.erc20Unclaimed > 0" class="col-md">
-              <button  class="styled" style="max-width: none;" (click)="collectAllRewards()">
-                Collect All {{erc20Unclaimed}}
-                <img id="center-img" src="../../../assets/toonverse/catCoin.gif" alt="logo" height="25vh" width="25"
-                  style="border-radius: 5%" />
-              </button>
-            </div>
-            <div *ngIf="erc20UnclaimedSelected!=0" class="col-md">
-              <button (click)="collectSelectedRewards()" class="styled"
-                style="min-width: fit-content; max-width: none;">
-                Collect {{erc20UnclaimedSelected}}
-                <img id="center-img" src="../../../assets/toonverse/catCoin.gif" alt="logo" height="25vh" width="25" />
-              </button>
-            </div>
+            <h3> No staked DevilCatz Found.</h3>
+            <p><img id="center-img" src="../../../assets/toonverse/catCoin.gif" alt="logo" height="25vh"
+                width="25" />Please stake to earn $TOON!<img id="center-img" src="../../../assets/toonverse/catCoin.gif"
+                alt="logo" height="25vh" width="25" />
+            </p>
 
-            <div class="col-md">
-              <button (click)="unstakeAllNfts()" class="styled">
-                Unstake All {{stakedJsonMap.size}}
-              </button>
-            </div>
-            <div *ngIf="erc721StakedSelectToUnStake.size!=0" class="col-md">
-              <button (click)="unstakeMultipleNfts()" class="styled">
-                Unstake {{erc721StakedSelectToUnStake.size}}
-              </button>
-            </div>
+            <img id="center-img" src="../../../assets/toonverse/multiBanner.png" alt="logo" height="50%" width="50%"
+              style=" margin-bottom: 20px;margin-top: 10px;" />
+            <br>
+            <br>
           </div>
 
-          <div class="row" style="justify-content: center;">
-
-            <div class="col-md" *ngFor="let token of stakedJsonMap | keyvalue">
-              <div class="card-body" id="styled">
-                <p class="card-text" style="font-size: 1em">
-                  {{token.value.data.name}}
-                </p>
-
-                <img id="center-img" src={{token.value.data.image}} alt="logo" height="100vh" width="100"
-                  style="border-radius: 5%" />
-                <br>
-                <br>
-                <p>{{token.value.data.rewards}}<img id="center-img" src="../../../assets/toonverse/catCoin.gif"
-                    alt="logo" height="25vh" width="25" style="border-radius: 5%" /></p>
-                <button *ngIf="token.value.data.rewards > 0" (click)="collectNftReward(token.value.data.edition)" class="styled">
-                  Collect
-                </button>
-                <button  *ngIf="token.value.data.rewards == 0" disabled (click)="collectNftReward(token.value.data.edition)" id="styledDisabled">
-                  Collect
-                </button>
-                Need  more than 1 to collect.
-                <br>
-                Come back in 24 hours.
-                <br> <button (click)="unstakeNft(token.value.data.edition)" class="styled">Unstake</button>
-                <br>
-                <div>
-                  <br>
-                  <input mdbCheckbox (click)="updateCatsToUnstakeMap(token.value.data.edition)"
-                    style="border-color: pink; text-decoration: black;" class="form-check-input" type="checkbox"
-                    id="checkboxNoLabel" value="" aria-label="..." />
-                </div>
-
-
-              </div>
-
-            </div>
-          </div>
-          <hr>
 
         </div>
-      </div>
 
-
-
-      <!-- UNSTAKED DEVILCATZ-->
-      <div class="container" id="unstaked" style="margin-bottom: 30px;">
         <div *ngIf="!this.isLoading">
 
-          <div *ngIf="unstakedJsonArray.length > 0">
 
-            <h3>UNSTAKED DEVILCATZ : {{unstakedJsonArray.length}}</h3>
-            <div class="row" style="margin-bottom: 20px;">
+          <div *ngIf="stakedJsonMap.size > 0">
+            <h3>STAKED DEVILCATZ : {{stakedJsonMap.size}}</h3>
 
-              <div *ngIf="erc721OwnedSelectedToStake.size !=0" class="col-sm">
-                <button class="styled" (click)="stakeSelectedNfts()">
-                  Stake Selected {{erc721OwnedSelectedToStake.size}}
+            <div class="row " style="margin-bottom: 20px;justify-content: center;">
+
+              <div *ngIf="this.erc20Unclaimed > 0" class="col-md">
+                <button class="styled" style="max-width: none;" (click)="collectAllRewards()">
+                  Collect All {{erc20Unclaimed}}
+                  <img id="center-img" src="../../../assets/toonverse/catCoin.gif" alt="logo" height="25vh" width="25"
+                    style="border-radius: 5%" />
+                </button>
+              </div>
+              <div *ngIf="erc20UnclaimedSelected!=0" class="col-md">
+                <button (click)="collectSelectedRewards()" class="styled"
+                  style="min-width: fit-content; max-width: none;">
+                  Collect {{erc20UnclaimedSelected}}
+                  <img id="center-img" src="../../../assets/toonverse/catCoin.gif" alt="logo" height="25vh"
+                    width="25" />
                 </button>
               </div>
 
-              <div class="col-sm">
-                <button class="styled" (click)="stakeAllNfts()">
-                  <!-- STAKE ALL {{erc721Owned}} -->
-                  Stake All {{unstakedJsonArray.length}}
-
+              <div class="col-md">
+                <button (click)="unstakeAllNfts()" class="styled">
+                  Unstake All {{stakedJsonMap.size}}
+                </button>
+              </div>
+              <div *ngIf="erc721StakedSelectToUnStake.size!=0" class="col-md">
+                <button (click)="unstakeMultipleNfts()" class="styled">
+                  Unstake {{erc721StakedSelectToUnStake.size}}
                 </button>
               </div>
             </div>
 
+            <div class="row" style="justify-content: center;">
 
-            <div class="row justify-content-center">
-              <div class="col-md" *ngFor="let token of unstakedJsonArray;">
+              <div class="col-md" *ngFor="let token of stakedJsonMap | keyvalue">
                 <div class="card-body" id="styled">
-
                   <p class="card-text" style="font-size: 1em">
-                    {{token.data.name}}
+                    {{token.value.data.name}}
                   </p>
 
-                  <img id="center-img" src={{token.data.image}} alt="logo" height="100vh" width="100"
+                  <img id="center-img" src={{token.value.data.image}} alt="logo" height="100vh" width="100"
                     style="border-radius: 5%" />
+                  <br>
+                  <br>
+                  <p>{{token.value.data.rewards}}<img id="center-img" src="../../../assets/toonverse/catCoin.gif"
+                      alt="logo" height="25vh" width="25" style="border-radius: 5%" /></p>
+                  <button *ngIf="token.value.data.rewards > 0" (click)="collectNftReward(token.value.data.edition)"
+                    class="styled">
+                    Collect
+                  </button>
+                  <button *ngIf="token.value.data.rewards == 0" disabled
+                    (click)="collectNftReward(token.value.data.edition)" id="styledDisabled">
+                    Collect
+                  </button>
+                  Need more than 1 to collect.
+                  <br>
+                  Come back in 24 hours.
+                  <br> <button (click)="unstakeNft(token.value.data.edition)" class="styled">Unstake</button>
+                  <br>
+                  <div>
+                    <br>
+                    <input mdbCheckbox (click)="updateCatsToUnstakeMap(token.value.data.edition)"
+                      style="border-color: pink; text-decoration: black;" class="form-check-input" type="checkbox"
+                      id="checkboxNoLabel" value="" aria-label="..." />
+                  </div>
 
-                  <br>
-                  <br>
-                  <a style="margin: 5px"
-                    href="https://opensea.io/assets/ethereum/0x1c4a28690482b03f6991c8c24295016cba197c12/{{token.data.edition}}">
-                    <img id="center-img" src="../../../assets/openSea.png" alt="openseaLogo" height="25vh" width="25vw"
+
+                </div>
+
+              </div>
+            </div>
+            <hr>
+
+          </div>
+        </div>
+
+
+
+        <!-- UNSTAKED DEVILCATZ-->
+        <div class="container" id="unstaked" style="margin-bottom: 30px;">
+          <div *ngIf="!this.isLoading">
+
+            <div *ngIf="unstakedJsonArray.length > 0">
+
+              <h3>UNSTAKED DEVILCATZ : {{unstakedJsonArray.length}}</h3>
+              <div class="row" style="margin-bottom: 20px;">
+
+                <div *ngIf="erc721OwnedSelectedToStake.size !=0" class="col-sm">
+                  <button class="styled" (click)="stakeSelectedNfts()">
+                    Stake Selected {{erc721OwnedSelectedToStake.size}}
+                  </button>
+                </div>
+
+                <div class="col-sm">
+                  <button class="styled" (click)="stakeAllNfts()">
+                    <!-- STAKE ALL {{erc721Owned}} -->
+                    Stake All {{unstakedJsonArray.length}}
+
+                  </button>
+                </div>
+              </div>
+
+
+              <div class="row justify-content-center">
+                <div class="col-md" *ngFor="let token of unstakedJsonArray;">
+                  <div class="card-body" id="styled">
+
+                    <p class="card-text" style="font-size: 1em">
+                      {{token.data.name}}
+                    </p>
+
+                    <img id="center-img" src={{token.data.image}} alt="logo" height="100vh" width="100"
                       style="border-radius: 5%" />
-                  </a>
 
-                  <a style="margin: 5px; margin-bottom: 5px;"
-                    href="https://rarible.com/token/0x1c4a28690482b03f6991c8c24295016cba197c12:{{token.data.edition}}?tab=overview">
-                    <img id="center-img" src="../../../assets/rarible.png" alt="rarible" height="25vh" width="25vw"
-                      style="border-radius: 5%" />
-                  </a>
+                    <br>
+                    <br>
+                    <a style="margin: 5px"
+                      href="https://opensea.io/assets/ethereum/0x1c4a28690482b03f6991c8c24295016cba197c12/{{token.data.edition}}">
+                      <img id="center-img" src="../../../assets/openSea.png" alt="openseaLogo" height="25vh"
+                        width="25vw" style="border-radius: 5%" />
+                    </a>
+
+                    <a style="margin: 5px; margin-bottom: 5px;"
+                      href="https://rarible.com/token/0x1c4a28690482b03f6991c8c24295016cba197c12:{{token.data.edition}}?tab=overview">
+                      <img id="center-img" src="../../../assets/rarible.png" alt="rarible" height="25vh" width="25vw"
+                        style="border-radius: 5%" />
+                    </a>
 
 
 
-                  <br>
-                  <br>
+                    <br>
+                    <br>
 
-                  <button (click)="stakeSingleNft(token.data.edition)" class="styled">Stake</button>
-                  <br>
-                  <br>
-                  <input mdbCheckbox (click)="updateCatsToStakeMap(token.data.edition)"
-                    style="border-color: pink; text-decoration: black;" class="form-check-input" type="checkbox"
-                    id="checkboxNoLabel" value="" aria-label="..." />
-                  <br>
+                    <button (click)="stakeSingleNft(token.data.edition)" class="styled">Stake</button>
+                    <br>
+                    <br>
+                    <input mdbCheckbox (click)="updateCatsToStakeMap(token.data.edition)"
+                      style="border-color: pink; text-decoration: black;" class="form-check-input" type="checkbox"
+                      id="checkboxNoLabel" value="" aria-label="..." />
+                    <br>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-          <div *ngIf="unstakedJsonArray.length == 0">
-            <h3> No DevilCatz in your wallet</h3>
-            <p> An official genisis Toonverse DevilCat can be purchaed after market below.</p>
-            <a style="margin: 5px" href="https://opensea.io/collection/toonversestudios">
-              <img id="center-img" src="../../../assets/openSea.png" alt="openseaLogo" height="35vh" width="35vw"
-                style="border-radius: 5%" />
-            </a>
-            <a style="margin: 5px" href="https://rarible.com/toonverseStudios/items">
-              <img id="center-img" src="../../../assets/rarible.png" alt="rarible" height="35vh" width="35vw"
-                style="border-radius: 5%" />
-            </a>
-            <br>
-            <img id="center-img" src="../../../assets/toonverse/DevilCats.png" alt="openseaLogo" height="25%" width="25%"
-            style="border-radius: 5%; margin-top: 40px;" />
+            <div *ngIf="unstakedJsonArray.length == 0">
+              <h3> No DevilCatz in your wallet</h3>
+              <p> An official genisis Toonverse DevilCat can be purchaed after market below.</p>
+              <a style="margin: 5px" href="https://opensea.io/collection/toonversestudios">
+                <img id="center-img" src="../../../assets/openSea.png" alt="openseaLogo" height="35vh" width="35vw"
+                  style="border-radius: 5%" />
+              </a>
+              <a style="margin: 5px" href="https://rarible.com/toonverseStudios/items">
+                <img id="center-img" src="../../../assets/rarible.png" alt="rarible" height="35vh" width="35vw"
+                  style="border-radius: 5%" />
+              </a>
+              <br>
+              <img id="center-img" src="../../../assets/toonverse/DevilCats.png" alt="openseaLogo" height="25%"
+                width="25%" style="border-radius: 5%; margin-top: 40px;" />
+            </div>
+
           </div>
 
         </div>
+      </div>
 
+      <div *ngIf="approvedForAll">
+        $Toon-contract is connected to DevilCats-contract for staking : {{approvedForAll}} <br>
+        <button class="styled" (click)="setApprovedForAll(false)">Disconnect</button>
       </div>
     </div>
-
-
   </div>
