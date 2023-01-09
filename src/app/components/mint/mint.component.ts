@@ -1,6 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { Web3Service } from "src/app/services/Web3/web3.service";
-import NFTContract , {ProviderLessNftContract} from "src/app/services/Solidity/nft.service";
+import NFTContract , {ProviderLessNftContract} from "src/app/services/Solidity/devilCatz.service";
 import { Router } from "@angular/router";
 const Web3 = require('web3');
 
