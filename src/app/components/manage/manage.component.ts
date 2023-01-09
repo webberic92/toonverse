@@ -26,6 +26,7 @@ export class ManageComponent implements OnInit {
   intervalId!: number;
   tempNftReward: number = 0;
 
+  approvedForAll: boolean = false;
   userAddress: string = "";
   tokenUri: string = "";
   searchedId: number = 0;
@@ -59,7 +60,7 @@ export class ManageComponent implements OnInit {
       .balanceOf(addressArray[0])
       .call();
       this.isLoading = false;
-
+    this.approvedForAll = await this.isApprovedForAll()
   }
 
   ngOnDestroy() {
@@ -182,10 +183,21 @@ export class ManageComponent implements OnInit {
     // }
     // console.log("final" +totalRewards)
   }
+ async isApprovedForAll() {
+
+  this.approvedForAll = await devilcatNFTContract.methods.isApprovedForAll(this.userAddress,"0x61DED8A72cDc7762D159ab46bE880BE7127A2DeF" ).call()
+  return this.approvedForAll
+   
+ }
+
 
   async stakeSelectedNfts() {
     this.isLoading = true;
+    if(!this.isApprovedForAll()){
 
+      this.setApprovedForAll(true)
+
+    }
     try {
       await $toonCoinContract.methods
         .stakeMultipleNfts(Array.from(this.erc721OwnedSelectedToStake))
@@ -198,6 +210,19 @@ export class ManageComponent implements OnInit {
     this.isLoading = false;
     this.getContent();
   }
+  async setApprovedForAll( b : boolean) {
+    this.isLoading = true;
+
+    try {
+      await $toonCoinContract.methods.setApprovedForAll("0x61DED8A72cDc7762D159ab46bE880BE7127A2DeF", b).send({
+        from: this.userAddress,
+      });
+    } catch (e) {
+      this.isLoading = false;
+    }
+    this.isLoading = false;
+  } 
+
 
   async stakeSingleNft(id: number) {
     this.isLoading = true;

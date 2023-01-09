@@ -48,6 +48,13 @@
               TOATAL STAKED DEVILCATZ :{{stakedJsonMap.size}}
             </div>
           </div>
+          <div *ngIf="approvedForAll">
+
+
+
+
+
+         $Toon-contract is connected to DevilCats-contract for staking : {{approvedForAll}}
         </div>
       </div>
 
@@ -91,17 +98,14 @@
 
       <div *ngIf="!this.isLoading">
 
-        <hr>
-
-
 
         <div *ngIf="stakedJsonMap.size > 0">
           <h3>STAKED DEVILCATZ : {{stakedJsonMap.size}}</h3>
 
           <div class="row " style="margin-bottom: 20px;justify-content: center;">
 
-            <div class="col-md">
-              <button class="styled" style="max-width: none;" (click)="collectAllRewards()">
+            <div *ngIf="this.erc20Unclaimed > 0" class="col-md">
+              <button  class="styled" style="max-width: none;" (click)="collectAllRewards()">
                 Collect All {{erc20Unclaimed}}
                 <img id="center-img" src="../../../assets/toonverse/catCoin.gif" alt="logo" height="25vh" width="25"
                   style="border-radius: 5%" />
@@ -127,9 +131,9 @@
             </div>
           </div>
 
-          <div class="row">
+          <div class="row" style="justify-content: center;">
 
-            <div class="col-sm" *ngFor="let token of stakedJsonMap | keyvalue">
+            <div class="col-md" *ngFor="let token of stakedJsonMap | keyvalue">
               <div class="card-body" id="styled">
                 <p class="card-text" style="font-size: 1em">
                   {{token.value.data.name}}
@@ -141,9 +145,15 @@
                 <br>
                 <p>{{token.value.data.rewards}}<img id="center-img" src="../../../assets/toonverse/catCoin.gif"
                     alt="logo" height="25vh" width="25" style="border-radius: 5%" /></p>
-                <button (click)="collectNftReward(token.value.data.edition)" class="styled">
+                <button *ngIf="token.value.data.rewards > 0" (click)="collectNftReward(token.value.data.edition)" class="styled">
                   Collect
                 </button>
+                <button  *ngIf="token.value.data.rewards == 0" disabled (click)="collectNftReward(token.value.data.edition)" id="styledDisabled">
+                  Collect
+                </button>
+                Need  more than 1 to collect.
+                <br>
+                Come back in 24 hours.
                 <br> <button (click)="unstakeNft(token.value.data.edition)" class="styled">Unstake</button>
                 <br>
                 <div>
@@ -158,6 +168,7 @@
 
             </div>
           </div>
+          <hr>
 
         </div>
       </div>
