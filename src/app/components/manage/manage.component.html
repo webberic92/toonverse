@@ -19,6 +19,11 @@
         </button>
         <p>Please login to access staking page.</p>
         <br>
+        RULES: ONE $TOON A DAY WILL BE REWARED UNTIL 1,235,813 ARE CLAIMED.
+        <br>
+        LEGAL: HOLDS NO FINANCIAL VALUE, STRICTLY FOR THE LOVE OF ART & BLOCKCHAIN
+        <br>
+        <br>
         <img id="center-img-gif" src="../../../assets/toonverse/devilCatCode.png" alt="logo" height="40%" width="63%"
           style="border-radius: 5%" />
       </div>
@@ -49,12 +54,18 @@
             </div>
           </div>
           <br>
+          RULES: ONE $TOON A DAY WILL BE REWARED UNTIL 1,235,813 ARE CLAIMED.
+          <br>
+          LEGAL: HOLDS NO FINANCIAL VALUE, STRICTLY FOR THE LOVE OF ART & BLOCKCHAIN
           <div>
           </div>
         </div>
 
         <Br>
 
+  
+
+        <hr>
         <div *ngIf="this.isLoading">
           <div>
             <img id="center-img" src="../../../assets/toonverse/catCoin.gif" alt="logo" height="200vh" width="150" />
@@ -67,8 +78,6 @@
           </p>
           <br />
         </div>
-
-        <hr>
 
         <div class="container" id="staked" style="margin-bottom: 15px;">
 
@@ -166,11 +175,11 @@
 
               </div>
             </div>
-            <hr>
 
           </div>
-        </div>
+          <hr>
 
+        </div>
 
 
         <!-- UNSTAKED DEVILCATZ-->
@@ -256,13 +265,17 @@
             </div>
 
           </div>
+          <hr>
 
         </div>
+
       </div>
 
-      <div *ngIf="approvedForAll">
+      <div *ngIf="approvedForAll && !this.isLoading">
         $Toon-contract is connected to DevilCats-contract for staking : {{approvedForAll}} <br>
-        <button class="styled" (click)="setApprovedForAll(false)">Disconnect</button>
+        <button class="styled" (click)="setApprovedForAllWithRefresh(false)">Disconnect</button>
+        <br>
+        You will have to spend connection gas fee if you want to connect again.
       </div>
     </div>
   </div>

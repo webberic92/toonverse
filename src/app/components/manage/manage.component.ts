@@ -44,6 +44,8 @@ export class ManageComponent implements OnInit {
   }
 
   async getContent() {
+    this.erc721StakedSelectToUnStake = new Map();
+    this.erc721OwnedSelectedToStake = new Set();
     this.isLoading = true;
     this.unstakedJsonArray = [];
     this.stakedJsonMap.clear;
@@ -191,29 +193,7 @@ export class ManageComponent implements OnInit {
 
   // }
 
-  async stakeSelectedNfts() {
-    this.isLoading = true;
-
-    try {
-      if (!(await this.isApprovedForAll())) {
-        this.setApprovedForAll(true);
-      }
-
-      await $toonCoinContract.methods
-        .stakeMultipleNfts(Array.from(this.erc721OwnedSelectedToStake))
-        .send({
-          from: this.userAddress,
-        });
-    } catch (e) {
-      this.isLoading = false;
-    }
-    this.isLoading = false;
-    this.getContent();
-  }
-
   async setApprovedForAll(b: boolean) {
-    this.isLoading = true;
-
     try {
       await devilcatNFTContract.methods
         .setApprovalForAll("0x61DED8A72cDc7762D159ab46bE880BE7127A2DeF", b)
@@ -222,7 +202,19 @@ export class ManageComponent implements OnInit {
         });
     } catch (e) {
       console.log(e);
-      this.isLoading = false;
+    }
+  }
+
+  async setApprovedForAllWithRefresh(b: boolean) {
+    this.isLoading = true;
+    try {
+      await devilcatNFTContract.methods
+        .setApprovalForAll("0x61DED8A72cDc7762D159ab46bE880BE7127A2DeF", b)
+        .send({
+          from: this.userAddress,
+        });
+    } catch (e) {
+      console.log(e);
     }
     this.isLoading = false;
     this.getContent();
@@ -232,17 +224,40 @@ export class ManageComponent implements OnInit {
     this.isLoading = true;
 
     try {
-      if (!(await this.isApprovedForAll())) {
-        this.setApprovedForAll(true);
+      if (!this.approvedForAll) {
+        await this.setApprovedForAll(true);
       }
       await $toonCoinContract.methods.stakeNft(id).send({
         from: this.userAddress,
       });
+      this.isLoading = false;
+      this.getContent();
     } catch (e) {
       this.isLoading = false;
+      this.getContent();
     }
-    this.isLoading = false;
-    this.getContent();
+  }
+
+  async stakeSelectedNfts() {
+    this.isLoading = true;
+
+    try {
+      if (!this.approvedForAll) {
+        await this.setApprovedForAll(true);
+      }
+
+      await $toonCoinContract.methods
+        .stakeMultipleNfts(Array.from(this.erc721OwnedSelectedToStake))
+        .send({
+          from: this.userAddress,
+        });
+      this.isLoading = false;
+      this.getContent();
+    } catch (e) {
+      console.log(e);
+      this.isLoading = false;
+      this.getContent();
+    }
   }
 
   async stakeAllNfts() {
@@ -254,8 +269,8 @@ export class ManageComponent implements OnInit {
         tempArray.push(nft.data.edition);
       }
 
-      if (!(await this.isApprovedForAll())) {
-        this.setApprovedForAll(true);
+      if (!this.approvedForAll) {
+        await this.setApprovedForAll(true);
       }
 
       await $toonCoinContract.methods
@@ -263,11 +278,12 @@ export class ManageComponent implements OnInit {
         .send({
           from: this.userAddress,
         });
+      this.isLoading = false;
+      this.getContent();
     } catch (e) {
       this.isLoading = false;
+      this.getContent();
     }
-    this.isLoading = false;
-    this.getContent();
   }
 
   async collectAllRewards() {
@@ -282,12 +298,12 @@ export class ManageComponent implements OnInit {
         .send({
           from: this.userAddress,
         });
+      this.isLoading = false;
+      this.getContent();
     } catch (e) {
       this.isLoading = false;
+      this.getContent();
     }
-
-    this.isLoading = false;
-    this.getContent();
   }
 
   async collectNftReward(id: Number) {
@@ -298,11 +314,12 @@ export class ManageComponent implements OnInit {
         .send({
           from: this.userAddress,
         });
+      this.isLoading = false;
+      this.getContent();
     } catch (e) {
       this.isLoading = false;
+      this.getContent();
     }
-    this.isLoading = false;
-    this.getContent();
   }
 
   async collectSelectedRewards() {
@@ -319,11 +336,12 @@ export class ManageComponent implements OnInit {
       await $toonCoinContract.methods.collectMultipleStakedNftReward(ids).send({
         from: this.userAddress,
       });
+      this.isLoading = false;
+      this.getContent();
     } catch (e) {
       this.isLoading = false;
+      this.getContent();
     }
-    this.isLoading = false;
-    this.getContent();
   }
 
   async unstakeAllNfts() {
@@ -336,10 +354,12 @@ export class ManageComponent implements OnInit {
       await $toonCoinContract.methods.removeMultipleStakedNft(nftIdArray).send({
         from: this.userAddress,
       });
+      this.isLoading = false;
+      this.getContent();
     } catch (e) {
       this.isLoading = false;
+      this.getContent();
     }
-    this.isLoading = false;
   }
 
   async unstakeNft(id: Number) {
@@ -349,11 +369,12 @@ export class ManageComponent implements OnInit {
       await $toonCoinContract.methods.removeStakedNft(id).send({
         from: this.userAddress,
       });
+      this.isLoading = false;
+      this.getContent();
     } catch (e) {
       this.isLoading = false;
+      this.getContent();
     }
-    this.isLoading = false;
-    this.getContent();
   }
 
   async unstakeMultipleNfts() {
@@ -369,10 +390,11 @@ export class ManageComponent implements OnInit {
       await $toonCoinContract.methods.removeMultipleStakedNft(ids).send({
         from: this.userAddress,
       });
+      this.isLoading = false;
+      this.getContent();
     } catch (e) {
       this.isLoading = false;
+      this.getContent();
     }
-    this.isLoading = false;
-    this.getContent();
   }
 }
