@@ -7,141 +7,184 @@
 
     </h3>
 
-    <div *ngIf="this.isLoading">
-      <div >
-        <img id="center-img" src="../../../assets/toonverse/catCoin.gif"
-        alt="logo" height="200vh" width="150" />
-        <span class="visually-hidden">...</span>
-      </div>
-      <br />
-      <p style="font-size: 1.25em;">Please finish transaction <br> or <br>wait for blokchain to confirm...
-      <br>
-    The page will referesh on its own.</p>
-      <br />
-    </div>
-
     <div *ngIf="!this.isLoading">
+
       <br>
-      <div *ngIf="this.userAddress == ''" style="position: relative; top: -45px;">    
+      <div *ngIf="this.userAddress == ''" style="position: relative; top: -45px;">
         <button (click)="connectAndGetStats()" class="styled" style="max-width: none;">
           Login
         </button>
         <p>Please login to access these features.</p>
         <br>
         <button class="styled" style="margin: 1%;"> <a style="margin: 10%;"
-          href="https://etherscan.io/token/0x61DED8A72cDc7762D159ab46bE880BE7127A2DeF#code" style="margin: 10px;">View
-          Contract</a></button>
-          <br>
-          <br>
+            href="https://etherscan.io/token/0x61DED8A72cDc7762D159ab46bE880BE7127A2DeF#code" style="margin: 10px;">View
+            Contract</a></button>
+        <br>
+        <br>
         <img id="center-img-gif" src="../../../assets/toonverse/devilCatCode.png" alt="logo" height="40%" width="63%"
-        style="border-radius: 5%" />  </div>
+          style="border-radius: 5%" />
       </div>
+    </div>
 
-      <!-- IF USER IS LOGGGGGGEDDD IN-->
-      <div *ngIf="this.userAddress != ''" style="position: relative; top: -45px;">
+    <!-- IF USER IS LOGGGGGGEDDD IN-->
+    <div *ngIf="this.userAddress != ''" style="position: relative; top: -45px;">
+      <div class="container" id="stats" style="width: fit-content;">
+        <div class="card-body" id="styled" style="min-height: 0px;">
+          <p>Welcome "{{ userAddress }}"!
 
-        <p>Welcome "{{ userAddress }}"!
-
-          <br>
-          $TOON IN WALLET :{{erc20Owned}} <img id="center-img" src="../../../assets/toonverse/catCoin.gif" alt="logo"
-            height="25vh" width="25" />
-          <br>
-          UNCLAIMED $TOON :{{erc20Unclaimed}} <img id="center-img" src="../../../assets/toonverse/catCoin.gif"
-            alt="logo" height="25vh" width="25" />
-          <br>
-          TOATAL UNSTAKED DEVILCATZ :{{unstakedJsonArray.length}}
-          <br>
-          TOATAL STAKED DEVILCATZ :{{stakedJsonMap.size}}
-          <br>
-
-      <div class="container" id="staked" style="background-color: rgb(198, 195, 195); margin-bottom: 15px;">
-        <h3>STAKED DEVILCATZ : {{stakedJsonMap.size}}</h3>
-
-        <div class="row " style="margin-bottom: 20px;justify-content: center;">
-
-          <div class="col-md">
-            <button class="styled" style="max-width: none;" (click)="collectAllRewards()">
-              Collect All {{erc20Unclaimed}}
-              <img id="center-img" src="../../../assets/toonverse/catCoin.gif" alt="logo" height="25vh" width="25"
-                style="border-radius: 5%" />
-            </button>
+          <div class="row" style="justify-content: center;">
+            <div class="col-md">
+              $TOON IN WALLET :{{erc20Owned}} <img id="center-img" src="../../../assets/toonverse/catCoin.gif"
+                alt="logo" height="25vh" width="25" />
+            </div>
+            <div class="col-md">
+              TOATAL UNSTAKED DEVILCATZ :{{unstakedJsonArray.length}}
+            </div>
           </div>
-          <div *ngIf="erc20UnclaimedSelected!=0" class="col-md">
-            <button (click)="collectSelectedRewards()" class="styled" style="min-width: fit-content; max-width: none;">
-              Collect {{erc20UnclaimedSelected}}
-              <img id="center-img" src="../../../assets/toonverse/catCoin.gif" alt="logo" height="25vh" width="25" />
-            </button>
-          </div>
-
-          <div class="col-md">
-            <button (click)="unstakeAllNfts()" class="styled">
-              Unstake All {{stakedJsonMap.size}}
-            </button>
-          </div>
-          <div *ngIf="erc721StakedSelectToUnStake.size!=0" class="col-md">
-            <button (click)="unstakeMultipleNfts()" class="styled">
-              Unstake {{erc721StakedSelectToUnStake.size}}
-            </button>
+          <div class="row" style="justify-content: center;">
+            <div class="col-md">
+              UNCLAIMED $TOON :{{erc20Unclaimed}} <img id="center-img" src="../../../assets/toonverse/catCoin.gif"
+                alt="logo" height="25vh" width="25" />
+            </div>
+            <div class="col-md">
+              TOATAL STAKED DEVILCATZ :{{stakedJsonMap.size}}
+            </div>
           </div>
         </div>
+      </div>
 
-        <div class="row">
+      <Br>
 
-          <div class="col-sm" *ngFor="let token of stakedJsonMap | keyvalue">
-            <div class="card-body" id="styled">
-              <p class="card-text" style="font-size: 1em">
-                {{token.value.data.name}}
-              </p>
+      <div *ngIf="this.isLoading">
+        <div>
+          <img id="center-img" src="../../../assets/toonverse/catCoin.gif" alt="logo" height="200vh" width="150" />
+          <span class="visually-hidden">...</span>
+        </div>
+        <br />
+        <p style="font-size: 1.25em;">Please finish transaction <br> or <br>wait for blokchain to confirm...
+          <br>
+          The page will referesh on its own.
+        </p>
+        <br />
+      </div>
 
-              <img id="center-img" src={{token.value.data.image}} alt="logo" height="100vh" width="100"
-                style="border-radius: 5%" />
-              <br>
-              <br>
-              <p>{{token.value.data.rewards}}<img id="center-img" src="../../../assets/toonverse/catCoin.gif" alt="logo"
-                  height="25vh" width="25" style="border-radius: 5%" /></p>
-              <button (click)="collectNftReward(token.value.data.edition)" class="styled">
-                Collect
+      <hr>
+
+      <div class="container" id="staked" style="margin-bottom: 15px;">
+
+
+
+        <div *ngIf="!this.isLoading">
+
+          <h3> No staked DevilCatz Found.</h3>
+          <p> Please stake to continue!</p>
+          <br>
+
+          <img id="center-img" src="../../../assets/toonverse/multiBanner.png" alt="logo" height="50%" width="50%"
+            style=" margin-bottom: 20px;" />
+          <br>
+          <br>
+        </div>
+      </div>
+      <div *ngIf="stakedJsonMap.size == 0">
+        <hr>
+
+
+
+        <div *ngIf="stakedJsonMap.size > 0">
+          <h3>STAKED DEVILCATZ : {{stakedJsonMap.size}}</h3>
+
+          <div class="row " style="margin-bottom: 20px;justify-content: center;">
+
+            <div class="col-md">
+              <button class="styled" style="max-width: none;" (click)="collectAllRewards()">
+                Collect All {{erc20Unclaimed}}
+                <img id="center-img" src="../../../assets/toonverse/catCoin.gif" alt="logo" height="25vh" width="25"
+                  style="border-radius: 5%" />
               </button>
-              <br> <button (click)="unstakeNft(token.value.data.edition)" class="styled">Unstake</button>
-              <br>
-              <div>
-                <br>
-                <input mdbCheckbox (click)="updateCatsToUnstakeMap(token.value.data.edition)"
-                  style="border-color: pink; text-decoration: black;" class="form-check-input" type="checkbox"
-                  id="checkboxNoLabel" value="" aria-label="..." />
-              </div>
-
-
+            </div>
+            <div *ngIf="erc20UnclaimedSelected!=0" class="col-md">
+              <button (click)="collectSelectedRewards()" class="styled"
+                style="min-width: fit-content; max-width: none;">
+                Collect {{erc20UnclaimedSelected}}
+                <img id="center-img" src="../../../assets/toonverse/catCoin.gif" alt="logo" height="25vh" width="25" />
+              </button>
             </div>
 
+            <div class="col-md">
+              <button (click)="unstakeAllNfts()" class="styled">
+                Unstake All {{stakedJsonMap.size}}
+              </button>
+            </div>
+            <div *ngIf="erc721StakedSelectToUnStake.size!=0" class="col-md">
+              <button (click)="unstakeMultipleNfts()" class="styled">
+                Unstake {{erc721StakedSelectToUnStake.size}}
+              </button>
+            </div>
           </div>
+
+          <div class="row">
+
+            <div class="col-sm" *ngFor="let token of stakedJsonMap | keyvalue">
+              <div class="card-body" id="styled">
+                <p class="card-text" style="font-size: 1em">
+                  {{token.value.data.name}}
+                </p>
+
+                <img id="center-img" src={{token.value.data.image}} alt="logo" height="100vh" width="100"
+                  style="border-radius: 5%" />
+                <br>
+                <br>
+                <p>{{token.value.data.rewards}}<img id="center-img" src="../../../assets/toonverse/catCoin.gif"
+                    alt="logo" height="25vh" width="25" style="border-radius: 5%" /></p>
+                <button (click)="collectNftReward(token.value.data.edition)" class="styled">
+                  Collect
+                </button>
+                <br> <button (click)="unstakeNft(token.value.data.edition)" class="styled">Unstake</button>
+                <br>
+                <div>
+                  <br>
+                  <input mdbCheckbox (click)="updateCatsToUnstakeMap(token.value.data.edition)"
+                    style="border-color: pink; text-decoration: black;" class="form-check-input" type="checkbox"
+                    id="checkboxNoLabel" value="" aria-label="..." />
+                </div>
+
+
+              </div>
+
+            </div>
+          </div>
+
         </div>
       </div>
 
-      <div class="container" id="unstaked" style="background-color: rgb(236, 230, 230); margin-bottom: 30px;">
-        <h3>UNSTAKED DEVILCATZ : {{unstakedJsonArray.length}}</h3>
-        <div class="row" style="margin-bottom: 20px;">
+      <div class="container" id="unstaked" style="margin-bottom: 30px;">
+        <div *ngIf="!this.isLoading">
 
-          <div *ngIf="erc721OwnedSelectedToStake.size !=0" class="col-sm">
-            <button class="styled" (click)="stakeSelectedNfts()">
-              Stake Selected {{erc721OwnedSelectedToStake.size}}
-            </button>
+
+          <h3>UNSTAKED DEVILCATZ : {{unstakedJsonArray.length}}</h3>
+          <div class="row" style="margin-bottom: 20px;">
+
+            <div *ngIf="erc721OwnedSelectedToStake.size !=0" class="col-sm">
+              <button class="styled" (click)="stakeSelectedNfts()">
+                Stake Selected {{erc721OwnedSelectedToStake.size}}
+              </button>
+            </div>
+
+            <div class="col-sm">
+              <button class="styled" (click)="stakeAllNfts()">
+                <!-- STAKE ALL {{erc721Owned}} -->
+                Stake All {{unstakedJsonArray.length}}
+
+              </button>
+            </div>
           </div>
 
-          <div class="col-sm">
-            <button class="styled" (click)="stakeAllNfts()">
-              <!-- STAKE ALL {{erc721Owned}} -->
-              Stake All {{unstakedJsonArray.length}}
 
-            </button>
-          </div>
-        </div>
+          <div class="row justify-content-center">
+            <div class="col-md" *ngFor="let token of unstakedJsonArray;">
+              <div class="card-body" id="styled">
 
-
-        <div class="row justify-content-center">
-          <div class="col-md" *ngFor="let token of unstakedJsonArray;">
-
-            <div id="styled" class="card-body" style="max-width: none;">
               <p class="card-text" style="font-size: 1em">
                 {{token.data.name}}
               </p>
@@ -178,9 +221,10 @@
             </div>
           </div>
         </div>
-      </div>
+        </div>
 
+      </div>
     </div>
 
 
-</div>
+  </div>

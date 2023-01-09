@@ -17,10 +17,10 @@ export class ContractService {
 provider.eth.setProvider(Web3.givenProvider);
 
 
-const erc721aContract = new provider.eth.Contract(
+const $toonCoinContract = new provider.eth.Contract(
   (contract),
   '0x61DED8A72cDc7762D159ab46bE880BE7127A2DeF' // Live $TOON contract MAIN NET
 );
 
 
-export default erc721aContract;
+export default $toonCoinContract;

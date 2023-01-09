@@ -49,7 +49,6 @@ export class ManageComponent implements OnInit {
     this.erc20Unclaimed = 0;
     this.erc20Owned = 0;
     let addressArray = await this.web3.getAccounts();
-    console.log(addressArray);
     this.userAddress=addressArray[0]
     this.getUnstakedNfts();
     this.getStakedNfts();
@@ -59,6 +58,8 @@ export class ManageComponent implements OnInit {
     this.erc20Owned = await $toonCoinContract.methods
       .balanceOf(addressArray[0])
       .call();
+      this.isLoading = false;
+
   }
 
   ngOnDestroy() {

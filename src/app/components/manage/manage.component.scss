@@ -12,6 +12,33 @@
 
 }
 
+#styled:hover {
+  background-color: bisque;
+  transform: scale(1.05);
+  text-decoration: underline;
+}
+
+#styledOp {
+  width: 95%;
+  margin-bottom: 25px;
+  margin-left: auto;
+  margin-right: auto;
+  min-height: 275px;
+  border: 0;
+  color: black;
+  text-shadow: 1px 1px 1px #000;
+  border-radius: 10px;
+  background-color: bisque;
+
+}
+
+#styledOp:hover {
+  background-color: aliceblue;
+  transform: scale(1.05);
+  text-decoration: underline;
+}
+
+
 #styled-mint-button {
   margin-bottom: 4px;
   border: 0;
@@ -66,15 +93,6 @@
 
 }
 
-#styled:hover {
-  background-color: bisque;
-  border-radius: 5%;
-  transform: scale(1.05);
-  text-decoration: underline;
-}
-
-
-
 
 #staked:hover {
   transform: scale(1.01);
@@ -107,7 +125,6 @@
 
 #card-lightblue-multi:hover{
   background-color: bisque;
-  border-radius: 5%;
   transform: scale(1.05);
   text-decoration: underline;
 
