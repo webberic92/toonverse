@@ -1,14 +1,11 @@
 <div class="center-div" style="display: grid;justify-items: center;margin-bottom: 20%;">
 
     <div class="card" style="border-radius: 5%; box-shadow: none;background: none; ">
-
-
-
         <br>
-        <h3 class="card-text">
-            <br>
-            <u> View Your Catz or Others!</u>
-        </h3>
+        <h6 style="font-weight: bold; "><u>** View Your Catz or Others!
+                **</u> </h6>
+
+
         <div class="row" style="justify-content: center;margin-top: 5%;margin-bottom: 5%;">
 
 
@@ -67,8 +64,7 @@
 
         <div id="container" style="padding-bottom: 20%;">
             <div class="row">
-                <div class="col-md-3"  id="card-lightblue-multi"
-                    *ngFor="let token of tokenJsonArray">
+                <div class="col-md-3" id="card-lightblue-multi" *ngFor="let token of tokenJsonArray">
                     <p>{{token.data.name}}</p>
                     <img id="center-img" src={{token.data.image}} alt="logo" height="100vh" width="100"
                         style="border-radius: 5%" />

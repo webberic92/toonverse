@@ -92,7 +92,12 @@
 
 
 }
+#text:hover{
+  text-decoration: underline;
+  transform: scale(1.05);
 
+
+}
 
 #staked:hover {
   transform: scale(1.01);
