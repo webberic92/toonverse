@@ -1840,9 +1840,13 @@ contract FruitTownGremlinsWTFruit is ERC721A, Ownable {
     uint256 freeMintAmount = 10;
     uint256 public stakersMintAmount = 15;
     uint256 public mintCost = 0.1 ether;
+<<<<<<< HEAD
     uint256 toonMintMultiplier = 1;
 
       uint256 sellOwnerShipCostInEth = 100 ether;
+=======
+      uint256 sellOwnerShipCostInEth = 50 ether;
+>>>>>>> acdfbc6c43bebd61dd5e2434f5dfa639472bab29
         uint256 sellOwnerShipCostInToon = 1000000;
     string public BASE_URI =
         "https://fruittown.s3.us-east-2.amazonaws.com/json/";
@@ -1854,6 +1858,7 @@ contract FruitTownGremlinsWTFruit is ERC721A, Ownable {
     mapping(uint256 => bool) public hasCatFreeMinted; 
     mapping(address => bool) public hasStakerAddressFreeMinted; 
     mapping(address => bool) public hasPublicAddressMinted; 
+<<<<<<< HEAD
     address public ARTIST = 0x701E5fe580f58eF2fEF7b5eEf37Eb7161C403DAF;
     address public DEV = 0xBF608bdF1A89a109c57b4e25854d97f6f030244A;
     constructor() ERC721A("Toonverse", "TOON", MAX_SUPPLY, MAX_MINT_AMOUNT) {
@@ -1861,6 +1866,13 @@ contract FruitTownGremlinsWTFruit is ERC721A, Ownable {
         // $toon = $TOON(0x61DED8A72cDc7762D159ab46bE880BE7127A2DeF); // TODO set up test net 
         devilCatzNft = ERC721A(0x9a59A4615B8fD0463d5fc403fE10a2a6bb582f97); // TODO set up test net
         $toon = $TOON(0x435dd9C7ADAcd74c666Cc00CD5Ca57452d1642B3); // TODO set up test net
+=======
+    address public ARTIST = 0x1BcCe17ea705d2a9f09993F8aD7ae3e6a68e1281;
+    address public DEV = 0x4538C3d93FfdE7677EF66aB548a4Dd7f39eca785;
+    constructor() ERC721A("Toonverse", "TOON", MAX_SUPPLY, MAX_MINT_AMOUNT) {
+        devilCatzNft = ERC721A(0x1c4a28690482b03F6991C8c24295016cba197C12); // TODO set up test net
+        $toon = $TOON(0x61DED8A72cDc7762D159ab46bE880BE7127A2DeF); // TODO set up test net
+>>>>>>> acdfbc6c43bebd61dd5e2434f5dfa639472bab29
         _safeMint(ARTIST, 350);
         _safeMint(DEV, 50);
     }
@@ -1888,9 +1900,12 @@ contract FruitTownGremlinsWTFruit is ERC721A, Ownable {
         _;
     }
 
+<<<<<<< HEAD
     function setToonMintMultiplier(uint256 _x) public onlyOwner {
         toonMintMultiplier = _x;
     }
+=======
+>>>>>>> acdfbc6c43bebd61dd5e2434f5dfa639472bab29
     function setDev(address _address) public onlyDev {
         DEV = _address;
     }
@@ -2043,6 +2058,14 @@ contract FruitTownGremlinsWTFruit is ERC721A, Ownable {
     /**
      Mint for TOON
     **/ 
+<<<<<<< HEAD
+=======
+    uint256 toonMintMultiplier = 1;
+    function setToonMintMultiplier(uint256 _x) public onlyOwner {
+        toonMintMultiplier = _x;
+    }
+
+>>>>>>> acdfbc6c43bebd61dd5e2434f5dfa639472bab29
     function mintWithToon(uint256 _mintAmount)
         public
         payable
