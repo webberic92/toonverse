@@ -179,10 +179,11 @@ export class ManageComponent implements OnInit {
   }
 
   async isApprovedForAll() {
+    console.log($toonCoinContract._address)
     let b = await devilcatNFTContract.methods
       .isApprovedForAll(
         this.userAddress,
-        "0x61DED8A72cDc7762D159ab46bE880BE7127A2DeF"
+        $toonCoinContract._address
       )
       .call();
     return b;
@@ -194,9 +195,10 @@ export class ManageComponent implements OnInit {
   // }
 
   async setApprovedForAll(b: boolean) {
+    console.log($toonCoinContract._address)
     try {
       await devilcatNFTContract.methods
-        .setApprovalForAll("0x61DED8A72cDc7762D159ab46bE880BE7127A2DeF", b)
+        .setApprovalForAll($toonCoinContract._address, b)
         .send({
           from: this.userAddress,
         });
@@ -209,7 +211,7 @@ export class ManageComponent implements OnInit {
     this.isLoading = true;
     try {
       await devilcatNFTContract.methods
-        .setApprovalForAll("0x61DED8A72cDc7762D159ab46bE880BE7127A2DeF", b)
+        .setApprovalForAll($toonCoinContract._contractAddress, b)
         .send({
           from: this.userAddress,
         });
