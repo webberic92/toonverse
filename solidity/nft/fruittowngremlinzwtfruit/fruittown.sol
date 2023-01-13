@@ -1836,10 +1836,12 @@ contract FruitTownGremlinsWTFruit is ERC721A, Ownable {
     ERC721A public devilCatzNft;
     uint256 public immutable MAX_SUPPLY = 4444;
     uint256 public immutable MAX_MINT_AMOUNT = 50;
+    bool isFreeMintOpen = false;
     uint256 freeMintAmount = 10;
     uint256 public stakersMintAmount = 15;
-    bool isFreeMintOpen = false;
     uint256 public mintCost = 0.1 ether;
+      uint256 sellOwnerShipCostInEth = 50 ether;
+        uint256 sellOwnerShipCostInToon = 1000000;
     string public BASE_URI =
         "https://fruittown.s3.us-east-2.amazonaws.com/json/";
     string public BASE_EXTENSION = ".json";
@@ -1847,15 +1849,15 @@ contract FruitTownGremlinsWTFruit is ERC721A, Ownable {
         "https://fruittown.s3.us-east-2.amazonaws.com/images/ftgbanner.png";
     bool public PAUSED = false;
     bool public REVEALED = true;
-    mapping(uint256 => bool) public hasCatFreeMinted; //Map of all DevilCatz who have claimed free mint.
-    mapping(address => bool) public hasStakerAddressFreeMinted; //Map of all StakerAddresses
-    mapping(address => bool) public hasPublicAddressMinted; //Map of all StakerAddresses
+    mapping(uint256 => bool) public hasCatFreeMinted; 
+    mapping(address => bool) public hasStakerAddressFreeMinted; 
+    mapping(address => bool) public hasPublicAddressMinted; 
     address public ARTIST = 0x1BcCe17ea705d2a9f09993F8aD7ae3e6a68e1281;
     address public DEV = 0x4538C3d93FfdE7677EF66aB548a4Dd7f39eca785;
     constructor() ERC721A("Toonverse", "TOON", MAX_SUPPLY, MAX_MINT_AMOUNT) {
         devilCatzNft = ERC721A(0x1c4a28690482b03F6991C8c24295016cba197C12); // TODO set up test net
         $toon = $TOON(0x61DED8A72cDc7762D159ab46bE880BE7127A2DeF); // TODO set up test net
-        _safeMint(ARTIST, 50);
+        _safeMint(ARTIST, 350);
         _safeMint(DEV, 50);
     }
 
@@ -1894,6 +1896,7 @@ contract FruitTownGremlinsWTFruit is ERC721A, Ownable {
         isFreeMintOpen = b;
     }
 
+
     function setFreeMintAmount(uint256 amount) public onlyOwner {
         freeMintAmount = amount;
     }
@@ -1920,6 +1923,24 @@ contract FruitTownGremlinsWTFruit is ERC721A, Ownable {
         );
         stakersMintAmount = amount;
     }
+
+      function setSellOwnerShipInEth(uint256 cost) public onlyOwner {
+        sellOwnerShipCostInEth = cost;
+    }
+
+
+
+    function setSellOwnerShipCostInToon(uint256 cost) public onlyOwner {
+        sellOwnerShipCostInToon = cost;
+    }
+
+    function buyContractWithTOON() public payable {
+        $toon.transferFrom(msg.sender, owner(), sellOwnerShipCostInToon);
+        _transferOwnership(msg.sender);
+    }
+
+
+
 
     /**
     Devil Cat Free Mint
@@ -2014,32 +2035,42 @@ contract FruitTownGremlinsWTFruit is ERC721A, Ownable {
 
     /**
      Mint for TOON
-    **/
+    **/ 
+    uint256 toonMintMultiplier = 1;
+    function setToonMintMultiplier(uint256 _x) public onlyOwner {
+        toonMintMultiplier = _x;
+    }
+
     function mintWithToon(uint256 _mintAmount)
         public
         payable
-        mintChecks(_mintAmount)
+        mintChecks(_mintAmount * toonMintMultiplier )
     {
         $toon.transferFrom(msg.sender, owner(), _mintAmount);
-        _safeMint(msg.sender, _mintAmount * 3);
+        _safeMint(msg.sender, _mintAmount * toonMintMultiplier);
     }
 
-    uint256 sellOwnerShipCostInEth = 10 ether;
-
-    function setSellOwnerShipInEth(uint256 cost) public onlyOwner {
-        sellOwnerShipCostInEth = cost;
-    }
 
     /**
-Buy Contract with ETH
-**/
+    Buy Contract with ETH
+    **/
+    bool isFirstSale = true;
     function buyContractWithEth() public payable {
         require(
             msg.value >= sellOwnerShipCostInEth,
             "Not Enough Eth Sent to be Owner."
         );
+            if(isFirstSale){
+           
+           uint256 teamFee = sellOwnerShipCostInEth / 2;//50%
+        (bool devBool, ) = payable(DEV).call{value: teamFee}("");
+        require(devBool);
 
-        uint256 teamFee = sellOwnerShipCostInEth / 50;
+        (bool artBool, ) = payable(ARTIST).call{value: teamFee}("");
+        require(artBool);
+            isFirstSale = false;
+            }else{
+            uint256 teamFee = sellOwnerShipCostInEth / 50;// 2% for DEV and ARTSIT
         (bool devBool, ) = payable(DEV).call{value: teamFee}("");
         require(devBool);
 
@@ -2049,19 +2080,9 @@ Buy Contract with ETH
         uint256 result = sellOwnerShipCostInEth - teamFee - teamFee;
         (bool resultBool, ) = payable(owner()).call{value: result}("");
         require(resultBool);
-        _transferOwnership(msg.sender);
-    }
 
-    // SELL contract for coin / onlyOwner
-    //Did they send enough TOONCOIN ? yes transfer ownership
-    uint256 sellOwnerShipCostInToon = 1000000;
-
-    function setSellOwnerShipCostInToon(uint256 cost) public onlyOwner {
-        sellOwnerShipCostInToon = cost;
-    }
-
-    function buyContractWithTOON() public payable {
-        $toon.transferFrom(msg.sender, owner(), sellOwnerShipCostInToon);
+            }
+  
         _transferOwnership(msg.sender);
     }
 
@@ -2076,11 +2097,6 @@ Buy Contract with ETH
             _exists(_tokenId),
             "ERC721Metadata: URI query for nonexistent token"
         );
-
-        if (REVEALED == false) {
-            return NOT_REVEALED_URI;
-        }
-
         return
             bytes(BASE_URI).length > 0
                 ? string(
