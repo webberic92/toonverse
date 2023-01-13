@@ -352,15 +352,15 @@ pragma solidity ^0.8.0;
  *
  * This contract is only required for intermediate, library-like contracts.
  */
-abstract contract Context {
-    function _msgSender() internal view virtual returns (address) {
-        return msg.sender;
-    }
+// abstract contract Context {
+//     function _msgSender() internal view virtual returns (address) {
+//         return msg.sender;
+//     }
 
-    function _msgData() internal view virtual returns (bytes calldata) {
-        return msg.data;
-    }
-}
+//     function _msgData() internal view virtual returns (bytes calldata) {
+//         return msg.data;
+//     }
+// }
 
 // File: @openzeppelin/contracts/access/Ownable.sol
 
@@ -1597,49 +1597,277 @@ contract ERC721A is
         uint256 quantity
     ) internal virtual {}
 }
-// File: contracts/toonverse.sol
+
+pragma solidity ^0.8.11;
+import "@openzeppelin/contracts/token/ERC20/extensions/ERC20Burnable.sol";
+import "@openzeppelin/contracts/security/Pausable.sol";
+import "@openzeppelin/contracts/utils/math/SafeMath.sol";
+
+contract $TOON is ERC20Burnable, Ownable {
+    using SafeMath for uint256;
+
+    ERC721A public devilCatzNft;
+
+    uint256 public cost = 0.0005 ether;
+    event Bought(uint256 amount);
+    uint256 public maxSupply = 1235813;
+    uint256 public stakedNfts = 0;
+    uint256 public rewardsTime = 86400;
+
+    bool public nftStakingPaused = false;
+    bool public rewardsCollectionPaused = false;
+    mapping(address => mapping(uint256 => uint256)) public nftStakersWithTime;
+    mapping(address => uint256[]) private nftStakersWithArray;
+    mapping(address => uint256) public rewardsInWei;
+
+    constructor() payable ERC20("$TOON", "$TOON") {
+        _mint(address(this), 935813);
+        _mint(0x1aBC6efe814F2766003d0c4AA5496B9b0EBC6eA3, 150000);
+        _mint(0x4538C3d93FfdE7677EF66aB548a4Dd7f39eca785, 150000);
+        devilCatzNft = ERC721A(0x1c4a28690482b03F6991C8c24295016cba197C12);
+    }
+
+    function getUsersStakedNfts(address _staker)
+        public
+        view
+        returns (uint256[] memory)
+    {
+        return nftStakersWithArray[_staker];
+    }
+
+    function decimals() public view virtual override returns (uint8) {
+        return 0;
+    }
+
+    function circulatingSupply() public view returns (uint256) {
+        return (this.totalSupply() - balanceOf(address(this)));
+    }
+
+    function setMaxSupply(uint256 _amount) public onlyOwner {
+        require(
+            circulatingSupply() < _amount,
+            "Cant set new total supply less than old supply."
+        );
+        maxSupply = _amount;
+    }
+
+    function setNftStakingPaused(bool _b) public onlyOwner {
+        nftStakingPaused = _b;
+    }
+
+    function setRewardsCollectionPaused(bool _b) public onlyOwner {
+        rewardsCollectionPaused = _b;
+    }
+
+    function buy(uint256 _quantity) public payable {
+        require(_quantity > 0, "Quantity needs to be greater than 1");
+        require(
+            balanceOf(address(this)) > _quantity,
+            "Not enough left in contract to buy.."
+        );
+        uint256 totalCostEth = _quantity * cost;
+        require(msg.value >= totalCostEth, "Did not send enough ETH");
+        _transfer(address(this), msg.sender, _quantity);
+        emit Bought(_quantity);
+    }
+
+    function withdrawEthFromContract(uint256 _amount) public payable onlyOwner {
+        (bool os, ) = payable(owner()).call{value: _amount}("");
+        require(os);
+    }
+
+    function withdrawToonFromContract(uint256 _amount)
+        public
+        payable
+        onlyOwner
+    {
+        _transfer(address(this), owner(), _amount);
+    }
+
+    function sendToonFromConract(address addy, uint256 _amount)
+        public
+        payable
+        onlyOwner
+    {
+        _transfer(address(this), addy, _amount);
+    }
+
+    function setCost(uint256 _newCost) public onlyOwner {
+        cost = _newCost;
+    }
+
+    function burn(uint256 _amount) public virtual override {
+        _burn(_msgSender(), _amount);
+        maxSupply -= _amount;
+    }
+
+    function stakeNft(uint256 _tokenID) public {
+        require(!nftStakingPaused, "Staking NFTs is currently paused.");
+        require(
+            nftStakersWithTime[msg.sender][_tokenID] == 0,
+            "This token already staked."
+        );
+        devilCatzNft.transferFrom(msg.sender, address(this), _tokenID);
+        nftStakersWithTime[msg.sender][_tokenID] = block.timestamp;
+        stakedNfts += 1;
+        nftStakersWithArray[msg.sender].push(_tokenID);
+    }
+
+    function stakeMultipleNfts(uint256[] calldata _nftIds) public {
+        require(!nftStakingPaused, "Staking NFTs is currently paused.");
+        for (uint256 i = 0; i <= _nftIds.length - 1; i++) {
+            require(
+                devilCatzNft.ownerOf(_nftIds[i]) == msg.sender,
+                "Not all of those NFTs are in your current wallet."
+            );
+
+            devilCatzNft.transferFrom(msg.sender, address(this), _nftIds[i]);
+            nftStakersWithTime[msg.sender][_nftIds[i]] = block.timestamp;
+            stakedNfts += 1;
+            nftStakersWithArray[msg.sender].push(_nftIds[i]);
+        }
+    }
+
+    function potentialAllStakedNftReward(address _addy)
+        public
+        view
+        returns (uint256)
+    {
+        uint256[] memory nfts = getUsersStakedNfts(_addy);
+        uint256 intDate = 0;
+        uint256 subtracted = 0;
+        uint256 utilToken = 0;
+
+        for (uint256 i = 0; i < nfts.length; i++) {
+            if (nftStakersWithTime[_addy][nfts[i]] != 0) {
+                intDate = nftStakersWithTime[_addy][nfts[i]];
+                subtracted = block.timestamp - intDate;
+                utilToken += subtracted / rewardsTime;
+            }
+        }
+        return utilToken * 1;
+    }
+
+    function potentialStakedNftReward(address _addy, uint256 _tokenID)
+        public
+        view
+        returns (uint256)
+    {
+        require(
+            nftStakersWithTime[_addy][_tokenID] != 0,
+            "This token not staked."
+        );
+        uint256 intDate = nftStakersWithTime[_addy][_tokenID];
+        uint256 subtracted = block.timestamp - intDate;
+        uint256 tokens = subtracted / rewardsTime;
+        return tokens * 1;
+    }
+
+    function collectStakedNftReward(address _addy, uint256 _tokenID) public {
+        require(!nftStakingPaused, "Staking NFTs is currently paused.");
+        require(
+            nftStakersWithTime[_addy][_tokenID] != 0,
+            "This token not staked."
+        );
+        require(
+            potentialStakedNftReward(_addy, _tokenID) != 0,
+            "You dont have enough to claim."
+        );
+
+        uint256 tokens = potentialStakedNftReward(_addy, _tokenID);
+        _transfer(address(this), _addy, tokens);
+        nftStakersWithTime[_addy][_tokenID] = block.timestamp;
+    }
+
+    function collectMultipleStakedNftReward(uint256[] calldata _nftIds) public {
+        require(
+            !rewardsCollectionPaused,
+            "Collecting Rewards is currently paused."
+        );
+
+        for (uint256 i = 0; i <= _nftIds.length - 1; i++) {
+            require(
+                nftStakersWithTime[msg.sender][_nftIds[i]] != 0,
+                "Not all those tokens are staked."
+            );
+            collectStakedNftReward(msg.sender, _nftIds[i]);
+        }
+    }
+
+    function removeStakedNft(uint256 _stakedNFT) public {
+        require(
+            nftStakersWithTime[msg.sender][_stakedNFT] != 0,
+            "Cant Unstake something your not staking."
+        );
+        devilCatzNft.transferFrom(address(this), msg.sender, _stakedNFT);
+        nftStakersWithTime[msg.sender][_stakedNFT] = 0;
+        stakedNfts -= 1;
+
+        uint256[] storage tempArray = nftStakersWithArray[msg.sender];
+        for (uint256 i = 0; i < tempArray.length; i++) {
+            if (tempArray[i] == _stakedNFT) {
+                if (i >= tempArray.length) return;
+
+                for (uint256 j = i; j < tempArray.length - 1; j++) {
+                    tempArray[j] = tempArray[j + 1];
+                }
+                tempArray.pop();
+                nftStakersWithArray[msg.sender] = tempArray;
+            }
+        }
+    }
+
+    function removeMultipleStakedNft(uint256[] calldata _nftIds) public {
+        for (uint256 k = 0; k <= _nftIds.length - 1; k++) {
+            require(
+                nftStakersWithTime[msg.sender][_nftIds[k]] != 0,
+                "Cant Unstake something your not staking."
+            );
+            removeStakedNft(_nftIds[k]);
+        }
+    }
+}
 
 pragma solidity ^0.8.11;
 
 contract FruitTownGremlinsWTFruit is ERC721A, Ownable {
     using Strings for uint256;
-
+    $TOON public $toon;
     ERC721A public devilCatzNft;
-    uint256 public MintCostEth = 0.05 ether;
-    // uint256 public ownerMintAmount = 3;
-
-    uint256 public MAX_SUPPLY = 4444;
+    uint256 public immutable MAX_SUPPLY = 4444;
     uint256 public immutable MAX_MINT_AMOUNT = 50;
+    uint256 freeMintAmount = 10;
+    uint256 public stakersMintAmount = 15;
+    bool isFreeMintOpen = false;
+    uint256 public mintCost = 0.1 ether;
     string public BASE_URI =
-        "https://fruittown.s3.us-east-2.amazonaws.com/json/"; //https://fruittown.s3.us-east-2.amazonaws.com/json/1.json
+        "https://fruittown.s3.us-east-2.amazonaws.com/json/";
     string public BASE_EXTENSION = ".json";
     string public NOT_REVEALED_URI =
         "https://fruittown.s3.us-east-2.amazonaws.com/images/ftgbanner.png";
     bool public PAUSED = false;
     bool public REVEALED = true;
-    mapping(uint256 => bool) public hasNftFreeMinted;
-
-    // address public OWNER_AUX = 0x1BcCe17ea705d2a9f09993F8aD7ae3e6a68e1281;
-    // address public DEV = 0x4538C3d93FfdE7677EF66aB548a4Dd7f39eca785;
-    // address public PARTNER =0x11A7D4E65E2086429113658A650e18F126FB4AA0;
-
-    // bytes32 public WHITELIST_MERKLE_ROOT = 0xacbeb311676f565667659156a2922c108ca8dd671396506659566ef845490043;
-    // mapping(address => bool) public WHITELIST_CLAIMED;
-    bool public IS_WHITELIST_ONLY = false;
-
+    mapping(uint256 => bool) public hasCatFreeMinted; //Map of all DevilCatz who have claimed free mint.
+    mapping(address => bool) public hasStakerAddressFreeMinted; //Map of all StakerAddresses
+    mapping(address => bool) public hasPublicAddressMinted; //Map of all StakerAddresses
+    address public ARTIST = 0x1BcCe17ea705d2a9f09993F8aD7ae3e6a68e1281;
+    address public DEV = 0x4538C3d93FfdE7677EF66aB548a4Dd7f39eca785;
     constructor() ERC721A("Toonverse", "TOON", MAX_SUPPLY, MAX_MINT_AMOUNT) {
         devilCatzNft = ERC721A(0x1c4a28690482b03F6991C8c24295016cba197C12); // TODO set up test net
+        $toon = $TOON(0x61DED8A72cDc7762D159ab46bE880BE7127A2DeF); // TODO set up test net
+        _safeMint(ARTIST, 50);
+        _safeMint(DEV, 50);
     }
 
-    // modifier onlyDev() {
-    //     require(msg.sender == DEV, 'Only Dev');
-    //     _;
-    // }
+    modifier onlyDev() {
+        require(msg.sender == DEV, "Dev only!");
+        _;
+    }
 
-    // modifier onlyPartner() {
-    //     require(msg.sender == PARTNER, 'Only PARTNER');
-    //     _;
-    // }
+    modifier onlyArtist() {
+        require(msg.sender == ARTIST, "Dev only!");
+        _;
+    }
 
     modifier mintChecks(uint256 _mintAmount) {
         require(_mintAmount > 0, "Mint amount has to be greater than 0.");
@@ -1651,83 +1879,131 @@ contract FruitTownGremlinsWTFruit is ERC721A, Ownable {
             _mintAmount <= MAX_MINT_AMOUNT,
             "Can not exceed max mint amount."
         );
-        checkIfPaused();
         _;
     }
 
-    // function setOwnerMintAmount(uint256 amount) public onlyOwner {
-    //     ownerMintAmount = amount;
-    // }
-
-    function setWhiteListOnly(bool _b) public onlyOwner {
-        IS_WHITELIST_ONLY = _b;
+    function setDev(address _address) public onlyDev {
+        DEV = _address;
     }
 
-    //Devil Catz Wallet free mint --  check if wallet owns cats, have they minted yet? mint and  add to ownerMinted.
+    function setArtist(address _address) public onlyArtist {
+        ARTIST = _address;
+    }
+
+    function setIsFreeMintOpen(bool b) public onlyOwner {
+        isFreeMintOpen = b;
+    }
+
+    function setFreeMintAmount(uint256 amount) public onlyOwner {
+        freeMintAmount = amount;
+    }
+
+    function setCost(uint256 _newCost) public onlyOwner {
+        mintCost = _newCost;
+    }
+
+    function setBaseURI(string memory _newBaseURI) public onlyArtist {
+        BASE_URI = _newBaseURI;
+    }
+
+    function setBaseExtension(string memory _newBaseExtension)
+        public
+        onlyArtist
+    {
+        BASE_EXTENSION = _newBaseExtension;
+    }
+
+    function setStakersMintAmount(uint256 amount) public onlyOwner {
+        require(
+            amount <= MAX_MINT_AMOUNT,
+            "Cant be greater than max mint amount."
+        );
+        stakersMintAmount = amount;
+    }
+
+    /**
+    Devil Cat Free Mint
+    **/
     function catFreeMint(uint256[] calldata catsToClaimFreeMint)
         public
         payable
         mintChecks(catsToClaimFreeMint.length)
     {
-         if (msg.sender != owner()) {
-            for (uint256 i = 0; i < catsToClaimFreeMint.length - 1; i++) {
+        uint256 numToMint = 0;
+        for (uint256 i = 0; i < catsToClaimFreeMint.length - 1; i++) {
+            require(
+                !hasCatFreeMinted[catsToClaimFreeMint[i]],
+                "One of these cats have already claimed a FTG.Wtfruit"
+            );
+
+            if (devilCatzNft.ownerOf(catsToClaimFreeMint[i]) == msg.sender) {
+                numToMint += 1;
+            } else {
                 require(
-                    !hasNftFreeMinted[catsToClaimFreeMint[i]],
-                    "One of these cats have already claimed a FTG.Wtfruit"
+                    $toon.nftStakersWithTime(
+                        msg.sender,
+                        catsToClaimFreeMint[i]
+                    ) > 0,
+                    "No Cats unstaked or staked found."
                 );
+                numToMint += 1;
             }
-
-            _safeMint(msg.sender, catsToClaimFreeMint.length);
-
-            for (uint256 i = 0; i < catsToClaimFreeMint.length - 1; i++) {
-                hasNftFreeMinted[catsToClaimFreeMint[i]] = true;
-            }
-        } else {
-            _safeMint(msg.sender, catsToClaimFreeMint.length);
+        }
+        _safeMint(msg.sender, numToMint);
+        for (uint256 i = 0; i < catsToClaimFreeMint.length - 1; i++) {
+            hasCatFreeMinted[catsToClaimFreeMint[i]] = true;
         }
     }
 
-    // function stakedCatFreeMint() public payable mintChecks(ownerMintAmount) {
-    //     if (msg.sender != owner()) {
-    //         uint256 devilCatBalance = devilCatzNft.balanceOf(msg.sender);
-    //         require(
-    //             devilCatBalance > 0,
-    //             "We dont see any Devil Catz in your wallet."
-    //         );
-    //         require(this.hasOwnerFreeMinted[msg.sender] = false,"This address has already free minted." );
-    //         _safeMint(msg.sender, ownerMintAmount);
-    //         this.hasOwnerFreeMinted[msg.sender] = true;
-    //     } else {
-    //         _safeMint(msg.sender, ownerMintAmount);
-    //     }
-    // }
+    /**
+    Stakers Mint
+    **/
+    function stakedAddressesFreeMint()
+        public
+        payable
+        mintChecks(stakersMintAmount)
+    {
+        require(
+            $toon.getUsersStakedNfts(msg.sender).length > 0,
+            "No staked catz found."
+        );
+        require(
+            !hasStakerAddressFreeMinted[msg.sender],
+            "This address already claimed free staking mint."
+        );
+        _safeMint(msg.sender, stakersMintAmount);
+        hasStakerAddressFreeMinted[msg.sender] = true;
+    }
 
-    // Devil Catz  Staked free mint X 5 does owner have staked cats? yes have they already minted? no mint, add to stakedminted.
+    /**
+     *FREE MINT
+     */
+    function freeMint(uint256 _mintAmount)
+        public
+        payable
+        mintChecks(_mintAmount)
+    {
+        require(isFreeMintOpen, "No Free Mints Right Now.");
+        require(freeMintAmount >= _mintAmount, "Cant mint that many.");
+        require(
+            !hasPublicAddressMinted[msg.sender],
+            "This address already claimed free mint."
+        );
+        _safeMint(msg.sender, _mintAmount);
+        hasPublicAddressMinted[msg.sender] = true;
+    }
 
-    // clear owner and staked minted already
-
-    // Devil Catz TOON COIN SUPPER MINT = did transaction send atleast 1 coin, nftmint x coin x multiplier
-
-    // set(EthContractForSaleCost) onlyOwner
-    //SELL contract for ETH / onlyOnwer (EthContractForSaleCost) did they send enough ? transferOWnership
-
-    // SELL contract for coin / onlyOwner
-    //Did they send enough TOONCOIN ? yes transfer ownership
-
-    //Mint for ETH
+    /**
+     Mint for ETH
+    **/
     function mintForEth(uint256 _mintAmount)
         public
         payable
         mintChecks(_mintAmount)
     {
-        require(
-            _mintAmount <= MAX_MINT_AMOUNT,
-            "Can not exceed max mint amount."
-        );
         if (msg.sender != owner()) {
-            checkIfPaused();
             require(
-                msg.value >= MintCostEth * _mintAmount,
+                msg.value >= mintCost * _mintAmount,
                 "Not Enough Eth Sent."
             );
             _safeMint(msg.sender, _mintAmount);
@@ -1736,31 +2012,58 @@ contract FruitTownGremlinsWTFruit is ERC721A, Ownable {
         }
     }
 
-    // function mintWhiteList(bytes32[] calldata _merkleProof,uint256 _mintAmount) public payable  mintChecks(_mintAmount)  {
-    //         if(msg.sender!= owner()){
-    //         checkIfPaused();
-    //         require(_mintAmount<= MAX_MINT_AMOUNT, "Can not exceed max mint amount.");
-    //         require(IS_WHITELIST_ONLY,"Whitelist no longer available.");
-    //         require(!WHITELIST_CLAIMED[msg.sender],"Address has already claimed");
-    //         bytes32 leaf = keccak256(abi.encodePacked(msg.sender));
-    //         require(MerkleProof.verify(_merkleProof,WHITELIST_MERKLE_ROOT,leaf),"Invalid Proof");
-    //         require(msg.value >= COST * _mintAmount, "Not Enough Eth Sent.");
-    //         // teamMint(msg.value);
+    /**
+     Mint for TOON
+    **/
+    function mintWithToon(uint256 _mintAmount)
+        public
+        payable
+        mintChecks(_mintAmount)
+    {
+        $toon.transferFrom(msg.sender, owner(), _mintAmount);
+        _safeMint(msg.sender, _mintAmount * 3);
+    }
 
-    //             if(_mintAmount >= 3){
-    //             _mintAmount = _mintAmount * 2;
-    //             _safeMint(msg.sender,_mintAmount);
-    //             WHITELIST_CLAIMED[msg.sender]=true;
+    uint256 sellOwnerShipCostInEth = 10 ether;
 
-    //             }else{
-    //              _safeMint(msg.sender,_mintAmount);
-    //              WHITELIST_CLAIMED[msg.sender]=true;
+    function setSellOwnerShipInEth(uint256 cost) public onlyOwner {
+        sellOwnerShipCostInEth = cost;
+    }
 
-    //              }
-    //         }else{
-    //             _safeMint(msg.sender,_mintAmount);
-    //               }
-    // }
+    /**
+Buy Contract with ETH
+**/
+    function buyContractWithEth() public payable {
+        require(
+            msg.value >= sellOwnerShipCostInEth,
+            "Not Enough Eth Sent to be Owner."
+        );
+
+        uint256 teamFee = sellOwnerShipCostInEth / 50;
+        (bool devBool, ) = payable(DEV).call{value: teamFee}("");
+        require(devBool);
+
+        (bool artBool, ) = payable(ARTIST).call{value: teamFee}("");
+        require(artBool);
+
+        uint256 result = sellOwnerShipCostInEth - teamFee - teamFee;
+        (bool resultBool, ) = payable(owner()).call{value: result}("");
+        require(resultBool);
+        _transferOwnership(msg.sender);
+    }
+
+    // SELL contract for coin / onlyOwner
+    //Did they send enough TOONCOIN ? yes transfer ownership
+    uint256 sellOwnerShipCostInToon = 1000000;
+
+    function setSellOwnerShipCostInToon(uint256 cost) public onlyOwner {
+        sellOwnerShipCostInToon = cost;
+    }
+
+    function buyContractWithTOON() public payable {
+        $toon.transferFrom(msg.sender, owner(), sellOwnerShipCostInToon);
+        _transferOwnership(msg.sender);
+    }
 
     function tokenURI(uint256 _tokenId)
         public
@@ -1789,84 +2092,4 @@ contract FruitTownGremlinsWTFruit is ERC721A, Ownable {
                 )
                 : "";
     }
-
-    function setRevealed(bool _b) public onlyOwner {
-        REVEALED = _b;
-    }
-
-    function setCost(uint256 _newCost) public onlyOwner {
-        MintCostEth = _newCost;
-    }
-
-    function setNotRevealedURI(string memory _notRevealedURI) public onlyOwner {
-        NOT_REVEALED_URI = _notRevealedURI;
-    }
-
-    function setBaseURI(string memory _newBaseURI) public onlyOwner {
-        BASE_URI = _newBaseURI;
-    }
-
-    function setBaseExtension(string memory _newBaseExtension)
-        public
-        onlyOwner
-    {
-        BASE_EXTENSION = _newBaseExtension;
-    }
-
-    function setPaused(bool _state) public onlyOwner {
-        PAUSED = _state;
-    }
-
-    // function setDev(address _address) public onlyDev {
-    //     DEV = _address;
-    // }
-
-    // function setPartner(address _address) public onlyPartner {
-    //     PARTNER = _address;
-    // }
-
-    // function setOwnerAux(address _address) public onlyOwner {
-    //     OWNER_AUX = _address;
-    // }
-
-    function checkIfPaused() private view {
-        require(!PAUSED, "Contract currently PAUSED.");
-    }
-
-    // function withdraw(uint256 _amount) public payable onlyOwner {
-
-    //     //Dev 2%
-    //         uint256 devFee = _amount /50;
-    //         (bool devBool, ) = payable(DEV).call{value: devFee}("");
-    //         require(devBool);
-
-    //     //Partner 20%
-    //         uint256 partnerFee = _amount * 1/ 5;
-    //         (bool partnerBool, ) = payable(PARTNER).call{value: partnerFee}("");
-    //         require(partnerBool);
-
-    //     //Rest goes to Owner of Contract
-    //         uint256 result = _amount - partnerFee - devFee;
-    //         (bool resultBool, ) = payable(owner()).call{value: result}("");
-    //         require(resultBool);
-    // }
-
-    // function teamMint(uint256 _ethAmount) internal   {
-
-    //         //.04 Dev
-    //         uint256 devFee = _ethAmount /25;
-    //         (bool devBool, ) = payable(DEV).call{value: devFee}("");
-    //         require(devBool);
-
-    //         //.07 Partner
-    //         uint256 partnerFee = _ethAmount * 7/ 100;
-    //         (bool partnerBool, ) = payable(PARTNER).call{value: partnerFee}("");
-    //         require(partnerBool);
-
-    //         //Rest goes to contract AUX wallet
-    //         uint256 result = _ethAmount - partnerFee - devFee;
-    //         (bool resultBool, ) = payable(OWNER_AUX).call{value: result}("");
-    //         require(resultBool);
-
-    //         }
 }
