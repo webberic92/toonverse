@@ -21,9 +21,10 @@ export class FruittownComponent implements OnInit {
   cdStakedArray: any[] = new Array();
   dcFreeMintSelected: number =0;
   $toonInWallet:number = 0;
-  isPublicMintOpen: boolean | null = null;
+  // isPublicMintOpen: boolean = false;
   publicMintPrice: number = 0;
   publicMintAmountSelected: number = 0;
+  publicMintPriceTotal: number = 0;
   priceOfContractToon: number =0;
   priceOfContractEth: number =0;
   isLoading: boolean = false;
@@ -42,6 +43,8 @@ export class FruittownComponent implements OnInit {
     this.fruitTownAddress = fruitTown._address;
     this.ftgOwned = await ProviderLessFTGContract.methods.balanceOf(this.userAddress).call();
     this.cdStakedArray =  await  $toonCoinContract.methods.getUsersStakedNfts(this.userAddress).call();
+    this.$toonInWallet = await $toonCoinContract.methods.balanceOf(this.userAddress).call();
+    this.publicMintPrice = Web3.utils.fromWei(await fruitTown.methods.mintCost().call());
     // console.log(this.cdStakedArray)
     // console.log(this.cdStakedArray)
     if(this.cdStakedArray.length > 0){
@@ -54,26 +57,24 @@ export class FruittownComponent implements OnInit {
 
   }
 
-  async stakedAddressFreeMintClaim(){
+async stakedAddressFreeMintClaim(){
 this.error = "";
 this.isLoading = true;
 try{
   await fruitTown.methods.stakedAddressesFreeMint().send({
     from: this.userAddress
   });
-
   this.isLoading = false;
   this.error = "";
   this.getContent();
-
 }
 catch(e){
   console.log(e.message)
   this.error = e.message;
   this.isLoading = false;
 }
-
   }
+
 
   clearError() {
     this.isLoading = false;
@@ -100,6 +101,28 @@ catch(e){
       this.isLoading = false;
     }
   }
+
+  async mintWithEth(){
+    this.error = "";
+    this.isLoading = true;
+
+    try{
+      await  fruitTown.methods.mintForEth(this.publicMintAmountSelected ).send({
+        from: this.userAddress,
+        value: Web3.utils.toWei(this.publicMintPriceTotal.toString(), 'ether')
+        });
+      this.isLoading = false;
+      this.error = "";
+      this.getContent();
+    }catch(e){
+      console.log(e.message)
+      this.error = e.message;
+      this.isLoading = false;
+    }
+
+
+  }
+
 
 
   async becomeOwnerWithEth(){
@@ -131,8 +154,6 @@ catch(e){
       await $toonCoinContract.methods.approve(this.fruitTownAddress, this.priceOfContractToon).send({
         from: this.userAddress,
       })
-
-
       await  fruitTown.methods.buyContractWithTOON().send({
         from: this.userAddress,
       });
@@ -146,6 +167,12 @@ catch(e){
     }
 
 
+  }
+
+  updatePublicMintPrice(e: Event) {
+    console.log(e)
+    this.publicMintAmountSelected = Number(e);
+    this.publicMintPriceTotal = parseFloat((this.publicMintPrice * this.publicMintAmountSelected).toFixed(2));
   }
 
 

@@ -111,7 +111,7 @@
                             $TOON Claim
                             <br>
                             <br>
-                            You have this much $TOON in your waller: {{dcFreeMintSelected}}
+                            You have this much $TOON in your waller: {{$toonInWallet}}
 
                             <br><br>Selected: {{dcFreeMintSelected}}
                             <!-- look up amount of $toon in wallet -->
@@ -129,16 +129,26 @@
                         <div class="p-3"> Public Mint
 
                             <br>
-                            is public mint open: {{isPublicMintOpen}}
+              
                             <br>
                             public mint price: {{publicMintPrice}}
                             <!-- look up amount of devilcatz in wallet. -->
                             <!-- look up amount of devil catz staked. -->
                             <!-- amount you can claim. -->
-                            <mdb-range [min]="0" [max]="50"></mdb-range>
-                            <button class="styled">
+                            <br>
+                            <br>
+                            selected : FTG {{publicMintAmountSelected}}
+                            <br>
+                            <br>
+                            total price : ETH {{publicMintPriceTotal}}
+                            <br><br>
+                            <mdb-range (ngModelChange)="updatePublicMintPrice($event)" [min]="0" [max]="50" ngModel="publicMintAmountSelected"></mdb-range>
+                            <button (click)="mintWithEth()" class="styled">
                                 Mint
                             </button>
+
+
+       
                         </div>
                     </div>
                 </div>
