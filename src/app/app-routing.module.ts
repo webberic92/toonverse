@@ -9,6 +9,8 @@ import { NFTComponent } from './components/nft/nft.component';
 import { AboutComponent } from './components/about/about.component';
 import { ViewcatzComponent } from './components/viewcatz/viewcatz.component';
 import { AccountComponent } from './components/account/account.component';
+import { MarketplaceComponent } from './components/marketplace/marketplace.component';
+import { FruittownComponent } from './components/fruittown/fruittown.component';
 const routes: Routes = [
 
   { path: '', pathMatch: 'full', component: HomeComponent },
@@ -20,7 +22,9 @@ const routes: Routes = [
   { path: 'about', pathMatch: 'full', component: AboutComponent },
   { path: 'viewcatz', pathMatch: 'full', component: ViewcatzComponent },
   { path: 'nft', pathMatch: 'full', component: NFTComponent },
-  { path: 'account', pathMatch: 'full', component: AccountComponent }
+  { path: 'account', pathMatch: 'full', component: AccountComponent },
+  { path: 'marketplace', pathMatch: 'full', component: MarketplaceComponent },
+  { path: 'fruittown', pathMatch: 'full', component: FruittownComponent }
 
 
 

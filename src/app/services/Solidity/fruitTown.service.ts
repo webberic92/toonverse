@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-const contract = require("../../../../solidity/nft/fruittowngremlinzwtfruit.json");
+const contract = require("../../../../solidity/nft/fruittowngremlinzwtfruit/fruittown.json");
 const Web3 = require('web3');
 //testNet
 const provider = new Web3('https://goerli.infura.io/v3/589e31a14b0c42b78400756b023d7894');
@@ -25,10 +25,10 @@ export const ProviderLessNftContract = new provider2.eth.Contract(contract, cont
 
 
 provider.eth.setProvider(Web3.givenProvider);
-const NFTContract = new provider.eth.Contract(
+const fruitTown = new provider.eth.Contract(
   (contract),
   contractAddress
 );
 
 
-export default NFTContract;
+export default fruitTown;
