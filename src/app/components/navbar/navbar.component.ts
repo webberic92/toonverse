@@ -27,7 +27,6 @@ export class NavbarComponent implements OnInit {
 }
 
 async function updatedTotalStakedNfts() {
-  console.log("Test");
   try {
     let retVal = await $toonCoinContract.methods.stakedNfts().call();
     return retVal;

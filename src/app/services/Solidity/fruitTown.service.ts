@@ -20,8 +20,8 @@ export class NftService {
 
 
 // const contractAddress = "0x1c4a28690482b03F6991C8c24295016cba197C12"; // Live fruit town NFT  Contract
-const contractAddress = "0x2EdE0D7236935e0Ce731E07643a0CBabf1529E4c"; // goerli fruit town NFT  Contract
-export const ProviderLessNftContract = new provider2.eth.Contract(contract, contractAddress);
+const contractAddress = "0x51C2612b7518E6359019E9f9Dd8361E61973c920"; // goerli fruit town NFT  Contract
+export const ProviderLessFTGContract = new provider2.eth.Contract(contract, contractAddress);
 
 
 provider.eth.setProvider(Web3.givenProvider);

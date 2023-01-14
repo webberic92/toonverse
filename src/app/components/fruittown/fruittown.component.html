@@ -2,16 +2,13 @@
 
     <h6 style="font-weight: bold; "><u>Fruit Town Gremlins</u> </h6>
 
-    {{fruitTownAddress}} <br>
-    <br><br>
-
-    <br>
-    <h6>A Fruity Gremlin Project With a Twist.</h6><br>
-
-
+    <p>A Fruity Gremlin Project With a Twist.<br>
+        FTG contract address :
+        <br>
+        {{fruitTownAddress}}
+    </p>
     <figure class="text-center">
         <blockquote class="blockquote">
-            <br>
             <h1>Citizens of Fruit Town are Outraged.</h1>
             "Fruit Town Residents Peel out in Anger as <br>
             Web3 Bandits Make off with their Precious Produce"
@@ -35,123 +32,194 @@
             Some Fruit Town mfer.. <cite title="Source Title">Sour Ass</cite>
         </figcaption>
     </figure>
-    <br>
-
-
-
-    <div class="container">
-        <div class="row">
-            <p>Sweetness Selectors</p>
-            <div class="col-lg-4">
-                <div class="card-body" id="styled">
-
-                    <div class="p-3">
-                        1 Free Mint Per DevilCat:
-
-                        <br>
-                        <!-- look up amount of devilcatz in wallet. -->
-                        <!-- look up amount of devil catz staked. -->
-                        <!-- amount you can claim. -->
-                        <mdb-range [min]="0" [max]="50"></mdb-range>
-                        <button class="styled">
-                            Mint
-                        </button>
-
-
-                    </div>
-
-                </div>
-            </div>
-            <div class="col-lg-4">
-                <div class="card-body" id="styled">
-
-                    <div class="p-3">
-
-                        $TOON Claim:
-                        <br>
-                        <!-- look up amount of $toon in wallet -->
-                        <mdb-range [min]="0" [max]="50"></mdb-range>
-                        <button class="styled">
-                            Mint
-                        </button>
-                    </div>
-
-                </div>
-            </div>
-            <div class="col-lg-4">
-                <div class="card-body" id="styled">
-
-                    <div class="p-3"> Free Mint
-
-                        <br>
-                        <!-- look up amount of devilcatz in wallet. -->
-                        <!-- look up amount of devil catz staked. -->
-                        <!-- amount you can claim. -->
-                        <mdb-range [min]="0" [max]="50"></mdb-range>
-                        <button class="styled">
-                            Mint
-                        </button>
-                    </div>
-                </div>
-            </div>
-
-
+    <!--
+    **
+    Loading
+    **  -->
+    <div *ngIf="this.isLoading">
+        <div>
+            <img id="center-img" src="../../../assets/toonverse/catCoin.gif" alt="logo" height="200vh" width="150" />
+            <span class="visually-hidden">...</span>
         </div>
+        <br />
+        <p style="font-size: 1.25em;">Please finish transaction <br> or <br>wait for blockchain to confirm...
+            <br>
+            The page will refresh on its own.
+        </p>
+        <br />
     </div>
+    <hr>
+    <div class="container">
+        <br>
 
+        <div *ngIf="this.userAddress == '' && !this.isLoading">
+            dONt bE a LEmOn HeAd gEt FrUiTy aND LogIN!
+            <br>
+            <button (click)="connectMetaMask()" style="margin: 50px; margin-top: 20px;" *ngIf="this.userAddress == ''"
+                class="styled">
+                Login
+            </button>
 
-
-
-    <div class="row">
-        <p>Pear-fict Picks</p>
-
-        <div class="col-lg-4">
-            <div class="card-body" id="styled">
-
-                Free 15 per Wallet
+            <div *ngIf="this.error">
                 <br>
-                Has this address claimed the free 15 mint yet?
-                <br>
-                <br>
-                {{hasStakedAddressClaimed}}
-                <br><br>
-                <button *ngIf="!hasStakedAddressClaimed" (click)="stakedAddressFreeMintClaim()" class="styled">
-                    Mint
-                </button>
 
-                <p *ngIf="hasStakedAddressClaimed"> This address has already claimed its FTG's</p>
+                <button class="styled" style="max-width: fit-content;" (click)="clearError()">{{error}}</button>
+
+
+                <br><br><br><br>
             </div>
 
         </div>
 
+        <div *ngIf="this.userAddress != '' && !this.isLoading">
+            <p> Welcome {{this.userAddress}}</p>
+            You own = {{this.ftgOwned}} FTG!
+            <br>
 
-        <div class="col-lg-4">
+            <div class="row">
 
-            <div class="card-body" id="styled">
-                Buy Contract With ETH:
-                <br><br>
-                <button class="styled">
-                    Become Owner
-                </button>
+                <p>Sweetness Selectors</p>
+                <div class="col-lg-4">
+                    <div class="card-body" id="styled">
+
+                        <div class="p-3">
+                            1 Free Mint Per DevilCat
+                            <br>
+
+                            <br>
+                            You have this many DevilCat Free Mints Left: {{dcFreeMintArray}}
+
+                            <br><br>Selected: {{dcFreeMintSelected}}
+                            <!-- look up amount of devilcatz in wallet. -->
+                            <!-- look up amount of devil catz staked. -->
+                            <!-- amount you can claim. -->
+                            <mdb-range [min]="0" [max]="50"></mdb-range>
+                            <button class="styled">
+                                Mint
+                            </button>
+
+
+                        </div>
+
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="card-body" id="styled">
+
+                        <div class="p-3">
+
+                            $TOON Claim
+                            <br>
+                            <br>
+                            You have this much $TOON in your waller: {{dcFreeMintSelected}}
+
+                            <br><br>Selected: {{dcFreeMintSelected}}
+                            <!-- look up amount of $toon in wallet -->
+                            <mdb-range [min]="0" [max]="50"></mdb-range>
+                            <button class="styled">
+                                Mint
+                            </button>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="card-body" id="styled">
+
+                        <div class="p-3"> Public Mint
+
+                            <br>
+                            is public mint open: {{isPublicMintOpen}}
+                            <br>
+                            public mint price: {{publicMintPrice}}
+                            <!-- look up amount of devilcatz in wallet. -->
+                            <!-- look up amount of devil catz staked. -->
+                            <!-- amount you can claim. -->
+                            <mdb-range [min]="0" [max]="50"></mdb-range>
+                            <button class="styled">
+                                Mint
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
 
             </div>
 
 
+            <hr>
+
+            <div class="row">
+                <p>Pear-fict Picks</p>
+
+                <div class="col-lg-4">
+                    <div class="card-body" id="styled">
+
+                        Free 15 per Staker Wallet
+                        <br>
+                        Has this address claimed the free 15 mint yet?
+                        <br>
+                        {{hasStakedAddressClaimed}} <br>
+                        <br>
+                        Does user have staked NFTs? <br>
+                        {{doesUserHaveStakedNfts}} <br>
+                        <br>
+                        <button *ngIf="hasStakedAddressClaimed  == false &&  doesUserHaveStakedNfts"
+                            (click)="stakedAddressFreeMintClaim()" class="styled">
+                            Mint
+                        </button>
+                        <button *ngIf="hasStakedAddressClaimed  == false &&  !doesUserHaveStakedNfts"
+                            [routerLink]="['/manage']" class="styled">
+                            Stake
+                        </button>
+
+                        <p *ngIf="hasStakedAddressClaimed"> This address has already claimed its FTG's</p>
+                    </div>
+
+                </div>
 
 
-        </div>
-        <div class="col-lg-4">
-            <div class="card-body" id="styled">
-                Buy Contract With $TOON
-                <br><br>
-                <button class="styled">
-                    Become Owner
+                <div class="col-lg-4">
 
-                </button>
+                    <div class="card-body" id="styled">
+                        Buy Contract With ETH:
+                        <br><br>
+
+                        Price to become contract owner of FruitTownGremlins.WTFruit:<br><br>
+                        <img id="center-img" src="../../../assets/etherSymbol.png" alt="logo" height="25vh" width="25"
+                            style="background-color:aliceblue" /> {{priceOfContractEth}}
+                        <br>
+                        <br>
+
+                        <button class="styled">
+                            Become Owner
+                        </button>
+
+                    </div>
+
+
+
+
+                </div>
+                <div class="col-lg-4">
+                    <div class="card-body" id="styled">
+                        Buy Contract With $TOON:
+                        <br><br>
+                        Price to become contract owner of FruitTownGremlins.WTFruit:<br><br>
+                        <img id="center-img" src="../../../assets/toonverse/catCoin.gif" alt="logo" height="25vh"
+                            width="25" />{{priceOfContractToon}}
+                        <br>
+                        <br>
+                        <button class="styled">
+                            Become Owner
+
+                        </button>
+                    </div>
+
+
+                </div>
+
             </div>
-
-
-
         </div>
     </div>
 </div>
