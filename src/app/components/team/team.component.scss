@@ -32,7 +32,7 @@
 }
 
 #card-free-mints:hover{
-  background-color: rgb(150, 154, 227);
+  background-color: bisque;
   border-radius: 5%;
   max-width: 70%;
   text-decoration: underline;
@@ -61,10 +61,8 @@
 }
 
 #gremlins-img {
-  // max-width: 100%;
-  // max-height: 100%;
-  // object-fit: contain;
-  // padding: 3px;
+   object-fit: contain;
+  padding: 10px;
   transition: 0.5s all ease-in-out;
 
 }
@@ -75,6 +73,7 @@
 }
 
 #card-gremlins {
+  min-height: 1000px; 
 background-color: #666;
 
 }
