@@ -102,4 +102,51 @@ catch(e){
   }
 
 
+  async becomeOwnerWithEth(){
+    this.error = "";
+    this.isLoading = true;
+
+    try{
+      await  fruitTown.methods.buyContractWithEth().send({
+        from: this.userAddress,
+        value: this.priceOfContractEth
+      });
+      this.isLoading = false;
+      this.error = "";
+      this.getContent();
+    }catch(e){
+      console.log(e.message)
+      this.error = e.message;
+      this.isLoading = false;
+    }
+
+
+  }
+
+  async becomeOwnerWithToon(){
+    this.error = "";
+    this.isLoading = true;
+
+    try{
+      await $toonCoinContract.methods.approve(this.fruitTownAddress, this.priceOfContractToon).send({
+        from: this.userAddress,
+      })
+
+
+      await  fruitTown.methods.buyContractWithTOON().send({
+        from: this.userAddress,
+      });
+      this.isLoading = false;
+      this.error = "";
+      this.getContent();
+    }catch(e){
+      console.log(e.message)
+      this.error = e.message;
+      this.isLoading = false;
+    }
+
+
+  }
+
+
 }
