@@ -7,6 +7,8 @@ import axios from "axios";
   styleUrls: ["./viewcatz.component.scss"],
 })
 export class ViewcatzComponent implements OnInit {
+  viewDevilCatz: boolean = false
+  viewFruitTown: boolean = false;
   contractOwner: any;
   constructor() {}
   tokenUri: string = "";
@@ -51,14 +53,23 @@ export class ViewcatzComponent implements OnInit {
         .catch((err) => console.log(err));
     }
 
-    // console.log(" this.tokenUri for " + this.tokenUri);
-
-    //Need to query Contract for MetData.
-
-    //API call metadatalink.
-
-    //Display data.
   }
+
+  toggleViewDevilCatz() {
+    this.viewDevilCatz = true;
+  }
+
+  toggleViewFtg() {
+    this.viewFruitTown = true;
+  }
+
+  clear(){
+    this.viewFruitTown = false;
+    this.viewDevilCatz = false;
+
+  }
+  
+
 
   async searchByEthAddress() {
     this.tokenJsonArray = new Array;
@@ -91,3 +102,7 @@ export class ViewcatzComponent implements OnInit {
     }
   }
 }
+function toggleViewDevilCatz() {
+  throw new Error("Function not implemented.");
+}
+

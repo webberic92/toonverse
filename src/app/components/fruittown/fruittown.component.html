@@ -105,7 +105,7 @@
                 
                             <br>
                             <br>
-                            <mdb-range (ngModelChange)="updatepublicMintFtgAmount($event)" [min]="0" [max]="50" ngModel="publicFreeMintSelected"></mdb-range>
+                            <mdb-range (ngModelChange)="updatepublicMintFtgAmount($event)" [min]="1" [max]="50" ngModel="publicFreeMintSelected"></mdb-range>
                             <button  *ngIf="publicFreeMintSelected <= freeMintAmount"  (click)="freeMint()" class="styled">
                                 Mint
                             </button>
@@ -148,7 +148,7 @@
                             <!-- amount you can claim. -->
                             <br>
                             <br>
-                            <mdb-range (ngModelChange)="updateDcMintFtgAmount($event)" [min]="0" [max]="50" ngModel="dcFreeMintSelected"></mdb-range>
+                            <mdb-range (ngModelChange)="updateDcMintFtgAmount($event)" [min]="1" [max]="50" ngModel="dcFreeMintSelected"></mdb-range>
                             <button  *ngIf="dcFreeMintSelected <= dcHaveNotClaimedArray.length"  (click)="mintWithDevilCat()" class="styled">
                                 Mint
                             </button>
@@ -178,7 +178,7 @@
                             total price :                         <img id="center-img" src="../../../assets/toonverse/catCoin.gif" alt="logo" height="25vh"
                             width="25" /> {{toonMintPriceTotal}}
                             <br><br>
-                            <mdb-range (ngModelChange)="updatePublicToonPrice($event)" [min]="0" [max]="50" ngModel="toonMintAmountSelected"></mdb-range>
+                            <mdb-range (ngModelChange)="updatePublicToonPrice($event)" [min]="1" [max]="50" ngModel="toonMintAmountSelected"></mdb-range>
                             <button *ngIf="toonMintPriceTotal <= this.$toonInWallet" (click)="mintWithToon()" class="styled">
                                 Mint
                             </button>
@@ -207,7 +207,7 @@
                             <br>
                             total price : ETH {{publicMintPriceTotal}}
                             <br><br>
-                            <mdb-range (ngModelChange)="updatePublicMintPrice($event)" [min]="0" [max]="50" ngModel="publicMintAmountSelected"></mdb-range>
+                            <mdb-range (ngModelChange)="updatePublicMintPrice($event)" [min]="1" [max]="50" ngModel="publicMintAmountSelected"></mdb-range>
                             <button (click)="mintWithEth()" class="styled">
                                 Mint
                             </button>
