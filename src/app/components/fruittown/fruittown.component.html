@@ -53,7 +53,7 @@
         <br>
 
         <div *ngIf="this.userAddress == '' && !this.isLoading">
-            dONt bE a LEmOn HeAd gEt FrUiTy aND LogIN!
+            <p>dONt bE a LEmOn HeAd gEt FrUiTy aND LogIN!</p>
             <br>
             <button (click)="connectMetaMask()" style="margin: 50px; margin-top: 20px;" *ngIf="this.userAddress == ''"
                 class="styled">
@@ -77,6 +77,48 @@
             You own = {{this.$toonInWallet}} <img id="center-img" src="../../../assets/toonverse/catCoin.gif" alt="logo" height="25vh"
             width="25" />!
             <br>
+
+
+
+
+            <div class="row" *ngIf="isFreeMintOpen && !hasPublicAddressFreeMinted" style="justify-content: center;">
+                <hr>     
+
+                <p>Fruity Free Mintz!</p>
+                <div class="col-lg-4">
+                    <div class="card-body" id="styled">
+
+                        <div class="p-3">
+                            1 Free Mint Per Wallet Address
+                    
+                            <br>
+                            <br>
+                            This wallet as already claimed:  {{hasPublicAddressFreeMinted}}
+                            <br>
+                            <br>
+
+                            Amount public can free mint:  {{freeMintAmount}}
+
+                            <br>
+                            <br>Selected: {{publicFreeMintSelected}} FTG <img id="center-img" src="../../../assets/toonverse/fruitgremlins.wtf/Dragonfruit.PNG" alt="logo" height="25vh"
+                            width="25" style="margin: 5px;" />
+                
+                            <br>
+                            <br>
+                            <mdb-range (ngModelChange)="updatepublicMintFtgAmount($event)" [min]="0" [max]="50" ngModel="publicFreeMintSelected"></mdb-range>
+                            <button  *ngIf="publicFreeMintSelected <= freeMintAmount"  (click)="freeMint()" class="styled">
+                                Mint
+                            </button>
+                            <p *ngIf="publicFreeMintSelected > freeMintAmount" > To many selected </p>
+
+                        </div>
+
+                    </div>
+                </div>   
+                <hr>     
+
+            </div>
+
 
             <div class="row">
 
@@ -137,10 +179,10 @@
                             width="25" /> {{toonMintPriceTotal}}
                             <br><br>
                             <mdb-range (ngModelChange)="updatePublicToonPrice($event)" [min]="0" [max]="50" ngModel="toonMintAmountSelected"></mdb-range>
-                            <button (click)="mintWithToon()" class="styled">
+                            <button *ngIf="toonMintPriceTotal <= this.$toonInWallet" (click)="mintWithToon()" class="styled">
                                 Mint
                             </button>
-
+                            <p *ngIf="toonMintPriceTotal > this.$toonInWallet" > To many selected </p>
 
        
                         </div>
@@ -183,7 +225,7 @@
             <hr>
 
             <div class="row">
-                <p>Pear-fict Picks</p>
+                <p>Pearfict Picks</p>
 
                 <div class="col-lg-4">
                     <div class="card-body" id="styled">

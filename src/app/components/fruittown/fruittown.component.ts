@@ -31,6 +31,7 @@ export class FruittownComponent implements OnInit {
   dcThatCanClaimFtgSet = new Set<number>();
   stakedAddressFreeMintAmount: number = 10;
   dcFreeMintSelected: number = 0;
+  publicFreeMintSelected: number = 0;
   $toonInWallet: number = 0;
   toonMintMultiplier: number = 0;
   toonMintAmountSelected: number = 0;
@@ -45,6 +46,9 @@ export class FruittownComponent implements OnInit {
   isMetaMaskConnected = false;
   isContractForSaleEth = false;
   isContractForSaleToon = false;
+  isFreeMintOpen = false;
+  hasPublicAddressFreeMinted = false;
+  freeMintAmount = 0;
   doesUserHaveStakedNfts: boolean = false;
   ftgOwned: number = 0;
   async ngOnInit(): Promise<void> {}
@@ -84,6 +88,10 @@ export class FruittownComponent implements OnInit {
         this.isContractForSaleEth = await ProviderLessFTGContract.methods.isContractForEthSale().call();
         this.isContractForSaleToon =await ProviderLessFTGContract.methods.isContractForToonSale().call();
 
+
+      this.isFreeMintOpen = await ProviderLessFTGContract.methods.isFreeMintOpen().call();
+       this.hasPublicAddressFreeMinted = await ProviderLessFTGContract.methods.hasPublicAddressMinted(this.userAddress).call();
+       this.freeMintAmount = await ProviderLessFTGContract.methods.freeMintAmount().call();
 
 
 
@@ -236,6 +244,25 @@ export class FruittownComponent implements OnInit {
     }
   }
 
+  async freeMint() {
+    this.isLoading = true;
+
+
+    try {
+      await fruitTown.methods.freeMint(this.publicFreeMintSelected).send({
+        from: this.userAddress,
+        value: 0
+      });
+      this.isLoading = false;
+      this.error = "";
+      this.getContent();
+    } catch (e) {
+      console.log(e.message);
+      this.error = e.message;
+      this.isLoading = false;
+    }
+  }
+
   async becomeOwnerWithEth() {
     this.error = "";
     this.isLoading = true;
@@ -297,8 +324,10 @@ export class FruittownComponent implements OnInit {
 
   updateDcMintFtgAmount(e: Event) {
     this.dcFreeMintSelected = Number(e);
+  } 
+   updatepublicMintFtgAmount(e: Event) {
+    this.publicFreeMintSelected = Number(e);
   }
-
   // updateCatClaimArraySelect(e: Event) {
   //   this.toonMintAmountSelected = Number(e);
   //   this.toonMintPriceTotal = this.toonMintMultiplier * this.toonMintAmountSelected;
