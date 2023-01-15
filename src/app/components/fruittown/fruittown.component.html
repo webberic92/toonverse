@@ -73,7 +73,9 @@
 
         <div *ngIf="this.userAddress != '' && !this.isLoading">
             <p> Welcome {{this.userAddress}}</p>
-            You own = {{this.ftgOwned}} FTG!
+            You own = {{this.ftgOwned}} FTG! <br>
+            You own = {{this.$toonInWallet}} <img id="center-img" src="../../../assets/toonverse/catCoin.gif" alt="logo" height="25vh"
+            width="25" />!
             <br>
 
             <div class="row">
@@ -106,21 +108,31 @@
                 <div class="col-lg-4">
                     <div class="card-body" id="styled">
 
-                        <div class="p-3">
+                        <div class="p-3"> $TOON Mint
 
-                            $TOON Claim
+                            <br>
+              
+                            <br>
+                            $TOON mint price: {{toonMintMultiplier}}
+                            <!-- look up amount of devilcatz in wallet. -->
+                            <!-- look up amount of devil catz staked. -->
+                            <!-- amount you can claim. -->
                             <br>
                             <br>
-                            You have this much $TOON in your waller: {{$toonInWallet}}
-
-                            <br><br>Selected: {{dcFreeMintSelected}}
-                            <!-- look up amount of $toon in wallet -->
-                            <mdb-range [min]="0" [max]="50"></mdb-range>
-                            <button class="styled">
+                            selected : FTG {{toonMintAmountSelected}}
+                            <br>
+                            <br>
+                            total price :                         <img id="center-img" src="../../../assets/toonverse/catCoin.gif" alt="logo" height="25vh"
+                            width="25" /> {{toonMintPriceTotal}}
+                            <br><br>
+                            <mdb-range (ngModelChange)="updatePublicToonPrice($event)" [min]="0" [max]="50" ngModel="toonMintAmountSelected"></mdb-range>
+                            <button (click)="mintWithToon()" class="styled">
                                 Mint
                             </button>
-                        </div>
 
+
+       
+                        </div>
                     </div>
                 </div>
                 <div class="col-lg-4">

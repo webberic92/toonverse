@@ -21,7 +21,9 @@ export class FruittownComponent implements OnInit {
   cdStakedArray: any[] = new Array();
   dcFreeMintSelected: number =0;
   $toonInWallet:number = 0;
-  // isPublicMintOpen: boolean = false;
+  toonMintMultiplier:number = 0;
+  toonMintAmountSelected: number = 0;
+  toonMintPriceTotal:number = 0;
   publicMintPrice: number = 0;
   publicMintAmountSelected: number = 0;
   publicMintPriceTotal: number = 0;
@@ -41,10 +43,13 @@ export class FruittownComponent implements OnInit {
   async getContent(){
     this.isLoading=true;
     this.fruitTownAddress = fruitTown._address;
+    try{
+
     this.ftgOwned = await ProviderLessFTGContract.methods.balanceOf(this.userAddress).call();
     this.cdStakedArray =  await  $toonCoinContract.methods.getUsersStakedNfts(this.userAddress).call();
     this.$toonInWallet = await $toonCoinContract.methods.balanceOf(this.userAddress).call();
     this.publicMintPrice = Web3.utils.fromWei(await fruitTown.methods.mintCost().call());
+    this.toonMintMultiplier = await ProviderLessFTGContract.methods.toonMintMultiplier().call();
     // console.log(this.cdStakedArray)
     // console.log(this.cdStakedArray)
     if(this.cdStakedArray.length > 0){
@@ -54,6 +59,17 @@ export class FruittownComponent implements OnInit {
     this.priceOfContractEth = Web3.utils.fromWei(await ProviderLessFTGContract.methods.sellOwnerShipCostInEth().call(),"ether");
     this.priceOfContractToon = await ProviderLessFTGContract.methods.sellOwnerShipCostInToon().call();
     this.isLoading=false;
+
+
+    }catch(e){
+
+      console.log(e.message)
+      this.error = e.message;
+      this.isLoading = false;
+
+
+    }
+
 
   }
 
@@ -123,6 +139,32 @@ catch(e){
 
   }
 
+  async mintWithToon(){
+    this.error = "";
+    this.isLoading = true;
+
+    try{
+      await $toonCoinContract.methods.approve(this.fruitTownAddress, this.toonMintAmountSelected).send({
+        from: this.userAddress,
+      })
+      await  fruitTown.methods.mintWithToon(this.toonMintAmountSelected ).send({
+        from: this.userAddress,
+        value: this.toonMintAmountSelected
+        });
+      this.isLoading = false;
+      this.error = "";
+      this.getContent();
+    }catch(e){
+      console.log(e.message)
+      this.error = e.message;
+      this.isLoading = false;
+    }
+
+
+  }
+
+
+
 
 
   async becomeOwnerWithEth(){
@@ -173,6 +215,12 @@ catch(e){
     console.log(e)
     this.publicMintAmountSelected = Number(e);
     this.publicMintPriceTotal = parseFloat((this.publicMintPrice * this.publicMintAmountSelected).toFixed(2));
+  }
+
+  updatePublicToonPrice(e: Event) {
+    console.log(e)
+    this.toonMintAmountSelected = Number(e);
+    this.toonMintPriceTotal = this.toonMintMultiplier * this.toonMintAmountSelected;
   }
 
 

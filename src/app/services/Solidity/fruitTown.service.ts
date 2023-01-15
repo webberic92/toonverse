@@ -20,7 +20,7 @@ export class NftService {
 
 
 // const contractAddress = "0x1c4a28690482b03F6991C8c24295016cba197C12"; // Live fruit town NFT  Contract
-const contractAddress = "0x51C2612b7518E6359019E9f9Dd8361E61973c920"; // goerli fruit town NFT  Contract
+const contractAddress = "0xf2F87a6430E86bEe2739E9E00fd6c83f6e0BD650"; // goerli fruit town NFT  Contract
 export const ProviderLessFTGContract = new provider2.eth.Contract(contract, contractAddress);
 
 
