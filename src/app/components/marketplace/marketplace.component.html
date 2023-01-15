@@ -9,239 +9,197 @@
 
 
 
+    <div class="container">
+        <div class="row" style="  justify-content: center; padding: 15px;background-color: aliceblue;border-bottom-style: double;">
+            <div class="col-md-2">Icon</div>
+            <div class="col-md-2">Project</div>
+            <div class="col-md-2">Status</div>
+            <div class="col-md-2">Supply</div>
+            <div class="col-md-2">Link</div>
+        </div>
+        <div class="row" id="table">
 
-    <div class="row">
-        <div class="col-md-2">Icon</div>
-        <div class="col-md-2">Project</div>
-        <div class="col-md-2">Status</div>
-        <div class="col-md-2">Supply</div>
-        <div class="col-md-2">Link</div>
-    </div>
-    <div class="row">
+            <div class="col-md-2">
 
-        <div class="col-md-2">
+                <img src="../../../assets/toonverse/greenCat.png" alt="" style="width: 45px; height: 45px"
+                    class="rounded-circle" />
+            </div>
 
-            <img src="../../../assets/toonverse/greenCat.png" alt="" style="width: 45px; height: 45px"
-                class="rounded-circle" />
+            <div class="col-md-2">
+
+                <div class="ms-3">
+                    <p class="fw-bold mb-1">Devil Catz</p>
                 </div>
+            </div>
 
-                <div class="col-md-2">
-  
-            <div class="ms-3">
-                <p class="fw-bold mb-1">Devil Catz</p>
+            <div class="col-md-2">
+
+
+                <span class="badge badge-success rounded-pill d-inline">SOLD OUT</span>
+            </div>
+            <div class="col-md-2">
+
+                2222
+            </div>
+
+            <div class="col-md-2">
+
+                <button [routerLink]="['/manage']" id="styled-mint-button">
+                    Stake
+                </button>
             </div>
         </div>
 
-        <div class="col-md-2">
+        <div class="row" id="table">
+
+            <div class="col-md-2">
+                <img src="../../../assets/toonverse/fruitgremlins.wtf/ftgbanner.png" class="rounded-circle" alt=""
+                    style="width: 45px; height: 45px" />
+
+            </div>
+            <div class="col-md-2">
+
+                <p class="fw-bold mb-1">Fruit Town Gremlins</p>
+
+            </div>
+
+            <div class="col-md-2">
 
 
-            <span class="badge badge-success rounded-pill d-inline">SOLD OUT</span>
-        </div>
-        <div class="col-md-2">
+                <span class="badge badge-primary rounded-pill d-inline">Minting Now</span>
+            </div>
+            <div class="col-md-2">
 
-            2222
-        </div>
+                4444
+            </div>
 
-        <div class="col-md-2">
+            <div class="col-md-2">
 
-            <button [routerLink]="['/manage']" id="styled-mint-button">
-                Stake
-            </button>
-        </div>
-    </div>
-
-    <div class="row">
-
-        <div class="col-md-2">
-            <img src="../../../assets/toonverse/fruitgremlins.wtf/ftgbanner.png" class="rounded-circle" alt=""
-                style="width: 45px; height: 45px" />
-            <p class="fw-bold mb-1">Fruit Town Gremlins</p>
-
-        </div>
-
-        <div class="col-md-2">
-
-
-            <span class="badge badge-primary rounded-pill d-inline">Minting Now</span>
-        </div>
-        <div class="col-md-2">
-
-            4444
-        </div>
-
-        <div class="col-md-2">
-
-            <button [routerLink]="['/fruittown']" id="styled-mint-button">
-                Mint
-            </button>
-        </div>
-
-    </div>
-
-    <div class="row">
-
-        <div class="col-md-2">
-
-            <img src="../../../assets/toonverse/tanggang/tangGang.png" class="rounded-circle" alt=""
-                style="width: 45px; height: 45px" />
-            <p class="fw-bold mb-1">Tang Gang</p>
+                <button [routerLink]="['/fruittown']" id="styled-mint-button">
+                    Mint
+                </button>
+            </div>
 
         </div>
 
-        <div class="col-md-2">
+        <div class="row" id="table">
+
+            <div class="col-md-2">
+
+                <img src="../../../assets/toonverse/tanggang/tangGang.png" class="rounded-circle" alt=""
+                    style="width: 45px; height: 45px" />
+            </div>
+            <div class="col-md-2">
+                <p class="fw-bold mb-1">Tang Gang</p>
+
+            </div>
+
+            <div class="col-md-2">
 
 
-            <span class="badge badge-warning rounded-pill d-inline">Coming Soon...</span>
-        </div>
-        <div class="col-md-2">
+                <span class="badge badge-warning rounded-pill d-inline">Coming Soon...</span>
+            </div>
+            <div class="col-md-2">
 
-            TBD</div>
+                TBD</div>
 
-        <div class="col-md-2">
+            <div class="col-md-2">
 
-            <button disabled [routerLink]="['/manage']" id="styled-mint-button">
-                TBD
-            </button>
-        </div>
-
-    </div>
-    <div class="row">
-
-        <div class="col-md-2">
-
-            <img src="../../../assets/toonverse/clouds/Music.png" class="rounded-circle" alt=""
-                style="width: 45px; height: 45px" />
-            <p class="fw-bold mb-1">Crazy Cloud Club</p>
-
-        </div>
-
-        <div class="col-md-2">
-
-
-            <span class="badge badge-warning rounded-pill d-inline">Coming Soon...</span>
-        </div>
-        <div class="col-md-2">
-
-            TBD</div>
-
-        <div class="col-md-2">
-
-            <button disabled [routerLink]="['/manage']" id="styled-mint-button">
-                TBD
-            </button>
-        </div>
-
-    </div>
-    <div class="row">
-
-        <div class="col-md-2">
-
-            <img src="../../../assets/toonverse/tanggang/tangGang.png" class="rounded-circle" alt=""
-                style="width: 45px; height: 45px" />
-            <p class="fw-bold mb-1">Tang Gang</p>
+                <button disabled [routerLink]="['/manage']" id="styled-mint-button">
+                    TBD
+                </button>
+            </div>
 
         </div>
+        <div class="row" id="table">
 
-        <div class="col-md-2">
+            <div class="col-md-2">
 
+                <img src="../../../assets/toonverse/clouds/Music.png" class="rounded-circle" alt=""
+                    style="width: 45px; height: 45px" />
+            </div>
+            <div class="col-md-2">
+                <p class="fw-bold mb-1">Crazy Cloud Club</p>
 
-            <span class="badge badge-warning rounded-pill d-inline">Coming Soon...</span>
-        </div>
-        <div class="col-md-2">
+            </div>
 
-            TBD</div>
-
-        <div class="col-md-2">
-
-            <button disabled [routerLink]="['/manage']" id="styled-mint-button">
-                TBD
-            </button>
-        </div>
-    </div>
+            <div class="col-md-2">
 
 
-    <div class="row">
+                <span class="badge badge-warning rounded-pill d-inline">Coming Soon...</span>
+            </div>
+            <div class="col-md-2">
 
-        <div class="col-md-2">
+                TBD</div>
 
-            <img src="../../../assets/toonverse/clouds/Music.png" class="rounded-circle" alt=""
-                style="width: 45px; height: 45px" />
+            <div class="col-md-2">
 
-            <p class="fw-bold mb-1">Cloudy Frens</p>
+                <button disabled [routerLink]="['/manage']" id="styled-mint-button">
+                    TBD
+                </button>
+            </div>
 
         </div>
 
-        <div class="col-md-2">
 
 
-            <span class="badge badge-warning rounded-pill d-inline">Coming Soon...</span>
+
+        <div class="row" id="table">
+
+            <div class="col-md-2">
+
+                <img src="../../../assets/toonverse/sourpuss/main.png" class="rounded-circle" alt=""
+                    style="width: 45px; height: 45px" />
+            </div>
+            <div class="col-md-2">
+                <p class="fw-bold mb-1">Sour Puss Felines</p>
+
+            </div>
+
+            <div class="col-md-2">
+
+
+                <span class="badge badge-warning rounded-pill d-inline">Coming Soon...</span>
+            </div>
+            <div class="col-md-2">
+
+                TDB</div>
+
+            <div class="col-md-2">
+
+                <button disabled [routerLink]="['/manage']" id="styled-mint-button">
+                    TBD
+                </button>
+            </div>
+
         </div>
-        <div class="col-md-2">
+        <div class="row" id="table">
 
-            TDB</div>
+            <div class="col-md-2">
 
-        <div class="col-md-2">
+                <img src="../../../assets/toonverse/redFront.png" class="rounded-circle" alt=""
+                    style="width: 45px; height: 45px" />
+            </div>
+            <div class="col-md-2">
+                <p class="fw-bold mb-1">Devil Catz V2</p>
 
-            <button disabled [routerLink]="['/manage']" id="styled-mint-button">
-                TBD
-            </button>
+            </div>
+
+            <div class="col-md-2">
+
+
+                <span class="badge badge-warning rounded-pill d-inline">Coming Soon...</span>
+            </div>
+            <div class="col-md-2">
+
+                TDB</div>
+
+            <div class="col-md-2">
+
+                <button disabled [routerLink]="['/manage']" id="styled-mint-button">
+                    TBD
+                </button>
+            </div>
         </div>
     </div>
-
-    <div class="row">
-
-        <div class="col-md-2">
-
-            <img src="../../../assets/toonverse/sourpuss/main.png" class="rounded-circle" alt=""
-                style="width: 45px; height: 45px" />
-
-            <p class="fw-bold mb-1">Sour Puss Felines</p>
-
-        </div>
-
-        <div class="col-md-2">
-
-
-            <span class="badge badge-warning rounded-pill d-inline">Coming Soon...</span>
-        </div>
-        <div class="col-md-2">
-
-            TDB</div>
-
-        <div class="col-md-2">
-
-            <button disabled [routerLink]="['/manage']" id="styled-mint-button">
-                TBD
-            </button>
-        </div>
-
-    </div>
-    <div class="row">
-
-        <div class="col-md-2">
-
-            <img src="../../../assets/toonverse/redFront.png" class="rounded-circle" alt=""
-                style="width: 45px; height: 45px" />
-
-            <p class="fw-bold mb-1">Devil Catz V2</p>
-
-        </div>
-
-        <div class="col-md-2">
-
-
-            <span class="badge badge-warning rounded-pill d-inline">Coming Soon...</span>
-        </div>
-        <div class="col-md-2">
-
-            TDB</div>
-
-        <div class="col-md-2">
-
-            <button disabled [routerLink]="['/manage']" id="styled-mint-button">
-                TBD
-            </button>
-        </div>
-    </div>
-
 </div>
