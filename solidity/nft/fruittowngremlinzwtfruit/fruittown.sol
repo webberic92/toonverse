@@ -1851,6 +1851,8 @@ contract FruitTownGremlinsWTFruit is ERC721A, Ownable {
         "https://fruittown.s3.us-east-2.amazonaws.com/images/ftgbanner.png";
     bool public PAUSED = false;
     bool public REVEALED = true;
+    bool public isContractForToonSale = false;
+    bool public isContractForEthSale = false;
     mapping(uint256 => bool) public hasCatFreeMinted; 
     mapping(address => bool) public hasStakerAddressFreeMinted; 
     mapping(address => bool) public hasPublicAddressMinted; 
@@ -1865,7 +1867,7 @@ contract FruitTownGremlinsWTFruit is ERC721A, Ownable {
         _safeMint(DEV, 50);
     }
 
-    modifier onlyDev() {
+     modifier onlyDev() {
         require(msg.sender == DEV, "Dev only!");
         _;
     }
@@ -1908,6 +1910,14 @@ contract FruitTownGremlinsWTFruit is ERC721A, Ownable {
         freeMintAmount = amount;
     }
 
+       function setisContractForToonSale(bool b) public onlyOwner {
+        isContractForToonSale = b;
+    }
+
+        function setisContractForEthSale(bool b) public onlyOwner {
+        isContractForEthSale = b;
+    }
+
     function setCost(uint256 _newCost) public onlyOwner {
         mintCost = _newCost;
     }
@@ -1942,6 +1952,8 @@ contract FruitTownGremlinsWTFruit is ERC721A, Ownable {
     }
 
     function buyContractWithTOON() public payable {
+                require(isContractForToonSale, "Contract not for sale right now for ETH");
+
         $toon.transferFrom(msg.sender, owner(), sellOwnerShipCostInToon);
         _transferOwnership(msg.sender);
     }
@@ -1958,7 +1970,7 @@ contract FruitTownGremlinsWTFruit is ERC721A, Ownable {
         mintChecks(catsToClaimFreeMint.length)
     {
         uint256 numToMint = 0;
-        for (uint256 i = 0; i < catsToClaimFreeMint.length - 1; i++) {
+        for (uint256 i = 0; i < catsToClaimFreeMint.length; i++) {
             require(
                 !hasCatFreeMinted[catsToClaimFreeMint[i]],
                 "One of these cats have already claimed a FTG.Wtfruit"
@@ -1978,7 +1990,7 @@ contract FruitTownGremlinsWTFruit is ERC721A, Ownable {
             }
         }
         _safeMint(msg.sender, numToMint);
-        for (uint256 i = 0; i < catsToClaimFreeMint.length - 1; i++) {
+        for (uint256 i = 0; i < catsToClaimFreeMint.length; i++) {
             hasCatFreeMinted[catsToClaimFreeMint[i]] = true;
         }
     }
@@ -2058,6 +2070,7 @@ contract FruitTownGremlinsWTFruit is ERC721A, Ownable {
     **/
     bool isFirstSale = true;
     function buyContractWithEth() public payable {
+        require(isContractForEthSale, "Contract not for sale right now for ETH");
         require(
             msg.value >= sellOwnerShipCostInEth,
             "Not Enough Eth Sent to be Owner."
@@ -2113,8 +2126,6 @@ contract FruitTownGremlinsWTFruit is ERC721A, Ownable {
 
     function withdraw(uint256 _amount) public payable onlyOwner {
         
-        //Rest goes to Owner of Contract
-           
             (bool resultBool, ) = payable(owner()).call{value: _amount}("");
             require(resultBool);    
     }

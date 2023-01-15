@@ -86,20 +86,31 @@
 
                         <div class="p-3">
                             1 Free Mint Per DevilCat
+                    
+                            <br>
+                            You have this many Unstaked Devil Catz: {{dcUnstakedNumboerOf}}
                             <br>
 
+                            You have this many Staked Devil Catz: {{dcStakedArray.length}}
+
                             <br>
-                            You have this many DevilCat Free Mints Left: {{dcFreeMintArray}}
+                            <br>
+                            This many can still claim a free cat. {{dcHaveNotClaimedArray.length}}<img id="center-img" src="../../../assets/toonverse/greenCat.png" alt="logo" height="25vh"
+                            width="25" />
+
+                            
 
                             <br><br>Selected: {{dcFreeMintSelected}}
                             <!-- look up amount of devilcatz in wallet. -->
                             <!-- look up amount of devil catz staked. -->
                             <!-- amount you can claim. -->
-                            <mdb-range [min]="0" [max]="50"></mdb-range>
-                            <button class="styled">
+                            <br>
+                            <br>
+                            <mdb-range (ngModelChange)="updateDcMintFtgAmount($event)" [min]="0" [max]="50" ngModel="dcFreeMintSelected"></mdb-range>
+                            <button  *ngIf="dcFreeMintSelected <= dcHaveNotClaimedArray.length"  (click)="mintWithDevilCat()" class="styled">
                                 Mint
                             </button>
-
+                            <p *ngIf="dcFreeMintSelected > dcHaveNotClaimedArray.length" > To many selected </p>
 
                         </div>
 
@@ -113,7 +124,7 @@
                             <br>
               
                             <br>
-                            $TOON mint price: {{toonMintMultiplier}}
+                            $TOON mint multiplier: {{toonMintMultiplier}}
                             <!-- look up amount of devilcatz in wallet. -->
                             <!-- look up amount of devil catz staked. -->
                             <!-- amount you can claim. -->
@@ -211,6 +222,7 @@
                         <img id="center-img" src="../../../assets/etherSymbol.png" alt="logo" height="25vh" width="25"
                             style="background-color:aliceblue" /> {{priceOfContractEth}}
                         <br>
+                        Is contract for sale right now : {{isContractForSaleEth}}
                         <br>
 
                         <button (click)="becomeOwnerWithEth()" class="styled">
@@ -231,6 +243,8 @@
                         <img id="center-img" src="../../../assets/toonverse/catCoin.gif" alt="logo" height="25vh"
                             width="25" />{{priceOfContractToon}}
                         <br>
+                        Is contract for sale right now : {{isContractForSaleToon}}
+
                         <br>
                         <button (click)="becomeOwnerWithToon()" class="styled">
                             Become Owner
