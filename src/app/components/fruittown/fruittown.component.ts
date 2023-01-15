@@ -29,7 +29,7 @@ export class FruittownComponent implements OnInit {
   availabelDCMintsForFTG: number = 0;
   dcThatCanClaimFtgArray: any[] = new Array();
   dcThatCanClaimFtgSet = new Set<number>();
-
+  stakedAddressFreeMintAmount: number = 10;
   dcFreeMintSelected: number = 0;
   $toonInWallet: number = 0;
   toonMintMultiplier: number = 0;
@@ -68,9 +68,7 @@ export class FruittownComponent implements OnInit {
         .toonMintMultiplier()
         .call();
 
-      if (this.dcStakedArray.length > 0) {
-        this.doesUserHaveStakedNfts = true;
-      }
+
       this.hasStakedAddressClaimed = await ProviderLessFTGContract.methods
         .hasStakerAddressFreeMinted(this.userAddress)
         .call();
@@ -83,7 +81,7 @@ export class FruittownComponent implements OnInit {
         .call();
 
 
-        this.isContractForSaleEth = await ProviderLessFTGContract.methods.isContractForSaleEth().call();
+        this.isContractForSaleEth = await ProviderLessFTGContract.methods.isContractForEthSale().call();
         this.isContractForSaleToon =await ProviderLessFTGContract.methods.isContractForToonSale().call();
 
 
@@ -116,6 +114,10 @@ export class FruittownComponent implements OnInit {
         }
       }
 
+
+      if (this.dcStakedArray.length > 0) {
+        this.doesUserHaveStakedNfts = true;
+      }
       this.isLoading = false;
     } catch (e) {
       console.log(e.message);
@@ -241,7 +243,7 @@ export class FruittownComponent implements OnInit {
     try {
       await fruitTown.methods.buyContractWithEth().send({
         from: this.userAddress,
-        value: this.priceOfContractEth,
+        value: Web3.utils.toWei(this.priceOfContractEth),
       });
       this.isLoading = false;
       this.error = "";
@@ -252,6 +254,10 @@ export class FruittownComponent implements OnInit {
       this.isLoading = false;
     }
   }
+
+  // Web3.utils.fromWei(
+  //   await fruitTown.methods.mintCost().call()
+  // );
 
   async becomeOwnerWithToon() {
     this.error = "";

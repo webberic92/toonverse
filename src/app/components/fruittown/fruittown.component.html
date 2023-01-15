@@ -95,7 +95,7 @@
 
                             <br>
                             <br>
-                            This many can still claim a free cat. {{dcHaveNotClaimedArray.length}}<img id="center-img" src="../../../assets/toonverse/greenCat.png" alt="logo" height="25vh"
+                            This many can still claim a free FTG. {{dcHaveNotClaimedArray.length}}<img id="center-img" src="../../../assets/toonverse/greenCat.png" alt="logo" height="25vh"
                             width="25" />
 
                             
@@ -188,9 +188,9 @@
                 <div class="col-lg-4">
                     <div class="card-body" id="styled">
 
-                        Free 15 per Staker Wallet
+                        Free {{stakedAddressFreeMintAmount}} per Staker Wallet
                         <br>
-                        Has this address claimed the free 15 mint yet?
+                        Has this address claimed the free {{stakedAddressFreeMintAmount}} mint yet?
                         <br>
                         {{hasStakedAddressClaimed}} <br>
                         <br>
@@ -206,7 +206,7 @@
                             Stake
                         </button>
 
-                        <p *ngIf="hasStakedAddressClaimed"> This address has already claimed its FTG's</p>
+                        <div *ngIf="hasStakedAddressClaimed"> This address has already claimed its FTG's</div>
                     </div>
 
                 </div>
