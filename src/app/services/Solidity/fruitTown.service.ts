@@ -5,9 +5,11 @@ const Web3 = require('web3');
 // const provider = new Web3('https://goerli.infura.io/v3/589e31a14b0c42b78400756b023d7894');
 // const provider2 = new Web3('https://goerli.infura.io/v3/589e31a14b0c42b78400756b023d7894');
 
-const provider = new Web3('https://mainnet.infura.io/v3/589e31a14b0c42b78400756b023d7894');
-const provider2 = new Web3('https://mainnet.infura.io/v3/589e31a14b0c42b78400756b023d7894');
+// const provider = new Web3('https://mainnet.infura.io/v3/589e31a14b0c42b78400756b023d7894');
+// const provider2 = new Web3('https://mainnet.infura.io/v3/589e31a14b0c42b78400756b023d7894');
 
+const provider = new Web3('https://eth-mainnet.g.alchemy.com/v2/ywlZhEbWT0TwK8e53YBtJBXf3xONC2qt');
+const provider2 = new Web3('https://eth-mainnet.g.alchemy.com/v2/ywlZhEbWT0TwK8e53YBtJBXf3xONC2qt');
 @Injectable({
   providedIn: 'root'
 })

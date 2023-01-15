@@ -20,10 +20,13 @@
 
 
 
-        <div *ngIf="viewFruitTown">viewFruitTown</div>
 
 
-        <div *ngIf="viewDevilCatz">
+
+        <div class="container" style="max-width: 90%;
+        justify-content: center;
+        justify-items: center;
+        display: grid;" *ngIf="viewDevilCatz">
             <p><button class="styled" (click)="clear()">
 
                     Back
@@ -70,97 +73,93 @@
                 </div>
             </div>
         </div>
-    </div>
 
 
-    <div class="container" style="max-width: 90%;
-    justify-content: center;
-    justify-items: center;
-    display: grid;" *ngIf="viewDevilCatz">
 
-    <!-- ETH ADDRESS LOOK UP RESULTS-->
-    <div class="ByAddressView" *ngIf="tokenJsonArray.length >0"
-        style="max-width: 100%; width: 65%; margin-bottom: 10%;">
 
-        <br>
+        <!-- ETH ADDRESS LOOK UP RESULTS-->
+        <div class="ByAddressView" *ngIf="tokenJsonArray.length >0"
+            style="max-width: 100%; width: 65%; margin-bottom: 10%;">
 
-        <button class="styled" (click)="clearCatObj()">Clear</button>
-        <br> <br>
+            <br>
 
-        <p>Unstaked DevilCatz belonging to {{searchedAddress}}...</p>
+            <button class="styled" (click)="clearCatObj()">Clear</button>
+            <br> <br>
 
-        <div id="container" style="padding-bottom: 20%;">
-            <div class="row">
-                <div class="col-md-3" id="card-lightblue-multi" *ngFor="let token of tokenJsonArray">
-                    <p>{{token.data.name}}</p>
-                    <img id="center-img" src={{token.data.image}} alt="logo" height="100vh" width="100"
-                        style="border-radius: 5%" />
-                    <br>
-                    <br>
-                    <a style="margin: 5px"
-                        href="https://opensea.io/assets/ethereum/0x1c4a28690482b03f6991c8c24295016cba197c12/{{token.data.edition}}">
-                        <img id="center-img" src="../../../assets/openSea.png" alt="openseaLogo" height="25vh"
-                            width="25vw" style="border-radius: 5%" />
-                    </a>
-                    <a style="margin: 5px"
-                        href="https://rarible.com/token/0x1c4a28690482b03f6991c8c24295016cba197c12:{{token.data.edition}}?tab=overview">
-                        <img id="center-img" src="../../../assets/rarible.png" alt="rarible" height="25vh" width="25vw"
+            <p>Unstaked DevilCatz belonging to {{searchedAddress}}...</p>
+
+            <div id="container" style="padding-bottom: 20%;">
+                <div class="row">
+                    <div class="col-md-3" id="card-lightblue-multi" *ngFor="let token of tokenJsonArray">
+                        <p>{{token.data.name}}</p>
+                        <img id="center-img" src={{token.data.image}} alt="logo" height="100vh" width="100"
                             style="border-radius: 5%" />
-                    </a>
+                        <br>
+                        <br>
+                        <a style="margin: 5px"
+                            href="https://opensea.io/assets/ethereum/0x1c4a28690482b03f6991c8c24295016cba197c12/{{token.data.edition}}">
+                            <img id="center-img" src="../../../assets/openSea.png" alt="openseaLogo" height="25vh"
+                                width="25vw" style="border-radius: 5%" />
+                        </a>
+                        <a style="margin: 5px"
+                            href="https://rarible.com/token/0x1c4a28690482b03f6991c8c24295016cba197c12:{{token.data.edition}}?tab=overview">
+                            <img id="center-img" src="../../../assets/rarible.png" alt="rarible" height="25vh"
+                                width="25vw" style="border-radius: 5%" />
+                        </a>
 
 
-                    <br>
-                    <br>
+                        <br>
+                        <br>
+                    </div>
+
                 </div>
 
             </div>
 
         </div>
 
-    </div>
 
 
 
+        <!-- GET BY CAT ID DIV -->
+        <div class="ByCatIDView" *ngIf="catObj!=null" style="max-width: 100%; width: 65%;margin-bottom: 10%;">
+            <br>
+            <button class="styled" (click)="clearCatObj()">Clear</button>
+            <br> <br>
 
-    <!-- GET BY CAT ID DIV -->
-    <div class="ByCatIDView" *ngIf="catObj!=null" style="max-width: 100%; width: 65%;margin-bottom: 10%;">
-        <br>
-        <button class="styled" (click)="clearCatObj()">Clear</button>
-        <br> <br>
 
-
-        <div id="card-lightblue" style="min-width: 75%;">
-            <p> {{catObj.data.name}}
-                <br>
-                <br>
-                <img id="center-img" src={{catObj.data.image}} alt="logo" height="150vh" width="150vw"
-                    style="border-radius: 5%" />
-                <br>
-                <br>
-                <a style="margin: 5px"
-                    href="https://opensea.io/assets/ethereum/0x1c4a28690482b03f6991c8c24295016cba197c12/{{catObj.data.edition}}">
-                    <img id="center-img" src="../../../assets/openSea.png" alt="openseaLogo" height="25vh" width="25vw"
+            <div id="card-lightblue" style="min-width: 75%;">
+                <p> {{catObj.data.name}}
+                    <br>
+                    <br>
+                    <img id="center-img" src={{catObj.data.image}} alt="logo" height="150vh" width="150vw"
                         style="border-radius: 5%" />
-                </a>
+                    <br>
+                    <br>
+                    <a style="margin: 5px"
+                        href="https://opensea.io/assets/ethereum/0x1c4a28690482b03f6991c8c24295016cba197c12/{{catObj.data.edition}}">
+                        <img id="center-img" src="../../../assets/openSea.png" alt="openseaLogo" height="25vh"
+                            width="25vw" style="border-radius: 5%" />
+                    </a>
 
-                <a style="margin: 5px"
-                    href="https://rarible.com/token/0x1c4a28690482b03f6991c8c24295016cba197c12:{{catObj.data.edition}}?tab=overview">
-                    <img id="center-img" src="../../../assets/rarible.png" alt="rarible" height="25vh" width="25vw"
-                        style="border-radius: 5%" />
-                </a>
+                    <a style="margin: 5px"
+                        href="https://rarible.com/token/0x1c4a28690482b03f6991c8c24295016cba197c12:{{catObj.data.edition}}?tab=overview">
+                        <img id="center-img" src="../../../assets/rarible.png" alt="rarible" height="25vh" width="25vw"
+                            style="border-radius: 5%" />
+                    </a>
 
-            <table id="styled" class="table" style="border-style:none">
-                <tbody style="border-style:none" id="table-cat-attributes">
+                <table id="styled" class="table" style="border-style:none">
+                    <tbody style="border-style:none" id="table-cat-attributes">
 
-                    <tr style="border-style:none" *ngFor="let attribute of catObj.data.attributes">
-                        {{attribute.trait_type}} : {{attribute.value}}
-                    </tr>
+                        <tr style="border-style:none" *ngFor="let attribute of catObj.data.attributes">
+                            {{attribute.trait_type}} : {{attribute.value}}
+                        </tr>
 
-                </tbody>
-            </table>
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
-</div>
 
 
 </div>
