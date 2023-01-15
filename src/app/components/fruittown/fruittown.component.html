@@ -18,8 +18,8 @@
         </figcaption>
     </figure>
     <br>
-    <img id="gremlins-img" src="../../../assets/toonverse/fruitgremlins.wtf/ftgBanner2.png " alt="logo"
-        width="95%" height="180vh" style="object-fit: contain;" /><br><br>
+    <img id="gremlins-img" src="../../../assets/toonverse/fruitgremlins.wtf/ftgBanner2.png " alt="logo" width="95%"
+        height="180vh" style="object-fit: contain;" /><br><br>
     <figure class="text-center">
         <blockquote class="blockquote">
             <p>
@@ -74,15 +74,15 @@
         <div *ngIf="this.userAddress != '' && !this.isLoading">
             <p> Welcome {{this.userAddress}}</p>
             You own = {{this.ftgOwned}} FTG! <br>
-            You own = {{this.$toonInWallet}} <img id="center-img" src="../../../assets/toonverse/catCoin.gif" alt="logo" height="25vh"
-            width="25" />!
+            You own = {{this.$toonInWallet}} <img id="center-img" src="../../../assets/toonverse/catCoin.gif" alt="logo"
+                height="25vh" width="25" />!
             <br>
 
 
 
 
             <div class="row" *ngIf="isFreeMintOpen && !hasPublicAddressFreeMinted" style="justify-content: center;">
-                <hr>     
+                <hr>
 
                 <p>Fruity Free Mintz!</p>
                 <div class="col-lg-4">
@@ -90,32 +90,35 @@
 
                         <div class="p-3">
                             1 Free Mint Per Wallet Address
-                    
+
                             <br>
                             <br>
-                            This wallet as already claimed:  {{hasPublicAddressFreeMinted}}
+                            This wallet as already claimed: {{hasPublicAddressFreeMinted}}
                             <br>
                             <br>
 
-                            Amount public can free mint:  {{freeMintAmount}}
+                            Amount public can free mint: {{freeMintAmount}}
 
                             <br>
-                            <br>Selected: {{publicFreeMintSelected}} FTG <img id="center-img" src="../../../assets/toonverse/fruitgremlins.wtf/Dragonfruit.PNG" alt="logo" height="25vh"
-                            width="25" style="margin: 5px;" />
-                
+                            <br>Selected: {{publicFreeMintSelected}} FTG <img id="center-img"
+                                src="../../../assets/toonverse/fruitgremlins.wtf/Dragonfruit.PNG" alt="logo"
+                                height="25vh" width="25" style="margin: 5px;" />
+
                             <br>
                             <br>
-                            <mdb-range (ngModelChange)="updatepublicMintFtgAmount($event)" [min]="1" [max]="50" ngModel="publicFreeMintSelected"></mdb-range>
-                            <button  *ngIf="publicFreeMintSelected <= freeMintAmount"  (click)="freeMint()" class="styled">
+                            <mdb-range (ngModelChange)="updatepublicMintFtgAmount($event)" [min]="1" [max]="50"
+                                ngModel="publicFreeMintSelected"></mdb-range>
+                            <button *ngIf="publicFreeMintSelected <= freeMintAmount" (click)="freeMint()"
+                                class="styled">
                                 Mint
                             </button>
-                            <p *ngIf="publicFreeMintSelected > freeMintAmount" > To many selected </p>
+                            <p *ngIf="publicFreeMintSelected > freeMintAmount"> To many selected </p>
 
                         </div>
 
                     </div>
-                </div>   
-                <hr>     
+                </div>
+                <hr>
 
             </div>
 
@@ -128,7 +131,7 @@
 
                         <div class="p-3">
                             1 Free Mint Per DevilCat
-                    
+
                             <br>
                             You have this many Unstaked Devil Catz: {{dcUnstakedNumboerOf}}
                             <br>
@@ -137,10 +140,10 @@
 
                             <br>
                             <br>
-                            This many can still claim a free FTG. {{dcHaveNotClaimedArray.length}}<img id="center-img" src="../../../assets/toonverse/greenCat.png" alt="logo" height="25vh"
-                            width="25" />
+                            This many can still claim a free FTG. {{dcHaveNotClaimedArray.length}}<img id="center-img"
+                                src="../../../assets/toonverse/greenCat.png" alt="logo" height="25vh" width="25" />
 
-                            
+
 
                             <br><br>Selected: {{dcFreeMintSelected}}
                             <!-- look up amount of devilcatz in wallet. -->
@@ -148,11 +151,13 @@
                             <!-- amount you can claim. -->
                             <br>
                             <br>
-                            <mdb-range (ngModelChange)="updateDcMintFtgAmount($event)" [min]="1" [max]="50" ngModel="dcFreeMintSelected"></mdb-range>
-                            <button  *ngIf="dcFreeMintSelected <= dcHaveNotClaimedArray.length"  (click)="mintWithDevilCat()" class="styled">
+                            <mdb-range (ngModelChange)="updateDcMintFtgAmount($event)" [min]="1" [max]="50"
+                                ngModel="dcFreeMintSelected"></mdb-range>
+                            <button *ngIf="dcFreeMintSelected <= dcHaveNotClaimedArray.length"
+                                (click)="mintWithDevilCat()" class="styled">
                                 Mint
                             </button>
-                            <p *ngIf="dcFreeMintSelected > dcHaveNotClaimedArray.length" > To many selected </p>
+                            <p *ngIf="dcFreeMintSelected > dcHaveNotClaimedArray.length"> To many selected </p>
 
                         </div>
 
@@ -164,7 +169,7 @@
                         <div class="p-3"> $TOON Mint
 
                             <br>
-              
+
                             <br>
                             $TOON mint multiplier: {{toonMintMultiplier}}
                             <!-- look up amount of devilcatz in wallet. -->
@@ -175,16 +180,18 @@
                             selected : FTG {{toonMintAmountSelected}}
                             <br>
                             <br>
-                            total price :                         <img id="center-img" src="../../../assets/toonverse/catCoin.gif" alt="logo" height="25vh"
-                            width="25" /> {{toonMintPriceTotal}}
+                            total price : <img id="center-img" src="../../../assets/toonverse/catCoin.gif" alt="logo"
+                                height="25vh" width="25" /> {{toonMintPriceTotal}}
                             <br><br>
-                            <mdb-range (ngModelChange)="updatePublicToonPrice($event)" [min]="1" [max]="50" ngModel="toonMintAmountSelected"></mdb-range>
-                            <button *ngIf="toonMintPriceTotal <= this.$toonInWallet" (click)="mintWithToon()" class="styled">
+                            <mdb-range (ngModelChange)="updatePublicToonPrice($event)" [min]="1" [max]="50"
+                                ngModel="toonMintAmountSelected"></mdb-range>
+                            <button *ngIf="toonMintPriceTotal <= this.$toonInWallet" (click)="mintWithToon()"
+                                class="styled">
                                 Mint
                             </button>
-                            <p *ngIf="toonMintPriceTotal > this.$toonInWallet" > To many selected </p>
+                            <p *ngIf="toonMintPriceTotal > this.$toonInWallet"> To many selected </p>
 
-       
+
                         </div>
                     </div>
                 </div>
@@ -194,7 +201,7 @@
                         <div class="p-3"> Public Mint
 
                             <br>
-              
+
                             <br>
                             public mint price: {{publicMintPrice}}
                             <!-- look up amount of devilcatz in wallet. -->
@@ -207,13 +214,14 @@
                             <br>
                             total price : ETH {{publicMintPriceTotal}}
                             <br><br>
-                            <mdb-range (ngModelChange)="updatePublicMintPrice($event)" [min]="1" [max]="50" ngModel="publicMintAmountSelected"></mdb-range>
+                            <mdb-range (ngModelChange)="updatePublicMintPrice($event)" [min]="1" [max]="50"
+                                ngModel="publicMintAmountSelected"></mdb-range>
                             <button (click)="mintWithEth()" class="styled">
                                 Mint
                             </button>
 
 
-       
+
                         </div>
                     </div>
                 </div>
