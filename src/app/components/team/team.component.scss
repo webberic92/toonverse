@@ -47,7 +47,7 @@
 
 
 #card-lightblue:hover{
-  background-color: bisque;
+  background-color: rgb(150, 154, 227);
   border-radius: 5%;
   transform: scale(1.05);
   text-decoration: underline;
@@ -61,10 +61,8 @@
 }
 
 #gremlins-img {
-  // max-width: 100%;
-  // max-height: 100%;
-  // object-fit: contain;
-  // padding: 3px;
+   object-fit: contain;
+  padding: 10px;
   transition: 0.5s all ease-in-out;
 
 }
@@ -75,6 +73,7 @@
 }
 
 #card-gremlins {
+  min-height: 1000px; 
 background-color: #666;
 
 }
@@ -101,15 +100,12 @@ background-color: #666;
 
 .grid-container {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  // grid-gap: 20px;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  grid-gap: 20px;
   padding: 20px;
 }
 
-
 .grid-item {
-  // background-color: white;
-  // border: 1px solid #666;
   display: flex;
   align-items: center;
   justify-content: center;

@@ -6,11 +6,11 @@
     <a class="navbar-brand" href="#">
 
       <a class="navbar-brand text-white" [routerLink]="['/home']">
-            <div class="navbar-image">
+          <div class="navbar-image">
           <img src="./../../../assets/toonverse/toonverseLogo.png" alt="logo" width="50" style="border-radius: 50%;" />
         </div>
 
-        <h6  (click)="basicNavbar.toggle()" id="navbar-text">Toonverse Studios!</h6>
+        <h6 (click)="basicNavbar.toggle()" id="navbar-text">Toonverse Studios!</h6>
 
       </a>
 
@@ -31,13 +31,19 @@
           </p>
         </li> -->
         <li class="nav-item">
-          <p id="navbar-text"(click)="basicNavbar.toggle()" class="styled" [routerLink]="['/viewcatz']"> LookUp</p>
+          <p id="navbar-text" (click)="basicNavbar.toggle()" class="styled" [routerLink]="['/viewcatz']"> LookUp</p>
         </li>
 
         <li class="nav-item">
           <p (click)="basicNavbar.toggle()" id="navbar-text" class="styled" [routerLink]="['/manage']">Staking</p>
         </li>
-        
+        <li class="nav-item">
+        </li>
+        <li class="nav-item">
+          <p id="navbar-text"(click)="basicNavbar.toggle()" class="styled" [routerLink]="['/marketplace']">Marketplace</p>
+        </li>
+
+
         <!-- <li class="nav-item" id="nav-item">
           <p id="navbar-text" (click)="basicNavbar.toggle()" class="styled" [routerLink]="['/about']">About</p>
         </li>
@@ -68,8 +74,23 @@
         </button>
       </form> -->
 
+      <div  class="hoverText" style="font-weight: bold; margin-right: 2vw;margin-top: auto; margin-bottom: auto;">Current Staked DevilCatz : {{totalStakedNfts}}
+      </div>
+    
+      <a style="margin: 5px" href="https://opensea.io/assets/ethereum/0x1c4a28690482b03f6991c8c24295016cba197c12/">
+        <img id="center-img" src="../../../assets/openSea.png" alt="openseaLogo" height="25vh" width="25vw"
+          style="border-radius: 5%" />
+      </a>
+
+      <a style="margin: 5px; margin-bottom: 5px;margin-right: 2vw;"
+        href="https://rarible.com/token/0x1c4a28690482b03f6991c8c24295016cba197c12:?tab=overview">
+        <img id="center-img" src="../../../assets/rarible.png" alt="rarible" height="25vh" width="25vw"
+          style="border-radius: 5%" />
+      </a>
+
     </div>
     <!-- Collapsible wrapper -->
+
   </div>
   <!-- Container wrapper -->
 </nav>

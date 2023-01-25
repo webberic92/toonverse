@@ -1,6 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { Web3Service } from "src/app/services/Web3/web3.service";
-import NFTContract , {ProviderLessNftContract} from "src/app/services/Solidity/nft.service";
+import NFTContract , {ProviderLessNftContract} from "src/app/services/Solidity/devilCatz.service";
 import { Router } from "@angular/router";
 const Web3 = require('web3');
 
@@ -34,7 +34,7 @@ export class MintComponent implements OnInit {
 
   async ngOnInit(): Promise<void> {
     this.totalSupply = (await ProviderLessNftContract.methods.totalSupply().call());
-    this.contractPrice = Web3.utils.fromWei(
+    this.contractPrice = Web3.Wei(
       await ProviderLessNftContract.methods.COST().call(),
       "ether"
     );

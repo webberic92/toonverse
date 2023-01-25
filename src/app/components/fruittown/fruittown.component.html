@@ -1,0 +1,311 @@
+<div class="container">
+
+    <h6 style="font-weight: bold; "><u>Fruit Town Gremlins</u> </h6>
+
+    <p>A Fruity Gremlin Project With a Twist.<br>
+        FTG contract address :
+        <br>
+        {{fruitTownAddress}}
+    </p>
+    <figure class="text-center">
+        <blockquote class="blockquote">
+            <h1>Citizens of Fruit Town are Outraged.</h1>
+            "Fruit Town Residents Peel out in Anger as <br>
+            Web3 Bandits Make off with their Precious Produce"
+        </blockquote>
+        <figcaption class="blockquote-footer">
+            Fruit Town Insider <cite title="Source Title">MFing Grems</cite>
+        </figcaption>
+    </figure>
+    <br>
+    <img id="gremlins-img" src="../../../assets/toonverse/fruitgremlins.wtf/ftgBanner2.png " alt="logo" width="95%"
+        height="180vh" style="object-fit: contain;" /><br><br>
+    <figure class="text-center">
+        <blockquote class="blockquote">
+            <p>
+                In Fruit Town, a Gremlin <br>
+                With Mischief in his Heart, he'll take<br>
+                Your Fruit, your Crypto, and your Non-Fungible Art.<br>
+            </p>
+        </blockquote>
+        <figcaption class="blockquote-footer">
+            Some Fruit Town mfer.. <cite title="Source Title">Sour Ass</cite>
+        </figcaption>
+    </figure>
+    <!--
+    **
+    Loading
+    **  -->
+    <div *ngIf="this.isLoading">
+        <div>
+            <img id="center-img" src="../../../assets/toonverse/catCoin.gif" alt="logo" height="200vh" width="150" />
+            <span class="visually-hidden">...</span>
+        </div>
+        <br />
+        <p style="font-size: 1.25em;">Please finish transaction <br> or <br>wait for blockchain to confirm...
+            <br>
+            The page will refresh on its own.
+        </p>
+        <br />
+    </div>
+    <hr>
+    <div class="container">
+        <br>
+
+        <div *ngIf="this.userAddress == '' && !this.isLoading">
+            <p>dONt bE a LEmOn HeAd gEt FrUiTy aND LogIN!</p>
+            <br>
+            <button (click)="connectMetaMask()" style="margin: 50px; margin-top: 20px;" *ngIf="this.userAddress == ''"
+                class="styled">
+                Login
+            </button>
+
+            <div *ngIf="this.error">
+                <br>
+
+                <button class="styled" style="max-width: fit-content;" (click)="clearError()">{{error}}</button>
+
+
+                <br><br><br><br>
+            </div>
+
+        </div>
+
+        <div *ngIf="this.userAddress != '' && !this.isLoading">
+            <p> Welcome {{this.userAddress}}</p>
+            You own = {{this.ftgOwned}} FTG! <br>
+            You own = {{this.$toonInWallet}} <img id="center-img" src="../../../assets/toonverse/catCoin.gif" alt="logo"
+                height="25vh" width="25" />!
+            <br>
+
+
+
+
+            <div class="row" *ngIf="isFreeMintOpen && !hasPublicAddressFreeMinted" style="justify-content: center;">
+                <hr>
+
+                <p>Fruity Free Mintz!</p>
+                <div class="col-lg-4">
+                    <div class="card-body" id="styled">
+
+                        <div class="p-3">
+                            1 Free Mint Per Wallet Address
+
+                            <br>
+                            <br>
+                            This wallet as already claimed: {{hasPublicAddressFreeMinted}}
+                            <br>
+                            <br>
+
+                            Amount public can free mint: {{freeMintAmount}}
+
+                            <br>
+                            <br>Selected: {{publicFreeMintSelected}} FTG <img id="center-img"
+                                src="../../../assets/toonverse/fruitgremlins.wtf/Dragonfruit.PNG" alt="logo"
+                                height="25vh" width="25" style="margin: 5px;" />
+
+                            <br>
+                            <br>
+                            <mdb-range (ngModelChange)="updatepublicMintFtgAmount($event)" [min]="1" [max]="50"
+                                ngModel="publicFreeMintSelected"></mdb-range>
+                            <button *ngIf="publicFreeMintSelected <= freeMintAmount" (click)="freeMint()"
+                                class="styled">
+                                Mint
+                            </button>
+                            <p *ngIf="publicFreeMintSelected > freeMintAmount"> To many selected </p>
+
+                        </div>
+
+                    </div>
+                </div>
+                <hr>
+
+            </div>
+
+
+            <div class="row">
+
+                <p>Sweetness Selectors</p>
+                <div class="col-lg-4">
+                    <div class="card-body" id="styled">
+
+                        <div class="p-3">
+                            1 Free Mint Per DevilCat
+
+                            <br>
+                            You have this many Unstaked Devil Catz: {{dcUnstakedNumboerOf}}
+                            <br>
+
+                            You have this many Staked Devil Catz: {{dcStakedArray.length}}
+
+                            <br>
+                            <br>
+                            This many can still claim a free FTG. {{dcHaveNotClaimedArray.length}}<img id="center-img"
+                                src="../../../assets/toonverse/greenCat.png" alt="logo" height="25vh" width="25" />
+
+
+
+                            <br><br>Selected: {{dcFreeMintSelected}}
+                            <!-- look up amount of devilcatz in wallet. -->
+                            <!-- look up amount of devil catz staked. -->
+                            <!-- amount you can claim. -->
+                            <br>
+                            <br>
+                            <mdb-range (ngModelChange)="updateDcMintFtgAmount($event)" [min]="1" [max]="50"
+                                ngModel="dcFreeMintSelected"></mdb-range>
+                            <button *ngIf="dcFreeMintSelected <= dcHaveNotClaimedArray.length"
+                                (click)="mintWithDevilCat()" class="styled">
+                                Mint
+                            </button>
+                            <p *ngIf="dcFreeMintSelected > dcHaveNotClaimedArray.length"> To many selected </p>
+
+                        </div>
+
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="card-body" id="styled">
+
+                        <div class="p-3"> $TOON Mint
+
+                            <br>
+
+                            <br>
+                            $TOON mint multiplier: {{toonMintMultiplier}}
+                            <!-- look up amount of devilcatz in wallet. -->
+                            <!-- look up amount of devil catz staked. -->
+                            <!-- amount you can claim. -->
+                            <br>
+                            <br>
+                            selected : FTG {{toonMintAmountSelected}}
+                            <br>
+                            <br>
+                            total price : <img id="center-img" src="../../../assets/toonverse/catCoin.gif" alt="logo"
+                                height="25vh" width="25" /> {{toonMintPriceTotal}}
+                            <br><br>
+                            <mdb-range (ngModelChange)="updatePublicToonPrice($event)" [min]="1" [max]="50"
+                                ngModel="toonMintAmountSelected"></mdb-range>
+                            <button *ngIf="toonMintPriceTotal <= this.$toonInWallet" (click)="mintWithToon()"
+                                class="styled">
+                                Mint
+                            </button>
+                            <p *ngIf="toonMintPriceTotal > this.$toonInWallet"> To many selected </p>
+
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="card-body" id="styled">
+
+                        <div class="p-3"> Public Mint
+
+                            <br>
+
+                            <br>
+                            public mint price: {{publicMintPrice}}
+                            <!-- look up amount of devilcatz in wallet. -->
+                            <!-- look up amount of devil catz staked. -->
+                            <!-- amount you can claim. -->
+                            <br>
+                            <br>
+                            selected : FTG {{publicMintAmountSelected}}
+                            <br>
+                            <br>
+                            total price : ETH {{publicMintPriceTotal}}
+                            <br><br>
+                            <mdb-range (ngModelChange)="updatePublicMintPrice($event)" [min]="1" [max]="50"
+                                ngModel="publicMintAmountSelected"></mdb-range>
+                            <button (click)="mintWithEth()" class="styled">
+                                Mint
+                            </button>
+
+
+
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+
+
+            <hr>
+
+            <div class="row">
+                <p>Pearfict Picks</p>
+
+                <div class="col-lg-4">
+                    <div class="card-body" id="styled">
+
+                        Free {{stakedAddressFreeMintAmount}} per Staker Wallet
+                        <br>
+                        Has this address claimed the free {{stakedAddressFreeMintAmount}} mint yet?
+                        <br>
+                        {{hasStakedAddressClaimed}} <br>
+                        <br>
+                        Does user have staked NFTs? <br>
+                        {{doesUserHaveStakedNfts}} <br>
+                        <br>
+                        <button *ngIf="hasStakedAddressClaimed  == false &&  doesUserHaveStakedNfts"
+                            (click)="stakedAddressFreeMintClaim()" class="styled">
+                            Mint
+                        </button>
+                        <button *ngIf="hasStakedAddressClaimed  == false &&  !doesUserHaveStakedNfts"
+                            [routerLink]="['/manage']" class="styled">
+                            Stake
+                        </button>
+
+                        <div *ngIf="hasStakedAddressClaimed"> This address has already claimed its FTG's</div>
+                    </div>
+
+                </div>
+
+
+                <div class="col-lg-4">
+
+                    <div class="card-body" id="styled">
+                        Buy Contract With ETH:
+                        <br><br>
+
+                        Price to become contract owner of FruitTownGremlins.WTFruit:<br><br>
+                        <img id="center-img" src="../../../assets/etherSymbol.png" alt="logo" height="25vh" width="25"
+                            style="background-color:aliceblue" /> {{priceOfContractEth}}
+                        <br>
+                        Is contract for sale right now : {{isContractForSaleEth}}
+                        <br>
+
+                        <button (click)="becomeOwnerWithEth()" class="styled">
+                            Become Owner
+                        </button>
+
+                    </div>
+
+
+
+
+                </div>
+                <div class="col-lg-4">
+                    <div class="card-body" id="styled">
+                        Buy Contract With $TOON:
+                        <br><br>
+                        Price to become contract owner of FruitTownGremlins.WTFruit:<br><br>
+                        <img id="center-img" src="../../../assets/toonverse/catCoin.gif" alt="logo" height="25vh"
+                            width="25" />{{priceOfContractToon}}
+                        <br>
+                        Is contract for sale right now : {{isContractForSaleToon}}
+
+                        <br>
+                        <button (click)="becomeOwnerWithToon()" class="styled">
+                            Become Owner
+
+                        </button>
+                    </div>
+
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

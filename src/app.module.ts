@@ -19,10 +19,13 @@ import { ManageComponent } from './app/components/manage/manage.component';
 import { NFTComponent } from './app/components/nft/nft.component';
 import { HttpClientModule } from '@angular/common/http';
 import { MdbCarouselModule } from 'mdb-angular-ui-kit/carousel';
+import { MdbRangeModule } from 'mdb-angular-ui-kit/range';
 import { AboutComponent } from './app/components/about/about.component';
 import { ViewcatzComponent } from './app/components/viewcatz/viewcatz.component';
 import { AccountComponent } from './app//components/account/account.component';
 import { HashLocationStrategy, LocationStrategy } from '@angular/common';
+import { MarketplaceComponent } from './app/components/marketplace/marketplace.component';
+import { FruittownComponent } from './app/components/fruittown/fruittown.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -37,6 +40,8 @@ import { HashLocationStrategy, LocationStrategy } from '@angular/common';
     ViewcatzComponent,
     AccountComponent,
     AboutComponent,
+    MarketplaceComponent,
+    FruittownComponent,
   ],
   imports: [
     StoreModule.forRoot({ address: addressReducer }),
@@ -46,7 +51,8 @@ import { HashLocationStrategy, LocationStrategy } from '@angular/common';
     MdbCollapseModule,
     MdbFormsModule,
     HttpClientModule,
-    MdbCarouselModule
+    MdbCarouselModule,
+    MdbRangeModule
 
   ],
   providers: [{provide: LocationStrategy, useClass: HashLocationStrategy}],

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import bscContract from 'src/app/services/Solidity/contract.service';
+import bscContract from 'src/app/services/Solidity/$toon.service';
 
 @Component({
   selector: 'app-footer',

@@ -1,21 +1,10 @@
------Front End Work-------
-Background scale up / down.
-Dont break on words text.
+GORELI TEST 
 
------Contract Work-------
-Unstake/stake all gas saver. ---- testing....
+owner -0x701E5fe580f58eF2fEF7b5eEf37Eb7161C403DAF
+dev 0xBF608bdF1A89a109c57b4e25854d97f6f030244A
+user 0x701E5fe580f58eF2fEF7b5eEf37Eb7161C403DAF
 
----------Other--------
-Home page verbiage.
-Team page verbiage.
-Roadmap page verbiage.
-Discord.
-Twitter.
-LLC/Trademark.
+DEVILCATZ NFT = 0x9a59A4615B8fD0463d5fc403fE10a2a6bb582f97
+$TOON = 0x435dd9C7ADAcd74c666Cc00CD5Ca57452d1642B3
+FruitTown gremlins = 0x2EdE0D7236935e0Ce731E07643a0CBabf1529E4c
 
-
-
-
-----when deploying.----
-Bep20 needs to set ERC721
-ERC721 needs to setApprovalForAll() for bep20

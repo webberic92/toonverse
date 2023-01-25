@@ -4,26 +4,70 @@
   margin-left: auto;
   margin-right: auto;
   min-height: 275px;
-
   border: 0;
-  // line-height: 2.5;
-  // // padding: 0 20px;
-  // font-size: 1rem;
-  // text-align: center;
   color: black;
   text-shadow: 1px 1px 1px #000;
   border-radius: 10px;
   background-color: aliceblue;
-  // background-image: linear-gradient(to top left,
-  //     rgba(0, 0, 0, 0.2),
-  //     rgba(0, 0, 0, 0.2) 30%,
-  //     rgba(0, 0, 0, 0));
-  // box-shadow: inset 2px 2px 3px pink, inset -2px -2px 3px rgba(0, 0, 0, 0.6);
+  border: 1mm ridge pink;
+
 }
+
+#styled:hover {
+  background-color: bisque;
+  transform: scale(1.05);
+  text-decoration: underline;
+}
+
+#styledOp {
+  width: 95%;
+  margin-bottom: 25px;
+  margin-left: auto;
+  margin-right: auto;
+  min-height: 275px;
+  border: 0;
+  color: black;
+  text-shadow: 1px 1px 1px #000;
+  border-radius: 10px;
+  background-color: bisque;
+
+}
+
+#styledOp:hover {
+  background-color: aliceblue;
+  transform: scale(1.05);
+  text-decoration: underline;
+}
+
+
+#styled-mint-button {
+  margin-bottom: 4px;
+  border: 0;
+  line-height: 2.5;
+  padding: 0 20px;
+  font-size: 1rem;
+  text-align: center;
+  color: black;
+  text-shadow: 1px 1px 1px #000;
+  border-radius: 10px;
+  background-color: pink;  
+}
+
+#styled-mint-button:hover {
+  box-shadow: inset 2px 2px 3px pink, inset -2px -2px 3px rgba(0, 0, 0, 0.6);
+}
+
+
 
 #styled-manage {
   margin: 5px;
 }
+.col-md{
+  flex: none;
+  min-width: 225px;
+  max-width: 248px;
+}
+
 
 #manageCard {
   width: 95%;
@@ -49,16 +93,12 @@
 
 
 }
-
-#styled:hover {
-  background-color: bisque;
-  border-radius: 5%;
-  transform: scale(1.05);
+#text:hover{
   text-decoration: underline;
+  transform: scale(1.05);
+
+
 }
-
-
-
 
 #staked:hover {
   transform: scale(1.01);
@@ -79,6 +119,22 @@
     inset 2px 2px 3px rgba(0, 0, 0, 0.6);
 }
 
+#card-lightblue-multi{
+  background-color: aliceblue;
+  border-radius: 5%;
+  max-width: 60%;
+  width: auto;
+  margin: auto;
+  margin-bottom: 5%;
+}
+
+
+#card-lightblue-multi:hover{
+  background-color: bisque;
+  transform: scale(1.05);
+  text-decoration: underline;
+
+}
 
 
 //   #card-lightblue{
@@ -98,23 +154,23 @@
 
 
 
-//   #styledDisabled {
-//     max-width: 200px;
+  #styledDisabled {
+    max-width: 200px;
 
-//     min-width: 150px;
-//     margin-bottom: 4px;
-//     border: 0;
-//     line-height: 2.5;
-//     padding: 0 20px;
-//     font-size: 1rem;
-//     text-align: center;
-//     color: black;
-//     text-shadow: 1px 1px 1px #000;
-//     border-radius: 10px;
-//     background-color: rgb(141, 139, 110);
-//     background-image: linear-gradient(to top left,
-//         rgba(0, 0, 0, 0.2),
-//         rgba(0, 0, 0, 0.2) 30%,
-//         rgba(0, 0, 0, 0));
-//     box-shadow: inset 2px 2px 3px pink, inset -2px -2px 3px rgba(0, 0, 0, 0.6);
-//   }
+    min-width: 150px;
+    margin-bottom: 4px;
+    border: 0;
+    line-height: 2.5;
+    padding: 0 20px;
+    font-size: 1rem;
+    text-align: center;
+    color: black;
+    text-shadow: 1px 1px 1px #000;
+    border-radius: 10px;
+    background-color: rgb(141, 139, 110);
+    background-image: linear-gradient(to top left,
+        rgba(0, 0, 0, 0.2),
+        rgba(0, 0, 0, 0.2) 30%,
+        rgba(0, 0, 0, 0));
+    box-shadow: inset 2px 2px 3px pink, inset -2px -2px 3px rgba(0, 0, 0, 0.6);
+  }
