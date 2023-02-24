@@ -11,5 +11,26 @@ export class BuytoonComponent implements OnInit {
 
   ngOnInit(): void {
   }
+  priceInEth: number = 0.00065;
+  purchaseAmount: number = 0;
+  purchasePriceTotal: number = 0;
+
+
+  async purchaseToonForEth() {
+   
+
+  }
+
+
+
+  updatePublicEthPrice(e: Event) {
+    this.purchaseAmount = Number(e);
+    this.purchasePriceTotal = parseFloat(
+      (this.priceInEth * this.purchaseAmount).toFixed(10)
+    );
+  }
+
+
+
 
 }

@@ -1,1 +1,40 @@
 <p>buytoon works!</p>
+
+<div class="card-body" id="styled">
+
+    <div class="p-3"> Buy $TOON 
+
+        <br>
+        $TOON Price in Eth: {{priceInEth}} ETH
+        <!-- look up amount of devilcatz in wallet. -->
+        <!-- look up amount of devil catz staked. -->
+        <!-- amount you can claim. -->
+        <br>
+        <br>
+        selected : $TOON {{purchaseAmount}}
+        <br>
+        <br>
+
+        total price :  {{purchasePriceTotal}} ETH
+        <br><br>
+
+
+        <mdb-range (ngModelChange)="updatePublicEthPrice($event)" [min]="1" [max]="100000"
+            ngModel="toonMintAmountSelected"></mdb-range>
+        <button (click)="purchaseToonForEth()"
+            class="styled">
+            Purchase
+        </button>
+
+        <input type="number" class="text-field w-input" max="100000" maxlength="256" name="email" data-name="Email"
+        placeholder="" id="mint-quantity" required="" [ngModel]="purchaseAmount" type="number"
+        (ngModelChange)="updatePublicEthPrice($event)" min="1" max="100000" step="1"
+        onfocus="this.previousValue = this.value"
+        onkeydown="if(event.key==='.'){event.preventDefault();} this.previousValue =this.value"
+        placeholder="Amount To Buy">
+
+
+
+        <br>
+    </div>
+</div>
