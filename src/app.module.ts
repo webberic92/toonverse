@@ -26,6 +26,7 @@ import { AccountComponent } from './app//components/account/account.component';
 import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 import { MarketplaceComponent } from './app/components/marketplace/marketplace.component';
 import { FruittownComponent } from './app/components/fruittown/fruittown.component';
+import { BuytoonComponent } from './app/components/buytoon/buytoon.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -42,6 +43,8 @@ import { FruittownComponent } from './app/components/fruittown/fruittown.compone
     AboutComponent,
     MarketplaceComponent,
     FruittownComponent,
+    BuytoonComponent,
+    BuytoonComponent
   ],
   imports: [
     StoreModule.forRoot({ address: addressReducer }),

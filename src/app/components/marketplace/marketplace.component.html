@@ -1,138 +1,236 @@
-<div class="center-div" style="  display: grid;
+<div class="center-div" style=" display: inline list-item;
 ">
     <h6 style="font-weight: bold; "><u>**ToonVerse Marketplace**</u> </h6>
+    The location for future mints and the ability to purchase ownership of entire collections, control the ownership
+    control the opensea | etherscan | rarible | royalties| etc.
 
-    <table class="table align-middle mb-0 bg-white" style="width: auto;">
-        <thead class="bg-light">
-            <tr>
-                <th>Project</th>
-                <th>Status</th>
-                <th>Supply</th>
-                <th>Link</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>
-                    <div class="d-flex align-items-center">
-                        <img src="../../../assets/toonverse/greenCat.png" alt="" style="width: 45px; height: 45px"
-                            class="rounded-circle" />
-                        <div class="ms-3">
-                            <p class="fw-bold mb-1">Devil Catz</p>
-                        </div>
-                    </div>
-                </td>
-                <td>
-                    <span class="badge badge-success rounded-pill d-inline">SOLD OUT</span>
-                </td>
-                <td>2222</td>
-                <td>
-                    <button [routerLink]="['/manage']" id="styled-mint-button">
-                        Stake
-                    </button>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <div class="d-flex align-items-center">
-                        <img src="../../../assets//toonverse/fruitgremlins.wtf/ftgbanner.png" class="rounded-circle"
-                            alt="" style="width: 45px; height: 45px" />
-                        <div class="ms-3">
-                            <p class="fw-bold mb-1">Fruit Town Gremlins</p>
-                        </div>
-                    </div>
-                </td>
-                <td>
-                    <span class="badge badge-primary rounded-pill d-inline">Minting Now</span>
-                </td>
-                <td>4444</td>
-                <td>
-                    <button [routerLink]="['/fruittown']" id="styled-mint-button">
-                        Mint
-                    </button>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <div class="d-flex align-items-center">
-                        <img src="../../../assets/toonverse//tanggang/tangGang.png" class="rounded-circle" alt=""
-                            style="width: 45px; height: 45px" />
-                        <div class="ms-3">
-                            <p class="fw-bold mb-1">Tang Gang</p>
-                        </div>
-                    </div>
-                </td>
-                <td>
-                    <span class="badge badge-warning rounded-pill d-inline">Coming Soon...</span>
-                </td>
-                <td>TBD..</td>
-                <td>
-                    <button disabled [routerLink]="['/manage']" id="styled-mint-button">
-                        TBD
-                    </button>
-                </td>
-            </tr>
 
-            <tr>
-                <td>
-                    <div class="d-flex align-items-center">
-                        <img src="../../../assets/toonverse//clouds/Music.png" class="rounded-circle" alt=""
-                            style="width: 45px; height: 45px" />
-                        <div class="ms-3">
-                            <p class="fw-bold mb-1">Cloudy Frens</p>
-                        </div>
-                    </div>
-                </td>
-                <td>
-                    <span class="badge badge-warning rounded-pill d-inline">Coming Soon...</span>
-                </td>
-                <td>TBD..</td>
-                <td>
-                    <button disabled [routerLink]="['/manage']" id="styled-mint-button">
-                        TBD
-                    </button>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <div class="d-flex align-items-center">
-                        <img src="../../../assets/toonverse/sourpuss/main.png" class="rounded-circle" alt=""
-                            style="width: 45px; height: 45px" />
-                        <div class="ms-3">
-                            <p class="fw-bold mb-1">Sour Puss</p>
-                        </div>
-                    </div>
-                </td>
-                <td>
-                    <span class="badge badge-warning rounded-pill d-inline">Coming Soon...</span>
-                </td>
-                <td>TBD..</td>
-                <td>
-                    <button disabled [routerLink]="['/manage']" id="styled-mint-button">
-                        TBD
-                    </button>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <div class="d-flex align-items-center">
-                        <img src="../../../assets/toonverse/redFront.png" class="rounded-circle" alt=""
-                            style="width: 45px; height: 45px" />
-                        <div class="ms-3">
-                            <p class="fw-bold mb-1">Devil Catz V2</p>
-                        </div>
-                    </div>
-                </td>
-                <td>
-                    <span class="badge badge-warning rounded-pill d-inline">Coming Soon...</span>
-                </td>
-                <td>TBD..</td>
-                <td>
-                    <button disabled [routerLink]="['/manage']" id="styled-mint-button">
-                        TBD
-                    </button>
-                </td>
-            </tr>
-        </tbody>
-    </table>
+
+
+
+
+
+
+
+    <div class="container" style="margin-bottom: 100px; margin-top:25px">
+        <div class="row"
+            style="  justify-content: center; padding: 15px;background-color: aliceblue;border-bottom-style: double;">
+            <div class="col-md-2">Price</div>
+            <div class="col-md-2">Icon</div>
+            <div class="col-md-2">Project</div>
+            <div class="col-md-2">Status</div>
+            <div class="col-md-2">Supply</div>
+            <div class="col-md-2">Link</div>
+        </div>
+        <div class="row" id="table">
+            <div class="col-md-2">
+                Not for sale
+            </div>
+
+            <div class="col-md-2">
+
+                <img src="../../../assets/toonverse/greenCat.png" alt="" style="width: 45px; height: 45px"
+                    class="rounded-circle" />
+            </div>
+
+            <div class="col-md-2">
+
+                <div class="ms-3">
+                    <p> <a href="https://opensea.io/collection/toonversestudios" class="fw-bold mb-1">Devil Catz</a>
+                    </p>
+
+                </div>
+            </div>
+
+            <div class="col-md-2">
+
+
+                <span class="badge badge-success rounded-pill d-inline">SOLD OUT</span>
+            </div>
+            <div class="col-md-2">
+
+                2222
+            </div>
+
+            <div class="col-md-2">
+
+                <button [routerLink]="['/manage']" id="styled-mint-button">
+                    Stake
+                </button>
+            </div>
+        </div>
+
+        <div class="row" id="table">
+
+            <div class="col-md-2">
+                50 ETH
+            </div>
+
+            <div class="col-md-2">
+                <img src="../../../assets/toonverse/fruitgremlins.wtf/ftgbanner.png" class="rounded-circle" alt=""
+                    style="width: 45px; height: 45px" />
+
+            </div>
+            <div class="col-md-2">
+
+
+                <!-- <a style="margin: 5px" href="https://rarible.com/collection/0xd2ebb721397c9278a5921741f9f53cef74beadf0/items">
+                    <img id="center-img" src="../../../assets/rarible.png" alt="rarible" height="25vh" width="25vw"
+                        style="border-radius: 5%" />
+                </a> -->
+                <p>
+                    <a href="https://opensea.io/collection/fruittowngremlins-wtfruit" class="fw-bold mb-1">Fruit Town
+                        Gremlins</a>
+                </p>
+
+            </div>
+
+            <div class="col-md-2">
+
+
+                <span class="badge badge-success rounded-pill d-inline">SOLD OUT</span>
+            </div>
+            <div class="col-md-2">
+
+                4444
+            </div>
+
+            <div class="col-md-2">
+                <a href="https://opensea.io/collection/fruittowngremlins-wtfruit" class="fw-bold mb-1">
+                    <button id="styled-mint-button">
+                        SOLD OUT
+                    </button></a>
+
+            </div>
+
+        </div>
+
+        <div class="row" id="table">
+            <div class="col-md-2">
+
+                TDB</div>
+            <div class="col-md-2">
+
+                <img src="../../../assets/toonverse/tanggang/tangGang.png" class="rounded-circle" alt=""
+                    style="width: 45px; height: 45px" />
+            </div>
+            <div class="col-md-2">
+                <p class="fw-bold mb-1">Tang Gang</p>
+
+            </div>
+
+            <div class="col-md-2">
+
+
+                <span class="badge badge-warning rounded-pill d-inline">Coming Soon...</span>
+            </div>
+            <div class="col-md-2">
+
+                TBD</div>
+
+            <div class="col-md-2">
+
+                <button disabled [routerLink]="['/manage']" id="styled-mint-button">
+                    TBD
+                </button>
+            </div>
+
+        </div>
+        <div class="row" id="table">
+            <div class="col-md-2">
+
+                TDB</div>
+            <div class="col-md-2">
+
+                <img src="../../../assets/toonverse/clouds/Music.png" class="rounded-circle" alt=""
+                    style="width: 45px; height: 45px" />
+            </div>
+            <div class="col-md-2">
+                <p class="fw-bold mb-1">Crazy Cloud Club</p>
+
+            </div>
+
+            <div class="col-md-2">
+
+
+                <span class="badge badge-warning rounded-pill d-inline">Coming Soon...</span>
+            </div>
+            <div class="col-md-2">
+
+                TBD</div>
+
+            <div class="col-md-2">
+
+                <button disabled [routerLink]="['/manage']" id="styled-mint-button">
+                    TBD
+                </button>
+            </div>
+
+        </div>
+
+
+
+
+        <div class="row" id="table">
+            <div class="col-md-2">
+
+                TDB</div>
+            <div class="col-md-2">
+
+                <img src="../../../assets/toonverse/sourpuss/main.png" class="rounded-circle" alt=""
+                    style="width: 45px; height: 45px" />
+            </div>
+            <div class="col-md-2">
+                <p class="fw-bold mb-1">Sour Puss Felines</p>
+
+            </div>
+
+            <div class="col-md-2">
+
+
+                <span class="badge badge-warning rounded-pill d-inline">Coming Soon...</span>
+            </div>
+            <div class="col-md-2">
+
+                TDB</div>
+
+            <div class="col-md-2">
+
+                <button disabled [routerLink]="['/manage']" id="styled-mint-button">
+                    TBD
+                </button>
+            </div>
+
+        </div>
+        <div class="row" id="table">
+            <div class="col-md-2">
+
+                TDB</div>
+            <div class="col-md-2">
+
+                <img src="../../../assets/toonverse/redFront.png" class="rounded-circle" alt=""
+                    style="width: 45px; height: 45px" />
+            </div>
+            <div class="col-md-2">
+                <p class="fw-bold mb-1">Devil Catz V2</p>
+
+            </div>
+
+            <div class="col-md-2">
+
+
+                <span class="badge badge-warning rounded-pill d-inline">Coming Soon...</span>
+            </div>
+            <div class="col-md-2">
+
+                TDB</div>
+
+            <div class="col-md-2">
+
+                <button disabled [routerLink]="['/manage']" id="styled-mint-button">
+                    TBD
+                </button>
+            </div>
+        </div>
+    </div>
 </div>

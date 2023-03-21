@@ -1,0 +1,57 @@
+<div class="card-body" id="styled">
+
+    <div class="p-3"> 
+        <p>Buy $TOON</p> 
+        <img id="center-img" src="../../../assets/toonverse/catCoin.gif" alt="logo" height="200vh" width="150" />
+        <br>
+        $TOON Price in Eth: {{priceInEth}} ETH
+        <!-- look up amount of devilcatz in wallet. -->
+        <!-- look up amount of devil catz staked. -->
+        <!-- amount you can claim. -->
+        <br>
+        <br>
+        Selected : {{purchaseAmount}} $TOON 
+        <br>
+        <br>
+
+
+
+
+        <mdb-range (ngModelChange)="updatePublicEthPrice($event)"  [min]="0" [max]="10000"
+            ngModel="toonMintAmountSelected"></mdb-range>
+
+
+        <br>
+        <input type="number" class="text-field w-input" max="100000" maxlength="256" name="email" data-name="Email"
+        placeholder="" id="mint-quantity" required="" [ngModel]="purchaseAmount" type="number"
+        (ngModelChange)="updatePublicEthPrice($event)" min="0" max="100000" step="1"
+        onfocus="this.previousValue = this.value"
+        onkeydown="if(event.key==='.'){event.preventDefault();} this.previousValue =this.value"
+        placeholder="Amount To Buy">
+
+
+
+        <br>
+        <br>
+
+        Total price :  {{purchasePriceTotal}} ETH
+        <br><br>
+        <button *ngIf="!isLoading" (click)="purchaseToonForEth()"
+        class="styled">
+        Purchase
+    </button>
+
+    <div *ngIf="this.isLoading">
+        <div>
+            <img id="center-img" src="../../../assets/toonverse/toonverseLogo.png" alt="logo" height="200vh" width="150" />
+            <span class="visually-hidden">...</span>
+        </div>
+        <br />
+        <p style="font-size: 1.25em;">Please finish transaction <br> or <br>wait for blockchain to confirm...
+            <br>
+            The page will refresh on its own.
+        </p>
+        <br />
+    </div>
+    </div>
+</div>
