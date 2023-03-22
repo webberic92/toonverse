@@ -21,11 +21,11 @@ text-decoration: underline;
   color: black;
   text-shadow: 1px 1px 1px #000;
   border-radius: 10px;
-  background-color: pink;  
+  background-color: rgb(241, 109, 186);  
 }
 
 #styled-mint-button:hover {
-  box-shadow: inset 2px 2px 3px pink, inset -2px -2px 3px rgba(0, 0, 0, 0.6);
+  box-shadow: inset 2px 2px 3px rgb(241, 109, 186), inset -2px -2px 3px rgba(0, 0, 0, 0.6);
 }
 
 
@@ -72,7 +72,7 @@ text-decoration: underline;
 #card-free-mints{
   background-color: aliceblue;
   border-radius: 5%;
-  border: 1mm ridge pink;
+  border: 1mm ridge rgb(241, 109, 186);
   
   // max-width: 60%;
 
@@ -83,7 +83,7 @@ text-decoration: underline;
   border-radius: 5%;
   // max-width: 70%;
   text-decoration: underline;
-  border: 1mm ridge pink;
+  border: 1mm ridge rgb(241, 109, 186);
 
 }
 
@@ -91,7 +91,7 @@ text-decoration: underline;
   background-color: aliceblue;
   border-radius: 5%;
   max-width: 555px;
-  border: 1mm ridge pink;
+  border: 1mm ridge rgb(241, 109, 186);
 }
 
 // #card-mintDevilCat:hover{
@@ -106,7 +106,7 @@ text-decoration: underline;
   background-color: aliceblue;
   border-radius: 5%;
   max-width: 85%;
-  border: 1mm ridge pink;
+  border: 1mm ridge rgb(241, 109, 186);
 }
 
 

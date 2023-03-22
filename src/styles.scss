@@ -1,44 +1,46 @@
 /* You can add global styles to this file, and also import other style files */
 @import "~mdb-angular-ui-kit/assets/scss/mdb.scss";
 
+/* Import Fredoka One font */
+@font-face {
+  font-family: 'Fredoka One';
+  src: url('https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap');
+}
+
+/* Set body background */
 body {
-  // background-image: url("https://thebuddhainu.s3.amazonaws.com/background.png");
   background-image: url("./assets/toonverse/background.jpg");
-  // -webkit-background-size: wrap;
-  // -moz-background-size: cover;
-  // -o-background-size: cover;
   background-size: cover;
   background-attachment: fixed;
 }
 
+/* Main container */
 .main {
   background-color: #fbf1e6;
-  border: 1mm ridge pink;
-  // width: 65%;
+  border: 1mm ridge rgb(241, 109, 186);
   min-width: 400px;
   opacity: 99%;
-
-
 }
 
+/* Inside container */
 .inside {
   background-color: #404756;
-  border: 1mm ridge pink;
+  border: 1mm ridge rgb(241, 109, 186);
   width: 90%;
   min-width: 400px;
   opacity: 95%;
 }
 
+/* Card styling */
 .card {
   justify-content: center;
   align-items: center;
   text-align: center;
   margin-left: auto;
   margin-right: auto;
-
 }
 
-
+/* Centering div */
 .center-div {
   display: flex;
   justify-content: center;
@@ -46,14 +48,15 @@ body {
   text-align: center;
 }
 
+/* Container styling */
 .container {
   justify-content: center;
   align-items: center;
 }
 
+/* Button styling */
 .styled {
   max-width: 200px;
-
   min-width: 150px;
   margin-bottom: 4px;
   border: 0;
@@ -64,22 +67,23 @@ body {
   color: black;
   text-shadow: 1px 1px 1px #000;
   border-radius: 10px;
-  background-color: pink;
+  background-color: rgb(241, 109, 186),;
   background-image: linear-gradient(to top left,
       rgba(0, 0, 0, 0.2),
       rgba(0, 0, 0, 0.2) 30%,
       rgba(0, 0, 0, 0));
-  box-shadow: inset 2px 2px 3px pink, inset -2px -2px 3px rgba(0, 0, 0, 0.6);
+  box-shadow: inset 2px 2px 3px rgb(241, 109, 186), inset -2px -2px 3px rgba(0, 0, 0, 0.6);
+  font-family: 'Fredoka One', sans-serif; /* Use Fredoka One font */
 }
 
-.container{
+/* Container width */
+.container {
   max-width: 90%;
 }
 
-
+/* Disabled button styling */
 .styledDisabled {
   max-width: 200px;
-
   min-width: 150px;
   margin-bottom: 4px;
   border: 0;
@@ -95,56 +99,47 @@ body {
       rgba(0, 0, 0, 0.2),
       rgba(0, 0, 0, 0.2) 30%,
       rgba(0, 0, 0, 0));
-  box-shadow: inset 2px 2px 3px pink, inset -2px -2px 3px rgba(0, 0, 0, 0.6);
+  box-shadow: inset 2px 2px 3px rgb(241, 109, 186), inset -2px -2px 3px rgba(0, 0, 0, 0.6);
+  font-family: 'Fredoka One', sans-serif; /* Use Fredoka One font */
 }
 
+/* Hover button styling */
 .styled:hover {
-  background-color: pink;
-  box-shadow: inset 2px 2px 3px rgb(108, 34, 46), inset -2px -2px 3px rgba(0, 0, 0, 0.6);
-  font-size: 1.05rem;
+background-color: rgb(241, 109, 186);
+box-shadow: inset 2px 2px 3px rgb(108, 34, 46), inset -2px -2px 3px rgba(0, 0, 0, 0.6);
+font-size: 1.05rem;
 }
 
+/* Active button styling */
 .styled:active {
-  box-shadow: inset -2px -2px 3px rgba(255, 255, 255, 0.6),
-    inset 2px 2px 3px rgba(0, 0, 0, 0.6);
+box-shadow: inset -2px -2px 3px rgba(255, 255, 255, 0.6),
+inset 2px 2px 3px rgba(0, 0, 0, 0.6);
 }
 
-// @font-face {
-//   font-family: EncodeSansCondensedBold;
-//   src: url("./assets/encode-sans-font/EncodeSansCondensedBold-r7LO.ttf");
-// }
-
-// @font-face {
-//   font-family: RapidFinger101;
-//   src: url("./assets/cooper-hewitt-font/CooperhewittBold-K4BW.ttf");
-// }
+/* Set font for headers*/
 h1,
 h2,
 h3,
 h4,
 h5,
 h6 {
-  color: black;
-  font-family: EncodeSansCondensedBold;
-  font-size: 1em;
-  font-size: min(6vw, 35px);
-
-  // word-wrap: break-word;
-  // word-break: break-all;
+color: black;
+font-family: 'Fredoka One', sans-serif; /* Use Fredoka One font */
+font-size: 1em;
+font-size: min(6vw, 35px);
 }
 
+/* Set font for buttons */
 button {
-  font-family: EncodeSansCondensedBold;
+font-family: 'Fredoka One', sans-serif; /* Use Fredoka One font */
 }
 
-
-
+/* Set font for paragraphs */
 p {
-  font-family: EncodeSansCondensedBold;
-  color: black;
-  // word-break: normal;
-  word-break: break-word;
-  font-size: min(4vw, 20px);
+font-family: 'Fredoka One', sans-serif; /* Use Fredoka One font */
+color: black;
+word-break: break-word;
+font-size: min(4vw, 20px);
 }
 
 #list {
@@ -173,7 +168,7 @@ p {
 //   .zoom:hover {
 //     transform: scale(1.5); /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
 //   }
-// }        
+// }
 
 
 
@@ -190,7 +185,7 @@ p {
 }
 
 #yellowHamburger {
-  color: pink;
+  color: rgb(241, 109, 186);
 }
 
 #yellowHamburger:hover {
