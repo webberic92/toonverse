@@ -1,10 +1,9 @@
 /* You can add global styles to this file, and also import other style files */
 @import "~mdb-angular-ui-kit/assets/scss/mdb.scss";
 
-/* Import Fredoka One font */
 @font-face {
-  font-family: 'Fredoka One';
-  src: url('https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap');
+  font-family: 'Bangers';
+  src: url('https://fonts.googleapis.com/css2?family=Bangers&display=swap');
 }
 
 /* Set body background */
@@ -17,7 +16,7 @@ body {
 /* Main container */
 .main {
   background-color: #fbf1e6;
-  border: 1mm ridge rgb(241, 109, 186);
+  border: 1mm ridge rgb(241, 175, 109, 0)(241, 109, 186, 0);
   min-width: 400px;
   opacity: 99%;
 }
@@ -25,7 +24,7 @@ body {
 /* Inside container */
 .inside {
   background-color: #404756;
-  border: 1mm ridge rgb(241, 109, 186);
+  border: 1mm ridge rgba(241, 175, 109, 0)(241, 109, 186, 0);
   width: 90%;
   min-width: 400px;
   opacity: 95%;
@@ -67,13 +66,13 @@ body {
   color: black;
   text-shadow: 1px 1px 1px #000;
   border-radius: 10px;
-  background-color: rgb(241, 109, 186),;
+  background-color: rgb(234, 241, 95),;
   background-image: linear-gradient(to top left,
       rgba(0, 0, 0, 0.2),
       rgba(0, 0, 0, 0.2) 30%,
       rgba(0, 0, 0, 0));
-  box-shadow: inset 2px 2px 3px rgb(241, 109, 186), inset -2px -2px 3px rgba(0, 0, 0, 0.6);
-  font-family: 'Fredoka One', sans-serif; /* Use Fredoka One font */
+  box-shadow: inset 2px 2px 3px rgb(241, 175, 109), inset -2px -2px 3px rgba(0, 0, 0, 0.6);
+  font-family: 'Bangers', sans-serif;
 }
 
 /* Container width */
@@ -99,13 +98,13 @@ body {
       rgba(0, 0, 0, 0.2),
       rgba(0, 0, 0, 0.2) 30%,
       rgba(0, 0, 0, 0));
-  box-shadow: inset 2px 2px 3px rgb(241, 109, 186), inset -2px -2px 3px rgba(0, 0, 0, 0.6);
-  font-family: 'Fredoka One', sans-serif; /* Use Fredoka One font */
+  box-shadow: inset 2px 2px 3px rgb(241, 175, 109), inset -2px -2px 3px rgba(0, 0, 0, 0.6);
+  font-family: 'Bangers', sans-serif;
 }
 
 /* Hover button styling */
 .styled:hover {
-background-color: rgb(241, 109, 186);
+background-color: rgb(241, 175, 109);
 box-shadow: inset 2px 2px 3px rgb(108, 34, 46), inset -2px -2px 3px rgba(0, 0, 0, 0.6);
 font-size: 1.05rem;
 }
@@ -124,19 +123,19 @@ h4,
 h5,
 h6 {
 color: black;
-font-family: 'Fredoka One', sans-serif; /* Use Fredoka One font */
+font-family: 'Bangers', sans-serif;
 font-size: 1em;
 font-size: min(6vw, 35px);
 }
 
 /* Set font for buttons */
 button {
-font-family: 'Fredoka One', sans-serif; /* Use Fredoka One font */
+  font-family: 'Bangers', sans-serif;
 }
 
 /* Set font for paragraphs */
 p {
-font-family: 'Fredoka One', sans-serif; /* Use Fredoka One font */
+  font-family: 'Bangers', sans-serif;
 color: black;
 word-break: break-word;
 font-size: min(4vw, 20px);
@@ -185,7 +184,7 @@ font-size: min(4vw, 20px);
 }
 
 #yellowHamburger {
-  color: rgb(241, 109, 186);
+  color: rgb(241, 175, 109);
 }
 
 #yellowHamburger:hover {

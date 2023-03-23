@@ -1,7 +1,8 @@
 @font-face {
-  font-family: 'Fredoka One';
-  src: url('https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap');
+  font-family: 'Bangers';
+  src: url('https://fonts.googleapis.com/css2?family=Bangers&display=swap');
 }
+
 
 .hoverText:hover {
   text-decoration: underline;
@@ -19,15 +20,16 @@
   transform: scale(1.25);
 }
 
+
 #navbar-text {
-  font-family: 'Fredoka One', sans-serif;
+  font-family: 'Bangers', sans-serif;
   transition: 0.5s all ease-in-out;
   font-size: large;
   margin: 5px;
 }
 
 #navbar-text:hover {
-  font-family: 'Fredoka One', sans-serif;
+  font-family: 'Bangers', sans-serif;
   transform: scale(1.05);
   margin: 5px;
 }
@@ -44,14 +46,14 @@
   color: black;
   text-shadow: 1px 1px 1px #000;
   border-radius: 10px;
-  background-color: rgb(241, 109, 186);
+  background-color: rgb(241, 175, 109);
   background-image: linear-gradient(
     to top left,
     rgba(0, 0, 0, 0.2),
     rgba(0, 0, 0, 0.2) 30%,
     rgba(0, 0, 0, 0)
   );
-  box-shadow: inset 2px 2px 3px rgb(241, 109, 186),
+  box-shadow: inset 2px 2px 3px rgb(241, 175, 109),
     inset -2px -2px 3px rgba(0, 0, 0, 0.6);
 }
 
@@ -74,12 +76,12 @@
     rgba(0, 0, 0, 0.2) 30%,
     rgba(0, 0, 0, 0)
   );
-  box-shadow: inset 2px 2px 3px rgb(241, 109, 186),
+  box-shadow: inset 2px 2px 3px rgb(241, 175, 109),
     inset -2px -2px 3px rgba(0, 0, 0, 0.6);
 }
 
 .styled:hover {
-  background-color: rgb(241, 109, 186);
+  background-color: rgb(241, 175, 109);
   box-shadow: inset 2px 2px 3px rgb(108, 34, 46),
     inset -2px -2px 3px rgba(0, 0, 0, 0.6);
   font-size: 1.05rem;

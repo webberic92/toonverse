@@ -21,20 +21,24 @@ text-decoration: underline;
   color: black;
   text-shadow: 1px 1px 1px #000;
   border-radius: 10px;
-  background-color: rgb(241, 109, 186);  
+  background-color: rgb(234, 241, 95);  
 }
 
 #styled-mint-button:hover {
-  box-shadow: inset 2px 2px 3px rgb(241, 109, 186), inset -2px -2px 3px rgba(0, 0, 0, 0.6);
+  box-shadow: inset 2px 2px 3px rgb(241, 175, 109), inset -2px -2px 3px rgba(0, 0, 0, 0.6);
 }
 
-
+#styled-mint-button:disabled {
+  /* disabled button styles */
+  opacity: 0.5; /* reduce opacity to indicate disabled state */
+  cursor: not-allowed; /* set cursor to indicate button is disabled */
+}
 
 
 
 .yellowHighlight{
   
-    background-color: Yellow;
+    background-color: rgba(255, 255, 0, 0.555);
     display: grid;
     justify-content: center;
     justify-items: center;
@@ -72,7 +76,7 @@ text-decoration: underline;
 #card-free-mints{
   background-color: aliceblue;
   border-radius: 5%;
-  border: 1mm ridge rgb(241, 109, 186);
+  border: 1mm ridge rgb(234, 241, 95);
   
   // max-width: 60%;
 
@@ -83,7 +87,7 @@ text-decoration: underline;
   border-radius: 5%;
   // max-width: 70%;
   text-decoration: underline;
-  border: 1mm ridge rgb(241, 109, 186);
+  border: 1mm ridge rgb(234, 241, 95);
 
 }
 
@@ -91,7 +95,7 @@ text-decoration: underline;
   background-color: aliceblue;
   border-radius: 5%;
   max-width: 555px;
-  border: 1mm ridge rgb(241, 109, 186);
+  border: 1mm ridge rgb(234, 241, 95);
 }
 
 // #card-mintDevilCat:hover{
@@ -106,7 +110,7 @@ text-decoration: underline;
   background-color: aliceblue;
   border-radius: 5%;
   max-width: 85%;
-  border: 1mm ridge rgb(241, 109, 186);
+  border: 1mm ridge rgb(234, 241, 95);
 }
 
 

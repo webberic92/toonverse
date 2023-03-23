@@ -17,7 +17,7 @@
   width: 100%;
 }
 
-.marketplace-item {
+#marketplace-item {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -28,8 +28,8 @@
   border-radius: 10px;
 }
 
-.marketplace-item:hover {
-  background-color: bisque;
+#marketplace-item:hover {
+  background-color: rgb(134, 216, 247);
 }
 
 .item-header {
@@ -56,6 +56,36 @@
   margin-left: 10px;
 }
 
-.styled-mint-button {
+#styled-mint-button {
+  max-width: 200px;
+  min-width: 150px;
   margin-bottom: 4px;
+  border: 0;
+  line-height: 2.5;
+  padding: 0 20px;
+  font-size: 1rem;
+  text-align: center;
+  color: black;
+  text-shadow: 1px 1px 1px #000;
+  border-radius: 10px;
+  background-color: rgb(141, 139, 110);
+  background-image: linear-gradient(to top left,
+  rgb(109, 210, 241),
+  rgb(73, 163, 191) 30%,
+  rgb(7, 196, 254));
+  box-shadow: inset 2px 2px 3px rgb(18, 0, 88), inset -2px -2px 3px rgb(109, 210, 241);
+  font-family: 'Bangers', sans-serif;
+}
+
+/* Hover button styling */
+#styled-mint-button:hover {
+background-color: rgb(113, 109, 241);
+box-shadow: inset 2px 2px 3px rgb(18, 0, 88), inset -2px -2px 3px rgba(94, 195, 235, 0.948);
+font-size: 1.05rem;
+}
+
+#styled-mint-button:disabled {
+  /* disabled button styles */
+  opacity: 0.5; /* reduce opacity to indicate disabled state */
+  cursor: not-allowed; /* set cursor to indicate button is disabled */
 }
