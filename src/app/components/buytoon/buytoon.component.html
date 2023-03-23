@@ -17,7 +17,7 @@
 
 
 
-        <mdb-range (ngModelChange)="updatePublicEthPrice($event)"  [min]="0" [max]="10000"
+        <mdb-range (ngModelChange)="updatePublicEthPrice($event)" [ngModel]="purchaseAmount" [min]="0" [max]="10000"
             ngModel="toonMintAmountSelected"></mdb-range>
 
 

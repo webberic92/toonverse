@@ -22,7 +22,7 @@ export class BuytoonComponent implements OnInit {
 
   async ngOnInit(): Promise<void> {
 
-    this.getContent();
+    await this.getContent();
 
 
 
@@ -30,6 +30,8 @@ export class BuytoonComponent implements OnInit {
 
   async getContent() {
 		this.priceInEth = Number(Web3.utils.fromWei(await $toonCoinContract.methods.cost().call(), 'ether'))
+    this.purchasePriceTotal = this.priceInEth * this.purchaseAmount
+
   }
 
 
