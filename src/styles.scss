@@ -8,14 +8,13 @@
 
 /* Set body background */
 body {
-  background-image: url("./assets/toonverse/background.jpg");
+  background-image: url("./assets/toonverse/black.png");
   background-size: cover;
   background-attachment: fixed;
 }
 
 /* Main container */
 .main {
-  background-color: #fbf1e6;
   border: 1mm ridge rgb(241, 175, 109, 0)(241, 109, 186, 0);
   min-width: 400px;
   opacity: 99%;
@@ -63,15 +62,15 @@ body {
   padding: 0 20px;
   font-size: 1rem;
   text-align: center;
-  color: black;
+  color: rgb(255, 255, 255);
   text-shadow: 1px 1px 1px #000;
   border-radius: 10px;
-  background-color: rgb(234, 241, 95),;
+  background-color: rgb(255, 103, 225),;
   background-image: linear-gradient(to top left,
-      rgba(0, 0, 0, 0.2),
-      rgba(0, 0, 0, 0.2) 30%,
-      rgba(0, 0, 0, 0));
-  box-shadow: inset 2px 2px 3px rgb(241, 175, 109), inset -2px -2px 3px rgba(0, 0, 0, 0.6);
+      rgba(255, 255, 255, 0.2),
+      rgba(255, 255, 255, 0.2) 30%,
+      rgba(255, 255, 255, 0));
+  box-shadow: inset 2px 2px 3px rgb(15, 38, 187), inset -2px -2px 3px rgba(255, 255, 255, 0.6);
   font-family: 'Bangers', sans-serif;
 }
 
@@ -98,13 +97,13 @@ body {
       rgba(0, 0, 0, 0.2),
       rgba(0, 0, 0, 0.2) 30%,
       rgba(0, 0, 0, 0));
-  box-shadow: inset 2px 2px 3px rgb(241, 175, 109), inset -2px -2px 3px rgba(0, 0, 0, 0.6);
+  box-shadow: inset 2px 2px 3px rgb(255, 255, 255), inset -2px -2px 3px rgba(0, 0, 0, 0.6);
   font-family: 'Bangers', sans-serif;
 }
 
 /* Hover button styling */
 .styled:hover {
-background-color: rgb(241, 175, 109);
+background-color: rgb(255, 0, 174);
 box-shadow: inset 2px 2px 3px rgb(108, 34, 46), inset -2px -2px 3px rgba(0, 0, 0, 0.6);
 font-size: 1.05rem;
 }
@@ -122,7 +121,7 @@ h3,
 h4,
 h5,
 h6 {
-color: black;
+color: rgb(255, 255, 255);
 font-family: 'Bangers', sans-serif;
 font-size: 1em;
 font-size: min(6vw, 35px);
@@ -136,7 +135,7 @@ button {
 /* Set font for paragraphs */
 p {
   font-family: 'Bangers', sans-serif;
-color: black;
+color: rgb(255, 255, 255);
 word-break: break-word;
 font-size: min(4vw, 20px);
 }
@@ -184,11 +183,11 @@ font-size: min(4vw, 20px);
 }
 
 #yellowHamburger {
-  color: rgb(241, 175, 109);
+  color: rgb(255, 0, 251);
 }
 
 #yellowHamburger:hover {
-  color: #a07c07;
+  color: #fe04c4;
 }
 
 #teamCard {
@@ -259,7 +258,7 @@ font-size: min(4vw, 20px);
 }
 
 #card-free-mints:hover{
-  background-color: bisque;
+  background-color: rgb(167, 213, 255);
   border-radius: 5%;
   max-width: 70%;
   text-decoration: underline;
@@ -292,7 +291,7 @@ font-size: min(4vw, 20px);
 
 
 #card-lightblue:hover{
-  background-color: bisque;
+  background-color: rgb(167, 213, 255);
   border-radius: 5%;
   transform: scale(1.05);
   text-decoration: underline;

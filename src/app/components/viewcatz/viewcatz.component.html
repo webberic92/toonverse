@@ -47,13 +47,12 @@
                     <div id="card-lightblue" style="min-height: 100%;
                     max-width: 350px;
                     margin-left: auto;
-                    margin-right: auto;
-                    border: 1mm ridge pink;">
+                    margin-right: auto;">
                         <p>Eth Address</p>
                         <p>Lookup</p>
                         <mdb-form-control>
                             <input mdbInput (ngModelChange)="updateSearchedAddress($event)" [ngModel]="searchedAddress"
-                                type="text" id="typeText" class="styled" style="border: 1mm ridge pink;"
+                                type="text" id="typeText" class="styled"
                                 placeholder="Eth Address" /><br>
                             <button mdbLabel (click)="searchByEthAddress()" class="styled"
                                 for="typeText">Search</button>
@@ -68,14 +67,13 @@
                     <div id="card-lightblue" style="min-height: 100%;
                     max-width: 350px;
                     margin-left: auto;
-                    margin-right: auto;
-                    border: 1mm ridge pink;">
+                    margin-right: auto;">
                         <p>DevilCat ID#</p>
                         <p>Lookup</p>
                         <mdb-form-control>
                             <input mdbInput (ngModelChange)="updateSearchedID($event)" [ngModel]="searchedId"
                                 type="number" min="0" max="2222" id="typeText" placeholder="DevilCatID#" class="styled"
-                                style="border: 1mm ridge pink;" /><br>
+                                 /><br>
                             <button (click)="searchById()" class="styled" for="typeText">Search</button>
                         </mdb-form-control>
                     </div>
@@ -99,13 +97,12 @@
                     <div id="card-lightblue" style="min-height: 100%;
                     max-width: 350px;
                     margin-left: auto;
-                    margin-right: auto;
-                    border: 1mm ridge pink;">
+                    margin-right: auto;">
                         <p>Eth Address</p>
                         <p>Lookup</p>
                         <mdb-form-control>
                             <input mdbInput (ngModelChange)="updateSearchedAddress($event)" [ngModel]="searchedAddress"
-                                type="text" id="typeText" class="styled" style="border: 1mm ridge pink;"
+                                type="text" id="typeText" class="styled" 
                                 placeholder="Eth Address" /><br>
                             <button mdbLabel (click)="searchByEthAddressFTG()" class="styled"
                                 for="typeText">Search</button>
@@ -120,14 +117,13 @@
                     <div id="card-lightblue" style="min-height: 100%;
                     max-width: 350px;
                     margin-left: auto;
-                    margin-right: auto;
-                    border: 1mm ridge pink;">
+                    margin-right: auto;">
                         <p>FTG ID#</p>
                         <p>Lookup</p>
                         <mdb-form-control>
                             <input mdbInput (ngModelChange)="updateSearchedID($event)" [ngModel]="searchedId"
                                 type="number" min="0" max="2222" id="typeText" placeholder="DevilCatID#" class="styled"
-                                style="border: 1mm ridge pink;" /><br>
+                                 /><br>
                             <button (click)="searchByIdFTG()" class="styled" for="typeText">Search</button>
                         </mdb-form-control>
                     </div>

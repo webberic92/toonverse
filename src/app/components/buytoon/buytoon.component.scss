@@ -1,7 +1,7 @@
 
 
 .card-body {
-    width: 50%;
+    width: 90%;
     margin-bottom: 25px;
     margin-left: auto;
     margin-right: auto;
@@ -11,12 +11,11 @@
     text-shadow: 1px 1px 1px #000;
     border-radius: 10px;
     background-color: aliceblue;
-    border: 1mm ridge pink;
   
   }
   
   .card-body:hover {
-    background-color: bisque;
+    background-color: rgb(167, 213, 255);
     transform: scale(1.05);
     text-decoration: underline;
   }

@@ -7,11 +7,40 @@
 #styledText:hover {
   transform: scale(1.05);
 
-text-decoration: underline;
+
 }
 
 
 #styled-mint-button {
+  max-width: 200px;
+  min-width: 150px;
+  margin-bottom: 4px;
+  border: 0;
+  line-height: 2.5;
+  padding: 0 20px;
+  font-size: 1rem;
+  text-align: center;
+  color: rgb(255, 255, 255);
+  text-shadow: 1px 1px 1px #000;
+  border-radius: 10px;
+  background-color: rgb(255, 103, 225),;
+  background-image: linear-gradient(to top left,
+      rgba(255, 255, 255, 0.2),
+      rgba(255, 255, 255, 0.2) 30%,
+      rgba(255, 255, 255, 0));
+  box-shadow: inset 2px 2px 3px rgb(15, 38, 187), inset -2px -2px 3px rgba(255, 255, 255, 0.6);
+  font-family: 'Bangers', sans-serif;
+}
+
+#styled-mint-button:hover {
+  background-color: rgb(255, 0, 174);
+  box-shadow: inset 2px 2px 3px rgb(108, 34, 46), inset -2px -2px 3px rgba(0, 0, 0, 0.6);
+  font-size: 1.05rem;
+  }
+
+#styled-mint-button:disabled {
+  max-width: 200px;
+  min-width: 150px;
   margin-bottom: 4px;
   border: 0;
   line-height: 2.5;
@@ -21,20 +50,19 @@ text-decoration: underline;
   color: black;
   text-shadow: 1px 1px 1px #000;
   border-radius: 10px;
-  background-color: rgb(234, 241, 95);  
+  background-color: rgb(141, 139, 110);
+  background-image: linear-gradient(to top left,
+      rgba(0, 0, 0, 0.2),
+      rgba(0, 0, 0, 0.2) 30%,
+      rgba(0, 0, 0, 0));
+  box-shadow: inset 2px 2px 3px rgb(255, 255, 255), inset -2px -2px 3px rgba(0, 0, 0, 0.6);
+  font-family: 'Bangers', sans-serif;
 }
 
-#styled-mint-button:hover {
-  box-shadow: inset 2px 2px 3px rgb(241, 175, 109), inset -2px -2px 3px rgba(0, 0, 0, 0.6);
+#styled-mint-button:active{
+  box-shadow: inset -2px -2px 3px rgba(255, 255, 255, 0.6),
+    inset 2px 2px 3px rgba(0, 0, 0, 0.6);
 }
-
-#styled-mint-button:disabled {
-  /* disabled button styles */
-  opacity: 0.5; /* reduce opacity to indicate disabled state */
-  cursor: not-allowed; /* set cursor to indicate button is disabled */
-}
-
-
 
 .yellowHighlight{
   
@@ -74,7 +102,7 @@ text-decoration: underline;
 
 
 #card-free-mints{
-  background-color: aliceblue;
+  background-color: rgb(167, 213, 255);
   border-radius: 5%;
   border: 1mm ridge rgb(234, 241, 95);
   
@@ -83,39 +111,33 @@ text-decoration: underline;
 }
 
 #card-free-mints:hover{
-  background-color: bisque;
+  background-color: rgba(255, 228, 196, 0);
   border-radius: 5%;
   // max-width: 70%;
   text-decoration: underline;
-  border: 1mm ridge rgb(234, 241, 95);
-
 }
 
 #card-mintDevilCat{
   background-color: aliceblue;
   border-radius: 5%;
   max-width: 555px;
-  border: 1mm ridge rgb(234, 241, 95);
 }
 
-// #card-mintDevilCat:hover{
-//   background-color: bisque;
-//   border-radius: 5%;
-//   max-width: 650px;
-//   text-decoration: underline;
-
-// }
+#card-mintDevilCat:hover{
+  background-color: rgb(167, 213, 255);
+  border-radius: 5%;
+  max-width: 650px;
+}
 
 #card-freeMint{
   background-color: aliceblue;
   border-radius: 5%;
   max-width: 85%;
-  border: 1mm ridge rgb(234, 241, 95);
 }
 
 
 #card-freeMint:hover{
-  background-color: bisque;
+  background-color: rgb(167, 213, 255);
   border-radius: 5%;
   transform: scale(1.05);
   text-decoration: underline;
