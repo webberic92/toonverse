@@ -1,0 +1,26 @@
+#blue-pink-columns {
+
+    background-color: aliceblue;
+    border: 1mm ridge pink;
+}
+
+#styled {
+    width: 95%;
+    margin-bottom: 25px;
+    margin-left: auto;
+    margin-right: auto;
+    min-height: 275px;
+    border: 0;
+    color: black;
+    text-shadow: 1px 1px 1px #000;
+    border-radius: 10px;
+    background-color: aliceblue;
+    border: 1mm ridge pink;
+  
+  }
+  
+  #styled:hover {
+    background-color: bisque;
+    transform: scale(1.05);
+    text-decoration: underline;
+  }

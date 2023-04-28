@@ -12,6 +12,7 @@ import { AccountComponent } from './components/account/account.component';
 import { MarketplaceComponent } from './components/marketplace/marketplace.component';
 import { FruittownComponent } from './components/fruittown/fruittown.component';
 import { BuytoonComponent } from './components/buytoon/buytoon.component';
+import { ElGatoDiabloComponent } from './components/elgatodiablo/elgatodiablo.component';
 const routes: Routes = [
 
   { path: '', pathMatch: 'full', component: HomeComponent },
@@ -26,8 +27,11 @@ const routes: Routes = [
   { path: 'account', pathMatch: 'full', component: AccountComponent },
   { path: 'marketplace', pathMatch: 'full', component: MarketplaceComponent },
   { path: 'fruittown', pathMatch: 'full', component: FruittownComponent },
-  { path: 'buytoon', pathMatch: 'full', component: BuytoonComponent }
+  { path: 'buytoon', pathMatch: 'full', component: BuytoonComponent },
+  { path: 'elgatodiablo', pathMatch: 'full', component: ElGatoDiabloComponent }
 
+
+  
 
 
 

@@ -3,6 +3,8 @@
   <div style id="styledText">
     <h6 style="font-weight: bold; "><u>** Welcome to Toonverse Studios!
         **</u> </h6>
+    <img src="../../../assets/toonverse/multiBanner.png" alt="logo" height="50%" width="50%"
+      style=" margin-bottom: 20px;margin-top: 10px;" /><br>
 
     <p> A WEB3 Art development platform.<br>
       Our Tokenomics are really simple.
@@ -33,94 +35,264 @@
   <div class="card" id="card-mintDevilCat">
     <div class="container">
       <div class="card-body">
-        <h6>**SOLD OUT**</h6>
+        <h6>**Minting Soon **</h6>
+        <p>EL GATO DIABLO!</p>
 
-        <img id="center-img-gif" src="../../../assets/toonverse/slow.gif" alt="logo" height="40%" width="63%"
-          style="border-radius: 5%" />
+        <img id="center-img-gif" src="../../../assets/elgatodiablo/elgatodiabloGIF.webp" alt="logo" height="40%"
+          width="63%" style="border-radius: 5%" />
         <br>
         <br>
-        <p> The Devil Cats Minting has officially sold out.
+        <p> Check back May 7th...
+          <br>
 
-          <br> Ironically on new years day 2023.
-          <br> We would like to thank the community as we continue this journey in the web3 space.
+          At the request of our community based off the original design of our genesis DevilCatz collection.
+
+          350 of this collection will be minted with 100 $TOON 2 mints per wallet. <br>
+          DevilCatz owners can mint 2 at a discount and DevilCatz stakers can mint
+          unlimited at a discount.
+          <br>
+          Public mint is also available.
         </p>
-        <p class="yellowHighlight">{{totalSupply}} Minted!</p>
-        <p>out of</p>
-        <p class="yellowHighlight">2222</p>
+
+
+        <button id="navbar-text" class="styled" [routerLink]="['/elgatodiablo']">View Mint!</button>
         <br>
-        <p>Owning a DevilCatz token entitles you to future collection drops.</p>
-
-        <button id="navbar-text" class="styled">SOLD OUT!</button>
+        <button id="navbar-text" class="styled"> <a href="https://opensea.io/collection/elgatodiablo"
+           >View
+            Opensea</a></button>
+        <br>
+        <button id="navbar-text" class="styled"> <a
+            href="https://etherscan.io/address/0xa8b62866020970943de4f0e6fc4acf3e31636346#code"
+           >View
+            Contract </a></button>
 
       </div>
     </div>
   </div>
   <br>
   <br>
+  <br>
+  <br>
 
+  <div class="container" style="margin-bottom: 100px; margin-top:25px">
+    <div class="row"
+      style="  justify-content: center; padding: 15px;background-color: aliceblue;border-bottom-style: double;">
+      <div class="col-md-2">Price</div>
+      <div class="col-md-2">Icon</div>
+      <div class="col-md-2">Project</div>
+      <div class="col-md-2">Status</div>
+      <div class="col-md-2">Supply</div>
+      <div class="col-md-2">Link</div>
+    </div>
+    <div class="row" id="table">
+      <div class="col-md-2">
+        Not for sale
+      </div>
 
+      <div class="col-md-2">
 
-  <div class="container" id="text">
-    <br>
-    <h6>Coming Up to All Devil Cats Holders!</h6>
-    <p> We have TWO MINTS coming up to DevilCatz holders.<br>
-      Ladies and Gentlemen we introduce to you..<br>
-      CrazyCloudzClub.wtFluff and FruitTownGremlins.WtFruit<br>
-    </p>
-    <br>
-    <br>
+        <img src="../../../assets/toonverse/greenCat.png" alt="" style="width: 45px; height: 45px"
+          class="rounded-circle" />
+      </div>
 
+      <div class="col-md-2">
 
-
-
-
-
-
-
-
-    <div class="row" style="justify-content: center;">
-
-
-
-      <div class="col" style="min-height: 100%;display: flex;justify-content: center;">
-        <div id="card-freeMint">
-
-          <br>
-          <br>
-          <img id="gremlins-img" src="../../../assets/toonverse/fruitgremlins.wtf/fruitTownGremlins.gif " alt="logo"
-            width="95%" height="180vh" style="border-radius: 75%;object-fit: contain;" />
-          <br>
-          <br>
-          <p>COMING SOON</p>
-          <p> Fruit Town Gremlins
+        <div class="ms-3">
+          <p> <a href="https://opensea.io/collection/toonversestudios" class="fw-bold mb-1">Devil Catz</a>
           </p>
-          <h3>Sold Out</h3>
-          <br>
-          <p>Free mint only available to DevilCatz Holders.</p>
-          <br>
 
         </div>
       </div>
-      <div class="col" style="min-height: 100%;display: flex;justify-content: center;">
-        <div id="card-freeMint" style="min-height: 100%;">
-          <br> <br>
 
-          <img id="cloudz-img" src="../../../assets/toonverse/clouds/clouds.gif" alt="logo" width="95%" height="180vh"
-            style="border-radius: 75%;object-fit: contain;" />
-          <br>
-          <br>
-          <p>COMING SOON</p>
-          <p>Cloudy Frens</p>
-          <h3>Coming Soon</h3>
-          <br>
+      <div class="col-md-2">
 
-          <p>Free mint only available to DevilCatz Holders.</p>
-          <br>
-        </div>
+
+        <span class="badge badge-success rounded-pill d-inline">SOLD OUT</span>
+      </div>
+      <div class="col-md-2">
+
+        2222
+      </div>
+
+      <div class="col-md-2">
+
+        <button [routerLink]="['/manage']" id="styled-mint-button">
+          Stake
+        </button>
       </div>
     </div>
 
+    <div class="row" id="table">
+
+      <div class="col-md-2">
+        50 ETH
+      </div>
+
+      <div class="col-md-2">
+        <img src="../../../assets/toonverse/fruitgremlins.wtf/ftgbanner.png" class="rounded-circle" alt=""
+          style="width: 45px; height: 45px" />
+
+      </div>
+      <div class="col-md-2">
+
+
+        <p>
+          <a href="https://opensea.io/collection/fruittowngremlins-wtfruit" class="fw-bold mb-1">Fruit Town
+            Gremlins</a>
+        </p>
+
+      </div>
+
+      <div class="col-md-2">
+
+
+        <span class="badge badge-success rounded-pill d-inline">SOLD OUT</span>
+      </div>
+      <div class="col-md-2">
+
+        4444
+      </div>
+
+      <div class="col-md-2">
+        <a href="https://opensea.io/collection/fruittowngremlins-wtfruit" class="fw-bold mb-1">
+          <button id="styled-mint-button">
+            SOLD OUT
+          </button></a>
+
+      </div>
+
+    </div>
+
+    <div class="row" id="table">
+      <div class="col-md-2">
+
+        TDB</div>
+      <div class="col-md-2">
+
+        <img src="../../../assets/toonverse/tanggang/tangGang.png" class="rounded-circle" alt=""
+          style="width: 45px; height: 45px" />
+      </div>
+      <div class="col-md-2">
+        <p class="fw-bold mb-1">Tang Gang</p>
+
+      </div>
+
+      <div class="col-md-2">
+
+
+        <span class="badge badge-warning rounded-pill d-inline">Coming Soon...</span>
+      </div>
+      <div class="col-md-2">
+
+        TBD</div>
+
+      <div class="col-md-2">
+
+        <button disabled [routerLink]="['/manage']" id="styled-mint-button">
+          TBD
+        </button>
+      </div>
+
+    </div>
+    <div class="row" id="table">
+      <div class="col-md-2">
+
+        TDB</div>
+      <div class="col-md-2">
+
+        <img src="../../../assets/toonverse/clouds/Music.png" class="rounded-circle" alt=""
+          style="width: 45px; height: 45px" />
+      </div>
+      <div class="col-md-2">
+        <p class="fw-bold mb-1">Crazy Cloud Club</p>
+
+      </div>
+
+      <div class="col-md-2">
+
+
+        <span class="badge badge-warning rounded-pill d-inline">Coming Soon...</span>
+      </div>
+      <div class="col-md-2">
+
+        TBD</div>
+
+      <div class="col-md-2">
+
+        <button disabled [routerLink]="['/manage']" id="styled-mint-button">
+          TBD
+        </button>
+      </div>
+
+    </div>
+
+
+
+
+    <div class="row" id="table">
+      <div class="col-md-2">
+
+        TDB</div>
+      <div class="col-md-2">
+
+        <img src="../../../assets/toonverse/sourpuss/main.png" class="rounded-circle" alt=""
+          style="width: 45px; height: 45px" />
+      </div>
+      <div class="col-md-2">
+        <p class="fw-bold mb-1">Sour Puss Felines</p>
+
+      </div>
+
+      <div class="col-md-2">
+
+
+        <span class="badge badge-warning rounded-pill d-inline">Coming Soon...</span>
+      </div>
+      <div class="col-md-2">
+
+        TDB</div>
+
+      <div class="col-md-2">
+
+        <button disabled [routerLink]="['/manage']" id="styled-mint-button">
+          TBD
+        </button>
+      </div>
+
+    </div>
+    <div class="row" id="table">
+      <div class="col-md-2">
+
+        TDB</div>
+      <div class="col-md-2">
+
+        <img src="../../../assets/toonverse/redFront.png" class="rounded-circle" alt=""
+          style="width: 45px; height: 45px" />
+      </div>
+      <div class="col-md-2">
+        <p class="fw-bold mb-1">Devil Catz V2</p>
+
+      </div>
+
+      <div class="col-md-2">
+
+
+        <span class="badge badge-warning rounded-pill d-inline">Coming Soon...</span>
+      </div>
+      <div class="col-md-2">
+
+        TDB</div>
+
+      <div class="col-md-2">
+
+        <button disabled [routerLink]="['/manage']" id="styled-mint-button">
+          TBD
+        </button>
+      </div>
+    </div>
   </div>
+
+
   <br>
   <br>
 
