@@ -28,7 +28,7 @@
     <div class="row" id="centered">
         <h2> <b>Four ways to mint!</b></h2>
         <br>
-        <div class="col-lg-2">
+        <div class="col-lg-4">
             <div class="card-body" id="styled">
 
             <img id="gato-img" src="../../../assets/elgatodiablo/preReveal.png" alt="logo" width="95%" height="180vh"
@@ -47,7 +47,7 @@
                 selected : {{publicMintAmountSelected}}
                 <br>
                 <br>
-                total price : ETH {{publicMintPriceTotal}}
+                total price : ETH {{publicMintTotalPrice}}
                 <br><br>
                 <mdb-range (ngModelChange)="updatePublicMintPrice($event)" [min]="1" [max]="50"
                     ngModel="publicMintAmountSelected"></mdb-range>
@@ -59,7 +59,7 @@
         </div>
     </div>
 
-        <div class="col-lg-2">
+        <div class="col-lg-4">
             <div class="card-body" id="styled">
 
             <img id="gato-img" src="../../../assets/elgatodiablo/306.png" alt="logo" width="95%" height="180vh"
@@ -69,18 +69,18 @@
 
             <div *ngIf="this.userAddress != '' && !this.isLoading">
                 <br><br>
-                public mint price: {{publicMintPrice}} ETH
+                discount mint price: {{discountMintPrice}} ETH
 
 
                 <br>
                 <br>
-                selected : {{publicMintAmountSelected}}
+                selected : {{ownersMintAmountSelected}}
                 <br>
                 <br>
-                total price : ETH {{publicOwnersPriceTotal}}
+                total price : ETH {{ownersMintTotalPrice}}
                 <br><br>
                 <mdb-range (ngModelChange)="updateOwnersMintPrice($event)" [min]="1" [max]="2"
-                    ngModel="publicMintAmountSelected"></mdb-range>
+                    ngModel="ownersMintAmountSelected"></mdb-range>
                 <button (click)="mintWithEth()" class="styled">
                     Mint
                 </button>
@@ -88,7 +88,7 @@
         </div>
     </div>
 
-        <div class="col-lg-2">
+        <div class="col-lg-4">
             <div class="card-body" id="styled">
 
             <img id="gato-img" src="../../../assets/elgatodiablo/305.png" alt="logo" width="95%" height="180vh"
@@ -98,15 +98,15 @@
             Any wallet with a staked DevilCat can mint unlimited at .02 ETH each.
             <div *ngIf="this.userAddress != '' && !this.isLoading">
                 <br><br>
-                public mint price: {{publicMintPrice}}
+                discount mint price: {{discountMintPrice}} ETH
 
 
                 <br>
                 <br>
-                selected : {{publicMintAmountSelected}}
+                selected : {{stakersMintAmountSelected}}
                 <br>
                 <br>
-                total price : ETH {{publicMintPriceTotal}}
+                total price : ETH {{stakersMintTotalPrice}}
                 <br><br>
                 <mdb-range (ngModelChange)="updatePublicMintPrice($event)" [min]="1" [max]="50"
                     ngModel="publicMintAmountSelected"></mdb-range>
@@ -117,7 +117,7 @@
         </div>
     </div>
 
-        <div class="col-lg-2">
+        <div class="col-lg-4">
             <div class="card-body" id="styled">
 
             <img id="gato-img" src="../../../assets/elgatodiablo/309.png" alt="logo" width="95%" height="180vh"
@@ -127,7 +127,7 @@
             <div *ngIf="this.userAddress != '' && !this.isLoading">
                 <br>
 
-                $TOON mint multiplier: {{toonMintMultiplier}}
+                $TOON Price: {{toonMintCost}}
 
 
                 <br>
@@ -136,14 +136,14 @@
                 <br>
                 <br>
                 total price : <img id="center-img" src="../../../assets/toonverse/catCoin.gif" alt="logo" height="25vh"
-                    width="25" /> {{toonMintPriceTotal}}
+                    width="25" /> {{toonMintTotalPrice}}
                 <br><br>
                 <mdb-range (ngModelChange)="updatePublicToonPrice($event)" [min]="1" [max]="2"
                     ngModel="toonMintAmountSelected"></mdb-range>
-                <button *ngIf="toonMintPriceTotal <= this.$toonInWallet" (click)="mintWithToon()" class="styled">
+                <button *ngIf="toonMintTotalPrice <= this.$toonInWallet" (click)="mintWithToon()" class="styled">
                     Mint
                 </button>
-                <p *ngIf="toonMintPriceTotal > this.$toonInWallet"> To many selected </p>
+                <p *ngIf="toonMintTotalPrice > this.$toonInWallet"> To many selected </p>
             </div>
         </div>
     </div>

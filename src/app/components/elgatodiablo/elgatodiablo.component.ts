@@ -18,69 +18,58 @@ export class ElGatoDiabloComponent implements OnInit {
   constructor(private web3: Web3Service) {}
   async ngOnInit(): Promise<void> {}
 
-  elGatoDiabloAddress: string = "";
-  userAddress: string = "";
-  // hasStakedAddressClaimed: boolean = true;
-  // dcFreeMintArray: number[] = new Array();
-  // dcStakedArray: any[] = new Array();
-  // dcHaveNotClaimedArray = new Array();
-
-  toonMintAmountSelected: number = 0;
-  publicFreeMintSelected: number = 0;
-  publicMintAmountSelected: number = 0;
-
-  dcUnstakedNumboerOf: number = 0;
-  availabelDCMintsForFTG: number = 0;
-  dcThatCanClaimFtgArray: any[] = new Array();
-  dcThatCanClaimFtgSet = new Set<number>();
-  stakedAddressFreeMintAmount: number = 10;
-  dcFreeMintSelected: number = 0;
-  $toonInWallet: number = 0;
-  toonMintMultiplier: number = 0;
-  toonMintPriceTotal: number = 0;
-  publicMintPrice: number = 0;
-  publicMintPriceTotal: number = 0;
-  publicOwnersPriceTotal: number = 0;
-
   isLoading: boolean = false;
   error: string = "";
-  isMetaMaskConnected = false;
-  isContractForSaleEth = false;
-  isContractForSaleToon = false;
-  isFreeMintOpen = false;
-  hasPublicAddressFreeMinted = false;
-  freeMintAmount = 0;
-  doesUserHaveStakedNfts: boolean = false;
+  elGatoDiabloAddress: string = "";
+  userAddress: string = "";
+  $toonInWallet: number = 0;
   gatoDiabloOwned: number = 0;
 
+  //Costs
+  publicMintPrice: number = 0;
+  discountMintPrice: number = 0;
+  toonMintCost: number = 0; //TOON
+
+  //Selected
+  toonMintAmountSelected: number = 2;
+  ownersMintAmountSelected: number = 2;
+  stakersMintAmountSelected: number = 1;
+  publicMintAmountSelected: number = 1;
+  //Totals
+  publicMintTotalPrice: number = 0;
+  ownersMintTotalPrice: number = 0;
+  stakersMintTotalPrice: number = 0;
+  toonMintTotalPrice: number = 0;
+
+  isMetaMaskConnected = false;
+
+  updateStakerMintPrice(e: Event) {
+    this.stakersMintAmountSelected = Number(e);
+    this.stakersMintTotalPrice = parseFloat(
+      (this.discountMintPrice * this.stakersMintAmountSelected).toFixed(2)
+    );
+  }
 
   updatePublicMintPrice(e: Event) {
     this.publicMintAmountSelected = Number(e);
-    this.publicMintPriceTotal = parseFloat(
+    this.publicMintTotalPrice = parseFloat(
       (this.publicMintPrice * this.publicMintAmountSelected).toFixed(2)
     );
   }
 
   updateOwnersMintPrice(e: Event) {
-    this.publicMintAmountSelected = Number(e);
-    this.publicMintPriceTotal = parseFloat(
-      (this.publicOwnersPriceTotal * this.publicMintAmountSelected).toFixed(2)
+    this.ownersMintAmountSelected = Number(e);
+
+    this.ownersMintTotalPrice = parseFloat(
+      (this.discountMintPrice * this.ownersMintAmountSelected).toFixed(2)
     );
   }
 
   updatePublicToonPrice(e: Event) {
     this.toonMintAmountSelected = Number(e);
-    this.toonMintPriceTotal =
-      this.toonMintMultiplier * this.toonMintAmountSelected;
+    this.stakersMintTotalPrice =
+      this.toonMintCost * this.toonMintAmountSelected;
   }
-
-  updateDcMintFtgAmount(e: Event) {
-    this.dcFreeMintSelected = Number(e);
-  }
-  updatepublicMintFtgAmount(e: Event) {
-    this.publicFreeMintSelected = Number(e);
-  }
-
 
   async getContent() {
     this.isLoading = true;
@@ -93,31 +82,24 @@ export class ElGatoDiabloComponent implements OnInit {
       this.$toonInWallet = await $toonCoinContract.methods
         .balanceOf(this.userAddress)
         .call();
+
       this.publicMintPrice = Web3.utils.fromWei(
         await elGatoDiablo.methods.publicMintCost().call()
       );
-      this.isLoading = false;
-    } catch (e) {
-      console.log(e.message);
-      this.error = e.message;
-      this.isLoading = false;
-    }
-  }
+      this.publicMintTotalPrice =
+        this.publicMintPrice * this.publicMintAmountSelected;
 
-  async setdcThatCanClaimFtgSet(n: number) {
-    this.dcThatCanClaimFtgSet.add(n);
-  }
+      this.discountMintPrice = Web3.utils.fromWei(
+        await elGatoDiablo.methods.discountedCost().call()
+      );
+      this.ownersMintTotalPrice =
+        this.discountMintPrice * this.ownersMintAmountSelected;
+      this.stakersMintTotalPrice =
+        this.discountMintPrice * this.stakersMintAmountSelected;
 
-  async stakedAddressFreeMintClaim() {
-    this.error = "";
-    this.isLoading = true;
-    try {
-      await elGatoDiablo.methods.stakedAddressesFreeMint().send({
-        from: this.userAddress,
-      });
+      this.toonMintCost = await elGatoDiablo.methods.toonMintCost().call();
+
       this.isLoading = false;
-      this.error = "";
-      this.getContent();
     } catch (e) {
       console.log(e.message);
       this.error = e.message;
@@ -155,11 +137,11 @@ export class ElGatoDiabloComponent implements OnInit {
 
     try {
       await elGatoDiablo.methods
-        .mintForEth(this.publicMintAmountSelected)
+        .mintForEth(this.stakersMintAmountSelected)
         .send({
           from: this.userAddress,
           value: Web3.utils.toWei(
-            this.publicMintPriceTotal.toString(),
+            this.publicMintTotalPrice.toString(),
             "ether"
           ),
         });
@@ -220,5 +202,4 @@ export class ElGatoDiabloComponent implements OnInit {
   //     this.isLoading = false;
   //   }
   // }
-
 }
