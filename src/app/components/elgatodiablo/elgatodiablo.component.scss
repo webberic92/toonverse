@@ -16,6 +16,7 @@
     border-radius: 10px;
     background-color: aliceblue;
     border: 1mm ridge pink;
+    height: 100%;
   
   }
   
@@ -23,4 +24,22 @@
     background-color: bisque;
     transform: scale(1.05);
     text-decoration: underline;
+  }
+
+  #centered{
+    justify-content: center;
+  }
+
+  #gato-img {
+    // max-width: 100%;
+    // max-height: 100%;
+    // object-fit: contain;
+    // padding: 3px;
+    transition: 0.5s all ease-in-out;
+  
+  }
+  
+  
+  #gato-img:hover{
+    transform: scale(1.1);
   }
