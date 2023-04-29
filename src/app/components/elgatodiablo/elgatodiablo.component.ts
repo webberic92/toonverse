@@ -57,12 +57,25 @@ export class ElGatoDiabloComponent implements OnInit {
     );
   }
 
+  updateStakersMintPrice(e: Event) {
+    this.stakersMintAmountSelected = Number(e);
+    this.stakersMintTotalPrice = parseFloat(
+      (this.discountMintPrice * this.stakersMintAmountSelected).toFixed(2)
+    );
+  }
+
   updateOwnersMintPrice(e: Event) {
     this.ownersMintAmountSelected = Number(e);
 
     this.ownersMintTotalPrice = parseFloat(
       (this.discountMintPrice * this.ownersMintAmountSelected).toFixed(2)
     );
+  }
+
+  updateToonPrice(e: Event) {
+    this.toonMintAmountSelected = Number(e);
+    this.toonMintTotalPrice =
+      this.toonMintCost * this.toonMintAmountSelected;
   }
 
   updatePublicToonPrice(e: Event) {
@@ -137,7 +150,7 @@ export class ElGatoDiabloComponent implements OnInit {
 
     try {
       await elGatoDiablo.methods
-        .mintForEth(this.stakersMintAmountSelected)
+        .publicMint(this.publicMintAmountSelected)
         .send({
           from: this.userAddress,
           value: Web3.utils.toWei(
