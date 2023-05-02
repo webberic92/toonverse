@@ -24,6 +24,8 @@ export class ElGatoDiabloComponent implements OnInit {
   userAddress: string = "";
   $toonInWallet: number = 0;
   gatoDiabloOwned: number = 0;
+  isPaused: boolean = true;
+
 
   //Costs
   publicMintPrice: number = 0;
@@ -92,6 +94,8 @@ export class ElGatoDiabloComponent implements OnInit {
         .balanceOf(this.userAddress)
         .call();
 
+        this.isPaused = await elGatoDiabloProviderLessContract.methods.PAUSED().call()
+
       this.$toonInWallet = await $toonCoinContract.methods
         .balanceOf(this.userAddress)
         .call();
@@ -111,6 +115,7 @@ export class ElGatoDiabloComponent implements OnInit {
         this.discountMintPrice * this.stakersMintAmountSelected;
 
       this.toonMintCost = await elGatoDiablo.methods.toonMintCost().call();
+      this.toonMintTotalPrice = this.toonMintAmountSelected * this.toonMintCost;
 
       this.isLoading = false;
     } catch (e) {

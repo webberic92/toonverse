@@ -49,8 +49,11 @@
             You own = {{this.gatoDiabloOwned}} El Gato Diablo NFT's! <br>
             You own = {{this.$toonInWallet}} <img id="center-img" src="../../../assets/toonverse/catCoin.gif" alt="logo"
                 height="25vh" width="25" /> $TOON!
-            <br>
+
             <hr>
+
+            <h3 *ngIf="isPaused"> <b>Minting is Currently Paused!</b></h3>
+            <h3 *ngIf="!isPaused"> <b>Minting is Open!</b></h3>
 
         </div>
 
@@ -66,6 +69,7 @@
                 Public sale is .04 ETH. Buy a devilcat, stake a devilcat, or buy $TOON for a better deal.
 
                 <div *ngIf="this.userAddress != '' && !this.isLoading">
+                    <br>
 
                     <br>
                     public mint price: {{publicMintPrice}}
@@ -80,9 +84,11 @@
                     <br><br>
                     <mdb-range (ngModelChange)="updatePublicMintPrice($event)" [min]="1" [max]="50"
                         ngModel="publicMintAmountSelected"></mdb-range>
-                    <button (click)="mintWithEth()" class="styled">
+                    <button *ngIf="!isPaused" (click)="mintWithEth()" class="styled">
                         Mint
                     </button>
+
+
 
                 </div>
             </div>
@@ -110,9 +116,11 @@
                     <br><br>
                     <mdb-range (ngModelChange)="updateOwnersMintPrice($event)" [min]="1" [max]="2"
                         ngModel="ownersMintAmountSelected"></mdb-range>
-                    <button (click)="mintWithEth()" class="styled">
+                    <button *ngIf="!isPaused" (click)="mintWithEth()" class="styled">
                         Mint
                     </button>
+
+
                 </div>
             </div>
         </div>
@@ -139,9 +147,11 @@
                     <br><br>
                     <mdb-range (ngModelChange)="updateStakersMintPrice($event)" [min]="1" [max]="50"
                         ngModel="publicMintAmountSelected"></mdb-range>
-                    <button (click)="mintWithEth()" class="styled">
+                    <button *ngIf="!isPaused" (click)="mintWithEth()" class="styled">
                         Mint
                     </button>
+
+
                 </div>
             </div>
         </div>
@@ -169,9 +179,11 @@
                     <br><br>
                     <mdb-range (ngModelChange)="updateToonPrice($event)" [min]="1" [max]="2"
                         ngModel="toonMintAmountSelected"></mdb-range>
-                    <button *ngIf="toonMintTotalPrice <= this.$toonInWallet" (click)="mintWithToon()" class="styled">
+                    <button *ngIf="(toonMintTotalPrice <= this.$toonInWallet) && (!isPaused)" (click)="mintWithToon()"
+                        class="styled">
                         Mint
                     </button>
+
                     <p *ngIf="toonMintTotalPrice > this.$toonInWallet"> To many selected </p>
                 </div>
             </div>
