@@ -7,6 +7,7 @@ import NFTContract, {
   ProviderLessNftContract,
 } from "src/app/services/Solidity/devilCatz.service";
 import { Web3Service } from "src/app/services/Web3/web3.service";
+import elgatodiablo from "../../services/Solidity/elGatoDiablo.service";
 const Web3 = require("web3");
 
 @Component({
@@ -31,6 +32,7 @@ export class ElGatoDiabloComponent implements OnInit {
   publicMintPrice: number = 0;
   discountMintPrice: number = 0;
   toonMintCost: number = 0; //TOON
+  toonAllowedToBeSpentByContract: number = 0;
 
   //Selected
   toonMintAmountSelected: number = 2;
@@ -116,6 +118,8 @@ export class ElGatoDiabloComponent implements OnInit {
 
       this.toonMintCost = await elGatoDiablo.methods.toonMintCost().call();
       this.toonMintTotalPrice = this.toonMintAmountSelected * this.toonMintCost;
+        console.log($toonCoinContract._address)
+      this.toonAllowedToBeSpentByContract = await $toonCoinContract.methods.allowance(this.userAddress, elgatodiablo._address).call()
 
       this.isLoading = false;
     } catch (e) {
@@ -173,13 +177,65 @@ export class ElGatoDiabloComponent implements OnInit {
     }
   }
 
+
+  async ownersMint() {
+    this.error = "";
+    this.isLoading = true;
+
+    try {
+      await elGatoDiablo.methods
+        .devilCatzOwnerMint(this.ownersMintAmountSelected)
+        .send({
+          from: this.userAddress,
+          value: Web3.utils.toWei(
+            this.ownersMintTotalPrice.toString(),
+            "ether"
+          ),
+        });
+      this.isLoading = false;
+      this.error = "";
+      this.getContent();
+    } catch (e) {
+      console.log(e.message);
+      this.error = e.message;
+      this.isLoading = false;
+    }
+  }
+
+
+  async stakersMint() {
+    this.error = "";
+    this.isLoading = true;
+
+    try {
+      await elGatoDiablo.methods
+        .stakersMint(this.stakersMintAmountSelected)
+        .send({
+          from: this.userAddress,
+          value: Web3.utils.toWei(
+            this.stakersMintTotalPrice.toString(),
+            "ether"
+          ),
+        });
+      this.isLoading = false;
+      this.error = "";
+      this.getContent();
+    } catch (e) {
+      console.log(e.message);
+      this.error = e.message;
+      this.isLoading = false;
+    }
+  }
+
+
+
   async mintWithToon() {
     this.error = "";
     this.isLoading = true;
 
     try {
       await $toonCoinContract.methods
-        .approve(this.elGatoDiabloAddress, this.toonMintAmountSelected)
+        .approve(this.elGatoDiabloAddress, this.toonMintTotalPrice)
         .send({
           from: this.userAddress,
         });
@@ -187,7 +243,6 @@ export class ElGatoDiabloComponent implements OnInit {
         .mintWithToon(this.toonMintAmountSelected)
         .send({
           from: this.userAddress,
-          value: this.toonMintAmountSelected,
         });
       this.isLoading = false;
       this.error = "";

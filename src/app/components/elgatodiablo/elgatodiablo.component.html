@@ -4,7 +4,7 @@
     <h6 style="font-weight: bold; "><u>El Gato Diablo</u> </h6>
 
     <p>
-        **Estimated mint date March 7th** <br>
+        **Estimated mint date May 7th** <br>
         <button id="navbar-text" class="styled"> <a href="https://opensea.io/collection/elgatodiablo">View
                 Opensea</a></button> &nbsp;
 
@@ -60,7 +60,7 @@
 
 
 
-        <div class="col-lg-3">
+        <div class="col-lg-4">
             <div class="card-body" id="styled">
 
                 <img id="gato-img" src="../../../assets/elgatodiablo/preReveal.png" alt="logo" width="95%"
@@ -94,7 +94,7 @@
             </div>
         </div>
 
-        <div class="col-lg-3">
+        <div class="col-lg-4">
             <div class="card-body" id="styled">
 
                 <img id="gato-img" src="../../../assets/elgatodiablo/306.png" alt="logo" width="95%" height="180vh"
@@ -116,7 +116,7 @@
                     <br><br>
                     <mdb-range (ngModelChange)="updateOwnersMintPrice($event)" [min]="1" [max]="2"
                         ngModel="ownersMintAmountSelected"></mdb-range>
-                    <button *ngIf="!isPaused" (click)="mintWithEth()" class="styled">
+                    <button *ngIf="!isPaused" (click)="ownersMint()" class="styled">
                         Mint
                     </button>
 
@@ -125,7 +125,7 @@
             </div>
         </div>
 
-        <div class="col-lg-3">
+        <div class="col-lg-4">
             <div class="card-body" id="styled">
 
                 <img id="gato-img" src="../../../assets/elgatodiablo/305.png" alt="logo" width="95%" height="180vh"
@@ -147,7 +147,7 @@
                     <br><br>
                     <mdb-range (ngModelChange)="updateStakersMintPrice($event)" [min]="1" [max]="50"
                         ngModel="publicMintAmountSelected"></mdb-range>
-                    <button *ngIf="!isPaused" (click)="mintWithEth()" class="styled">
+                    <button *ngIf="!isPaused" (click)="stakersMint()" class="styled">
                         Mint
                     </button>
 
@@ -156,7 +156,9 @@
             </div>
         </div>
 
-        <div class="col-lg-3">
+    </div>
+    <div class="row" id="centered">
+        <div class="col-lg-4">
             <div class="card-body" id="styled">
 
                 <img id="gato-img" src="../../../assets/elgatodiablo/309.png" alt="logo" width="95%" height="180vh"
@@ -170,6 +172,7 @@
 
 
                     <br>
+                    Allowance: {{toonAllowedToBeSpentByContract}}
                     <br>
                     selected : {{toonMintAmountSelected}}
                     <br>
@@ -188,23 +191,27 @@
                 </div>
             </div>
         </div>
-
     </div>
 
-    <div *ngIf="this.isLoading">
-        <div>
-            <img id="center-img" src="../../../assets/toonverse/catCoin.gif" alt="logo" height="200vh" width="150" />
-            <span class="visually-hidden">...</span>
+
+    <div class="row" id="centered">
+
+        <div *ngIf="this.isLoading">
+            <div>
+                <img id="center-img" src="../../../assets/toonverse/catCoin.gif" alt="logo" height="200vh"
+                    width="150" />
+                <span class="visually-hidden">...</span>
+            </div>
+            <br />
+            <p style="font-size: 1.25em;">Please finish transaction <br> or <br>wait for blockchain to confirm...
+                <br>
+                The page will refresh on its own.
+            </p>
+            <br />
         </div>
-        <br />
-        <p style="font-size: 1.25em;">Please finish transaction <br> or <br>wait for blockchain to confirm...
-            <br>
-            The page will refresh on its own.
-        </p>
-        <br />
     </div>
     <hr>
-    <div class="container">
+    <!-- <div class="container">
         <br>
-    </div>
+    </div> -->
 </div>
