@@ -227,9 +227,7 @@ export class ElGatoDiabloComponent implements OnInit {
     }
   }
 
-
-
-  async mintWithToon() {
+  async allowToonSpend() {
     this.error = "";
     this.isLoading = true;
 
@@ -239,6 +237,21 @@ export class ElGatoDiabloComponent implements OnInit {
         .send({
           from: this.userAddress,
         });
+      this.isLoading = false;
+      this.error = "";
+      this.getContent();
+    } catch (e) {
+      console.log(e.message);
+      this.error = e.message;
+      this.isLoading = false;
+    }
+  }
+
+  async mintWithToon() {
+    this.error = "";
+    this.isLoading = true;
+
+    try {
       await elGatoDiablo.methods
         .mintWithToon(this.toonMintAmountSelected)
         .send({

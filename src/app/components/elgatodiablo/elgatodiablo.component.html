@@ -69,7 +69,6 @@
                 Public sale is .04 ETH. Buy a devilcat, stake a devilcat, or buy $TOON for a better deal.
 
                 <div *ngIf="this.userAddress != '' && !this.isLoading">
-                    <br>
 
                     <br>
                     public mint price: {{publicMintPrice}}
@@ -163,31 +162,42 @@
 
                 <img id="gato-img" src="../../../assets/elgatodiablo/309.png" alt="logo" width="95%" height="180vh"
                     style="object-fit: contain;" /><br><br>
-                <b> 100 $TOON mint: </b> <br>
-                Each wallet can mint with 100 $TOON each.Two mints per wallet. Only 350 will be minted with $TOON.
+                <b> Mint price : {{toonMintCost}} $TOON </b> <br>
+                Each wallet can mint with 100 $TOON.<br>
+                Two mints per wallet.<br>
+                Only 350 will be minted with $TOON.
                 <div *ngIf="this.userAddress != '' && !this.isLoading">
-                    <br>
-
-                    $TOON Price: {{toonMintCost}}
-
-
-                    <br>
-                    Allowance: {{toonAllowedToBeSpentByContract}}
-                    <br>
                     selected : {{toonMintAmountSelected}}
-                    <br>
                     <br>
                     total price : <img id="center-img" src="../../../assets/toonverse/catCoin.gif" alt="logo"
                         height="25vh" width="25" /> {{toonMintTotalPrice}}
-                    <br><br>
+                    <br>
                     <mdb-range (ngModelChange)="updateToonPrice($event)" [min]="1" [max]="2"
                         ngModel="toonMintAmountSelected"></mdb-range>
+
+                    <br>
+                    For contract integration with $TOON you need to allow El Gato Diablo contract to spend $TOON on your behalf.
+                    <br>                    <br>
+
+                    You have allowed this contract to spend this much $TOON on your behalf:
+                    {{toonAllowedToBeSpentByContract}}
+                    <br>
+                    <button *ngIf=" (!isPaused)" (click)="allowToonSpend()" class="styled">
+                        Allow
+                    </button>
+                    <br>
+
+                    <br>
+                    <div *ngIf="toonMintTotalPrice <=toonAllowedToBeSpentByContract "> You have enough allowed</div>
+                    <div *ngIf="toonMintTotalPrice >=toonAllowedToBeSpentByContract "> You dont have enough allowed
+                    </div>
+
                     <button *ngIf="(toonMintTotalPrice <= this.$toonInWallet) && (!isPaused)" (click)="mintWithToon()"
                         class="styled">
                         Mint
                     </button>
 
-                    <p *ngIf="toonMintTotalPrice > this.$toonInWallet"> To many selected </p>
+                    <!-- <p *ngIf="toonMintTotalPrice > this.$toonInWallet"> To many selected </p> -->
                 </div>
             </div>
         </div>
