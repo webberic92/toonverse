@@ -53,7 +53,6 @@ body {
 
 .styled {
   max-width: 200px;
-
   min-width: 150px;
   margin-bottom: 4px;
   border: 0;
@@ -61,15 +60,8 @@ body {
   padding: 0 20px;
   font-size: 1rem;
   text-align: center;
-  color: black;
-  text-shadow: 1px 1px 1px #000;
   border-radius: 10px;
   background-color: pink;
-  background-image: linear-gradient(to top left,
-      rgba(0, 0, 0, 0.2),
-      rgba(0, 0, 0, 0.2) 30%,
-      rgba(0, 0, 0, 0));
-  box-shadow: inset 2px 2px 3px pink, inset -2px -2px 3px rgba(0, 0, 0, 0.6);
 }
 
 .container{
@@ -79,7 +71,6 @@ body {
 
 .styledDisabled {
   max-width: 200px;
-
   min-width: 150px;
   margin-bottom: 4px;
   border: 0;
@@ -87,27 +78,20 @@ body {
   padding: 0 20px;
   font-size: 1rem;
   text-align: center;
-  color: black;
-  text-shadow: 1px 1px 1px #000;
+  color: white;
   border-radius: 10px;
-  background-color: rgb(141, 139, 110);
-  background-image: linear-gradient(to top left,
-      rgba(0, 0, 0, 0.2),
-      rgba(0, 0, 0, 0.2) 30%,
-      rgba(0, 0, 0, 0));
-  box-shadow: inset 2px 2px 3px pink, inset -2px -2px 3px rgba(0, 0, 0, 0.6);
 }
 
 .styled:hover {
-  background-color: pink;
-  box-shadow: inset 2px 2px 3px rgb(108, 34, 46), inset -2px -2px 3px rgba(0, 0, 0, 0.6);
+  background-color: lightblue;
+  color: white;
   font-size: 1.05rem;
 }
 
-.styled:active {
-  box-shadow: inset -2px -2px 3px rgba(255, 255, 255, 0.6),
-    inset 2px 2px 3px rgba(0, 0, 0, 0.6);
-}
+// .styled:active {
+//   box-shadow: inset -2px -2px 3px rgba(255, 255, 255, 0.6),
+//     inset 2px 2px 3px rgba(0, 0, 0, 0.6);
+// }
 
 // @font-face {
 //   font-family: EncodeSansCondensedBold;
@@ -141,7 +125,7 @@ button {
 
 p {
   font-family: EncodeSansCondensedBold;
-  color: black;
+  //color: black;
   // word-break: normal;
   word-break: break-word;
   font-size: min(4vw, 20px);
@@ -167,26 +151,6 @@ p {
   width: 100%;
   height: 2.5rem;
   /* Footer height */
-}
-
-// #logo-icon{
-//   .zoom:hover {
-//     transform: scale(1.5); /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
-//   }
-// }        
-
-
-
-
-
-
-#navbar-text {
-  color: black;
-  font-weight: bold;
-}
-
-#navbar-text:hover {
-  text-decoration: underline;
 }
 
 #yellowHamburger {

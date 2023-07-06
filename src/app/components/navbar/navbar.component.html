@@ -1,20 +1,14 @@
 <!-- Navbar -->
-<nav class="navbar navbar-expand-md  fixed-top" style="background-color: aliceblue; opacity: 90%;">
+<nav class="navbar navbar-expand-md fixed-top" style="background-color: #f8f8f8;">
   <!-- Container wrapper -->
   <div class="container-fluid">
     <!-- Navbar brand -->
-    <a class="navbar-brand" href="#">
-
-      <a class="navbar-brand text-white" [routerLink]="['/home']">
-          <div class="navbar-image">
-          <img src="./../../../assets/toonverse/toonverseLogo.png" alt="logo" width="50" style="border-radius: 50%;" />
-        </div>
-
-        <h6 (click)="basicNavbar.toggle()" id="navbar-text">Toonverse Studios!</h6>
-
-      </a>
-
-    </a>
+    <div class="navbar-brand d-flex align-items-center">
+      <div class="navbar-image">
+        <img src="./../../../assets/toonverse/toonverseLogo.png" alt="logo" width="50" />
+      </div>
+      <a href="#" id="navbar-text">Toonverse Studios!</a>
+    </div>
 
     <!-- Toggle button -->
     <button class="navbar-toggler" type="button" (click)="basicNavbar.toggle()" aria-expanded="false"
@@ -26,10 +20,7 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent" mdbCollapse #basicNavbar="mdbCollapse">
       <!-- Left links -->
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <!-- <li>
-          <p> <button (click)="basicNavbar.toggle()" id="navbar-text"   class="styledDisabled" [routerLink]="['/mint']">Mint Closed!</button>
-          </p>
-        </li> -->
+
         <li class="nav-item">
           <p id="navbar-text" (click)="basicNavbar.toggle()" class="styled" [routerLink]="['/viewcatz']"> LookUp</p>
         </li>
