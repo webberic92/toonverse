@@ -28,9 +28,22 @@ text-decoration: underline;
   box-shadow: inset 2px 2px 3px pink, inset -2px -2px 3px rgba(0, 0, 0, 0.6);
 }
 
+.centered-image {
+  display: block;
+  width: 150%;
+  height: 0%;
+  object-fit: cover; /* maintain aspect ratio while filling container */
+  opacity: 85%;
+  margin-left: calc(50% - 50vw);
+
+}
 
 
-
+.parent-container {
+  width: 100%;
+  padding: 0;
+  margin: 0;
+}
 
 .yellowHighlight{
   
@@ -213,3 +226,65 @@ background-color: #666;
 #table:hover{
   background-color: bisque;
 }
+
+.home-item {
+  color: #cf2a2a;
+  max-width: 200px;
+  min-width: 150px;
+  margin-bottom: 4px;
+  border: 0;
+  line-height: 2.5;
+  padding: 1 20px;
+  font-size: 1rem;
+  text-align: center;
+  border-radius: 10px;
+  background-color: pink;
+  box-shadow: 0 0 1px 1px rgba(0, 0, 0, 0.1);
+  transition: box-shadow 0.3s ease;
+  white-space: nowrap;
+}
+
+.home-item:hover {
+  background-color: lightblue;
+  color: white;
+  box-shadow: 0 0 10px 10px rgba(0, 0, 0, 0.1);
+}
+
+.home-itemDisabled {
+  max-width: 200px;
+  min-width: 150px;
+  margin-bottom: 4px;
+  border: 0;
+  line-height: 2.5;
+  padding: 0 20px;
+  font-size: 1rem;
+  text-align: center;
+  color: white;
+  border-radius: 10px;
+}
+
+.comic-bio {
+  background-color: #58b3ec;
+  padding: 20px;
+  border-radius: 15px;
+  color: #FAFAFA;
+  font-family: 'Roboto', sans-serif;
+  font-size: 18px;
+  line-height: 1.5;
+  width: 70%;
+  margin: 0 auto;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease-in-out;
+
+}
+
+.comic-bio:hover {
+  background-color: #317eae;
+  transition: all 0.3s ease-in-out;
+}
+
