@@ -1,24 +1,92 @@
+.center-div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 25px;
+}
+
+.title {
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.marketplace-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+#marketplace-item {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  background-color: aliceblue;
+  padding: 15px;
+  margin-bottom: 15px;
+  border-radius: 10px;
+  margin-right: 20px;
+}
+
+#marketplace-item:hover {
+  background-color: rgb(134, 216, 247);
+}
+
+.item-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.item-price {
+  font-weight: bold;
+  margin-right: 10px;
+}
+
+.item-icon {
+  margin-right: 20px;
+}
+
+.project-name {
+  margin-bottom: 0;
+}
+
+.item-status {
+  margin-left: 10px;
+}
+
 #styled-mint-button {
-    margin-bottom: 4px;
-    border: 0;
-    line-height: 2.5;
-    padding: 0 20px;
-    font-size: 1rem;
-    text-align: center;
-    color: black;
-    text-shadow: 1px 1px 1px #000;
-    border-radius: 10px;
-    background-color: pink;  
-  }
-  
-  #styled-mint-button:hover {
-    box-shadow: inset 2px 2px 3px pink, inset -2px -2px 3px rgba(0, 0, 0, 0.6);
-  }
+  max-width: 200px;
+  min-width: 150px;
+  margin-bottom: 4px;
+  border: 0;
+  line-height: 2.5;
+  padding: 0 20px;
+  font-size: 1rem;
+  text-align: center;
+  color: black;
+  text-shadow: 1px 1px 1px #000;
+  border-radius: 10px;
+  background-color: rgb(141, 139, 110);
+  background-image: linear-gradient(to top left,
+  rgb(109, 210, 241),
+  rgb(73, 163, 191) 30%,
+  rgb(7, 196, 254));
+  box-shadow: inset 2px 2px 3px rgb(18, 0, 88), inset -2px -2px 3px rgb(109, 210, 241);
+  font-family: 'Bangers', sans-serif;
+}
 
-  #table{
-    justify-content: center; padding: 15px;background-color: aliceblue;
-  }
+/* Hover button styling */
+#styled-mint-button:hover {
+background-color: rgb(113, 109, 241);
+box-shadow: inset 2px 2px 3px rgb(18, 0, 88), inset -2px -2px 3px rgba(94, 195, 235, 0.948);
+font-size: 1.05rem;
+}
 
-  #table:hover{
-    background-color: bisque;
-  }
+#styled-mint-button:disabled {
+  /* disabled button styles */
+  opacity: 0.5; /* reduce opacity to indicate disabled state */
+  cursor: not-allowed; /* set cursor to indicate button is disabled */
+}
