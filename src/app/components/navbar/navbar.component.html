@@ -1,11 +1,11 @@
 <!-- Navbar -->
-<nav class="navbar navbar-expand-md fixed-top" style="background-color: #f8f8f8;">
+<nav class="navbar navbar-expand-lg fixed-top" style="background-color: #f8f8f8;">
   <!-- Container wrapper -->
   <div class="container-fluid">
     <!-- Navbar brand -->
     <div class="navbar-brand d-flex align-items-center">
       <div class="navbar-image">
-        <img src="./../../../assets/toonverse/toonverseLogo.png" alt="logo" width="50" />
+        <img src="./../../../assets/toonverse/toonverseLogo.png" alt="logo" style="width: auto; max-width: 50px;" />
       </div>
       <a href="#" id="navbar-text">Toonverse Studios</a>
     </div>
@@ -17,9 +17,9 @@
     </button>
 
     <!-- Collapsible wrapper -->
-    <div class="collapse navbar-collapse" id="navbarSupportedContent" mdbCollapse #basicNavbar="mdbCollapse">
+    <div class="collapse navbar-collapse justify-content-center" id="navbarSupportedContent" mdbCollapse #basicNavbar="mdbCollapse">
       <!-- Left links -->
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+      <ul class="navbar-nav">
 
         <li class="nav-item">
           <p id="navbar-text" (click)="basicNavbar.toggle()" class="styled" [routerLink]="['/viewcatz']"> LookUp</p>
@@ -28,66 +28,29 @@
           <p (click)="basicNavbar.toggle()" id="navbar-text" class="styled" [routerLink]="['/manage']">Staking</p>
         </li>
         <li class="nav-item">
-        <!-- </li>
-        <li class="nav-item">
-          <p id="navbar-text"(click)="basicNavbar.toggle()" class="styled" [routerLink]="['/marketplace']">Marketplace</p>
-        </li> -->
-        <li class="nav-item">
-          <p id="navbar-text"(click)="basicNavbar.toggle()" class="styled" [routerLink]="['/elgatodiablo']">El Gato Diablo</p>
+        <p id="navbar-text"(click)="basicNavbar.toggle()" class="styled" [routerLink]="['/elgatodiablo']">El Gato Diablo</p>
         </li>
         <li class="nav-item">
           <p id="navbar-text"(click)="basicNavbar.toggle()" class="styled" [routerLink]="['/buytoon']">Buy $TOON</p>
         </li>
-
-
-        <!-- <li class="nav-item" id="nav-item">
-          <p id="navbar-text" (click)="basicNavbar.toggle()" class="styled" [routerLink]="['/about']">About</p>
-        </li>
-        <li class="nav-item">
-          <p id="navbar-text"(click)="basicNavbar.toggle()" class="styled" [routerLink]="['/team']">Team</p>
-        </li> -->
-
-        <!-- <li class="nav-item">
-          <p id="navbar-text"  class="styled"[routerLink]="['/roadmap']">RoadMap</p>
-        </li>
-        <li class="nav-item">
-          <p id="navbar-text"  class="styled"[routerLink]="['/mint']">Free Mints</p>
-        </li> -->
       </ul>
       <!-- Left links -->
 
-      <!-- Search form -->
-      <!-- <button id="navbar-text" class="styled" [routerLink]="['/home']">Stake DevilCat</button> -->
-      <!-- <form class="d-flex input-group w-auto">
-        <input
-          type="search"
-          class="form-control"
-          placeholder="Type query"
-          aria-label="Search"
-        />
-        <button class="btn btn-outline-primary" type="button">
-          Search
-        </button>
-      </form> -->
-
-      <div  class="hoverText" style="font-weight: bold; margin-left: 2vw; margin-right: 2vw;margin-top: auto; margin-bottom: auto;">Current Staked DevilCatz : {{totalStakedNfts}}
+      <div  class="hoverText" style="font-weight: bold;">Current Staked DevilCatz : {{totalStakedNfts}}
       </div>
     
       <a style="margin: 5px" href="https://opensea.io/assets/ethereum/0x1c4a28690482b03f6991c8c24295016cba197c12/">
-        <img id="center-img" src="../../../assets/openSea.png" alt="openseaLogo" height="25vh" width="25vw"
-          style="border-radius: 5%" />
+        <img id="center-img" src="../../../assets/openSea.png" alt="openseaLogo" style="width: auto; max-width: 25px; height: auto; max-height: 25px; border-radius: 5%;" />
       </a>
 
       <a style="margin: 5px; margin-bottom: 5px; margin-left: 1vw;"
         href="https://rarible.com/toonverseStudios/items">
-        <img id="center-img" src="../../../assets/rarible.png" alt="rarible" height="25vh" width="25vw"
-          style="border-radius: 5%" />
+        <img id="center-img" src="../../../assets/rarible.png" alt="rarible" style="width: auto; max-width: 25px; height: auto; max-height: 25px; border-radius: 5%;" />
       </a>
 
       <a style="margin: 5px; margin-bottom: 5px;margin-right: 3vw; margin-left: 0.5vw; "
       href="https://hub.auraexchange.org/collection/ethereum/0x1c4a28690482b03f6991c8c24295016cba197c12">
-      <img id="center-img" src="../../../assets/aura.png" alt="aura" height="40vh" width="40vw"
-        style="border-radius: 5%" />
+      <img id="center-img" src="../../../assets/aura.png" alt="aura" style="width: auto; max-width: 40px; height: auto; max-height: 40px; border-radius: 5%;" />
     </a>
 
     </div>

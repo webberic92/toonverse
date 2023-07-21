@@ -28,23 +28,6 @@ text-decoration: underline;
   box-shadow: inset 2px 2px 3px pink, inset -2px -2px 3px rgba(0, 0, 0, 0.6);
 }
 
-.centered-image {
-  display: block;
-  width: 150%;
-  height: 0%;
-  object-fit: cover; /* maintain aspect ratio while filling container */
-  opacity: 85%;
-  margin-left: calc(50% - 50vw);
-
-}
-
-
-.parent-container {
-  width: 100%;
-  padding: 0;
-  margin: 0;
-}
-
 .yellowHighlight{
   
     background-color: Yellow;
@@ -220,15 +203,12 @@ background-color: #666;
 }
 
 #table{
-  justify-content: center; padding: 15px;background-color: aliceblue;
+  justify-content: center; padding: 15px;
 }
 
-#table:hover{
-  background-color: bisque;
-}
 
 .home-item {
-  color: #cf2a2a;
+  color: #425cde;
   max-width: 200px;
   min-width: 150px;
   margin-bottom: 4px;
@@ -280,11 +260,101 @@ background-color: #666;
   justify-content: center;
   box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
   transition: all 0.3s ease-in-out;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  opacity: 100%;
+  font-family: 'Roboto', sans-serif;
 
 }
 
 .comic-bio:hover {
   background-color: #317eae;
   transition: all 0.3s ease-in-out;
+  font-family: 'Roboto', sans-serif;
+
+}
+.container .row {
+  background-color: #E8F6FA;
+  border-radius: 15px;
+  margin-bottom: 10px;
+
+  box-shadow: 0 0 3px 3px rgba(0, 0, 0, 0.1);
 }
 
+.container .row:hover {
+  background-color: #B5E0E6;
+  box-shadow: 0 0 10px 10px rgba(0, 0, 0, 0.1);
+  transition: box-shadow 0.3s ease;
+}
+
+.container .col-md-2 {
+  padding: 15px;
+  text-align: center;
+}
+
+.comic-bio2 {
+  background-color: #58b3ec;
+  padding: 20px;
+  border-radius: 15px;
+  color: #FAFAFA;
+  font-family: 'Roboto', sans-serif;
+  font-size: 18px;
+  line-height: 1.5;
+  width: 70%;
+  margin: 0 auto;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
+  font-family: 'Roboto', sans-serif;
+}
+
+.home-item {
+  background-color: #007BFF;
+  border: none;
+  color: white;
+  padding: 10px 24px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  border-radius: 12px;
+  transition: background-color 0.5s;
+}
+
+.home-item:hover {
+  background-color: #0056b3; /* Darker shade of button color on hover */
+}
+
+.centered-image {
+  display: block;
+  width: 100%;
+  height: 0%;
+  object-fit: cover; /* maintain aspect ratio while filling container */
+  opacity: 85%;
+
+  border-radius: 12px;
+}
+
+
+.parent-container {
+  font-family: 'Roboto', sans-serif;
+
+  position: relative;
+  width: 100%;
+  padding: 0;
+  margin: 0;
+}
+
+
+.parent{
+  font-family: 'Roboto', sans-serif;
+
+  position: relative;
+  width: 100%;
+  padding: 5%;
+}
