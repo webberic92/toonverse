@@ -3,7 +3,8 @@
 
 body {
   // background-image: url("https://thebuddhainu.s3.amazonaws.com/background.png");
-  background-image: url("./assets/toonverse/background.jpg");
+  // background-image: url("./assets/toonverse/background.jpg");
+  background-color: black;
   // -webkit-background-size: wrap;
   // -moz-background-size: cover;
   // -o-background-size: cover;
@@ -12,8 +13,7 @@ body {
 }
 
 .main {
-  background-color: #fbf1e6;
-  border: 1mm ridge pink;
+  // background-color: aliceblue;
   // width: 65%;
   min-width: 400px;
   opacity: 99%;
@@ -141,7 +141,7 @@ button {
 
 p {
   font-family: EncodeSansCondensedBold;
-  color: black;
+  color: white;
   // word-break: normal;
   word-break: break-word;
   font-size: min(4vw, 20px);
@@ -149,6 +149,9 @@ p {
 
 #list {
   background-color: black;
+}
+.p{
+  color: white;
 }
 
 #page-container {
